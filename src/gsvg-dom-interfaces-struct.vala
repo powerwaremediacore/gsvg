@@ -19,43 +19,41 @@
 using GLib;
 using GXml;
 
-
-public interface SVGDocument : Object,  DomDocument,
-                                        DocumentEvent {
-  public abstract DOMString title { get; }
-  public abstract DOMString referrer { get; }
-  public abstract DOMString doma{ get; }
-  public abstract DOMString URL { get; }
-  public abstract SVGSVGElement rootElement { get; }
+namespace GSvg {
+public interface Document : Object,  DomDocument {
+  public abstract string title { get; }
+  public abstract string referrer { get; }
+  public abstract string doma{ get; }
+  public abstract string URL { get; }
+  public abstract SVGElement rootElement { get; }
 }
 
-interface SVGSVGElement : SVGElement,
-                          SVGTests,
-                          SVGLangSpace,
-                          SVGExternalResourcesRequired,
-                          SVGStylable,
-                          SVGLocatable,
-                          SVGFitToViewBox,
-                          SVGZoomAndPan,
-                          DomDocumentEvent,
+public interface SVGElement : Element,
+                          Tests,
+                          LangSpace,
+                          ExternalResourcesRequired,
+                          Stylable,
+                          Locatable,
+                          FitToViewBox,
+                          ZoomAndPan,
                           ViewCSS,
                           DocumentCSS {
 
-  public abstract SVGAnimatedLength x { get; }
-  public abstract SVGAnimatedLength y { get; }
-  public abstract SVGAnimatedLength width { get; }
-  public abstract SVGAnimatedLength height { get; }
+  public abstract AnimatedLength x { get; }
+  public abstract AnimatedLength y { get; }
+  public abstract AnimatedLength width { get; }
+  public abstract AnimatedLength height { get; }
   public abstract string contentScriptType { get; set; }
   public abstract string contentStyleType { get; set; }
-  public abstract SVGRect viewport { get; }
+  public abstract Rect viewport { get; }
   public abstract float pixelUnitToMillimeterX { get; }
   public abstract float pixelUnitToMillimeterY { get; }
   public abstract float screenPixelToMillimeterX { get; }
   public abstract float screenPixelToMillimeterY { get; }
   public abstract bool useCurrentView { get; }
-  public abstract SVGViewSpec currentView { get; }
+  public abstract ViewSpec currentView { get; }
   public abstract float currentScale { get; set; }
-  public abstract SVGPoint currentTranslate { get; }
+  public abstract Point currentTranslate { get; }
 
   public abstract ulong suspendRedraw(ulong maxWaitMilliseconds);
   public abstract void unsuspendRedraw(ulong suspendHandleID);
@@ -66,119 +64,119 @@ interface SVGSVGElement : SVGElement,
   public abstract bool animationsPaused();
   public abstract float getCurrentTime();
   public abstract void setCurrentTime(float seconds);
-  public abstract NodeList getIntersectionList(SVGRect rect, SVGElement referenceElement);
-  public abstract NodeList getEnclosureList(SVGRect rect, SVGElement referenceElement);
-  public abstract bool checkIntersection(SVGElement element, SVGRect rect);
-  public abstract bool checkEnclosure(SVGElement element, SVGRect rect);
+  public abstract NodeList getIntersectionList(Rect rect, Element referenceElement);
+  public abstract NodeList getEnclosureList(Rect rect, Element referenceElement);
+  public abstract bool checkIntersection(Element element, Rect rect);
+  public abstract bool checkEnclosure(Element element, Rect rect);
   public abstract void deselectAll();
-  public abstract SVGNumber createSVGNumber();
-  public abstract SVGLength createSVGLength();
-  public abstract SVGAngle createSVGAngle();
-  public abstract SVGPoint createSVGPoint();
-  public abstract SVGMatrix createSVGMatrix();
-  public abstract SVGRect createSVGRect();
-  public abstract SVGTransform createSVGTransform();
-  public abstract SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix);
-  public abstract DomElement getElementById(DOMString elementId);
+  public abstract Number createSVGNumber();
+  public abstract Length createSVGLength();
+  public abstract Angle createSVGAngle();
+  public abstract Point createSVGPoint();
+  public abstract Matrix createSVGMatrix();
+  public abstract Rect createSVGRect();
+  public abstract Transform createSVGTransform();
+  public abstract Transform createSVGTransformFromMatrix(Matrix matrix);
+  public abstract DomElement getElementById(string elementId);
 }
 
-public interface SVGGElement : Object,
-                        SVGElement,
-                        SVGTests,
-                        SVGLangSpace,
-                        SVGExternalResourcesRequired,
-                        SVGStylable,
-                        SVGTransformable {
+public interface GElement : Object,
+                        Element,
+                        Tests,
+                        LangSpace,
+                        ExternalResourcesRequired,
+                        Stylable,
+                        Transformable {
 }
 
-public interface SVGDefsElement : Object,
-                             SVGElement,
-                             SVGTests,
-                             SVGLangSpace,
-                             SVGExternalResourcesRequired,
-                             SVGStylable,
-                             SVGTransformable {
+public interface DefsElement : Object,
+                             Element,
+                             Tests,
+                             LangSpace,
+                             ExternalResourcesRequired,
+                             Stylable,
+                             Transformable {
 }
 
-public interface SVGDescElement : Object,
-                           SVGElement,
-                           SVGLangSpace,
-                           SVGStylable {
+public interface DescElement : Object,
+                           Element,
+                           LangSpace,
+                           Stylable {
 }
 
-public interface SVGTitleElement : Object,
-                            SVGElement,
-                            SVGLangSpace,
-                            SVGStylable {
+public interface TitleElement : Object,
+                            Element,
+                            LangSpace,
+                            Stylable {
 }
 
-public interface SVGSymbolElement : Object,
-                             SVGElement,
-                             SVGLangSpace,
-                             SVGExternalResourcesRequired,
-                             SVGStylable,
-                             SVGFitToViewBox {
+public interface SymbolElement : Object,
+                             Element,
+                             LangSpace,
+                             ExternalResourcesRequired,
+                             Stylable,
+                             FitToViewBox {
 }
 
-public interface SVGUseElement : SVGElement,
-                          SVGURIReference,
-                          SVGTests,
-                          SVGLangSpace,
-                          SVGExternalResourcesRequired,
-                          SVGStylable,
-                          SVGTransformable {
-  public abstract SVGAnimatedLength x { get; }
-  public abstract SVGAnimatedLength y { get; }
-  public abstract SVGAnimatedLength width { get; }
-  public abstract SVGAnimatedLength height { get; }
-  public abstract SVGElementInstance instanceRoot { get; }
-  public abstract SVGElementInstance animatedInstanceRoot { get; }
+public interface UseElement : Element,
+                          URIReference,
+                          Tests,
+                          LangSpace,
+                          ExternalResourcesRequired,
+                          Stylable,
+                          Transformable {
+  public abstract AnimatedLength x { get; }
+  public abstract AnimatedLength y { get; }
+  public abstract AnimatedLength width { get; }
+  public abstract AnimatedLength height { get; }
+  public abstract ElementInstance instanceRoot { get; }
+  public abstract ElementInstance animatedInstanceRoot { get; }
 }
 
-public interface SVGElementInstance : Object, EventTarget {
-  public abstract SVGElement correspondingElement { get; }
-  public abstract SVGUseElement correspondingUseElement { get; }
-  public abstract SVGElementInstance parentNode { get; }
-  public abstract SVGElementInstanceList childNodes { get; }
-  public abstract SVGElementInstance firstChild { get; }
-  public abstract SVGElementInstance lastChild { get; }
-  public abstract SVGElementInstance previousSibling { get; }
-  public abstract SVGElementInstance nextSibling { get; }
+public interface ElementInstance : Object, DomEventTarget {
+  public abstract Element correspondingElement { get; }
+  public abstract UseElement correspondingUseElement { get; }
+  public abstract ElementInstance parentNode { get; }
+  public abstract ElementInstanceList childNodes { get; }
+  public abstract ElementInstance firstChild { get; }
+  public abstract ElementInstance lastChild { get; }
+  public abstract ElementInstance previousSibling { get; }
+  public abstract ElementInstance nextSibling { get; }
 }
 
-public interface SVGElementInstanceList : Object {
+public interface ElementInstanceList : Object {
 
   public abstract ulong lengthg { get; }
 
-  public abstract SVGElementInstance item (ulong index);
+  public abstract ElementInstance item (ulong index);
 }
 
-public interface SVGImageElement : Object,
-                            SVGElement,
-                            SVGURIReference,
-                            SVGTests,
-                            SVGLangSpace,
-                            SVGExternalResourcesRequired,
-                            SVGStylable,
-                            SVGTransformable {
-  public abstract SVGAnimatedLength x { get; }
-  public abstract SVGAnimatedLength y { get; }
-  public abstract SVGAnimatedLength width { get; }
-  public abstract SVGAnimatedLength height { get; }
-  public abstract SVGAnimatedPreserveAspectRatio preserveAspectRatio { get; }
+public interface ImageElement : Object,
+                            Element,
+                            URIReference,
+                            Tests,
+                            LangSpace,
+                            ExternalResourcesRequired,
+                            Stylable,
+                            Transformable {
+  public abstract AnimatedLength x { get; }
+  public abstract AnimatedLength y { get; }
+  public abstract AnimatedLength width { get; }
+  public abstract AnimatedLength height { get; }
+  public abstract AnimatedPreserveAspectRatio preserveAspectRatio { get; }
 }
 
-public interface SVGSwitchElement : Object,
-                             SVGElement,
-                             SVGTests,
-                             SVGLangSpace,
-                             SVGExternalResourcesRequired,
-                             SVGStylable,
-                             SVGTransformable {
+public interface SwitchElement : Object,
+                             Element,
+                             Tests,
+                             LangSpace,
+                             ExternalResourcesRequired,
+                             Stylable,
+                             Transformable {
 }
 
 public interface GetSVGDocument {
-  public abstract SVGDocument getSVGDocument();
+  public abstract Document getSVGDocument();
 }
 
-
+} // GSvg

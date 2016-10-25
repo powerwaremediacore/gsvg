@@ -29,7 +29,7 @@ public class GSvg.Object : GXml.SerializableObjectModel {
   public override bool property_use_nick () { return true; }
   public override string to_string () {
     var d = new TDocument ();
-    try { serialize (d); } catch { return typeof (Gsvg.Object).name; }
+    try { serialize (d); } catch { return get_type ().name (); }
     return d.to_string ();
   }
 }

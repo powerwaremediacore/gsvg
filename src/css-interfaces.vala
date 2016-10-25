@@ -19,6 +19,10 @@
 using GLib;
 using GXml;
 
+namespace GSvg {
+
+// FIXME: This should be moved to its own library
+
 /**
  * CSS interfaces according with https://www.w3.org/TR/SVG/ version 1.1
  */
@@ -80,7 +84,7 @@ public interface CSSStyleSheet : Object {
   public abstract void deleteRule (ulong index) throws GLib.Error;
 }
 
-interface CSSRuleList {
+public interface CSSRuleList {
   public abstract ulong length { get; }
   public abstract CSSRule item (ulong index);
 }
@@ -95,3 +99,78 @@ public interface ViewCSS : Object {
   public abstract CSSStyleDeclaration getComputedStyle(DomElement elt,
                                                       string pseudoElt);
 }
+
+public interface CSSPrimitiveValue : CSSValue {
+
+  // UnitTypes
+  public enum Type {
+    UNKNOWN = 0,
+    NUMBER = 1,
+    PERCENTAGE = 2,
+    EMS = 3,
+    EXS = 4,
+    PX = 5,
+    CM = 6,
+    MM = 7,
+    IN = 8,
+    PT = 9,
+    PC = 10,
+    DEG = 11,
+    RAD = 12,
+    GRAD = 13,
+    MS = 14,
+    S = 15,
+    HZ = 16,
+    KHZ = 17,
+    DIMENSION = 18,
+    STRING = 19,
+    URI = 20,
+    IDENT = 21,
+    ATTR = 22,
+    COUNTER = 23,
+    RECT = 24,
+    RGBCOLOR = 25
+  }
+  public abstract  ushort   primitiveType { get; }
+
+  public abstract void               setFloatValue(ushort unitType,
+                                   float floatValue) throws GLib.Error;
+  public abstract float              getFloatValue(ushort unitType) throws GLib.Error;
+  public abstract void               setStringValue(ushort stringType,
+                                    string stringValue) throws GLib.Error;
+  public abstract string          getStringValue() throws GLib.Error;
+  public abstract CSSCounter            getCounterValue() throws GLib.Error;
+  public abstract CSSRect               getRectValue() throws GLib.Error;
+  public abstract CSSRGBColor           getRGBColorValue() throws GLib.Error;
+}
+
+/**
+ * RGB Color Definition from DOM2
+ */
+public interface CSSCounter {
+  public abstract string        identifier { get; }
+  public abstract string        listStyle { get; }
+  public abstract string        separator { get; }
+}
+
+/**
+ * RGB Color Definition from DOM2
+ */
+public interface CSSRGBColor {
+  public abstract CSSPrimitiveValue  red { get; }
+  public abstract CSSPrimitiveValue  green { get; }
+  public abstract CSSPrimitiveValue  blue { get; }
+}
+
+
+/**
+ * Rect value taken from DOM2
+ */
+public interface CSSRect {
+  public abstract CSSPrimitiveValue  top { get; }
+  public abstract CSSPrimitiveValue  right { get; }
+  public abstract CSSPrimitiveValue  bottom { get; }
+  public abstract CSSPrimitiveValue  left { get; }
+}
+
+} // GSvg

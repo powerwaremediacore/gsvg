@@ -19,28 +19,30 @@
 using GLib;
 using GXml;
 
-public interface SVGPoint : Object {
+namespace GSvg {
+
+public interface Point : Object {
 
   public abstract float x { get; set; }
   public abstract float y { get; set; }
 
-  public abstract SVGPoint matrixTransform (SVGMatrix matrix);
+  public abstract Point matrixTransform (Matrix matrix);
 }
 
-public interface SVGPointList : Object {
+public interface PointList : Object {
 
   public abstract ulong numberOfItems { get; }
 
   public abstract void clear() throws GLib.Error;
-  public abstract SVGPoint initialize(SVGPoint newItem) throws GLib.Error;
-  public abstract SVGPoint getItem(ulong index) throws GLib.Error;
-  public abstract SVGPoint insertItemBefore(SVGPoint newItem, ulong index) throws GLib.Error;
-  public abstract SVGPoint replaceItem(SVGPoint newItem, ulong index) throws GLib.Error;
-  public abstract SVGPoint removeItem(ulong index) throws GLib.Error;
-  public abstract SVGPoint appendItem(SVGPoint newItem) throws GLib.Error;
+  public abstract Point initialize(Point newItem) throws GLib.Error;
+  public abstract Point getItem(ulong index) throws GLib.Error;
+  public abstract Point insertItemBefore(Point newItem, ulong index) throws GLib.Error;
+  public abstract Point replaceItem(Point newItem, ulong index) throws GLib.Error;
+  public abstract Point removeItem(ulong index) throws GLib.Error;
+  public abstract Point appendItem(Point newItem) throws GLib.Error;
 }
 
-public interface SVGMatrix : Object {
+public interface Matrix : Object {
 
   public abstract float a { get; set; }
   public abstract float b { get; set; }
@@ -49,25 +51,25 @@ public interface SVGMatrix : Object {
   public abstract float e { get; set; }
   public abstract float f { get; set; }
 
-  public abstract SVGMatrix multiply(SVGMatrix secondMatrix);
-  public abstract SVGMatrix inverse() throws GLib.Error;
-  public abstract SVGMatrix translate(float x, float y);
-  public abstract SVGMatrix scale(float scaleFactor);
-  public abstract SVGMatrix scaleNonUniform(float scaleFactorX, float scaleFactorY);
-  public abstract SVGMatrix rotate(float angle);
-  public abstract VGMatrix rotateFromVector(float x, float y) throws GLib.Error;
-  public abstract SVGMatrix flipX();
-  public abstract SVGMatrix flipY();
-  public abstract SVGMatrix skewX(float angle);
-  public abstract SVGMatrix skewY(float angle);
+  public abstract Matrix multiply(Matrix secondMatrix);
+  public abstract Matrix inverse() throws GLib.Error;
+  public abstract Matrix translate(float x, float y);
+  public abstract Matrix scale(float scaleFactor);
+  public abstract Matrix scaleNonUniform(float scaleFactorX, float scaleFactorY);
+  public abstract Matrix rotate(float angle);
+  public abstract Matrix rotateFromVector(float x, float y) throws GLib.Error;
+  public abstract Matrix flipX();
+  public abstract Matrix flipY();
+  public abstract Matrix skewX(float angle);
+  public abstract Matrix skewY(float angle);
 }
 
-public interface SVGTransform {
+public interface Transform {
   public abstract ushort type { get; set; }
-  public abstract SVGMatrix matrix { get; set; }
+  public abstract Matrix matrix { get; set; }
   public abstract float angle { get; set; }
 
-  public abstract void setMatrix(SVGMatrix matrix) throws GLib.Error;
+  public abstract void setMatrix(Matrix matrix) throws GLib.Error;
   public abstract void setTranslate(float tx, float ty) throws GLib.Error;
   public abstract void setScale(float sx, float sy) throws GLib.Error;
   public abstract void setRotate(float angle, float cx, float cy) throws GLib.Error;
@@ -87,27 +89,27 @@ public interface SVGTransform {
   }
 }
 
-public interface SVGTransformList : Object {
+public interface TransformList : Object {
 
   public abstract ulong numberOfItems { get; }
 
   public abstract void clear()throws GLib.Error;
-  public abstract SVGTransform initialize(SVGTransform newItem)throws GLib.Error;
-  public abstract SVGTransform getItem(ulong index)throws GLib.Error;
-  public abstract SVGTransform insertItemBefore(SVGTransform newItem, ulong index) throws GLib.Error;
-  public abstract SVGTransform replaceItem(SVGTransform newItem, ulong index) throws GLib.Error;
-  public abstract SVGTransform removeItem(ulong index)throws GLib.Error;
-  public abstract SVGTransform appendItem(SVGTransform newItem)throws GLib.Error;
-  public abstract SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix);
-  public abstract SVGTransform consolidate() throws GLib.Error;
+  public abstract Transform initialize(Transform newItem)throws GLib.Error;
+  public abstract Transform getItem(ulong index)throws GLib.Error;
+  public abstract Transform insertItemBefore(Transform newItem, ulong index) throws GLib.Error;
+  public abstract Transform replaceItem(Transform newItem, ulong index) throws GLib.Error;
+  public abstract Transform removeItem(ulong index)throws GLib.Error;
+  public abstract Transform appendItem(Transform newItem)throws GLib.Error;
+  public abstract Transform createSVGTransformFromMatrix(Matrix matrix);
+  public abstract Transform consolidate() throws GLib.Error;
 }
 
-public interface SVGAnimatedTransformList : Object {
-  public abstract SVGTransformList baseVal { get; set; }
-  public abstract SVGTransformList animVal { get; set; }
+public interface AnimatedTransformList : Object {
+  public abstract TransformList baseVal { get; set; }
+  public abstract TransformList animVal { get; set; }
 }
 
-interface SVGPreserveAspectRatio {
+public interface PreserveAspectRatio {
 
 
   public abstract short align { get; set; }
@@ -137,7 +139,9 @@ interface SVGPreserveAspectRatio {
   }
 }
 
-interface SVGAnimatedPreserveAspectRatio {
-  public abstract SVGPreserveAspectRatio baseVal { get; }
-  public abstract SVGPreserveAspectRatio animVal { get; }
+public interface AnimatedPreserveAspectRatio {
+  public abstract PreserveAspectRatio baseVal { get; }
+  public abstract PreserveAspectRatio animVal { get; }
 }
+
+} // GSvg

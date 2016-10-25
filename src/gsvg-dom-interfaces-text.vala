@@ -19,24 +19,26 @@
 using GLib;
 using GXml;
 
-public interface SVGTextContentElement : Object,
-                                  SVGElement,
-                                  SVGTests,
-                                  SVGLangSpace,
-                                  SVGExternalResourcesRequired,
-                                  SVGStylable {
+namespace GSvg {
 
-  public abstract SVGAnimatedLength textLength { get; }
-  public abstract SVGAnimatedEnumeration lengthAdjust { get; }
+public interface TextContentElement : Object,
+                                  Element,
+                                  Tests,
+                                  LangSpace,
+                                  ExternalResourcesRequired,
+                                  Stylable {
+
+  public abstract AnimatedLength textLength { get; }
+  public abstract AnimatedEnumeration lengthAdjust { get; }
 
   public abstract long getNumberOfChars();
   public abstract float getComputedTextLength();
   public abstract float getSubStringLength(ulong charnum, ulong nchars) throws GLib.Error;
-  public abstract SVGPoint getStartPositionOfChar(ulong charnum) throws GLib.Error;
-  public abstract SVGPoint getEndPositionOfChar(ulong charnum) throws GLib.Error;
-  public abstract SVGRect getExtentOfChar(ulong charnum) throws GLib.Error;
+  public abstract Point getStartPositionOfChar(ulong charnum) throws GLib.Error;
+  public abstract Point getEndPositionOfChar(ulong charnum) throws GLib.Error;
+  public abstract Rect getExtentOfChar(ulong charnum) throws GLib.Error;
   public abstract float getRotationOfChar(ulong charnum) throws GLib.Error;
-  public abstract long getCharNumAtPosition(SVGPoint point);
+  public abstract long getCharNumAtPosition(Point point);
   public abstract void selectSubString(ulong charnum, ulong nchars) throws GLib.Error;
 }
 
@@ -47,69 +49,69 @@ public enum LengthAdjust {
   SPACINGANDGLYPHS = 2
 }
 
-public interface SVGTextPositioningElement : Object,
-                                   SVGTextContentElement {
-  public abstract SVGAnimatedLengthList x { get; }
-  public abstract SVGAnimatedLengthList y { get; }
-  public abstract SVGAnimatedLengthList dx { get; }
-  public abstract SVGAnimatedLengthList dy { get; }
-  public abstract SVGAnimatedNumberList rotate { get; }
+public interface TextPositioningElement : Object,
+                                   TextContentElement {
+  public abstract AnimatedLengthList x { get; }
+  public abstract AnimatedLengthList y { get; }
+  public abstract AnimatedLengthList dx { get; }
+  public abstract AnimatedLengthList dy { get; }
+  public abstract AnimatedNumberList rotate { get; }
 }
 
-public interface SVGTextElement : Object,
-                                   SVGTextPositioningElement,
-                                   SVGTransformable {
+public interface TextElement : Object,
+                                   TextPositioningElement,
+                                   Transformable {
 }
 
-public interface SVGTSpanElement : Object,
-                                   SVGTextPositioningElement {
+public interface TSpanElement : Object,
+                                   TextPositioningElement {
 }
 
-public interface SVGTRefElement : Object,
-                                   SVGTextPositioningElement,
-                                   SVGURIReference {
+public interface TRefElement : Object,
+                                   TextPositioningElement,
+                                   URIReference {
 }
 
-public interface SVGTextPathElement : Object,
-                                   SVGTextContentElement,
-                                   SVGURIReference {
-  public abstract SVGAnimatedLength startOffset { get; }
-  public abstract SVGAnimatedEnumeration method { get; }
-  public abstract SVGAnimatedEnumeration spacing { get; }
+public interface TextPathElement : Object,
+                                   TextContentElement,
+                                   URIReference {
+  public abstract AnimatedLength startOffset { get; }
+  public abstract AnimatedEnumeration method { get; }
+  public abstract AnimatedEnumeration spacing { get; }
 }
 
 
 // textPath Method Types
-public enum SVGTextPathMethodType {
+public enum TextPathMethodType {
   UNKNOWN = 0,
   ALIGN = 1,
   STRETCH = 2
 }
 
   // textPath Spacing Types
-public enum SVGTextPathSpacingType {
+public enum TextPathSpacingType {
   UNKNOWN = 0,
   AUTO = 1,
   EXACT = 2
 }
 
-public interface SVGAltGlyphElement : Object,
-                                   SVGTextPositioningElement,
-                                   SVGURIReference {
+public interface AltGlyphElement : Object,
+                                   TextPositioningElement,
+                                   URIReference {
   public abstract string glyphRef { get; set; }
   public abstract string format { get; set; }
 }
 
-public interface SVGAltGlyphDefElement : Object, SVGElement {
+public interface AltGlyphDefElement : Object, Element {
 }
 
-public interface SVGAltGlyphItemElement : Object, SVGElement {
+public interface AltGlyphItemElement : Object, Element {
 }
 
-public interface SVGGlyphRefElement : Object,
-                               SVGElement,
-                               SVGURIReference,
-                               SVGStylable {
+public interface GlyphRefElement : Object,
+                               Element,
+                               URIReference,
+                               Stylable {
   public abstract string glyphRef { get; set; }
   public abstract string format { get; set; }
   public abstract float x { get; set; }
@@ -118,4 +120,4 @@ public interface SVGGlyphRefElement : Object,
   public abstract float dy { get; set; }
 }
 
-
+} // GSvg

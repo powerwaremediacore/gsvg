@@ -19,7 +19,9 @@
 using GLib;
 using GXml;
 
-public interface SVGPaint : Object, Object, SVGColor {
+namespace GSvg {
+
+public interface Paint : Object, Color {
 
   public abstract ushort paintType { get; }
   public abstract string uri { get; }
@@ -47,132 +49,126 @@ public interface SVGPaint : Object, Object, SVGColor {
   }
 }
 
-public interface SVGMarkerElement : Object, Object,
-                             SVGElement,
-                             SVGLangSpace,
-                             SVGExternalResourcesRequired,
-                             SVGStylable,
-                             SVGFitToViewBox {
+public interface MarkerElement : Object,
+                             Element,
+                             LangSpace,
+                             ExternalResourcesRequired,
+                             Stylable,
+                             FitToViewBox {
 
-  public abstract  SVGAnimatedLength refX { get; }
-  public abstract  SVGAnimatedLength refY { get;}
-  public abstract  SVGAnimatedEnumeration markerUnits { get;}
-  public abstract  SVGAnimatedLength markerWidth { get; }
-  public abstract  SVGAnimatedLength markerHeight { get; }
-  public abstract  SVGAnimatedEnumeration orientType { get; }
-  public abstract  SVGAnimatedAngle orientAngle { get; }
+  public abstract  AnimatedLength refX { get; }
+  public abstract  AnimatedLength refY { get;}
+  public abstract  AnimatedEnumeration markerUnits { get;}
+  public abstract  AnimatedLength markerWidth { get; }
+  public abstract  AnimatedLength markerHeight { get; }
+  public abstract  AnimatedEnumeration orientType { get; }
+  public abstract  AnimatedAngle orientAngle { get; }
 
   public abstract void setOrientToAuto () throws GLib.Error;
-  public abstract void setOrientToAngle (SVGAngle angle) throws GLib.Error;
+  public abstract void setOrientToAngle (Angle angle) throws GLib.Error;
 }
 
   // Marker Unit Types
-public enum SVGMarkerUnits {
+public enum MarkerUnits {
   UNKNOWN = 0,
   USERSPACEONUSE = 1,
   STROKEWIDTH = 2
 }
 
   // Marker Orientation Types
-public enum SVGMarkerOrient {
+public enum MarkerOrient {
   UNKNOWN = 0,
   AUTO = 1,
   ANGLE = 2
 }
 
-public interface SVGColorProfileElement : Object, SVGElement,
-                                   SVGURIReference,
-                                   SVGRenderingIntent {
+public interface ColorProfileElement : Object, Element,
+                                   URIReference {
   public abstract string local { get; set; }
   public abstract string name { get; set; }
   public abstract ushort renderingIntent { get; set; }
 }
 
-public interface SVGColorProfileRule : Object, SVGCSSRule,
-                                SVGRenderingIntent {
+public interface ColorProfileRule : Object, CSSRule {
   public abstract string src { get; set; }
   public abstract string name { get; set; }
   public abstract ushort renderingIntent { get; set; }
 }
 
-public interface SVGGradientElement : Object, SVGElement,
-                               SVGURIReference,
-                               SVGExternalResourcesRequired,
-                               SVGStylable,
-                               SVGUnitTypes {
-  public abstract  SVGAnimatedEnumeration gradientUnits { get; }
-  public abstract  SVGAnimatedTransformList gradientTransform { get; }
-  public abstract  SVGAnimatedEnumeration spreadMethod { get; }
+public interface GradientElement : Object, Element,
+                               URIReference,
+                               ExternalResourcesRequired,
+                               Stylable {
+  public abstract  AnimatedEnumeration gradientUnits { get; }
+  public abstract  AnimatedTransformList gradientTransform { get; }
+  public abstract  AnimatedEnumeration spreadMethod { get; }
 }
 
 
   // Spread Method Types
-public enum SVGSpreadMethod {
+public enum SpreadMethod {
   UNKNOWN = 0,
   PAD = 1,
   REFLECT = 2,
   REPEAT = 3
 }
 
-public interface SVGLinearGradientElement : Object, SVGGradientElement {
-  public abstract  SVGAnimatedLength x1 { get; }
-  public abstract  SVGAnimatedLength y1 { get; }
-  public abstract  SVGAnimatedLength x2 { get; }
-  public abstract  SVGAnimatedLength y2 { get; }
+public interface LinearGradientElement : Object, GradientElement {
+  public abstract  AnimatedLength x1 { get; }
+  public abstract  AnimatedLength y1 { get; }
+  public abstract  AnimatedLength x2 { get; }
+  public abstract  AnimatedLength y2 { get; }
 }
 
-public interface SVGRadialGradientElement : Object, SVGGradientElement {
-  public abstract  SVGAnimatedLength cx { get; }
-  public abstract  SVGAnimatedLength cy { get; }
-  public abstract  SVGAnimatedLength r { get; }
-  public abstract  SVGAnimatedLength fx { get; }
-  public abstract  SVGAnimatedLength fy { get; }
+public interface RadialGradientElement : Object, GradientElement {
+  public abstract  AnimatedLength cx { get; }
+  public abstract  AnimatedLength cy { get; }
+  public abstract  AnimatedLength r { get; }
+  public abstract  AnimatedLength fx { get; }
+  public abstract  AnimatedLength fy { get; }
 }
 
-public interface SVGStopElement : Object, SVGElement,
-                           SVGStylable {
-  public abstract  SVGAnimatedNumber offset { get; }
+public interface StopElement : Object, Element,
+                           Stylable {
+  public abstract  AnimatedNumber offset { get; }
 }
 
-public interface SVGPatternElement : Object, SVGElement,
-                              SVGURIReference,
-                              SVGTests,
-                              SVGLangSpace,
-                              SVGExternalResourcesRequired,
-                              SVGStylable,
-                              SVGFitToViewBox,
-                              SVGUnitTypes {
-  public abstract  SVGAnimatedEnumeration patternUnits { get; }
-  public abstract  SVGAnimatedEnumeration patternContentUnits { get; }
-  public abstract  SVGAnimatedTransformList patternTransform { get; }
-  public abstract  SVGAnimatedLength x { get; }
-  public abstract  SVGAnimatedLength y { get; }
-  public abstract  SVGAnimatedLength width { get; }
-  public abstract  SVGAnimatedLength height { get; }
+public interface PatternElement : Object, Element,
+                              URIReference,
+                              Tests,
+                              LangSpace,
+                              ExternalResourcesRequired,
+                              Stylable,
+                              FitToViewBox {
+  public abstract  AnimatedEnumeration patternUnits { get; }
+  public abstract  AnimatedEnumeration patternContentUnits { get; }
+  public abstract  AnimatedTransformList patternTransform { get; }
+  public abstract  AnimatedLength x { get; }
+  public abstract  AnimatedLength y { get; }
+  public abstract  AnimatedLength width { get; }
+  public abstract  AnimatedLength height { get; }
 }
 
-public interface SVGClipPathElement : Object, SVGElement,
-                               SVGTests,
-                               SVGLangSpace,
-                               SVGExternalResourcesRequired,
-                               SVGStylable,
-                               SVGTransformable,
-                               SVGUnitTypes {
-  public abstract  SVGAnimatedEnumeration clipPathUnits { get; }
+public interface ClipPathElement : Object, Element,
+                               Tests,
+                               LangSpace,
+                               ExternalResourcesRequired,
+                               Stylable,
+                               Transformable {
+  public abstract  AnimatedEnumeration clipPathUnits { get; }
 }
 
-public interface SVGMaskElement : Object, SVGElement,
-                           SVGTests,
-                           SVGLangSpace,
-                           SVGExternalResourcesRequired,
-                           SVGStylable,
-                           SVGUnitTypes {
-  public abstract  SVGAnimatedEnumeration maskUnits { get; }
-  public abstract  SVGAnimatedEnumeration maskContentUnits { get; }
-  public abstract  SVGAnimatedLength x { get; }
-  public abstract  SVGAnimatedLength y { get; }
-  public abstract  SVGAnimatedLength width { get; }
-  public abstract  SVGAnimatedLength height { get; }
+public interface MaskElement : Object, Element,
+                           Tests,
+                           LangSpace,
+                           ExternalResourcesRequired,
+                           Stylable {
+  public abstract  AnimatedEnumeration maskUnits { get; }
+  public abstract  AnimatedEnumeration maskContentUnits { get; }
+  public abstract  AnimatedLength x { get; }
+  public abstract  AnimatedLength y { get; }
+  public abstract  AnimatedLength width { get; }
+  public abstract  AnimatedLength height { get; }
 }
 
-
+} // GSvg

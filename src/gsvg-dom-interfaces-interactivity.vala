@@ -19,43 +19,45 @@
 using GLib;
 using GXml;
 
-public interface SVGCursorElement : Object, SVGElement,
-                             SVGURIReference,
-                             SVGTests,
-                             SVGExternalResourcesRequired {
-  public abstract SVGAnimatedLength x { get; }
-  public abstract SVGAnimatedLength y { get; }
+namespace GSvg {
+
+public interface CursorElement : Object, Element,
+                             URIReference,
+                             Tests,
+                             ExternalResourcesRequired {
+  public abstract AnimatedLength x { get; }
+  public abstract AnimatedLength y { get; }
 }
 
-public interface SVGAElement : Object, SVGElement,
-                        SVGURIReference,
-                        SVGTests,
-                        SVGLangSpace,
-                        SVGExternalResourcesRequired,
-                        SVGStylable,
-                        SVGTransformable {
-  public abstract SVGAnimatedString target { get; }
+public interface AElement : Object, Element,
+                        URIReference,
+                        Tests,
+                        LangSpace,
+                        ExternalResourcesRequired,
+                        Stylable,
+                        Transformable {
+  public abstract AnimatedString target { get; }
 }
 
-public interface SVGViewElement : Object, SVGElement,
-                           SVGExternalResourcesRequired,
-                           SVGFitToViewBox,
-                           SVGZoomAndPan {
-  public abstract SVGStringList viewTarget { get; }
+public interface ViewElement : Object, Element,
+                           ExternalResourcesRequired,
+                           FitToViewBox,
+                           ZoomAndPan {
+  public abstract StringList viewTarget { get; }
 }
 
-public interface SVGScriptElement : Object, SVGElement,
-                             SVGURIReference,
-                             SVGExternalResourcesRequired {
+public interface ScriptElement : Object, Element,
+                             URIReference,
+                             ExternalResourcesRequired {
   public abstract string type { get; set; }
 }
 
-public interface SVGZoomEvent : Object/*, UIEvent*/ {
-  public abstract SVGRect zoomRectScreen { get; }
+public interface ZoomEvent : Object/*, UIEvent*/ {
+  public abstract Rect zoomRectScreen { get; }
   public abstract float previousScale { get; }
-  public abstract SVGPoint previousTranslate { get; }
+  public abstract Point previousTranslate { get; }
   public abstract float newScale { get; }
-  public abstract SVGPoint newTranslate { get; }
+  public abstract Point newTranslate { get; }
 }
 
 public interface ElementTimeControl {
@@ -65,46 +67,47 @@ public interface ElementTimeControl {
   public abstract void endElementAt(float offset);
 }
 
-public interface TimeEvent : Object, Event {
+public interface TimeEvent : Object, DomEvent {
 
-  public abstract AbstractView view { get; }
+// TODO: This is not devined in DOM4
+//  public abstract AbstractView view { get; }
   public abstract long detail { get; }
-
-  void initTimeEvent(string typeArg, AbstractView viewArg, long detailArg);
+// TODO: This is not devined in DOM4
+//  void initTimeEvent(string typeArg, AbstractView viewArg, long detailArg);
 }
 
-public interface SVGAnimationElement : Object, SVGElement,
-                                SVGTests,
-                                SVGExternalResourcesRequired,
+public interface AnimationElement : Object, Element,
+                                Tests,
+                                ExternalResourcesRequired,
                                 ElementTimeControl {
 
-  public abstract SVGElement targetElement { get; }
+  public abstract Element targetElement { get; }
 
   public abstract float getStartTime()throws GLib.Error;
   public abstract float getCurrentTime();
   public abstract float getSimpleDuration()throws GLib.Error;
 }
 
-public interface SVGAnimateElement : Object, SVGAnimationElement,
-                              SVGStylable {
+public interface AnimateElement : Object, AnimationElement,
+                              Stylable {
 }
 
-public interface SVGSetElement : Object, SVGAnimationElement {
+public interface SetElement : Object, AnimationElement {
 }
 
-public interface SVGAnimateMotionElement : Object, SVGAnimationElement {
+public interface AnimateMotionElement : Object, AnimationElement {
 }
 
-public interface SVGMPathElement : Object, SVGElement,
-                            SVGURIReference,
-                            SVGExternalResourcesRequired {
+public interface MPathElement : Object, Element,
+                            URIReference,
+                            ExternalResourcesRequired {
 }
 
-public interface SVGAnimateColorElement : Object, SVGAnimationElement,
-                                   SVGStylable {
+public interface AnimateColorElement : Object, AnimationElement,
+                                   Stylable {
 }
 
-public interface SVGAnimateTransformElement : Object, SVGAnimationElement {
+public interface AnimateTransformElement : Object, AnimationElement {
 }
 
-
+} // GSvg

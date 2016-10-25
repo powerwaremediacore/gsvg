@@ -19,42 +19,43 @@
 using GLib;
 using GXml;
 
-public interface SVGFilterElement : Object, SVGElement,
-                             SVGURIReference,
-                             SVGLangSpace,
-                             SVGExternalResourcesRequired,
-                             SVGStylable,
-                             SVGUnitTypes {
+namespace GSvg {
 
-  public abstract SVGAnimatedEnumeration filterUnits { get; }
-  public abstract SVGAnimatedEnumeration primitiveUnits { get; }
-  public abstract SVGAnimatedLength x { get; }
-  public abstract SVGAnimatedLength y { get; }
-  public abstract SVGAnimatedLength width { get; }
-  public abstract SVGAnimatedLength height { get; }
-  public abstract SVGAnimatedInteger filterResX { get; }
-  public abstract SVGAnimatedInteger filterResY { get; }
+public interface FilterElement : Object, Element,
+                             URIReference,
+                             LangSpace,
+                             ExternalResourcesRequired,
+                             Stylable {
 
-  void setFilterRes(ulong filterResX, ulong filterResY) throws GLib.Error;
+  public abstract AnimatedEnumeration filterUnits { get; }
+  public abstract AnimatedEnumeration primitiveUnits { get; }
+  public abstract AnimatedLength x { get; }
+  public abstract AnimatedLength y { get; }
+  public abstract AnimatedLength width { get; }
+  public abstract AnimatedLength height { get; }
+  public abstract AnimatedInteger filterResX { get; }
+  public abstract AnimatedInteger filterResY { get; }
+
+  public abstract void setFilterRes(ulong filterResX, ulong filterResY) throws GLib.Error;
 }
 
-public interface SVGFilterPrimitiveStandardAttributes : Object, SVGStylable {
-  public abstract SVGAnimatedLength x { get; }
-  public abstract SVGAnimatedLength y { get; }
-  public abstract SVGAnimatedLength width { get; }
-  public abstract SVGAnimatedLength height { get; }
-  public abstract SVGAnimatedString result { get; }
+public interface FilterPrimitiveStandardAttributes : Object, Stylable {
+  public abstract AnimatedLength x { get; }
+  public abstract AnimatedLength y { get; }
+  public abstract AnimatedLength width { get; }
+  public abstract AnimatedLength height { get; }
+  public abstract AnimatedString result { get; }
 }
 
-public interface SVGFEBlendElement : Object, SVGElement,
-                              SVGFilterPrimitiveStandardAttributes {
-  public abstract SVGAnimatedString in1 { get; }
-  public abstract SVGAnimatedString in2 { get; }
-  public abstract SVGAnimatedEnumeration mode { get; }
+public interface FEBlendElement : Object, Element,
+                              FilterPrimitiveStandardAttributes {
+  public abstract AnimatedString in1 { get; }
+  public abstract AnimatedString in2 { get; }
+  public abstract AnimatedEnumeration mode { get; }
 }
 
   // Blend Mode Types
-public enum SVGFEBlendMode {
+public enum FEBlendMode {
   UNKNOWN = 0,
   NORMAL = 1,
   MULTIPLY = 2,
@@ -63,15 +64,15 @@ public enum SVGFEBlendMode {
   LIGHTEN = 5
 }
 
-public interface SVGFEColorMatrixElement : Object, SVGElement,
-                                    SVGFilterPrimitiveStandardAttributes {
-  public abstract SVGAnimatedString in1 { get; }
-  public abstract SVGAnimatedEnumeration type { get; }
-  public abstract SVGAnimatedNumberList values { get; }
+public interface FEColorMatrixElement : Object, Element,
+                                    FilterPrimitiveStandardAttributes {
+  public abstract AnimatedString in1 { get; }
+  public abstract AnimatedEnumeration type { get; }
+  public abstract AnimatedNumberList values { get; }
 }
 
   // Color Matrix Types
-public enum SVGFEColorMatrixType {
+public enum FEColorMatrixType {
   UNKNOWN = 0,
   MATRIX = 1,
   SATURATE = 2,
@@ -80,24 +81,24 @@ public enum SVGFEColorMatrixType {
 }
 
 
-public interface SVGFEComponentTransferElement : Object, SVGElement,
-                                          SVGFilterPrimitiveStandardAttributes {
-  public abstract SVGAnimatedString in1 { get; }
+public interface FEComponentTransferElement : Object, Element,
+                                          FilterPrimitiveStandardAttributes {
+  public abstract AnimatedString in1 { get; }
 }
 
-public interface SVGComponentTransferFunctionElement : Object, SVGElement {
-  public abstract SVGAnimatedEnumeration type { get; }
-  public abstract SVGAnimatedNumberList tableValues { get; }
-  public abstract SVGAnimatedNumber slope { get; }
-  public abstract SVGAnimatedNumber intercept { get; }
-  public abstract SVGAnimatedNumber amplitude { get; }
-  public abstract SVGAnimatedNumber exponent { get; }
-  public abstract SVGAnimatedNumber offset { get; }
+public interface ComponentTransferFunctionElement : Object, Element {
+  public abstract AnimatedEnumeration type { get; }
+  public abstract AnimatedNumberList tableValues { get; }
+  public abstract AnimatedNumber slope { get; }
+  public abstract AnimatedNumber intercept { get; }
+  public abstract AnimatedNumber amplitude { get; }
+  public abstract AnimatedNumber exponent { get; }
+  public abstract AnimatedNumber offset { get; }
 }
 
 
   // Component Transfer Types
-public enum SVGFEComponentTransferType {
+public enum FEComponentTransferType {
   UNKNOWN = 0,
   IDENTITY = 1,
   TABLE = 2,
@@ -107,32 +108,32 @@ public enum SVGFEComponentTransferType {
 }
 
 
-public interface SVGFEFuncRElement : Object, SVGComponentTransferFunctionElement {
+public interface FEFuncRElement : Object, ComponentTransferFunctionElement {
 }
 
-public interface SVGFEFuncGElement : Object, SVGComponentTransferFunctionElement {
+public interface FEFuncGElement : Object, ComponentTransferFunctionElement {
 }
 
-public interface SVGFEFuncBElement : Object, SVGComponentTransferFunctionElement {
+public interface FEFuncBElement : Object, ComponentTransferFunctionElement {
 }
 
-public interface SVGFEFuncAElement : Object, SVGComponentTransferFunctionElement {
+public interface FEFuncAElement : Object, ComponentTransferFunctionElement {
 }
 
-public interface SVGFECompositeElement : Object, SVGElement,
-                                  SVGFilterPrimitiveStandardAttributes {
-  public abstract SVGAnimatedString in1 { get; }
-  public abstract SVGAnimatedString in2 { get; }
-  public abstract SVGAnimatedEnumeration operator { get; }
-  public abstract SVGAnimatedNumber k1 { get; }
-  public abstract SVGAnimatedNumber k2 { get; }
-  public abstract SVGAnimatedNumber k3 { get; }
-  public abstract SVGAnimatedNumber k4 { get; }
+public interface FECompositeElement : Object, Element,
+                                  FilterPrimitiveStandardAttributes {
+  public abstract AnimatedString in1 { get; }
+  public abstract AnimatedString in2 { get; }
+  public abstract AnimatedEnumeration operator { get; }
+  public abstract AnimatedNumber k1 { get; }
+  public abstract AnimatedNumber k2 { get; }
+  public abstract AnimatedNumber k3 { get; }
+  public abstract AnimatedNumber k4 { get; }
 }
 
 
   // Composite Operators
-public enum SVGFE0CompositeOperator {
+public enum FE0CompositeOperator {
   UNKNOWN = 0,
   OVER = 1,
   IN = 2,
@@ -142,73 +143,73 @@ public enum SVGFE0CompositeOperator {
   ARITHMETIC = 6,
 }
 
-public interface SVGFEConvolveMatrixElement : Object, SVGElement,
-                                       SVGFilterPrimitiveStandardAttributes {
+public interface FEConvolveMatrixElement : Object, Element,
+                                       FilterPrimitiveStandardAttributes {
 
-  public abstract SVGAnimatedString in1 { get; }
-  public abstract SVGAnimatedInteger orderX { get; }
-  public abstract SVGAnimatedInteger orderY { get; }
-  public abstract SVGAnimatedNumberList kernelMatrix { get; }
-  public abstract SVGAnimatedNumber divisor { get; }
-  public abstract SVGAnimatedNumber bias { get; }
-  public abstract SVGAnimatedInteger targetX { get; }
-  public abstract SVGAnimatedInteger targetY { get; }
-  public abstract SVGAnimatedEnumeration edgeMode { get; }
-  public abstract SVGAnimatedNumber kernelUnitLengthX { get; }
-  public abstract SVGAnimatedNumber kernelUnitLengthY { get; }
-  public abstract SVGAnimatedBoolean preserveAlpha { get; }
+  public abstract AnimatedString in1 { get; }
+  public abstract AnimatedInteger orderX { get; }
+  public abstract AnimatedInteger orderY { get; }
+  public abstract AnimatedNumberList kernelMatrix { get; }
+  public abstract AnimatedNumber divisor { get; }
+  public abstract AnimatedNumber bias { get; }
+  public abstract AnimatedInteger targetX { get; }
+  public abstract AnimatedInteger targetY { get; }
+  public abstract AnimatedEnumeration edgeMode { get; }
+  public abstract AnimatedNumber kernelUnitLengthX { get; }
+  public abstract AnimatedNumber kernelUnitLengthY { get; }
+  public abstract AnimatedBoolean preserveAlpha { get; }
 }
 
   // Edge Mode Values
-public enum SVGEdgeMode {
+public enum EdgeMode {
   UNKNOWN = 0,
   DUPLICATE = 1,
   WRAP = 2,
   NONE = 3
 }
 
-public interface SVGFEDiffuseLightingElement : Object, SVGElement,
-                                        SVGFilterPrimitiveStandardAttributes {
-  public abstract SVGAnimatedString in1 { get; }
-  public abstract SVGAnimatedNumber surfaceScale { get; }
-  public abstract SVGAnimatedNumber diffuseConstant { get; }
-  public abstract SVGAnimatedNumber kernelUnitLengthX { get; }
-  public abstract SVGAnimatedNumber kernelUnitLengthY { get; }
+public interface FEDiffuseLightingElement : Object, Element,
+                                        FilterPrimitiveStandardAttributes {
+  public abstract AnimatedString in1 { get; }
+  public abstract AnimatedNumber surfaceScale { get; }
+  public abstract AnimatedNumber diffuseConstant { get; }
+  public abstract AnimatedNumber kernelUnitLengthX { get; }
+  public abstract AnimatedNumber kernelUnitLengthY { get; }
 }
 
-public interface SVGFEDistantLightElement : Object, SVGElement {
-  public abstract SVGAnimatedNumber azimuth { get; }
-  public abstract SVGAnimatedNumber elevation { get; }
+public interface FEDistantLightElement : Object, Element {
+  public abstract AnimatedNumber azimuth { get; }
+  public abstract AnimatedNumber elevation { get; }
 }
 
-public interface SVGFEPointLightElement : Object, SVGElement {
-  public abstract SVGAnimatedNumber x { get; }
-  public abstract SVGAnimatedNumber y { get; }
-  public abstract SVGAnimatedNumber z { get; }
+public interface FEPointLightElement : Object, Element {
+  public abstract AnimatedNumber x { get; }
+  public abstract AnimatedNumber y { get; }
+  public abstract AnimatedNumber z { get; }
 }
 
-public interface SVGFESpotLightElement : Object, SVGElement {
-  public abstract SVGAnimatedNumber x { get; }
-  public abstract SVGAnimatedNumber y { get; }
-  public abstract SVGAnimatedNumber z { get; }
-  public abstract SVGAnimatedNumber pointsAtX { get; }
-  public abstract SVGAnimatedNumber pointsAtY { get; }
-  public abstract SVGAnimatedNumber pointsAtZ { get; }
-  public abstract SVGAnimatedNumber specularExponent { get; }
-  public abstract SVGAnimatedNumber limitingConeAngle { get; }
+public interface FESpotLightElement : Object, Element {
+  public abstract AnimatedNumber x { get; }
+  public abstract AnimatedNumber y { get; }
+  public abstract AnimatedNumber z { get; }
+  public abstract AnimatedNumber pointsAtX { get; }
+  public abstract AnimatedNumber pointsAtY { get; }
+  public abstract AnimatedNumber pointsAtZ { get; }
+  public abstract AnimatedNumber specularExponent { get; }
+  public abstract AnimatedNumber limitingConeAngle { get; }
 }
 
-public interface SVGFEDisplacementMapElement : Object, SVGElement,
-                                        SVGFilterPrimitiveStandardAttributes {
-  public abstract SVGAnimatedString in1 { get; }
-  public abstract SVGAnimatedString in2 { get; }
-  public abstract SVGAnimatedNumber scale { get; }
-  public abstract SVGAnimatedEnumeration xChannelSelector { get; }
-  public abstract SVGAnimatedEnumeration yChannelSelector { get; }
+public interface FEDisplacementMapElement : Object, Element,
+                                        FilterPrimitiveStandardAttributes {
+  public abstract AnimatedString in1 { get; }
+  public abstract AnimatedString in2 { get; }
+  public abstract AnimatedNumber scale { get; }
+  public abstract AnimatedEnumeration xChannelSelector { get; }
+  public abstract AnimatedEnumeration yChannelSelector { get; }
 }
 
   // Channel Selectors
-public enum SVGChannel {
+public enum Channel {
   UNKNOWN = 0,
   R = 1,
   G = 2,
@@ -217,96 +218,96 @@ public enum SVGChannel {
 }
 
 
-public interface SVGFEFloodElement : Object, SVGElement,
-                              SVGFilterPrimitiveStandardAttributes {
+public interface FEFloodElement : Object, Element,
+                              FilterPrimitiveStandardAttributes {
 }
 
-public interface SVGFEGaussianBlurElement : Object, SVGElement,
-                                     SVGFilterPrimitiveStandardAttributes {
+public interface FEGaussianBlurElement : Object, Element,
+                                     FilterPrimitiveStandardAttributes {
 
-  public abstract SVGAnimatedString in1 { get; }
-  public abstract SVGAnimatedNumber stdDeviationX { get; }
-  public abstract SVGAnimatedNumber stdDeviationY { get; }
+  public abstract AnimatedString in1 { get; }
+  public abstract AnimatedNumber stdDeviationX { get; }
+  public abstract AnimatedNumber stdDeviationY { get; }
 
-  void setStdDeviation(float stdDeviationX, float stdDeviationY) throws GLib.Error;
+  public abstract void setStdDeviation(float stdDeviationX, float stdDeviationY) throws GLib.Error;
 }
 
-public interface SVGFEImageElement : Object, SVGElement,
-                              SVGURIReference,
-                              SVGLangSpace,
-                              SVGExternalResourcesRequired,
-                              SVGFilterPrimitiveStandardAttributes {
-  public abstract SVGAnimatedPreserveAspectRatio preserveAspectRatio { get; }
+public interface FEImageElement : Object, Element,
+                              URIReference,
+                              LangSpace,
+                              ExternalResourcesRequired,
+                              FilterPrimitiveStandardAttributes {
+  public abstract AnimatedPreserveAspectRatio preserveAspectRatio { get; }
 }
 
-public interface SVGFEMergeElement : Object, SVGElement,
-                              SVGFilterPrimitiveStandardAttributes {
+public interface FEMergeElement : Object, Element,
+                              FilterPrimitiveStandardAttributes {
 }
 
-public interface SVGFEMergeNodeElement : Object, SVGElement {
-  public abstract SVGAnimatedString in1 { get; }
+public interface FEMergeNodeElement : Object, Element {
+  public abstract AnimatedString in1 { get; }
 }
 
-public interface SVGFEMorphologyElement : Object, SVGElement,
-                                   SVGFilterPrimitiveStandardAttributes {
-  public abstract SVGAnimatedString in1 { get; }
-  public abstract SVGAnimatedEnumeration operator { get; }
-  public abstract SVGAnimatedNumber radiusX { get; }
-  public abstract SVGAnimatedNumber radiusY { get; }
+public interface FEMorphologyElement : Object, Element,
+                                   FilterPrimitiveStandardAttributes {
+  public abstract AnimatedString in1 { get; }
+  public abstract AnimatedEnumeration operator { get; }
+  public abstract AnimatedNumber radiusX { get; }
+  public abstract AnimatedNumber radiusY { get; }
 }
 
 
   // Morphology Operators
-public enum SVGMorphologyOperator {
+public enum MorphologyOperator {
   UNKNOWN = 0,
   ERODE = 1,
   DILATE = 2
 }
 
-public interface SVGFEOffsetElement : Object, SVGElement,
-                               SVGFilterPrimitiveStandardAttributes {
-  public abstract SVGAnimatedString in1 { get; }
-  public abstract SVGAnimatedNumber dx { get; }
-  public abstract SVGAnimatedNumber dy { get; }
+public interface FEOffsetElement : Object, Element,
+                               FilterPrimitiveStandardAttributes {
+  public abstract AnimatedString in1 { get; }
+  public abstract AnimatedNumber dx { get; }
+  public abstract AnimatedNumber dy { get; }
 }
 
-public interface SVGFESpecularLightingElement : Object, SVGElement,
-                                         SVGFilterPrimitiveStandardAttributes {
-  public abstract SVGAnimatedString in1 { get; }
-  public abstract SVGAnimatedNumber surfaceScale { get; }
-  public abstract SVGAnimatedNumber specularConstant { get; }
-  public abstract SVGAnimatedNumber specularExponent { get; }
-  public abstract SVGAnimatedNumber kernelUnitLengthX { get; }
-  public abstract SVGAnimatedNumber kernelUnitLengthY { get; }
+public interface FESpecularLightingElement : Object, Element,
+                                         FilterPrimitiveStandardAttributes {
+  public abstract AnimatedString in1 { get; }
+  public abstract AnimatedNumber surfaceScale { get; }
+  public abstract AnimatedNumber specularConstant { get; }
+  public abstract AnimatedNumber specularExponent { get; }
+  public abstract AnimatedNumber kernelUnitLengthX { get; }
+  public abstract AnimatedNumber kernelUnitLengthY { get; }
 }
 
-public interface SVGFETileElement : Object, SVGElement,
-                             SVGFilterPrimitiveStandardAttributes {
-  public abstract SVGAnimatedString in1 { get; }
+public interface FETileElement : Object, Element,
+                             FilterPrimitiveStandardAttributes {
+  public abstract AnimatedString in1 { get; }
 }
 
-public interface SVGFETurbulenceElement : Object, SVGElement,
-                                   SVGFilterPrimitiveStandardAttributes {
-  public abstract SVGAnimatedNumber baseFrequencyX { get; }
-  public abstract SVGAnimatedNumber baseFrequencyY { get; }
-  public abstract SVGAnimatedInteger numOctaves { get; }
-  public abstract SVGAnimatedNumber seed { get; }
-  public abstract SVGAnimatedEnumeration stitchTiles { get; }
-  public abstract SVGAnimatedEnumeration type { get; }
+public interface FETurbulenceElement : Object, Element,
+                                   FilterPrimitiveStandardAttributes {
+  public abstract AnimatedNumber baseFrequencyX { get; }
+  public abstract AnimatedNumber baseFrequencyY { get; }
+  public abstract AnimatedInteger numOctaves { get; }
+  public abstract AnimatedNumber seed { get; }
+  public abstract AnimatedEnumeration stitchTiles { get; }
+  public abstract AnimatedEnumeration type { get; }
 }
 
 
   // Turbulence Types
-public enum SVGTurbulenceType {
+public enum TurbulenceType {
   UNKNOWN = 0,
   FRACTALNOISE = 1,
   TURBULENCE = 2
 }
   // Stitch Options
-public enum SVGStichType {
+public enum StichType {
   UNKNOWN = 0,
   STITCH = 1,
   NOSTITCH = 2
 }
 
-
+} // GSvg

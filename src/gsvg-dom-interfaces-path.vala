@@ -19,7 +19,9 @@
 using GLib;
 using GXml;
 
-public interface SVGPathSeg : Object {
+namespace GSvg {
+
+public interface PathSeg : Object {
   public abstract ushort pathSegType { get;}
   public abstract string pathSegTypeAsLetter { get;}
 
@@ -50,39 +52,30 @@ public interface SVGPathSeg : Object {
   }
 }
 
-public interface SVGPathSegClosePath : Object, SVGPathSeg {
+public interface PathSegClosePath : Object, PathSeg {
 }
 
-public interface SVGPathSegMovetoAbs : Object, SVGPathSeg {
+public interface PathSegMovetoAbs : Object, PathSeg {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
 }
 
-public interface SVGPathSegMovetoRel : Object, SVGPathSeg {
+public interface PathSegMovetoRel : Object, PathSeg {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
 }
 
-public interface SVGPathSegLinetoAbs : Object, SVGPathSeg {
+public interface PathSegLinetoAbs : Object, PathSeg {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
 }
 
-public interface SVGPathSegLinetoRel : Object, SVGPathSeg {
+public interface PathSegLinetoRel : Object, PathSeg {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
 }
 
-public interface SVGPathSegCurvetoCubicAbs : Object, SVGPathSeg {
-  public abstract float x { get; set; }
-  public abstract float y { get; set; }
-  public abstract float x1 { get; set; }
-  public abstract float y1 { get; set; }
-  public abstract float x2 { get; set; }
-  public abstract float y2 { get; set; }
-}
-
-public interface SVGPathSegCurvetoCubicRel : Object, SVGPathSeg {
+public interface PathSegCurvetoCubicAbs : Object, PathSeg {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
   public abstract float x1 { get; set; }
@@ -91,132 +84,141 @@ public interface SVGPathSegCurvetoCubicRel : Object, SVGPathSeg {
   public abstract float y2 { get; set; }
 }
 
-public interface SVGPathSegCurvetoQuadraticAbs : Object, SVGPathSeg {
+public interface PathSegCurvetoCubicRel : Object, PathSeg {
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+  public abstract float x1 { get; set; }
+  public abstract float y1 { get; set; }
+  public abstract float x2 { get; set; }
+  public abstract float y2 { get; set; }
+}
+
+public interface PathSegCurvetoQuadraticAbs : Object, PathSeg {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
   public abstract float x1 { get; set; }
   public abstract float y1 { get; set; }
 }
 
-public interface SVGPathSegCurvetoQuadraticRel : Object, SVGPathSeg {
+public interface PathSegCurvetoQuadraticRel : Object, PathSeg {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
   public abstract float x1 { get; set; }
   public abstract float y1 { get; set; }
 }
 
-public interface SVGPathSegArcAbs : Object, SVGPathSeg {
+public interface PathSegArcAbs : Object, PathSeg {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
   public abstract float r1 { get; set; }
   public abstract float r2 { get; set; }
   public abstract float angle { get; set; }
-  public abstract boolean largeArcFlag { get; set; }
-  public abstract boolean sweepFlag { get; set; }
+  public abstract bool largeArcFlag { get; set; }
+  public abstract bool sweepFlag { get; set; }
 }
 
-public interface SVGPathSegArcRel : Object, SVGPathSeg {
+public interface PathSegArcRel : Object, PathSeg {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
   public abstract float r1 { get; set; }
   public abstract float r2 { get; set; }
   public abstract float angle { get; set; }
-  public abstract boolean largeArcFlag { get; set; }
-  public abstract boolean sweepFlag { get; set; }
+  public abstract bool largeArcFlag { get; set; }
+  public abstract bool sweepFlag { get; set; }
 }
 
-public interface SVGPathSegLinetoHorizontalAbs : Object, SVGPathSeg {
+public interface PathSegLinetoHorizontalAbs : Object, PathSeg {
   public abstract float x { get; set; }
 }
 
-public interface SVGPathSegLinetoHorizontalRel : Object, SVGPathSeg {
+public interface PathSegLinetoHorizontalRel : Object, PathSeg {
   public abstract float x { get; set; }
 }
 
-public interface SVGPathSegLinetoVerticalAbs : Object, SVGPathSeg {
+public interface PathSegLinetoVerticalAbs : Object, PathSeg {
   public abstract float y { get; set; }
 }
 
-public interface SVGPathSegLinetoVerticalRel : Object, SVGPathSeg {
+public interface PathSegLinetoVerticalRel : Object, PathSeg {
   public abstract float y { get; set; }
 }
 
-public interface SVGPathSegCurvetoCubicSmoothAbs : Object, SVGPathSeg {
-  public abstract float x { get; set; }
-  public abstract float y { get; set; }
-  public abstract float x2 { get; set; }
-  public abstract float y2 { get; set; }
-}
-
-public interface SVGPathSegCurvetoCubicSmoothRel : Object, SVGPathSeg {
+public interface PathSegCurvetoCubicSmoothAbs : Object, PathSeg {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
   public abstract float x2 { get; set; }
   public abstract float y2 { get; set; }
 }
 
-public interface SVGPathSegCurvetoQuadraticSmoothAbs : Object, SVGPathSeg {
+public interface PathSegCurvetoCubicSmoothRel : Object, PathSeg {
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+  public abstract float x2 { get; set; }
+  public abstract float y2 { get; set; }
+}
+
+public interface PathSegCurvetoQuadraticSmoothAbs : Object, PathSeg {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
 }
 
-public interface SVGPathSegCurvetoQuadraticSmoothRel : Object, SVGPathSeg {
+public interface PathSegCurvetoQuadraticSmoothRel : Object, PathSeg {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
 }
 
-public interface SVGPathSegList : Object {
+public interface PathSegList : Object {
 
   public abstract ulong numberOfItems { get;}
 
   public abstract void clear() throws GLib.Error;
-  public abstract SVGPathSeg initialize(SVGPathSeg newItem) throws GLib.Error;
-  public abstract SVGPathSeg getItem(ulong index) throws GLib.Error;
-  public abstract SVGPathSeg insertItemBefore(SVGPathSeg newItem, ulong index) throws GLib.Error;
-  public abstract SVGPathSeg replaceItem(SVGPathSeg newItem, ulong index) throws GLib.Error;
-  public abstract SVGPathSeg removeItem(ulong index) throws GLib.Error;
-  public abstract SVGPathSeg appendItem(SVGPathSeg newItem) throws GLib.Error;
+  public abstract PathSeg initialize(PathSeg newItem) throws GLib.Error;
+  public abstract PathSeg getItem(ulong index) throws GLib.Error;
+  public abstract PathSeg insertItemBefore(PathSeg newItem, ulong index) throws GLib.Error;
+  public abstract PathSeg replaceItem(PathSeg newItem, ulong index) throws GLib.Error;
+  public abstract PathSeg removeItem(ulong index) throws GLib.Error;
+  public abstract PathSeg appendItem(PathSeg newItem) throws GLib.Error;
 }
 
-public interface SVGAnimatedPathData : Object {
-  public abstract  SVGPathSegList pathSegLis { get;}
-  public abstract  SVGPathSegList normalizedPathSegList { get;}
-  public abstract  SVGPathSegList animatedPathSegList { get;}
-  public abstract  SVGPathSegList animatedNormalizedPathSegList { get;}
+public interface AnimatedPathData : Object {
+  public abstract  PathSegList pathSegLis { get;}
+  public abstract  PathSegList normalizedPathSegList { get;}
+  public abstract  PathSegList animatedPathSegList { get;}
+  public abstract  PathSegList animatedNormalizedPathSegList { get;}
 }
 
-public interface SVGPathElement : Object, SVGElement,
-                           SVGTests,
-                           SVGLangSpace,
-                           SVGExternalResourcesRequired,
-                           SVGStylable,
-                           SVGTransformable,
-                           SVGAnimatedPathData {
+public interface PathElement : Object, Element,
+                           Tests,
+                           LangSpace,
+                           ExternalResourcesRequired,
+                           Stylable,
+                           Transformable,
+                           AnimatedPathData {
 
-  public abstract SVGAnimatedNumber pathLength { get;}
+  public abstract AnimatedNumber pathLength { get;}
 
   public abstract float getTotalLength();
-  public abstract SVGPoint getPointAtLength(float distance);
+  public abstract Point getPointAtLength(float distance);
   public abstract ulong getPathSegAtLength(float distance);
-  public abstract SVGPathSegClosePath createSVGPathSegClosePath();
-  public abstract SVGPathSegMovetoAbs createSVGPathSegMovetoAbs(float x, float y);
-  public abstract SVGPathSegMovetoRel createSVGPathSegMovetoRel(float x, float y);
-  public abstract SVGPathSegLinetoAbs createSVGPathSegLinetoAbs(float x, float y);
-  public abstract SVGPathSegLinetoRel createSVGPathSegLinetoRel(float x, float y);
-  public abstract SVGPathSegCurvetoCubicAbs createSVGPathSegCurvetoCubicAbs(float x, float y, float x1, float y1, float x2, float y2);
-  public abstract SVGPathSegCurvetoCubicRel createSVGPathSegCurvetoCubicRel(float x, float y, float x1, float y1, float x2, float y2);
-  public abstract SVGPathSegCurvetoQuadraticAbs createSVGPathSegCurvetoQuadraticAbs(float x, float y, float x1, float y1);
-  public abstract SVGPathSegCurvetoQuadraticRel createSVGPathSegCurvetoQuadraticRel(float x, float y, float x1, float y1);
-  public abstract SVGPathSegArcAbs createSVGPathSegArcAbs(float x, float y, float r1, float r2, float angle, boolean largeArcFlag, boolean sweepFlag);
-  public abstract SVGPathSegArcRel createSVGPathSegArcRel(float x, float y, float r1, float r2, float angle, boolean largeArcFlag, boolean sweepFlag);
-  public abstract SVGPathSegLinetoHorizontalAbs createSVGPathSegLinetoHorizontalAbs(float x);
-  public abstract SVGPathSegLinetoHorizontalRel createSVGPathSegLinetoHorizontalRel(float x);
-  public abstract SVGPathSegLinetoVerticalAbs createSVGPathSegLinetoVerticalAbs(float y);
-  public abstract SVGPathSegLinetoVerticalRel createSVGPathSegLinetoVerticalRel(float y);
-  public abstract SVGPathSegCurvetoCubicSmoothAbs createSVGPathSegCurvetoCubicSmoothAbs(float x, float y, float x2, float y2);
-  public abstract SVGPathSegCurvetoCubicSmoothRel createSVGPathSegCurvetoCubicSmoothRel(float x, float y, float x2, float y2);
-  public abstract SVGPathSegCurvetoQuadraticSmoothAbs createSVGPathSegCurvetoQuadraticSmoothAbs(float x, float y);
-  public abstract SVGPathSegCurvetoQuadraticSmoothRel createSVGPathSegCurvetoQuadraticSmoothRel(float x, float y);
+  public abstract PathSegClosePath createSVGPathSegClosePath();
+  public abstract PathSegMovetoAbs createSVGPathSegMovetoAbs(float x, float y);
+  public abstract PathSegMovetoRel createSVGPathSegMovetoRel(float x, float y);
+  public abstract PathSegLinetoAbs createSVGPathSegLinetoAbs(float x, float y);
+  public abstract PathSegLinetoRel createSVGPathSegLinetoRel(float x, float y);
+  public abstract PathSegCurvetoCubicAbs createSVGPathSegCurvetoCubicAbs(float x, float y, float x1, float y1, float x2, float y2);
+  public abstract PathSegCurvetoCubicRel createSVGPathSegCurvetoCubicRel(float x, float y, float x1, float y1, float x2, float y2);
+  public abstract PathSegCurvetoQuadraticAbs createSVGPathSegCurvetoQuadraticAbs(float x, float y, float x1, float y1);
+  public abstract PathSegCurvetoQuadraticRel createSVGPathSegCurvetoQuadraticRel(float x, float y, float x1, float y1);
+  public abstract PathSegArcAbs createSVGPathSegArcAbs(float x, float y, float r1, float r2, float angle, bool largeArcFlag, bool sweepFlag);
+  public abstract PathSegArcRel createSVGPathSegArcRel(float x, float y, float r1, float r2, float angle, bool largeArcFlag, bool sweepFlag);
+  public abstract PathSegLinetoHorizontalAbs createSVGPathSegLinetoHorizontalAbs(float x);
+  public abstract PathSegLinetoHorizontalRel createSVGPathSegLinetoHorizontalRel(float x);
+  public abstract PathSegLinetoVerticalAbs createSVGPathSegLinetoVerticalAbs(float y);
+  public abstract PathSegLinetoVerticalRel createSVGPathSegLinetoVerticalRel(float y);
+  public abstract PathSegCurvetoCubicSmoothAbs createSVGPathSegCurvetoCubicSmoothAbs(float x, float y, float x2, float y2);
+  public abstract PathSegCurvetoCubicSmoothRel createSVGPathSegCurvetoCubicSmoothRel(float x, float y, float x2, float y2);
+  public abstract PathSegCurvetoQuadraticSmoothAbs createSVGPathSegCurvetoQuadraticSmoothAbs(float x, float y);
+  public abstract PathSegCurvetoQuadraticSmoothRel createSVGPathSegCurvetoQuadraticSmoothRel(float x, float y);
 }
 
-
+} // GSvg

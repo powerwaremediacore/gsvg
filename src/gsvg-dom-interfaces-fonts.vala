@@ -19,37 +19,41 @@
 using GLib;
 using GXml;
 
-public interface SVGFontElement : Object, VGElement,
-                           SVGExternalResourcesRequired,
-                           SVGStylable {
+namespace GSvg {
+
+public interface FontElement : Object, SVGElement,
+                           ExternalResourcesRequired,
+                           Stylable {
 }
 
 
-public interface SVGGlyphElement : Object, VGElement,
-                            SVGStylable {
+public interface GlyphElement : Object, SVGElement,
+                            Stylable {
 }
 
-public interface SVGMissingGlyphElement : Object, VGElement,
-                                   SVGStylable {
+public interface MissingGlyphElement : Object, SVGElement,
+                                   Stylable {
 }
 
-public interface SVGHKernElement : Object, VGElement {
+public interface HKernElement : Object, SVGElement {
 }
 
-public interface SVGVKernElement : Object, VGElement {
+public interface VKernElement : Object, SVGElement {
 }
 
-public interface SVGFontFaceElement : Object, VGElement {
+public interface FontFaceElement : Object, SVGElement {
 }
 
-public interface SVGFontFaceSrcElement : Object, VGElement {
+public interface FontFaceSrcElement : Object, SVGElement {
 }
 
-public interface SVGFontFaceUriElement : Object, VGElement {
+public interface FontFaceUriElement : Object, SVGElement {
 }
 
-public interface SVGFontFaceFormatElement : Object, VGElement {
+public interface FontFaceFormatElement : Object, SVGElement {
 }
 
-public interface SVGFontFaceNameElement : Object, VGElement {
+public interface FontFaceNameElement : Object, SVGElement {
 }
+
+} // GSvg

@@ -2,8 +2,6 @@ lib_LTLIBRARIES = libgsvg-@API_VERSION@.la
 
 libgsvg_@API_VERSION@_la_SOURCES = \
 	gsvg-object.vala \
-	gsvg-dom-interfaces.vala \
-	gsvg-svg.vala \
 	css-interfaces.vala \
 	gsvg-dom-interfaces-basic-shapes.vala \
 	gsvg-dom-interfaces-coord.vala \
@@ -35,6 +33,8 @@ libgsvg_@API_VERSION@_la_VALAFLAGS = \
 	--thread \
 	--target-glib=2.44 \
 	--pkg glib-2.0 \
+	--pkg gxml-0.12 \
+	--pkg gee-0.8 \
 	$(NULL)
 
 -include $(top_srcdir)/git.mk

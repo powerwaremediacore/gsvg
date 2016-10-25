@@ -19,18 +19,21 @@
 using GLib;
 using GXml;
 
+namespace GSvg {
 
-interface SVGMetadataElement : SVGElement {
+interface MetadataElement : Element {
 }
 
-interface SVGForeignObjectElement : SVGElement,
-                                    SVGTests,
-                                    SVGLangSpace,
-                                    SVGExternalResourcesRequired,
-                                    SVGStylable,
-                                    SVGTransformable {
-  public abstract SVGAnimatedLength x { get; set; }
-  public abstract SVGAnimatedLength y { get; set; }
-  public abstract SVGAnimatedLength width { get; set; }
-  public abstract SVGAnimatedLength height { get; set; }
+interface ForeignObjectElement : Element,
+                                    Tests,
+                                    LangSpace,
+                                    ExternalResourcesRequired,
+                                    Stylable,
+                                    Transformable {
+  public abstract AnimatedLength x { get; set; }
+  public abstract AnimatedLength y { get; set; }
+  public abstract AnimatedLength width { get; set; }
+  public abstract AnimatedLength height { get; set; }
 }
+
+} // GSvg

@@ -19,27 +19,28 @@
 using GLib;
 using GXml;
 
+namespace GSvg {
 /**
  * Top level SVG Element node according with https://www.w3.org/TR/SVG/ version 1.1
  */
-public interface SVGElement : Object, DomElement {
+public interface Element : Object, DomElement {
   public abstract string id { get; set; }
   public abstract string xmlbase { get; set; }
-  public abstract SVGSVGElement ownerSVGElement { get; }
-  public abstract SVGElement viewportElement { get; }
+  public abstract SVGElement ownerSVGElement { get; }
+  public abstract Element viewportElement { get; }
 }
 
-public interface SVGAnimatedBoolean : Object {
+public interface AnimatedBoolean : Object {
   public abstract bool baseVal { get; set; }
   public abstract bool animVal { get; }
 }
 
-public interface SVGAnimatedString : Object {
+public interface AnimatedString : Object {
   public abstract string baseVal { get; set; }
   public abstract string animVal { get; }
 }
 
-public interface SVGStringList : Object {
+public interface StringList : Object {
 
   public abstract uint numberOfItems { get; }
   public abstract void clear () throws GLib.Error;
@@ -52,44 +53,44 @@ public interface SVGStringList : Object {
 }
 
 
-public interface SVGAnimatedEnumeration : Object {
+public interface AnimatedEnumeration : Object {
   public abstract uint baseVal { get; set; }
   public abstract uint animVal { get; }
 }
 
-public interface SVGAnimatedInteger : Object {
+public interface AnimatedInteger : Object {
   public abstract long baseVal { get; set; }
   public abstract long animVal { get; }
 }
 
-public interface SVGNumber : Object {
+public interface Number : Object {
   public abstract float value { get; set; }
 }
 
-public interface SVGAnimatedNumber : Object {
+public interface AnimatedNumber : Object {
   public abstract float baseVal { get; set; }
   public abstract float animVal  { get; }
 }
 
-public interface SVGNumberList : Object {
+public interface NumberList : Object {
 
   public abstract ulong numberOfItems { get; }
 
   public abstract void clear() throws GLib.Error;
-  public abstract SVGNumber initialize(SVGNumber newItem) throws GLib.Error;
-  public abstract SVGNumber getItem(ulong index) throws GLib.Error;
-  public abstract SVGNumber insertItemBefore(SVGNumber newItem, ulong index) throws GLib.Error;
-  public abstract SVGNumber replaceItem(SVGNumber newItem, ulong index) throws GLib.Error;
-  public abstract SVGNumber removeItem(ulong index) throws GLib.Error;
-  public abstract SVGNumber appendItem(SVGNumber newItem) throws GLib.Error;
+  public abstract Number initialize(Number newItem) throws GLib.Error;
+  public abstract Number getItem(ulong index) throws GLib.Error;
+  public abstract Number insertItemBefore(Number newItem, ulong index) throws GLib.Error;
+  public abstract Number replaceItem(Number newItem, ulong index) throws GLib.Error;
+  public abstract Number removeItem(ulong index) throws GLib.Error;
+  public abstract Number appendItem(Number newItem) throws GLib.Error;
 }
 
-public interface SVGAnimatedNumberList : Object {
-  public abstract SVGNumberList baseVal { get; }
-  public abstract SVGNumberList animVal { get; }
+public interface AnimatedNumberList : Object {
+  public abstract NumberList baseVal { get; }
+  public abstract NumberList animVal { get; }
 }
 
-public interface SVGLength : Object {
+public interface Length : Object {
   public abstract ushort unitType { get; }
   public abstract float value { get; set; }
   public abstract float valueInSpecifiedUnits { get; set; }
@@ -116,30 +117,30 @@ public interface SVGLength : Object {
   }
 }
 
-public interface SVGAnimatedLength : Object {
-  public abstract SVGLength baseVal { get; }
-  public abstract SVGLength animVal { get; }
+public interface AnimatedLength : Object {
+  public abstract Length baseVal { get; }
+  public abstract Length animVal { get; }
 }
 
-interface SVGLengthList {
+public interface LengthList {
 
   public abstract ulong numberOfItems { get; }
 
   public abstract void clear() throws GLib.Error;
-  public abstract SVGLength initialize(SVGLength newItem) throws GLib.Error;
-  public abstract SVGLength getItem(ulong index) throws GLib.Error;
-  public abstract SVGLength insertItemBefore(SVGLength newItem,ulong index) throws GLib.Error;
-  public abstract SVGLength replaceItem(SVGLength newItem, ulong index) throws GLib.Error;
-  public abstract SVGLength removeItem(ulong index) throws GLib.Error;
-  public abstract SVGLength appendItem(SVGLength newItem) throws GLib.Error;
+  public abstract Length initialize(Length newItem) throws GLib.Error;
+  public abstract Length getItem(ulong index) throws GLib.Error;
+  public abstract Length insertItemBefore(Length newItem,ulong index) throws GLib.Error;
+  public abstract Length replaceItem(Length newItem, ulong index) throws GLib.Error;
+  public abstract Length removeItem(ulong index) throws GLib.Error;
+  public abstract Length appendItem(Length newItem) throws GLib.Error;
 }
 
-public interface SVGAnimatedLengthList : Object {
-  public abstract SVGLengthList baseVal { get; }
-  public abstract SVGLengthList animVal { get; }
+public interface AnimatedLengthList : Object {
+  public abstract LengthList baseVal { get; }
+  public abstract LengthList animVal { get; }
 }
 
-public interface SVGAngle : Object {
+public interface Angle : Object {
   public abstract ushort unitType { get; }
   public abstract  float value { get; set; }
   public abstract  float valueInSpecifiedUnits { get; set; }
@@ -159,19 +160,19 @@ public interface SVGAngle : Object {
   }
 }
 
-public interface SVGAnimatedAngle : Object {
-  public abstract  SVGAngle baseVal { get; }
-  public abstract  SVGAngle animVal { get; }
+public interface AnimatedAngle : Object {
+  public abstract  Angle baseVal { get; }
+  public abstract  Angle animVal { get; }
 }
 
-public interface SVGColor : Object, CSSValue {
+public interface Color : Object, CSSValue {
   public abstract ushort colorType { get; }
-  public abstract RGBColor rgbColor { get; }
-  public abstract SVGICCColor iccColor { get; }
+  public abstract CSSRGBColor rgbColor { get; }
+  public abstract ICCColor iccColor { get; }
 
-  void setRGBColor(string rgbColor) throws GLib.Error;
-  void setRGBColorICCColor(string rgbColor, string iccColor) throws GLib.Error;
-  void setColor(ushort colorType, string rgbColor, string iccColor) throws GLib.Error;
+  public abstract void setRGBColor(string rgbColor) throws GLib.Error;
+  public abstract void setRGBColorICCColor(string rgbColor, string iccColor) throws GLib.Error;
+  public abstract void setColor(ushort colorType, string rgbColor, string iccColor) throws GLib.Error;
 
   /**
    * Color Types
@@ -184,79 +185,79 @@ public interface SVGColor : Object, CSSValue {
   }
 }
 
-public interface SVGICCColor : Object {
+public interface ICCColor : Object {
   public abstract string colorProfile { get; set; }
-  public abstract SVGNumberList colors { get; }
+  public abstract NumberList colors { get; }
 }
 
-public interface SVGRect : Object {
+public interface Rect : Object {
   public abstract float x { get; set; }
   public abstract float y { get; set; }
   public abstract float width { get; set; }
   public abstract float height { get; set; }
 }
 
-public interface SVGAnimatedRect {
-  public abstract SVGRect baseVal { get; }
-  public abstract SVGRect animVal { get; }
+public interface AnimatedRect {
+  public abstract Rect baseVal { get; }
+  public abstract Rect animVal { get; }
 }
 
 /**
  * Unit Types
  */
-public enum SVGUnitTypes {
+public enum UnitTypes {
   UNKNOWN = 0,
   USERSPACEONUSE = 1,
   OBJECTBOUNDINGBOX = 2
 }
 
-public interface SVGStylable : Object {
+public interface Stylable : Object {
 
-  public abstract  SVGAnimatedString className { get; }
+  public abstract  AnimatedString className { get; }
   public abstract  CSSStyleDeclaration style { get; }
 
   public abstract CSSValue getPresentationAttribute (string name);
 }
 
-public interface SVGLocatable : Object {
+public interface Locatable : Object {
 
-  public abstract SVGElement nearestViewportElement { get; }
-  public abstract SVGElement farthestViewportElement { get; }
+  public abstract Element nearestViewportElement { get; }
+  public abstract Element farthestViewportElement { get; }
 
-  public abstract SVGRect getBBox();
-  public abstract SVGMatrix getCTM();
-  public abstract SVGMatrix getScreenCTM();
-  public abstract SVGMatrix getTransformToElement(SVGElement element) throws GLib.Error;
+  public abstract Rect getBBox();
+  public abstract Matrix getCTM();
+  public abstract Matrix getScreenCTM();
+  public abstract Matrix getTransformToElement(Element element) throws GLib.Error;
 }
 
-public interface SVGTransformable : Objec, SVGLocatable {
-  public abstract SVGAnimatedTransformList transform { get; }
+public interface Transformable : Object, Locatable {
+  public abstract AnimatedTransformList transform { get; }
 }
 
-public interface SVGTests : Object {
+public interface Tests : Object {
 
-  public abstract SVGStringList requiredFeatures { get; }
-  public abstract SVGStringList requiredExtensions { get; }
-  public abstract SVGStringList systemLanguage { get; }
+  public abstract StringList requiredFeatures { get; }
+  public abstract StringList requiredExtensions { get; }
+  public abstract StringList systemLanguage { get; }
 
-  public abstract boolean hasExtension (string extension);
+  public abstract bool hasExtension (string extension);
 }
 
-public interface SVGLangSpace : Object {
+public interface LangSpace : Object {
   public abstract string xmllang { get; set; }
   public abstract string xmlspace { get; set; }
 }
 
-public interface SVGExternalResourcesRequired : Object {
-  public abstract SVGAnimatedBoolean externalResourcesRequired { get; }
+public interface ExternalResourcesRequired : Object {
+  public abstract AnimatedBoolean externalResourcesRequired { get; }
 }
 
-public interface SVGFitToViewBox : Object {
-  public abstract SVGAnimatedRect viewBox { get; }
-  public abstract SVGAnimatedPreserveAspectRatio preserveAspectRatio { get; }
+public interface FitToViewBox : Object {
+  public abstract AnimatedRect viewBox { get; }
+  public abstract AnimatedPreserveAspectRatio preserveAspectRatio { get; }
 }
 
-public interface SVGZoomAndPan : Object {
+public interface ZoomAndPan : Object {
   public abstract short zoomAndPan { get; set; }
 
   /**
@@ -269,18 +270,18 @@ public interface SVGZoomAndPan : Object {
   }
 }
 
-public interface SVGViewSpec : Object,  SVGZoomAndPan,
-                                        SVGFitToViewBox {
-  public abstract SVGTransformList transform { get; }
-  public abstract SVGElement viewTarget { get; }
+public interface ViewSpec : Object,  ZoomAndPan,
+                                        FitToViewBox {
+  public abstract TransformList transform { get; }
+  public abstract Element viewTarget { get; }
   public abstract string viewBoxString { get; }
   public abstract string preserveAspectRatioString { get; }
   public abstract string transformString { get; }
   public abstract string viewTargetString { get; }
 }
 
-public interface SVGURIReference : Object {
-  public abstract SVGAnimatedString href { get; }
+public interface URIReference : Object {
+  public abstract AnimatedString href { get; }
 }
 
 public interface SVGCSSRule : Object, CSSRule {
@@ -291,7 +292,7 @@ public interface SVGCSSRule : Object, CSSRule {
 /**
  * Rendering Intent Types
  */
-public enum SVGRenderingIntent {
+public enum RenderingIntent {
   UNKNOWN = 0,
   INTENT_AUTO = 1,
   PERCEPTUAL = 2,
@@ -300,3 +301,4 @@ public enum SVGRenderingIntent {
   ABSOLUTE_COLORIMETRIC = 5
 }
 
+}// GSvg

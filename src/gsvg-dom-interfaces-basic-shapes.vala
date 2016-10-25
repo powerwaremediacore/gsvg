@@ -19,80 +19,84 @@
 using GLib;
 using GXml;
 
-public interface SVGRectElement : Object,
-                           SVGElement,
-                           SVGTests,
-                           SVGLangSpace,
-                           SVGExternalResourcesRequired,
-                           SVGStylable,
-                           SVGTransformable {
-  public abstract SVGAnimatedLength x { get; }
-  public abstract SVGAnimatedLength y { get; }
-  public abstract SVGAnimatedLength width { get; }
-  public abstract SVGAnimatedLength height { get; }
-  public abstract SVGAnimatedLength rx { get; }
-  public abstract SVGAnimatedLength ry { get; }
+namespace GSvg {
+
+public interface RectElement : Object,
+                           Element,
+                           Tests,
+                           LangSpace,
+                           ExternalResourcesRequired,
+                           Stylable,
+                           Transformable {
+  public abstract AnimatedLength x { get; }
+  public abstract AnimatedLength y { get; }
+  public abstract AnimatedLength width { get; }
+  public abstract AnimatedLength height { get; }
+  public abstract AnimatedLength rx { get; }
+  public abstract AnimatedLength ry { get; }
 }
 
-public interface SVGCircleElement : Object,
-                             SVGElement,
-                             SVGTests,
-                             SVGLangSpace,
-                             SVGExternalResourcesRequired,
-                             SVGStylable,
-                             SVGTransformable {
-  public abstract SVGAnimatedLength cx { get; }
-  public abstract SVGAnimatedLength cy { get; }
-  public abstract SVGAnimatedLength r { get; }
+public interface CircleElement : Object,
+                             Element,
+                             Tests,
+                             LangSpace,
+                             ExternalResourcesRequired,
+                             Stylable,
+                             Transformable {
+  public abstract AnimatedLength cx { get; }
+  public abstract AnimatedLength cy { get; }
+  public abstract AnimatedLength r { get; }
 }
 
-public interface SVGEllipseElement : Object,
-                              SVGElement,
-                              SVGTests,
-                              SVGLangSpace,
-                              SVGExternalResourcesRequired,
-                              SVGStylable,
-                              SVGTransformable {
-  public abstract SVGAnimatedLength cx { get; }
-  public abstract SVGAnimatedLength cy { get; }
-  public abstract SVGAnimatedLength rx { get; }
-  public abstract SVGAnimatedLength ry { get; }
+public interface EllipseElement : Object,
+                              Element,
+                              Tests,
+                              LangSpace,
+                              ExternalResourcesRequired,
+                              Stylable,
+                              Transformable {
+  public abstract AnimatedLength cx { get; }
+  public abstract AnimatedLength cy { get; }
+  public abstract AnimatedLength rx { get; }
+  public abstract AnimatedLength ry { get; }
 }
 
-public interface SVGLineElement : Object,
-                           SVGElement,
-                           SVGTests,
-                           SVGLangSpace,
-                           SVGExternalResourcesRequired,
-                           SVGStylable,
-                           SVGTransformable {
-  public abstract SVGAnimatedLength x1 { get; }
-  public abstract SVGAnimatedLength y1 { get; }
-  public abstract SVGAnimatedLength x2 { get; }
-  public abstract SVGAnimatedLength y2 { get; }
+public interface LineElement : Object,
+                           Element,
+                           Tests,
+                           LangSpace,
+                           ExternalResourcesRequired,
+                           Stylable,
+                           Transformable {
+  public abstract AnimatedLength x1 { get; }
+  public abstract AnimatedLength y1 { get; }
+  public abstract AnimatedLength x2 { get; }
+  public abstract AnimatedLength y2 { get; }
 }
 
-public interface SVGAnimatedPoints : Object {
-  public abstract SVGPointList points { get; }
-  public abstract SVGPointList animatedPoints { get; }
+public interface AnimatedPoints : Object {
+  public abstract PointList points { get; }
+  public abstract PointList animatedPoints { get; }
 }
 
-public interface SVGPolylineElement : Object,
-                               SVGElement,
-                               SVGTests,
-                               SVGLangSpace,
-                               SVGExternalResourcesRequired,
-                               SVGStylable,
-                               SVGTransformable,
-                               SVGAnimatedPoints {
+public interface PolylineElement : Object,
+                               Element,
+                               Tests,
+                               LangSpace,
+                               ExternalResourcesRequired,
+                               Stylable,
+                               Transformable,
+                               AnimatedPoints {
 }
 
-public interface SVGPolygonElement : Object,
-                              SVGElement,
-                              SVGTests,
-                              SVGLangSpace,
-                              SVGExternalResourcesRequired,
-                              SVGStylable,
-                              SVGTransformable,
-                              SVGAnimatedPoints {
+public interface PolygonElement : Object,
+                              Element,
+                              Tests,
+                              LangSpace,
+                              ExternalResourcesRequired,
+                              Stylable,
+                              Transformable,
+                              AnimatedPoints {
 }
+
+} // GSvg
