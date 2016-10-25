@@ -7,7 +7,7 @@
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This program is distributed the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -22,24 +22,22 @@ using GXml;
 /**
  * CSS interfaces according with https://www.w3.org/TR/SVG/ version 1.1
  */
-public interface GSvg.CSSStyleDeclaration : Object {
+public interface CSSStyleDeclaration : Object {
   public abstract string        cssText { get; set; }
   public abstract ulong    length { get; set; }
   public abstract CSSRule          parentRule { get; set; }
 
-  public abstract string          getPropertyValue(in DOMString propertyName);
-  public abstract CSSValue           getPropertyCSSValue(in DOMString propertyName);
-  public abstract string          removeProperty(in DOMString propertyName)
-                                        raises(DOMException);
-  public abstract string          getPropertyPriority(in DOMString propertyName);
-  public abstract void               setProperty(in DOMString propertyName,
-                                 in DOMString value,
-                                 in DOMString priority)
-                                        raises(DOMException);
-  public abstract string          item(in unsigned long index);
+  public abstract string          getPropertyValue(string propertyName);
+  public abstract CSSValue           getPropertyCSSValue(string propertyName);
+  public abstract string          removeProperty(string propertyName) throws GLib.Error;
+  public abstract string          getPropertyPriority(string propertyName);
+  public abstract void               setProperty(string propertyName,
+                                     string value,
+                                     string priority) throws GLib.Error;
+  public abstract string          item(ulong index);
 }
 
-public interface GSvg.CSSValue : Object {
+public interface CSSValue : Object {
 
 
   public abstract string cssText { get; set; }
@@ -55,9 +53,9 @@ public interface GSvg.CSSValue : Object {
   }
 }
 
-public interface GSvg.CSSRule : Object {
+public interface CSSRule : Object {
   public abstract ushort   type { get; }
-  public abstract string        cssText { get; set; }
+  public abstract string   cssText { get; set; }
 
   public abstract CSSStyleSheet parentStyleSheet { get; }
   public abstract CSSRule parentRule { get; }
@@ -65,7 +63,7 @@ public interface GSvg.CSSRule : Object {
   // RuleType
   public enum Type {
     UNKNOWN_RULE = 0,
-    STYLE_RULE = 1
+    STYLE_RULE = 1,
     CHARSET_RULE = 2,
     IMPORT_RULE= 3,
     MEDIA_RULE = 4,
@@ -74,7 +72,7 @@ public interface GSvg.CSSRule : Object {
   }
 }
 
-public interface GSvg.CSSStyleSheet : Object {
+public interface CSSStyleSheet : Object {
   public abstract CSSRule ownerRule { get; }
   public abstract CSSRuleList cssRules { get; }
 
@@ -82,7 +80,7 @@ public interface GSvg.CSSStyleSheet : Object {
   public abstract void deleteRule (ulong index) throws GLib.Error;
 }
 
-interface GSvg.CSSRuleList {
+interface CSSRuleList {
   public abstract ulong length { get; }
   public abstract CSSRule item (ulong index);
 }

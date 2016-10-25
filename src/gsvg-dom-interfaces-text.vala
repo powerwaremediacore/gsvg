@@ -31,20 +31,20 @@ public interface SVGTextContentElement : Object,
 
   public abstract long getNumberOfChars();
   public abstract float getComputedTextLength();
-  public abstract float getSubStringLength(unsigned long charnum, unsigned long nchars) raises(DOMException);
-  public abstract SVGPoint getStartPositionOfChar(unsigned long charnum) raises(DOMException);
-  public abstract SVGPoint getEndPositionOfChar(unsigned long charnum) raises(DOMException);
-  public abstract SVGRect getExtentOfChar(unsigned long charnum) raises(DOMException);
-  public abstract float getRotationOfChar(unsigned long charnum) raises(DOMException);
+  public abstract float getSubStringLength(ulong charnum, ulong nchars) throws GLib.Error;
+  public abstract SVGPoint getStartPositionOfChar(ulong charnum) throws GLib.Error;
+  public abstract SVGPoint getEndPositionOfChar(ulong charnum) throws GLib.Error;
+  public abstract SVGRect getExtentOfChar(ulong charnum) throws GLib.Error;
+  public abstract float getRotationOfChar(ulong charnum) throws GLib.Error;
   public abstract long getCharNumAtPosition(SVGPoint point);
-  public abstract void selectSubString(unsigned long charnum, unsigned long nchars) raises(DOMException);
+  public abstract void selectSubString(ulong charnum, ulong nchars) throws GLib.Error;
 }
 
   // lengthAdjust Types
 public enum LengthAdjust {
-  UNKNOWN = 0;
-  SPACING = 1;
-  SPACINGANDGLYPHS = 2;
+  UNKNOWN = 0,
+  SPACING = 1,
+  SPACINGANDGLYPHS = 2
 }
 
 public interface SVGTextPositioningElement : Object,
@@ -81,23 +81,23 @@ public interface SVGTextPathElement : Object,
 
 // textPath Method Types
 public enum SVGTextPathMethodType {
-  UNKNOWN = 0;
-  ALIGN = 1;
-  STRETCH = 2;
+  UNKNOWN = 0,
+  ALIGN = 1,
+  STRETCH = 2
 }
 
   // textPath Spacing Types
-public enum SVGTextPathSpacingType : Object{
-  UNKNOWN = 0;
-  AUTO = 1;
-  EXACT = 2;
+public enum SVGTextPathSpacingType {
+  UNKNOWN = 0,
+  AUTO = 1,
+  EXACT = 2
 }
 
 public interface SVGAltGlyphElement : Object,
                                    SVGTextPositioningElement,
                                    SVGURIReference {
-  public abstract string glyphRef setraises(DOMException) { get; set; }
-  public abstract string format setraises(DOMException) { get; set; }
+  public abstract string glyphRef { get; set; }
+  public abstract string format { get; set; }
 }
 
 public interface SVGAltGlyphDefElement : Object, SVGElement {
@@ -110,12 +110,12 @@ public interface SVGGlyphRefElement : Object,
                                SVGElement,
                                SVGURIReference,
                                SVGStylable {
-  public abstract string glyphRef setraises(DOMException) { get; set; }
-  public abstract string format setraises(DOMException) { get; set; }
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-  public abstract float dx setraises(DOMException) { get; set; }
-  public abstract float dy setraises(DOMException) { get; set; }
+  public abstract string glyphRef { get; set; }
+  public abstract string format { get; set; }
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+  public abstract float dx { get; set; }
+  public abstract float dy { get; set; }
 }
 
 

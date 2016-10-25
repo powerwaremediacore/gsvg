@@ -7,7 +7,7 @@
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * This program is distributed in the hope that it will be useful,
+ * This program is distributed the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU Lesser General Public License for more details.
@@ -24,7 +24,7 @@ public interface SVGDocument : Object,  DomDocument,
                                         DocumentEvent {
   public abstract DOMString title { get; }
   public abstract DOMString referrer { get; }
-  public abstract DOMString domain { get; }
+  public abstract DOMString doma{ get; }
   public abstract DOMString URL { get; }
   public abstract SVGSVGElement rootElement { get; }
 }
@@ -50,26 +50,26 @@ interface SVGSVGElement : SVGElement,
   public abstract SVGRect viewport { get; }
   public abstract float pixelUnitToMillimeterX { get; }
   public abstract float pixelUnitToMillimeterY { get; }
-  public abstract float screenPixelToMillimeterX; { get; }
+  public abstract float screenPixelToMillimeterX { get; }
   public abstract float screenPixelToMillimeterY { get; }
-  public abstract boolean useCurrentView { get; }
+  public abstract bool useCurrentView { get; }
   public abstract SVGViewSpec currentView { get; }
   public abstract float currentScale { get; set; }
   public abstract SVGPoint currentTranslate { get; }
 
-  public abstract unsigned long suspendRedraw(in unsigned long maxWaitMilliseconds);
-  public abstract void unsuspendRedraw(in unsigned long suspendHandleID);
+  public abstract ulong suspendRedraw(ulong maxWaitMilliseconds);
+  public abstract void unsuspendRedraw(ulong suspendHandleID);
   public abstract void unsuspendRedrawAll();
   public abstract void forceRedraw();
   public abstract void pauseAnimations();
   public abstract void unpauseAnimations();
-  public abstract boolean animationsPaused();
+  public abstract bool animationsPaused();
   public abstract float getCurrentTime();
-  public abstract void setCurrentTime(in float seconds);
-  public abstract NodeList getIntersectionList(in SVGRect rect, in SVGElement referenceElement);
-  public abstract NodeList getEnclosureList(in SVGRect rect, in SVGElement referenceElement);
-  public abstract boolean checkIntersection(in SVGElement element, in SVGRect rect);
-  public abstract boolean checkEnclosure(in SVGElement element, in SVGRect rect);
+  public abstract void setCurrentTime(float seconds);
+  public abstract NodeList getIntersectionList(SVGRect rect, SVGElement referenceElement);
+  public abstract NodeList getEnclosureList(SVGRect rect, SVGElement referenceElement);
+  public abstract bool checkIntersection(SVGElement element, SVGRect rect);
+  public abstract bool checkEnclosure(SVGElement element, SVGRect rect);
   public abstract void deselectAll();
   public abstract SVGNumber createSVGNumber();
   public abstract SVGLength createSVGLength();
@@ -78,8 +78,8 @@ interface SVGSVGElement : SVGElement,
   public abstract SVGMatrix createSVGMatrix();
   public abstract SVGRect createSVGRect();
   public abstract SVGTransform createSVGTransform();
-  public abstract SVGTransform createSVGTransformFromMatrix(in SVGMatrix matrix);
-  public abstract DomElement getElementById(in DOMString elementId);
+  public abstract SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix);
+  public abstract DomElement getElementById(DOMString elementId);
 }
 
 public interface SVGGElement : Object,

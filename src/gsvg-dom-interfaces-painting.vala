@@ -21,7 +21,7 @@ using GXml;
 
 public interface SVGPaint : Object, Object, SVGColor {
 
-  public abstract unsigned short paintType { get; }
+  public abstract ushort paintType { get; }
   public abstract string uri { get; }
 
   public abstract void setUri(string uri);
@@ -34,16 +34,16 @@ public interface SVGPaint : Object, Object, SVGColor {
    * Paint Types
   */
   public enum Type {
-    UNKNOWN = 0;
-    RGBCOLOR = 1;
-    RGBCOLOR_ICCCOLOR = 2;
-    NONE = 101;
-    CURRENTCOLOR = 102;
-    URI_NONE = 103;
-    URI_CURRENTCOLOR = 104;
-    URI_RGBCOLOR = 105;
-    URI_RGBCOLOR_ICCCOLOR = 106;
-    URI = 107;
+    UNKNOWN = 0,
+    RGBCOLOR = 1,
+    RGBCOLOR_ICCCOLOR = 2,
+    NONE = 101,
+    CURRENTCOLOR = 102,
+    URI_NONE = 103,
+    URI_CURRENTCOLOR = 104,
+    URI_RGBCOLOR = 105,
+    URI_RGBCOLOR_ICCCOLOR = 106,
+    URI = 107
   }
 }
 
@@ -58,26 +58,26 @@ public interface SVGMarkerElement : Object, Object,
   public abstract  SVGAnimatedLength refY { get;}
   public abstract  SVGAnimatedEnumeration markerUnits { get;}
   public abstract  SVGAnimatedLength markerWidth { get; }
-  public abstract  SVGAnimatedLength markerHeight; { get; }
+  public abstract  SVGAnimatedLength markerHeight { get; }
   public abstract  SVGAnimatedEnumeration orientType { get; }
   public abstract  SVGAnimatedAngle orientAngle { get; }
 
-  public abstract void setOrientToAuto () raises(DOMException);
-  public abstract void setOrientToAngle (SVGAngle angle) raises(DOMException);
+  public abstract void setOrientToAuto () throws GLib.Error;
+  public abstract void setOrientToAngle (SVGAngle angle) throws GLib.Error;
 }
 
   // Marker Unit Types
 public enum SVGMarkerUnits {
-  UNKNOWN = 0;
-  USERSPACEONUSE = 1;
-  STROKEWIDTH = 2;
+  UNKNOWN = 0,
+  USERSPACEONUSE = 1,
+  STROKEWIDTH = 2
 }
 
   // Marker Orientation Types
 public enum SVGMarkerOrient {
-  UNKNOWN = 0;
-  AUTO = 1;
-  ANGLE = 2;
+  UNKNOWN = 0,
+  AUTO = 1,
+  ANGLE = 2
 }
 
 public interface SVGColorProfileElement : Object, SVGElement,
@@ -85,14 +85,14 @@ public interface SVGColorProfileElement : Object, SVGElement,
                                    SVGRenderingIntent {
   public abstract string local { get; set; }
   public abstract string name { get; set; }
-  public abstract unsigned short renderingIntent { get; set; }
+  public abstract ushort renderingIntent { get; set; }
 }
 
 public interface SVGColorProfileRule : Object, SVGCSSRule,
                                 SVGRenderingIntent {
-  public abstract string src setraises(DOMException) { get; set; }
-  public abstract string name setraises(DOMException) { get; set; }
-  public abstract unsigned short renderingIntent setraises(DOMException) { get; set; }
+  public abstract string src { get; set; }
+  public abstract string name { get; set; }
+  public abstract ushort renderingIntent { get; set; }
 }
 
 public interface SVGGradientElement : Object, SVGElement,
@@ -108,10 +108,10 @@ public interface SVGGradientElement : Object, SVGElement,
 
   // Spread Method Types
 public enum SVGSpreadMethod {
-  UNKNOWN = 0;
-  PAD = 1;
-  REFLECT = 2;
-  REPEAT = 3;
+  UNKNOWN = 0,
+  PAD = 1,
+  REFLECT = 2,
+  REPEAT = 3
 }
 
 public interface SVGLinearGradientElement : Object, SVGGradientElement {
@@ -131,7 +131,7 @@ public interface SVGRadialGradientElement : Object, SVGGradientElement {
 
 public interface SVGStopElement : Object, SVGElement,
                            SVGStylable {
-  public abstract  SVGAnimatedNumber offset;
+  public abstract  SVGAnimatedNumber offset { get; }
 }
 
 public interface SVGPatternElement : Object, SVGElement,

@@ -47,10 +47,10 @@ public interface SVGViewElement : Object, SVGElement,
 public interface SVGScriptElement : Object, SVGElement,
                              SVGURIReference,
                              SVGExternalResourcesRequired {
-  attribute string type setraises(DOMException) { get; set; }
+  public abstract string type { get; set; }
 }
 
-public interface SVGZoomEvent : Object, UIEvent {
+public interface SVGZoomEvent : Object/*, UIEvent*/ {
   public abstract SVGRect zoomRectScreen { get; }
   public abstract float previousScale { get; }
   public abstract SVGPoint previousTranslate { get; }
@@ -60,9 +60,9 @@ public interface SVGZoomEvent : Object, UIEvent {
 
 public interface ElementTimeControl {
   public abstract void beginElement();
-  public abstract void beginElementAt(in float offset);
+  public abstract void beginElementAt(float offset);
   public abstract void endElement();
-  public abstract void endElementAt(in float offset);
+  public abstract void endElementAt(float offset);
 }
 
 public interface TimeEvent : Object, Event {
@@ -70,7 +70,7 @@ public interface TimeEvent : Object, Event {
   public abstract AbstractView view { get; }
   public abstract long detail { get; }
 
-  void initTimeEvent(in string typeArg, in AbstractView viewArg, in long detailArg);
+  void initTimeEvent(string typeArg, AbstractView viewArg, long detailArg);
 }
 
 public interface SVGAnimationElement : Object, SVGElement,

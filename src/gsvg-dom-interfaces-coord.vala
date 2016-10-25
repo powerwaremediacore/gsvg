@@ -21,41 +21,41 @@ using GXml;
 
 public interface SVGPoint : Object {
 
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
 
   public abstract SVGPoint matrixTransform (SVGMatrix matrix);
 }
 
 public interface SVGPointList : Object {
 
-  public abstract ulong numberOfItems { get; set; }
+  public abstract ulong numberOfItems { get; }
 
-  public abstract void clear() raises(DOMException);
-  public abstract SVGPoint initialize(SVGPoint newItem) raises(DOMException) { get; set; }
-  public abstract SVGPoint getItem(unsigned long index) raises(DOMException) { get; set; }
-  public abstract SVGPoint insertItemBefore(SVGPoint newItem, unsigned long index) raises(DOMException) { get; set; }
-  public abstract SVGPoint replaceItem(SVGPoint newItem, unsigned long index) raises(DOMException) { get; set; }
-  public abstract SVGPoint removeItem(unsigned long index) raises(DOMException) { get; set; }
-  public abstract SVGPoint appendItem(SVGPoint newItem) raises(DOMException) { get; set; }
+  public abstract void clear() throws GLib.Error;
+  public abstract SVGPoint initialize(SVGPoint newItem) throws GLib.Error;
+  public abstract SVGPoint getItem(ulong index) throws GLib.Error;
+  public abstract SVGPoint insertItemBefore(SVGPoint newItem, ulong index) throws GLib.Error;
+  public abstract SVGPoint replaceItem(SVGPoint newItem, ulong index) throws GLib.Error;
+  public abstract SVGPoint removeItem(ulong index) throws GLib.Error;
+  public abstract SVGPoint appendItem(SVGPoint newItem) throws GLib.Error;
 }
 
 public interface SVGMatrix : Object {
 
-  public abstract float a setraises(DOMException) { get; set; }
-  public abstract float b setraises(DOMException) { get; set; }
-  public abstract float c setraises(DOMException) { get; set; }
-  public abstract float d setraises(DOMException) { get; set; }
-  public abstract float e setraises(DOMException) { get; set; }
-  public abstract float f setraises(DOMException) { get; set; }
+  public abstract float a { get; set; }
+  public abstract float b { get; set; }
+  public abstract float c { get; set; }
+  public abstract float d { get; set; }
+  public abstract float e { get; set; }
+  public abstract float f { get; set; }
 
   public abstract SVGMatrix multiply(SVGMatrix secondMatrix);
-  public abstract SVGMatrix inverse() raises(SVGException);
+  public abstract SVGMatrix inverse() throws GLib.Error;
   public abstract SVGMatrix translate(float x, float y);
   public abstract SVGMatrix scale(float scaleFactor);
   public abstract SVGMatrix scaleNonUniform(float scaleFactorX, float scaleFactorY);
   public abstract SVGMatrix rotate(float angle);
-  public abstract VGMatrix rotateFromVector(float x, float y) raises(SVGException);
+  public abstract VGMatrix rotateFromVector(float x, float y) throws GLib.Error;
   public abstract SVGMatrix flipX();
   public abstract SVGMatrix flipY();
   public abstract SVGMatrix skewX(float angle);
@@ -67,12 +67,12 @@ public interface SVGTransform {
   public abstract SVGMatrix matrix { get; set; }
   public abstract float angle { get; set; }
 
-  public abstract void setMatrix(SVGMatrix matrix) raises(DOMException);
-  public abstract void setTranslate(float tx, float ty) raises(DOMException);
-  public abstract void setScale(float sx, float sy) raises(DOMException);
-  public abstract void setRotate(float angle, float cx, float cy) raises(DOMException);
-  public abstract void setSkewX(float angle) raises(DOMException);
-  public abstract void setSkewY(float angle) raises(DOMException);
+  public abstract void setMatrix(SVGMatrix matrix) throws GLib.Error;
+  public abstract void setTranslate(float tx, float ty) throws GLib.Error;
+  public abstract void setScale(float sx, float sy) throws GLib.Error;
+  public abstract void setRotate(float angle, float cx, float cy) throws GLib.Error;
+  public abstract void setSkewX(float angle) throws GLib.Error;
+  public abstract void setSkewY(float angle) throws GLib.Error;
 
 
   // Transform Types
@@ -89,17 +89,17 @@ public interface SVGTransform {
 
 public interface SVGTransformList : Object {
 
-  public abstract ulong numberOfItems;
+  public abstract ulong numberOfItems { get; }
 
   public abstract void clear()throws GLib.Error;
   public abstract SVGTransform initialize(SVGTransform newItem)throws GLib.Error;
-  public abstract SVGTransform getItem(unsigned long index)throws GLib.Error;
-  public abstract SVGTransform insertItemBefore(SVGTransform newItem, ulong index) raises(DOMException);
-  public abstract SVGTransform replaceItem(SVGTransform newItem, ulong index) raises(DOMException);
-  public abstract SVGTransform removeItem(unsigned long index)throws GLib.Error;
+  public abstract SVGTransform getItem(ulong index)throws GLib.Error;
+  public abstract SVGTransform insertItemBefore(SVGTransform newItem, ulong index) throws GLib.Error;
+  public abstract SVGTransform replaceItem(SVGTransform newItem, ulong index) throws GLib.Error;
+  public abstract SVGTransform removeItem(ulong index)throws GLib.Error;
   public abstract SVGTransform appendItem(SVGTransform newItem)throws GLib.Error;
   public abstract SVGTransform createSVGTransformFromMatrix(SVGMatrix matrix);
-  public abstract SVGTransform consolidate() raises(DOMException);
+  public abstract SVGTransform consolidate() throws GLib.Error;
 }
 
 public interface SVGAnimatedTransformList : Object {
@@ -110,30 +110,30 @@ public interface SVGAnimatedTransformList : Object {
 interface SVGPreserveAspectRatio {
 
 
-  public abstract short align setraises(DOMException) { get; set; }
-  public abstract short meetOrSlice setraises(DOMException) { get; set; }
+  public abstract short align { get; set; }
+  public abstract short meetOrSlice { get; set; }
 
 
   // Alignment Types
   public enum Type {
-    UNKNOWN = 0;
-    NONE = 1;
-    XMINYMIN = 2;
-    XMIDYMIN = 3;
-    XMAXYMIN = 4;
-    XMINYMID = 5;
-    XMIDYMID = 6;
-    XMAXYMID = 7;
-    XMINYMAX = 8;
-    XMIDYMAX = 9;
-    XMAXYMAX = 10;
+    UNKNOWN = 0,
+    NONE = 1,
+    XMINYMIN = 2,
+    XMIDYMIN = 3,
+    XMAXYMIN = 4,
+    XMINYMID = 5,
+    XMIDYMID = 6,
+    XMAXYMID = 7,
+    XMINYMAX = 8,
+    XMIDYMAX = 9,
+    XMAXYMAX = 10
   }
 
     // Meet-or-slice Types
   public enum MeetorSlice {
-    UNKNOWN = 0;
-    MEET = 1;
-    SLICE = 2;
+    UNKNOWN = 0,
+    MEET = 1,
+    SLICE = 2
   }
 }
 

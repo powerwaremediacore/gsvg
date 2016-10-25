@@ -27,155 +27,155 @@ public interface SVGPathSeg : Object {
    * Path Segment Types
    */
   public enum Type {
-    UNKNOWN = 0;
-    CLOSEPATH = 1;
-    MOVETO_ABS = 2;
-    MOVETO_REL = 3;
-    LINETO_ABS = 4;
-    LINETO_REL = 5;
-    CURVETO_CUBIC_ABS = 6;
-    CURVETO_CUBIC_REL = 7;
-    CURVETO_QUADRATIC_ABS = 8;
-    CURVETO_QUADRATIC_REL = 9;
-    ARC_ABS = 10;
-    ARC_REL = 11;
-    LINETO_HORIZONTAL_ABS = 12;
-    LINETO_HORIZONTAL_REL = 13;
-    LINETO_VERTICAL_ABS = 14;
-    LINETO_VERTICAL_REL = 15;
-    CURVETO_CUBIC_SMOOTH_ABS = 16;
-    CURVETO_CUBIC_SMOOTH_REL = 17;
-    CURVETO_QUADRATIC_SMOOTH_ABS = 18;
-    CURVETO_QUADRATIC_SMOOTH_REL = 19;
+    UNKNOWN = 0,
+    CLOSEPATH = 1,
+    MOVETO_ABS = 2,
+    MOVETO_REL = 3,
+    LINETO_ABS = 4,
+    LINETO_REL = 5,
+    CURVETO_CUBIC_ABS = 6,
+    CURVETO_CUBIC_REL = 7,
+    CURVETO_QUADRATIC_ABS = 8,
+    CURVETO_QUADRATIC_REL = 9,
+    ARC_ABS = 10,
+    ARC_REL = 11,
+    LINETO_HORIZONTAL_ABS = 12,
+    LINETO_HORIZONTAL_REL = 13,
+    LINETO_VERTICAL_ABS = 14,
+    LINETO_VERTICAL_REL = 15,
+    CURVETO_CUBIC_SMOOTH_ABS = 16,
+    CURVETO_CUBIC_SMOOTH_REL = 17,
+    CURVETO_QUADRATIC_SMOOTH_ABS = 18,
+    CURVETO_QUADRATIC_SMOOTH_REL = 19
   }
-};
+}
 
-public interface SVGPathSegClosePath : Object SVGPathSeg {
-};
+public interface SVGPathSegClosePath : Object, SVGPathSeg {
+}
 
 public interface SVGPathSegMovetoAbs : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-};
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+}
 
 public interface SVGPathSegMovetoRel : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-};
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+}
 
 public interface SVGPathSegLinetoAbs : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-};
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+}
 
-public interface SVGPathSegLinetoRel : Object SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-};
+public interface SVGPathSegLinetoRel : Object, SVGPathSeg {
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+}
 
 public interface SVGPathSegCurvetoCubicAbs : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-  public abstract float x1 setraises(DOMException) { get; set; }
-  public abstract float y1 setraises(DOMException) { get; set; }
-  public abstract float x2 setraises(DOMException) { get; set; }
-  public abstract float y2 setraises(DOMException) { get; set; }
-};
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+  public abstract float x1 { get; set; }
+  public abstract float y1 { get; set; }
+  public abstract float x2 { get; set; }
+  public abstract float y2 { get; set; }
+}
 
 public interface SVGPathSegCurvetoCubicRel : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-  public abstract float x1 setraises(DOMException) { get; set; }
-  public abstract float y1 setraises(DOMException) { get; set; }
-  public abstract float x2 setraises(DOMException) { get; set; }
-  public abstract float y2 setraises(DOMException) { get; set; }
-};
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+  public abstract float x1 { get; set; }
+  public abstract float y1 { get; set; }
+  public abstract float x2 { get; set; }
+  public abstract float y2 { get; set; }
+}
 
 public interface SVGPathSegCurvetoQuadraticAbs : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-  public abstract float x1 setraises(DOMException) { get; set; }
-  public abstract float y1 setraises(DOMException) { get; set; }
-};
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+  public abstract float x1 { get; set; }
+  public abstract float y1 { get; set; }
+}
 
 public interface SVGPathSegCurvetoQuadraticRel : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-  public abstract float x1 setraises(DOMException) { get; set; }
-  public abstract float y1 setraises(DOMException) { get; set; }
-};
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+  public abstract float x1 { get; set; }
+  public abstract float y1 { get; set; }
+}
 
 public interface SVGPathSegArcAbs : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-  public abstract float r1 setraises(DOMException) { get; set; }
-  public abstract float r2 setraises(DOMException) { get; set; }
-  public abstract float angle setraises(DOMException) { get; set; }
-  public abstract boolean largeArcFlag setraises(DOMxception) { get; set; }
-  public abstract boolean sweepFlag setraises(DOMException) { get; set; }
-};
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+  public abstract float r1 { get; set; }
+  public abstract float r2 { get; set; }
+  public abstract float angle { get; set; }
+  public abstract boolean largeArcFlag { get; set; }
+  public abstract boolean sweepFlag { get; set; }
+}
 
 public interface SVGPathSegArcRel : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-  public abstract float r1 setraises(DOMException) { get; set; }
-  public abstract float r2 setraises(DOMException) { get; set; }
-  public abstract float angle setraises(DOMException) { get; set; }
-  public abstract boolean largeArcFlag setraises(DOMExcepton) { get; set; }
-  public abstract boolean sweepFlag setraises(DOMException) { get; set; }
-};
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+  public abstract float r1 { get; set; }
+  public abstract float r2 { get; set; }
+  public abstract float angle { get; set; }
+  public abstract boolean largeArcFlag { get; set; }
+  public abstract boolean sweepFlag { get; set; }
+}
 
 public interface SVGPathSegLinetoHorizontalAbs : Object, SVGPathSeg {
-  float x setraises(DOMException) { get; set; }
+  public abstract float x { get; set; }
 }
 
 public interface SVGPathSegLinetoHorizontalRel : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
+  public abstract float x { get; set; }
 }
 
 public interface SVGPathSegLinetoVerticalAbs : Object, SVGPathSeg {
-  public abstract float y setraises(DOMException) { get; set; }
+  public abstract float y { get; set; }
 }
 
 public interface SVGPathSegLinetoVerticalRel : Object, SVGPathSeg {
-  public abstract float y setraises(DOMException) { get; set; }
+  public abstract float y { get; set; }
 }
 
 public interface SVGPathSegCurvetoCubicSmoothAbs : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-  public abstract float x2 setraises(DOMException) { get; set; }
-  public abstract float y2 setraises(DOMException) { get; set; }
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+  public abstract float x2 { get; set; }
+  public abstract float y2 { get; set; }
 }
 
 public interface SVGPathSegCurvetoCubicSmoothRel : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
-  public abstract float x2 setraises(DOMException) { get; set; }
-  public abstract float y2 setraises(DOMException) { get; set; }
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
+  public abstract float x2 { get; set; }
+  public abstract float y2 { get; set; }
 }
 
 public interface SVGPathSegCurvetoQuadraticSmoothAbs : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
 }
 
 public interface SVGPathSegCurvetoQuadraticSmoothRel : Object, SVGPathSeg {
-  public abstract float x setraises(DOMException) { get; set; }
-  public abstract float y setraises(DOMException) { get; set; }
+  public abstract float x { get; set; }
+  public abstract float y { get; set; }
 }
 
 public interface SVGPathSegList : Object {
 
-   ulong numberOfItems { get;}
+  public abstract ulong numberOfItems { get;}
 
-  public abstract void clear() raises(DOMException);
-  public abstract SVGPathSeg initialize(SVGPathSeg newItem) raises(DOMException);
-  public abstract SVGPathSeg getItem(ulong index) raises(DOMException);
-  public abstract SVGPathSeg insertItemBefore(SVGPathSeg newItem, ulong index) raises(DOMException);
-  public abstract SVGPathSeg replaceItem(SVGPathSeg newItem, ulong index) raises(DOMException);
-  public abstract SVGPathSeg removeItem(ulong index) raises(DOMException);
-  public abstract SVGPathSeg appendItem(SVGPathSeg newItem) raises(DOMException);
+  public abstract void clear() throws GLib.Error;
+  public abstract SVGPathSeg initialize(SVGPathSeg newItem) throws GLib.Error;
+  public abstract SVGPathSeg getItem(ulong index) throws GLib.Error;
+  public abstract SVGPathSeg insertItemBefore(SVGPathSeg newItem, ulong index) throws GLib.Error;
+  public abstract SVGPathSeg replaceItem(SVGPathSeg newItem, ulong index) throws GLib.Error;
+  public abstract SVGPathSeg removeItem(ulong index) throws GLib.Error;
+  public abstract SVGPathSeg appendItem(SVGPathSeg newItem) throws GLib.Error;
 }
 
 public interface SVGAnimatedPathData : Object {

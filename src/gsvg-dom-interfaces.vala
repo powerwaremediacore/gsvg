@@ -22,69 +22,69 @@ using GXml;
 /**
  * Top level SVG Element node according with https://www.w3.org/TR/SVG/ version 1.1
  */
-public interface GSvg.SVGElement : Object, DomElement {
+public interface SVGElement : Object, DomElement {
   public abstract string id { get; set; }
   public abstract string xmlbase { get; set; }
   public abstract SVGSVGElement ownerSVGElement { get; }
   public abstract SVGElement viewportElement { get; }
 }
 
-public interface GSvg.SVGAnimatedBoolean Object, {
+public interface SVGAnimatedBoolean : Object {
   public abstract bool baseVal { get; set; }
   public abstract bool animVal { get; }
 }
 
-public interface GSvg.SVGAnimatedString : Object {
+public interface SVGAnimatedString : Object {
   public abstract string baseVal { get; set; }
   public abstract string animVal { get; }
 }
 
-public interface GSvg.SVGStringList : Object {
+public interface SVGStringList : Object {
 
   public abstract uint numberOfItems { get; }
   public abstract void clear () throws GLib.Error;
   public abstract string initialize (string newItem) throws GLib.Error;
   public abstract string getItem (int index) throws GLib.Error;
-  public abstract string insertItemBefore (string newItem, unsigned long index) throws GLib.Error;
-  public abstract string replaceItem (string newItem, unsigned long index) throws GLib.Error;
+  public abstract string insertItemBefore (string newItem, ulong index) throws GLib.Error;
+  public abstract string replaceItem (string newItem, ulong index) throws GLib.Error;
   public abstract string removeItem (int index) throws GLib.Error;
   public abstract string appendItem (string newItem) throws GLib.Error;
 }
 
 
-public interface GSvg.SVGAnimatedEnumeration : Object {
+public interface SVGAnimatedEnumeration : Object {
   public abstract uint baseVal { get; set; }
   public abstract uint animVal { get; }
 }
 
-public interface GSvg.SVGAnimatedInteger : Object {
+public interface SVGAnimatedInteger : Object {
   public abstract long baseVal { get; set; }
   public abstract long animVal { get; }
 }
 
-public interface GSvg.SVGNumber : Object {
+public interface SVGNumber : Object {
   public abstract float value { get; set; }
 }
 
-public interface GSvg.SVGAnimatedNumber : Object {
+public interface SVGAnimatedNumber : Object {
   public abstract float baseVal { get; set; }
   public abstract float animVal  { get; }
 }
 
-public interface GSvg.SVGNumberList : Object {
+public interface SVGNumberList : Object {
 
   public abstract ulong numberOfItems { get; }
 
-  public abstract void clear() { get; }
+  public abstract void clear() throws GLib.Error;
   public abstract SVGNumber initialize(SVGNumber newItem) throws GLib.Error;
   public abstract SVGNumber getItem(ulong index) throws GLib.Error;
-  public abstract SVGNumber insertItemBefore(SVGNumber newItem, unsigned long index) throws GLib.Error;
-  public abstract SVGNumber replaceItem(SVGNumber newItem, unsigned long index) throws GLib.Error;
+  public abstract SVGNumber insertItemBefore(SVGNumber newItem, ulong index) throws GLib.Error;
+  public abstract SVGNumber replaceItem(SVGNumber newItem, ulong index) throws GLib.Error;
   public abstract SVGNumber removeItem(ulong index) throws GLib.Error;
   public abstract SVGNumber appendItem(SVGNumber newItem) throws GLib.Error;
 }
 
-public interface GSvg.SVGAnimatedNumberList : Object {
+public interface SVGAnimatedNumberList : Object {
   public abstract SVGNumberList baseVal { get; }
   public abstract SVGNumberList animVal { get; }
 }
@@ -296,7 +296,7 @@ public enum SVGRenderingIntent {
   INTENT_AUTO = 1,
   PERCEPTUAL = 2,
   COLORIMETRIC = 3,
-  SATURATION = 4,ç
+  SATURATION = 4,
   ABSOLUTE_COLORIMETRIC = 5
 }
 

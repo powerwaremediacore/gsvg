@@ -35,7 +35,7 @@ public interface SVGFilterElement : Object, SVGElement,
   public abstract SVGAnimatedInteger filterResX { get; }
   public abstract SVGAnimatedInteger filterResY { get; }
 
-  void setFilterRes(in unsigned long filterResX, in unsigned long filterResY) raises(DOMException);
+  void setFilterRes(ulong filterResX, ulong filterResY) throws GLib.Error;
 }
 
 public interface SVGFilterPrimitiveStandardAttributes : Object, SVGStylable {
@@ -54,13 +54,13 @@ public interface SVGFEBlendElement : Object, SVGElement,
 }
 
   // Blend Mode Types
-public enum SVGFeBlendMode {
-  UNKNOWN = 0;
-  NORMAL = 1;
-  MULTIPLY = 2;
-  SCREEN = 3;
-  DARKEN = 4;
-  LIGHTEN = 5;
+public enum SVGFEBlendMode {
+  UNKNOWN = 0,
+  NORMAL = 1,
+  MULTIPLY = 2,
+  SCREEN = 3,
+  DARKEN = 4,
+  LIGHTEN = 5
 }
 
 public interface SVGFEColorMatrixElement : Object, SVGElement,
@@ -71,12 +71,12 @@ public interface SVGFEColorMatrixElement : Object, SVGElement,
 }
 
   // Color Matrix Types
-public enum SVGFeColorMatrixType {
-  UNKNOWN = 0;
-  MATRIX = 1;
-  SATURATE = 2;
-  HUEROTATE = 3;
-  LUMINANCETOALPHA = 4;
+public enum SVGFEColorMatrixType {
+  UNKNOWN = 0,
+  MATRIX = 1,
+  SATURATE = 2,
+  HUEROTATE = 3,
+  LUMINANCETOALPHA = 4
 }
 
 
@@ -97,13 +97,13 @@ public interface SVGComponentTransferFunctionElement : Object, SVGElement {
 
 
   // Component Transfer Types
-public enum SVGFeComponentTransferType {
-  UNKNOWN = 0;
-  IDENTITY = 1;
-  TABLE = 2;
-  DISCRETE = 3;
-  LINEAR = 4;
-  GAMMA = 5;
+public enum SVGFEComponentTransferType {
+  UNKNOWN = 0,
+  IDENTITY = 1,
+  TABLE = 2,
+  DISCRETE = 3,
+  LINEAR = 4,
+  GAMMA = 5
 }
 
 
@@ -133,13 +133,13 @@ public interface SVGFECompositeElement : Object, SVGElement,
 
   // Composite Operators
 public enum SVGFE0CompositeOperator {
-  UNKNOWN = 0;
-  OVER = 1;
-  IN = 2;
-  OUT = 3;
-  ATOP = 4;
-  XOR = 5;
-  ARITHMETIC = 6;
+  UNKNOWN = 0,
+  OVER = 1,
+  IN = 2,
+  OUT = 3,
+  ATOP = 4,
+  XOR = 5,
+  ARITHMETIC = 6,
 }
 
 public interface SVGFEConvolveMatrixElement : Object, SVGElement,
@@ -161,10 +161,10 @@ public interface SVGFEConvolveMatrixElement : Object, SVGElement,
 
   // Edge Mode Values
 public enum SVGEdgeMode {
-  UNKNOWN = 0;
-  DUPLICATE = 1;
-  WRAP = 2;
-  NONE = 3;
+  UNKNOWN = 0,
+  DUPLICATE = 1,
+  WRAP = 2,
+  NONE = 3
 }
 
 public interface SVGFEDiffuseLightingElement : Object, SVGElement,
@@ -209,11 +209,11 @@ public interface SVGFEDisplacementMapElement : Object, SVGElement,
 
   // Channel Selectors
 public enum SVGChannel {
-  UNKNOWN = 0;
-  R = 1;
-  G = 2;
-  B = 3;
-  A = 4;
+  UNKNOWN = 0,
+  R = 1,
+  G = 2,
+  B = 3,
+  A = 4
 }
 
 
@@ -228,7 +228,7 @@ public interface SVGFEGaussianBlurElement : Object, SVGElement,
   public abstract SVGAnimatedNumber stdDeviationX { get; }
   public abstract SVGAnimatedNumber stdDeviationY { get; }
 
-  void setStdDeviation(in float stdDeviationX, in float stdDeviationY) raises(DOMException);
+  void setStdDeviation(float stdDeviationX, float stdDeviationY) throws GLib.Error;
 }
 
 public interface SVGFEImageElement : Object, SVGElement,
@@ -258,9 +258,9 @@ public interface SVGFEMorphologyElement : Object, SVGElement,
 
   // Morphology Operators
 public enum SVGMorphologyOperator {
-  UNKNOWN = 0;
-  ERODE = 1;
-  DILATE = 2;
+  UNKNOWN = 0,
+  ERODE = 1,
+  DILATE = 2
 }
 
 public interface SVGFEOffsetElement : Object, SVGElement,
@@ -298,15 +298,15 @@ public interface SVGFETurbulenceElement : Object, SVGElement,
 
   // Turbulence Types
 public enum SVGTurbulenceType {
-  UNKNOWN = 0;
-  FRACTALNOISE = 1;
-  TURBULENCE = 2;
+  UNKNOWN = 0,
+  FRACTALNOISE = 1,
+  TURBULENCE = 2
 }
   // Stitch Options
 public enum SVGStichType {
-  UNKNOWN = 0;
-  STITCH = 1;
-  NOSTITCH = 2;
+  UNKNOWN = 0,
+  STITCH = 1,
+  NOSTITCH = 2
 }
 
 
