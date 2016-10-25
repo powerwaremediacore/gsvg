@@ -4,6 +4,18 @@ libgsvg_@API_VERSION@_la_SOURCES = \
 	gsvg-object.vala \
 	gsvg-dom-interfaces.vala \
 	gsvg-svg.vala \
+	css-interfaces.vala \
+	gsvg-dom-interfaces-basic-shapes.vala \
+	gsvg-dom-interfaces-coord.vala \
+	gsvg-dom-interfaces-filter.vala \
+	gsvg-dom-interfaces-fonts.vala \
+	gsvg-dom-interfaces-interactivity.vala \
+	gsvg-dom-interfaces-meta-ext.vala \
+	gsvg-dom-interfaces-painting.vala \
+	gsvg-dom-interfaces-path.vala \
+	gsvg-dom-interfaces-struct.vala \
+	gsvg-dom-interfaces-text.vala \
+	gsvg-dom-interfaces.vala \
 	$(NULL)
 
 libgsvg_@API_VERSION@_la_CFLAGS = \
