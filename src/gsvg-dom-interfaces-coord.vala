@@ -31,14 +31,14 @@ public interface Point : Object {
 
 public interface PointList : Object {
 
-  public abstract ulong numberOfItems { get; }
+  public abstract uint numberOfItems { get; }
 
   public abstract void clear() throws GLib.Error;
   public abstract Point initialize(Point newItem) throws GLib.Error;
-  public abstract Point getItem(ulong index) throws GLib.Error;
-  public abstract Point insertItemBefore(Point newItem, ulong index) throws GLib.Error;
-  public abstract Point replaceItem(Point newItem, ulong index) throws GLib.Error;
-  public abstract Point removeItem(ulong index) throws GLib.Error;
+  public abstract Point getItem(uint index) throws GLib.Error;
+  public abstract Point insertItemBefore(Point newItem, uint index) throws GLib.Error;
+  public abstract Point replaceItem(Point newItem, uint index) throws GLib.Error;
+  public abstract Point removeItem(uint index) throws GLib.Error;
   public abstract Point appendItem(Point newItem) throws GLib.Error;
 }
 
@@ -64,8 +64,8 @@ public interface Matrix : Object {
   public abstract Matrix skewY(float angle);
 }
 
-public interface Transform {
-  public abstract ushort type { get; set; }
+public interface Transform : Object {
+  public abstract uint ttype { get; set; }
   public abstract Matrix matrix { get; set; }
   public abstract float angle { get; set; }
 
@@ -91,14 +91,14 @@ public interface Transform {
 
 public interface TransformList : Object {
 
-  public abstract ulong numberOfItems { get; }
+  public abstract uint numberOfItems { get; }
 
   public abstract void clear()throws GLib.Error;
   public abstract Transform initialize(Transform newItem)throws GLib.Error;
-  public abstract Transform getItem(ulong index)throws GLib.Error;
-  public abstract Transform insertItemBefore(Transform newItem, ulong index) throws GLib.Error;
-  public abstract Transform replaceItem(Transform newItem, ulong index) throws GLib.Error;
-  public abstract Transform removeItem(ulong index)throws GLib.Error;
+  public abstract Transform getItem(uint index)throws GLib.Error;
+  public abstract Transform insertItemBefore(Transform newItem, uint index) throws GLib.Error;
+  public abstract Transform replaceItem(Transform newItem, uint index) throws GLib.Error;
+  public abstract Transform removeItem(uint index)throws GLib.Error;
   public abstract Transform appendItem(Transform newItem)throws GLib.Error;
   public abstract Transform createSVGTransformFromMatrix(Matrix matrix);
   public abstract Transform consolidate() throws GLib.Error;
@@ -109,12 +109,9 @@ public interface AnimatedTransformList : Object {
   public abstract TransformList animVal { get; set; }
 }
 
-public interface PreserveAspectRatio {
-
-
+public interface PreserveAspectRatio : Object {
   public abstract short align { get; set; }
   public abstract short meetOrSlice { get; set; }
-
 
   // Alignment Types
   public enum Type {
@@ -139,7 +136,7 @@ public interface PreserveAspectRatio {
   }
 }
 
-public interface AnimatedPreserveAspectRatio {
+public interface AnimatedPreserveAspectRatio : Object {
   public abstract PreserveAspectRatio baseVal { get; }
   public abstract PreserveAspectRatio animVal { get; }
 }

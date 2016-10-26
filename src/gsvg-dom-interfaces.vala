@@ -46,8 +46,8 @@ public interface StringList : Object {
   public abstract void clear () throws GLib.Error;
   public abstract string initialize (string newItem) throws GLib.Error;
   public abstract string getItem (int index) throws GLib.Error;
-  public abstract string insertItemBefore (string newItem, ulong index) throws GLib.Error;
-  public abstract string replaceItem (string newItem, ulong index) throws GLib.Error;
+  public abstract string insertItemBefore (string newItem, uint index) throws GLib.Error;
+  public abstract string replaceItem (string newItem, uint index) throws GLib.Error;
   public abstract string removeItem (int index) throws GLib.Error;
   public abstract string appendItem (string newItem) throws GLib.Error;
 }
@@ -74,14 +74,14 @@ public interface AnimatedNumber : Object {
 
 public interface NumberList : Object {
 
-  public abstract ulong numberOfItems { get; }
+  public abstract uint numberOfItems { get; }
 
   public abstract void clear() throws GLib.Error;
   public abstract Number initialize(Number newItem) throws GLib.Error;
-  public abstract Number getItem(ulong index) throws GLib.Error;
-  public abstract Number insertItemBefore(Number newItem, ulong index) throws GLib.Error;
-  public abstract Number replaceItem(Number newItem, ulong index) throws GLib.Error;
-  public abstract Number removeItem(ulong index) throws GLib.Error;
+  public abstract Number getItem(uint index) throws GLib.Error;
+  public abstract Number insertItemBefore(Number newItem, uint index) throws GLib.Error;
+  public abstract Number replaceItem(Number newItem, uint index) throws GLib.Error;
+  public abstract Number removeItem(uint index) throws GLib.Error;
   public abstract Number appendItem(Number newItem) throws GLib.Error;
 }
 
@@ -91,13 +91,13 @@ public interface AnimatedNumberList : Object {
 }
 
 public interface Length : Object {
-  public abstract ushort unitType { get; }
+  public abstract uint unitType { get; }
   public abstract float value { get; set; }
   public abstract float valueInSpecifiedUnits { get; set; }
   public abstract string valueAsString { get; set; }
 
-  public abstract void newValueSpecifiedUnits(ushort unitType,float valueInSpecifiedUnits) throws GLib.Error;
-  public abstract void convertToSpecifiedUnits(ushort unitType) throws GLib.Error;
+  public abstract void newValueSpecifiedUnits(uint unitType,float valueInSpecifiedUnits) throws GLib.Error;
+  public abstract void convertToSpecifiedUnits(uint unitType) throws GLib.Error;
 
   /**
    * Length Unit Types
@@ -122,16 +122,16 @@ public interface AnimatedLength : Object {
   public abstract Length animVal { get; }
 }
 
-public interface LengthList {
+public interface LengthList : Object {
 
-  public abstract ulong numberOfItems { get; }
+  public abstract uint numberOfItems { get; }
 
   public abstract void clear() throws GLib.Error;
   public abstract Length initialize(Length newItem) throws GLib.Error;
-  public abstract Length getItem(ulong index) throws GLib.Error;
-  public abstract Length insertItemBefore(Length newItem,ulong index) throws GLib.Error;
-  public abstract Length replaceItem(Length newItem, ulong index) throws GLib.Error;
-  public abstract Length removeItem(ulong index) throws GLib.Error;
+  public abstract Length getItem(uint index) throws GLib.Error;
+  public abstract Length insertItemBefore(Length newItem,uint index) throws GLib.Error;
+  public abstract Length replaceItem(Length newItem, uint index) throws GLib.Error;
+  public abstract Length removeItem(uint index) throws GLib.Error;
   public abstract Length appendItem(Length newItem) throws GLib.Error;
 }
 
@@ -141,13 +141,13 @@ public interface AnimatedLengthList : Object {
 }
 
 public interface Angle : Object {
-  public abstract ushort unitType { get; }
+  public abstract uint unitType { get; }
   public abstract  float value { get; set; }
   public abstract  float valueInSpecifiedUnits { get; set; }
   public abstract  string valueAsString { get; set; }
 
-  public abstract void newValueSpecifiedUnits (ushort unitType, float valueInSpecifiedUnits) throws GLib.Error;
-  public abstract void convertToSpecifiedUnits (ushort unitType) throws GLib.Error;
+  public abstract void newValueSpecifiedUnits (uint unitType, float valueInSpecifiedUnits) throws GLib.Error;
+  public abstract void convertToSpecifiedUnits (uint unitType) throws GLib.Error;
   /**
    * Angle Unit Types
    */
@@ -166,13 +166,13 @@ public interface AnimatedAngle : Object {
 }
 
 public interface Color : Object, CSSValue {
-  public abstract ushort colorType { get; }
+  public abstract uint colorType { get; }
   public abstract CSSRGBColor rgbColor { get; }
   public abstract ICCColor iccColor { get; }
 
   public abstract void setRGBColor(string rgbColor) throws GLib.Error;
   public abstract void setRGBColorICCColor(string rgbColor, string iccColor) throws GLib.Error;
-  public abstract void setColor(ushort colorType, string rgbColor, string iccColor) throws GLib.Error;
+  public abstract void setColor(uint colorType, string rgbColor, string iccColor) throws GLib.Error;
 
   /**
    * Color Types
@@ -197,7 +197,7 @@ public interface Rect : Object {
   public abstract float height { get; set; }
 }
 
-public interface AnimatedRect {
+public interface AnimatedRect : Object {
   public abstract Rect baseVal { get; }
   public abstract Rect animVal { get; }
 }
@@ -270,8 +270,9 @@ public interface ZoomAndPan : Object {
   }
 }
 
-public interface ViewSpec : Object,  ZoomAndPan,
-                                        FitToViewBox {
+public interface ViewSpec : Object,
+                            ZoomAndPan,
+                            FitToViewBox {
   public abstract TransformList transform { get; }
   public abstract Element viewTarget { get; }
   public abstract string viewBoxString { get; }

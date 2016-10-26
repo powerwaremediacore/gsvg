@@ -13,7 +13,7 @@
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * aint with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 using GLib;
@@ -31,15 +31,15 @@ public interface TextContentElement : Object,
   public abstract AnimatedLength textLength { get; }
   public abstract AnimatedEnumeration lengthAdjust { get; }
 
-  public abstract long getNumberOfChars();
+  public abstract int getNumberOfChars();
   public abstract float getComputedTextLength();
-  public abstract float getSubStringLength(ulong charnum, ulong nchars) throws GLib.Error;
-  public abstract Point getStartPositionOfChar(ulong charnum) throws GLib.Error;
-  public abstract Point getEndPositionOfChar(ulong charnum) throws GLib.Error;
-  public abstract Rect getExtentOfChar(ulong charnum) throws GLib.Error;
-  public abstract float getRotationOfChar(ulong charnum) throws GLib.Error;
-  public abstract long getCharNumAtPosition(Point point);
-  public abstract void selectSubString(ulong charnum, ulong nchars) throws GLib.Error;
+  public abstract float getSubStringLength(uint charnum, uint nchars) throws GLib.Error;
+  public abstract Point getStartPositionOfChar(uint charnum) throws GLib.Error;
+  public abstract Point getEndPositionOfChar(uint charnum) throws GLib.Error;
+  public abstract Rect getExtentOfChar(uint charnum) throws GLib.Error;
+  public abstract float getRotationOfChar(uint charnum) throws GLib.Error;
+  public abstract int getCharNumAtPosition(Point point);
+  public abstract void selectSubString(uint charnum, uint nchars) throws GLib.Error;
 }
 
   // lengthAdjust Types

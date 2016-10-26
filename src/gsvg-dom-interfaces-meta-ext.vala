@@ -21,10 +21,11 @@ using GXml;
 
 namespace GSvg {
 
-interface MetadataElement : Element {
+interface MetadataElement : Object, Element {
 }
 
-interface ForeignObjectElement : Element,
+interface ForeignObjectElement : Object,
+                                    Element,
                                     Tests,
                                     LangSpace,
                                     ExternalResourcesRequired,

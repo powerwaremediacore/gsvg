@@ -28,7 +28,7 @@ namespace GSvg {
  */
 public interface CSSStyleDeclaration : Object {
   public abstract string        cssText { get; set; }
-  public abstract ulong    length { get; set; }
+  public abstract uint    length { get; set; }
   public abstract CSSRule          parentRule { get; set; }
 
   public abstract string          getPropertyValue(string propertyName);
@@ -38,14 +38,12 @@ public interface CSSStyleDeclaration : Object {
   public abstract void               setProperty(string propertyName,
                                      string value,
                                      string priority) throws GLib.Error;
-  public abstract string          item(ulong index);
+  public abstract string          item(uint index);
 }
 
 public interface CSSValue : Object {
-
-
   public abstract string cssText { get; set; }
-  public abstract ushort cssValueType { get; }
+  public abstract uint cssValueType { get; }
   /**
    * UnitTypes
    */
@@ -58,7 +56,7 @@ public interface CSSValue : Object {
 }
 
 public interface CSSRule : Object {
-  public abstract ushort   type { get; }
+  public abstract uint   rtype { get; }
   public abstract string   cssText { get; set; }
 
   public abstract CSSStyleSheet parentStyleSheet { get; }
@@ -80,13 +78,13 @@ public interface CSSStyleSheet : Object {
   public abstract CSSRule ownerRule { get; }
   public abstract CSSRuleList cssRules { get; }
 
-  public abstract ulong insertRule(string rule, ulong index) throws GLib.Error;
-  public abstract void deleteRule (ulong index) throws GLib.Error;
+  public abstract uint insertRule(string rule, uint index) throws GLib.Error;
+  public abstract void deleteRule (uint index) throws GLib.Error;
 }
 
-public interface CSSRuleList {
-  public abstract ulong length { get; }
-  public abstract CSSRule item (ulong index);
+public interface CSSRuleList : Object {
+  public abstract uint length { get; }
+  public abstract CSSRule item (uint index);
 }
 
 
@@ -100,7 +98,18 @@ public interface ViewCSS : Object {
                                                       string pseudoElt);
 }
 
-public interface CSSPrimitiveValue : CSSValue {
+public interface CSSPrimitiveValue : Object, CSSValue {
+  public abstract  uint   primitiveType { get; }
+
+  public abstract void               setFloatValue(uint unitType,
+                                   float floatValue) throws GLib.Error;
+  public abstract float              getFloatValue(uint unitType) throws GLib.Error;
+  public abstract void               setStringValue(uint stringType,
+                                    string stringValue) throws GLib.Error;
+  public abstract string          getStringValue() throws GLib.Error;
+  public abstract CSSCounter            getCounterValue() throws GLib.Error;
+  public abstract CSSRect               getRectValue() throws GLib.Error;
+  public abstract CSSRGBColor           getRGBColorValue() throws GLib.Error;
 
   // UnitTypes
   public enum Type {
@@ -131,23 +140,12 @@ public interface CSSPrimitiveValue : CSSValue {
     RECT = 24,
     RGBCOLOR = 25
   }
-  public abstract  ushort   primitiveType { get; }
-
-  public abstract void               setFloatValue(ushort unitType,
-                                   float floatValue) throws GLib.Error;
-  public abstract float              getFloatValue(ushort unitType) throws GLib.Error;
-  public abstract void               setStringValue(ushort stringType,
-                                    string stringValue) throws GLib.Error;
-  public abstract string          getStringValue() throws GLib.Error;
-  public abstract CSSCounter            getCounterValue() throws GLib.Error;
-  public abstract CSSRect               getRectValue() throws GLib.Error;
-  public abstract CSSRGBColor           getRGBColorValue() throws GLib.Error;
 }
 
 /**
  * RGB Color Definition from DOM2
  */
-public interface CSSCounter {
+public interface CSSCounter : Object {
   public abstract string        identifier { get; }
   public abstract string        listStyle { get; }
   public abstract string        separator { get; }
@@ -156,7 +154,7 @@ public interface CSSCounter {
 /**
  * RGB Color Definition from DOM2
  */
-public interface CSSRGBColor {
+public interface CSSRGBColor : Object {
   public abstract CSSPrimitiveValue  red { get; }
   public abstract CSSPrimitiveValue  green { get; }
   public abstract CSSPrimitiveValue  blue { get; }
@@ -166,7 +164,7 @@ public interface CSSRGBColor {
 /**
  * Rect value taken from DOM2
  */
-public interface CSSRect {
+public interface CSSRect : Object {
   public abstract CSSPrimitiveValue  top { get; }
   public abstract CSSPrimitiveValue  right { get; }
   public abstract CSSPrimitiveValue  bottom { get; }

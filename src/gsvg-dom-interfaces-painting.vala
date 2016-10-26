@@ -23,11 +23,11 @@ namespace GSvg {
 
 public interface Paint : Object, Color {
 
-  public abstract ushort paintType { get; }
+  public abstract uint paintType { get; }
   public abstract string uri { get; }
 
   public abstract void setUri(string uri);
-  public abstract void setPaint(ushort paintType,
+  public abstract void setPaint(uint paintType,
                                 string uri,
                                 string rgbColor,
                                 string iccColor) throws GLib.Error;
@@ -82,20 +82,22 @@ public enum MarkerOrient {
   ANGLE = 2
 }
 
-public interface ColorProfileElement : Object, Element,
+public interface ColorProfileElement : Object,
+                                   Element,
                                    URIReference {
   public abstract string local { get; set; }
   public abstract string name { get; set; }
-  public abstract ushort renderingIntent { get; set; }
+  public abstract uint renderingIntent { get; set; }
 }
 
 public interface ColorProfileRule : Object, CSSRule {
   public abstract string src { get; set; }
   public abstract string name { get; set; }
-  public abstract ushort renderingIntent { get; set; }
+  public abstract uint renderingIntent { get; set; }
 }
 
-public interface GradientElement : Object, Element,
+public interface GradientElement : Object,
+                               Element,
                                URIReference,
                                ExternalResourcesRequired,
                                Stylable {
@@ -128,12 +130,14 @@ public interface RadialGradientElement : Object, GradientElement {
   public abstract  AnimatedLength fy { get; }
 }
 
-public interface StopElement : Object, Element,
+public interface StopElement : Object,
+                           Element,
                            Stylable {
   public abstract  AnimatedNumber offset { get; }
 }
 
-public interface PatternElement : Object, Element,
+public interface PatternElement : Object,
+                              Element,
                               URIReference,
                               Tests,
                               LangSpace,
@@ -149,7 +153,8 @@ public interface PatternElement : Object, Element,
   public abstract  AnimatedLength height { get; }
 }
 
-public interface ClipPathElement : Object, Element,
+public interface ClipPathElement : Object,
+                               Element,
                                Tests,
                                LangSpace,
                                ExternalResourcesRequired,
@@ -158,7 +163,8 @@ public interface ClipPathElement : Object, Element,
   public abstract  AnimatedEnumeration clipPathUnits { get; }
 }
 
-public interface MaskElement : Object, Element,
+public interface MaskElement : Object,
+                           Element,
                            Tests,
                            LangSpace,
                            ExternalResourcesRequired,

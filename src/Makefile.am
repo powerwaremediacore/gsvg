@@ -35,6 +35,9 @@ libgsvg_@API_VERSION@_la_VALAFLAGS = \
 	--pkg glib-2.0 \
 	--pkg gxml-0.12 \
 	--pkg gee-0.8 \
+	--library=gsvg-@API_VERSION@ \
+	-H gsvg.h \
+	-X $(GSVG_CFLAGS) \
 	$(NULL)
 
 -include $(top_srcdir)/git.mk

@@ -36,7 +36,7 @@ public interface FilterElement : Object, Element,
   public abstract AnimatedInteger filterResX { get; }
   public abstract AnimatedInteger filterResY { get; }
 
-  public abstract void setFilterRes(ulong filterResX, ulong filterResY) throws GLib.Error;
+  public abstract void setFilterRes(uint filterResX, uint filterResY) throws GLib.Error;
 }
 
 public interface FilterPrimitiveStandardAttributes : Object, Stylable {
@@ -67,7 +67,7 @@ public enum FEBlendMode {
 public interface FEColorMatrixElement : Object, Element,
                                     FilterPrimitiveStandardAttributes {
   public abstract AnimatedString in1 { get; }
-  public abstract AnimatedEnumeration type { get; }
+  public abstract AnimatedEnumeration cm_type { get; }
   public abstract AnimatedNumberList values { get; }
 }
 
@@ -87,7 +87,7 @@ public interface FEComponentTransferElement : Object, Element,
 }
 
 public interface ComponentTransferFunctionElement : Object, Element {
-  public abstract AnimatedEnumeration type { get; }
+  public abstract AnimatedEnumeration ctf_type { get; }
   public abstract AnimatedNumberList tableValues { get; }
   public abstract AnimatedNumber slope { get; }
   public abstract AnimatedNumber intercept { get; }
@@ -120,7 +120,8 @@ public interface FEFuncBElement : Object, ComponentTransferFunctionElement {
 public interface FEFuncAElement : Object, ComponentTransferFunctionElement {
 }
 
-public interface FECompositeElement : Object, Element,
+public interface FECompositeElement : Object,
+                                  Element,
                                   FilterPrimitiveStandardAttributes {
   public abstract AnimatedString in1 { get; }
   public abstract AnimatedString in2 { get; }
@@ -143,8 +144,9 @@ public enum FE0CompositeOperator {
   ARITHMETIC = 6,
 }
 
-public interface FEConvolveMatrixElement : Object, Element,
-                                       FilterPrimitiveStandardAttributes {
+public interface FEConvolveMatrixElement : Object,
+                                      Element,
+                                      FilterPrimitiveStandardAttributes {
 
   public abstract AnimatedString in1 { get; }
   public abstract AnimatedInteger orderX { get; }
@@ -168,7 +170,8 @@ public enum EdgeMode {
   NONE = 3
 }
 
-public interface FEDiffuseLightingElement : Object, Element,
+public interface FEDiffuseLightingElement : Object,
+                                        Element,
                                         FilterPrimitiveStandardAttributes {
   public abstract AnimatedString in1 { get; }
   public abstract AnimatedNumber surfaceScale { get; }
@@ -293,7 +296,7 @@ public interface FETurbulenceElement : Object, Element,
   public abstract AnimatedInteger numOctaves { get; }
   public abstract AnimatedNumber seed { get; }
   public abstract AnimatedEnumeration stitchTiles { get; }
-  public abstract AnimatedEnumeration type { get; }
+  public abstract AnimatedEnumeration ttype { get; }
 }
 
 

@@ -22,7 +22,7 @@ using GXml;
 namespace GSvg {
 
 public interface PathSeg : Object {
-  public abstract ushort pathSegType { get;}
+  public abstract uint pathSegType { get;}
   public abstract string pathSegTypeAsLetter { get;}
 
   /**
@@ -169,14 +169,14 @@ public interface PathSegCurvetoQuadraticSmoothRel : Object, PathSeg {
 
 public interface PathSegList : Object {
 
-  public abstract ulong numberOfItems { get;}
+  public abstract uint numberOfItems { get;}
 
   public abstract void clear() throws GLib.Error;
   public abstract PathSeg initialize(PathSeg newItem) throws GLib.Error;
-  public abstract PathSeg getItem(ulong index) throws GLib.Error;
-  public abstract PathSeg insertItemBefore(PathSeg newItem, ulong index) throws GLib.Error;
-  public abstract PathSeg replaceItem(PathSeg newItem, ulong index) throws GLib.Error;
-  public abstract PathSeg removeItem(ulong index) throws GLib.Error;
+  public abstract PathSeg getItem(uint index) throws GLib.Error;
+  public abstract PathSeg insertItemBefore(PathSeg newItem, uint index) throws GLib.Error;
+  public abstract PathSeg replaceItem(PathSeg newItem, uint index) throws GLib.Error;
+  public abstract PathSeg removeItem(uint index) throws GLib.Error;
   public abstract PathSeg appendItem(PathSeg newItem) throws GLib.Error;
 }
 
@@ -199,7 +199,7 @@ public interface PathElement : Object, Element,
 
   public abstract float getTotalLength();
   public abstract Point getPointAtLength(float distance);
-  public abstract ulong getPathSegAtLength(float distance);
+  public abstract uint getPathSegAtLength(float distance);
   public abstract PathSegClosePath createSVGPathSegClosePath();
   public abstract PathSegMovetoAbs createSVGPathSegMovetoAbs(float x, float y);
   public abstract PathSegMovetoRel createSVGPathSegMovetoRel(float x, float y);

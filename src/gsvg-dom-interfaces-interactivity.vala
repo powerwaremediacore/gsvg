@@ -13,7 +13,7 @@
  * GNU Lesser General Public License for more details.
  *
  * You should have received a copy of the GNU Lesser General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * aint with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 using GLib;
@@ -46,10 +46,11 @@ public interface ViewElement : Object, Element,
   public abstract StringList viewTarget { get; }
 }
 
-public interface ScriptElement : Object, Element,
+public interface ScriptElement : Object,
+                             Element,
                              URIReference,
                              ExternalResourcesRequired {
-  public abstract string type { get; set; }
+  public abstract string stype { get; set; }
 }
 
 public interface ZoomEvent : Object/*, UIEvent*/ {
@@ -60,7 +61,7 @@ public interface ZoomEvent : Object/*, UIEvent*/ {
   public abstract Point newTranslate { get; }
 }
 
-public interface ElementTimeControl {
+public interface ElementTimeControl : Object {
   public abstract void beginElement();
   public abstract void beginElementAt(float offset);
   public abstract void endElement();
@@ -71,9 +72,9 @@ public interface TimeEvent : Object, DomEvent {
 
 // TODO: This is not devined in DOM4
 //  public abstract AbstractView view { get; }
-  public abstract long detail { get; }
+  public abstract int detail { get; }
 // TODO: This is not devined in DOM4
-//  void initTimeEvent(string typeArg, AbstractView viewArg, long detailArg);
+//  void initTimeEvent(string typeArg, AbstractView viewArg, int detailArg);
 }
 
 public interface AnimationElement : Object, Element,

@@ -19,7 +19,7 @@
 using GLib;
 using GXml;
 
-public class GSvg.Object : GXml.SerializableObjectModel {
+public class GSvg.Base : GXml.SerializableObjectModel {
   public override string node_name () {
     string nname = get_type ().name ();
     if ("Pwmc" in nname)

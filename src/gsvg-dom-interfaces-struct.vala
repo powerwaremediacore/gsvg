@@ -55,8 +55,8 @@ public interface SVGElement : Element,
   public abstract float currentScale { get; set; }
   public abstract Point currentTranslate { get; }
 
-  public abstract ulong suspendRedraw(ulong maxWaitMilliseconds);
-  public abstract void unsuspendRedraw(ulong suspendHandleID);
+  public abstract uint suspendRedraw(uint maxWaitMilliseconds);
+  public abstract void unsuspendRedraw(uint suspendHandleID);
   public abstract void unsuspendRedrawAll();
   public abstract void forceRedraw();
   public abstract void pauseAnimations();
@@ -146,9 +146,9 @@ public interface ElementInstance : Object, DomEventTarget {
 
 public interface ElementInstanceList : Object {
 
-  public abstract ulong lengthg { get; }
+  public abstract uint lengthg { get; }
 
-  public abstract ElementInstance item (ulong index);
+  public abstract ElementInstance item (uint index);
 }
 
 public interface ImageElement : Object,
