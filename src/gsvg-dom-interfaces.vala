@@ -29,9 +29,9 @@ public interface Element : Object, DomElement {
   [Description (nick="::xml:base")]
   public abstract string xmlbase { get; set; }
   // ownerSVGElement
-  public abstract SVGElement owner_svg_element { get; construct set; }
+  public abstract SVGElement? owner_svg_element { get; }
   // viewportElement
-  public abstract Element viewport_element { get; }
+  public abstract Element? viewport_element { get; }
 }
 
 public interface AnimatedBoolean : Object {
@@ -217,19 +217,20 @@ public enum UnitTypes {
 
 public interface Stylable : Object {
   [Description (nick="::class")]
-  public abstract  AnimatedString class_name { get; }
+  public abstract  AnimatedString? class_name { get; construct set; }
   [Description (nick="::style")]
-  public abstract  CSSStyleDeclaration style { get; }
+  public abstract  CSSStyleDeclaration? style { get; construct set;  }
 
-  public abstract CSSValue get_presentation_attribute (string name);
+  public abstract CSSValue? get_presentation_attribute (string name);
 }
 
 public interface Locatable : Object {
+  // nearestViewportElement
+  public abstract Element nearest_viewport_element { get; }
+  // farthestViewportElement
+  public abstract Element farthest_viewport_element { get; }
 
-  public abstract Element nearestViewportElement { get; }
-  public abstract Element farthestViewportElement { get; }
-
-  public abstract Rect getBBox();
+  public abstract Rect get_bbox();
   public abstract Matrix get_ctm ();
   public abstract Matrix get_screen_ctm ();
   public abstract Matrix get_transform_to_element (Element element) throws GLib.Error;
@@ -240,12 +241,14 @@ public interface Transformable : Object, Locatable {
 }
 
 public interface Tests : Object {
+  // requiredFeatures
+  public abstract StringList required_features { get; }
+  // requiredExtensions
+  public abstract StringList required_extensions { get; }
+  // systemLanguage
+  public abstract StringList system_language { get; }
 
-  public abstract StringList requiredFeatures { get; }
-  public abstract StringList requiredExtensions { get; }
-  public abstract StringList systemLanguage { get; }
-
-  public abstract bool hasExtension (string extension);
+  public abstract bool has_extension (string extension);
 }
 
 public interface LangSpace : Object {
@@ -254,16 +257,19 @@ public interface LangSpace : Object {
 }
 
 public interface ExternalResourcesRequired : Object {
-  public abstract AnimatedBoolean externalResourcesRequired { get; }
+  // externalResourcesRequired
+  public abstract AnimatedBoolean external_resources_required { get; }
 }
 
 public interface FitToViewBox : Object {
-  public abstract AnimatedRect viewBox { get; }
-  public abstract AnimatedPreserveAspectRatio preserveAspectRatio { get; }
+  // viewBox
+  public abstract AnimatedRect view_box { get; }
+  // preserveAspectRatio
+  public abstract AnimatedPreserveAspectRatio preserve_aspect_ratio { get; }
 }
 
 public interface ZoomAndPan : Object {
-  public abstract short zoomAndPan { get; set; }
+  public abstract int zoom_and_pan { get; set; }
 
   /**
    * Zoom and Pan Types

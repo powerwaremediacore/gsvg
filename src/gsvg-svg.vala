@@ -31,25 +31,57 @@ public class GSvg.GsElement : GSvg.GsObject,
   public string id { get; set; }
   [Description (nick="::xml:base")]
   public string xmlbase { get; set; }
-  public SVGElement owner_svg_element {
+  public SVGElement? owner_svg_element {
     get { return _owner_svg_element; }
-    construct set { _owner_svg_element = value; }
   }
-  public Element viewport_element { get { return _viewport_element; } }
+  public Element? viewport_element { get { return _viewport_element; } }
   // Stylable
   [Description (nick="::class")]
-  public AnimatedString class_name { get { return _class; } }
+  public AnimatedString? class_name {
+    get { return _class; } construct set { _class = value; }
+  }
   [Description (nick="::style")]
-  public CSSStyleDeclaration style { get { return _style; } }
+  public CSSStyleDeclaration? style {
+    get { return _style; } construct set { _style = value; }
+  }
 
-  public CSSValue get_presentation_attribute (string name) { return null; }
+  public CSSValue? get_presentation_attribute (string name) { return null; }
 }
 
-public class GSvg.GsSvg : GSvg.GsElement {
+/**
+ * Base class for SVG and basic types elements
+ */
+public class GSvg.GsCommonElement : GsElement,
+                        Tests,
+                        LangSpace,
+                        ExternalResourcesRequired,
+                        Locatable
+{
+  // Tests
+  protected StringList _required_features;
+  protected StringList _required_extensions;
+  protected StringList _system_language;
+  protected AnimatedBoolean _external_resources_required;
   protected Element _nearest_viewport_element;
   protected Element _farthest_viewport_element;
+    // requiredFeatures
+  public StringList required_features { get { return _required_features;} }
+  // requiredExtensions
+  public StringList required_extensions { get { return _required_extensions; } }
+  // systemLanguage
+  public StringList system_language { get { return _system_language; } }
 
-  public CSSValue get_presentation_attribute (string name) { return null; }
+  public bool has_extension (string extension) { return false; }
+  // LangSpace
+  [Description (nick="::xml:lang")]
+  public string xmllang { get; set; }
+  [Description (nick="::xml:space")]
+  public string xmlspace { get; set; }
+  // ExternalResourcesRequired
+  // * externalResourcesRequired
+  public AnimatedBoolean external_resources_required {
+    get { return _external_resources_required; }
+  }
   // Locatable
   // nearestViewportElement
   public Element nearest_viewport_element { get { return _nearest_viewport_element; } }
@@ -60,7 +92,14 @@ public class GSvg.GsSvg : GSvg.GsElement {
   public Matrix get_ctm () { return null; }
   public Matrix get_screen_ctm () { return null; }
   public Matrix get_transform_to_element (Element element) throws GLib.Error { return null; }
-  // SVGElement
+}
+public class GSvg.GsSvg : GSvg.GsCommonElement,
+                        FitToViewBox,
+                        ZoomAndPan,
+                        ViewCSS,
+                        DocumentCSS,
+                        GSvg.SVGElement
+{
   protected AnimatedLength _x;
   protected AnimatedLength _y;
   protected AnimatedLength _width;
@@ -72,6 +111,34 @@ public class GSvg.GsSvg : GSvg.GsElement {
   protected float _screen_pixel_to_millimeter_y;
   protected bool _use_current_view;
   protected ViewSpec _current_view;
+  protected AnimatedRect _view_box;
+  protected AnimatedPreserveAspectRatio _preserve_aspect_ratio;
+  protected Point _current_translate;
+
+  public CSSValue get_presentation_attribute (string name) { return null; }
+  // FitToViewBox
+  // * viewBox
+  public AnimatedRect view_box { get { return _view_box; } }
+  // preserveAspectRatio
+  public AnimatedPreserveAspectRatio preserve_aspect_ratio {
+    get { return _preserve_aspect_ratio; }
+  }
+  // ZoomAndPan
+  // * zoomAndPan
+  public int zoom_and_pan { get; set; }
+  // ViewCSS
+  public CSSStyleDeclaration get_computed_style (DomElement elt,
+                                                      string pseudoElt)
+  {
+    return null;
+  }
+  // DocumentCSS
+  public CSSStyleDeclaration get_override_style (DomElement elt,
+                                                string pseudoElt)
+  {
+    return null;
+  }
+  // SVGElement
   [Description (nick="::x")]
   public AnimatedLength x { get { return _x; } construct set { _x = value; } }
   [Description (nick="::y")]
@@ -100,11 +167,32 @@ public class GSvg.GsSvg : GSvg.GsElement {
   public ViewSpec current_view { get { return _current_view; } }
   //currentScale
   public float current_scale { get; set; }
+  // currentTranslate
+  public Point current_translate { get { return _current_translate; } }
 
   construct {
     _local_name = "svg";
     set_attribute_ns ("http://www.w3.org/2000/xmlns/",
                       "xmlns:svg", "http://www.w3.org/2000/svg");
+  }
+
+  public GsSvg.initialize (GSvg.GsSvg? parent,
+                          AnimatedLength? x,
+                          AnimatedLength? y,
+                          AnimatedLength? width,
+                          AnimatedLength? height,
+                          AnimatedString? class_name,
+                          CSSStyleDeclaration? style) {
+    if (parent != null) {
+      _document = parent.owner_document;
+      _owner_svg_element = parent;
+    }
+    _x = x;
+    _y = y;
+    _width = width;
+    _height = height;
+    _class = class_name;
+    _style = style;
   }
 
   //currentTranslate

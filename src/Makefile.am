@@ -19,6 +19,7 @@ VALASOURCES = \
 	gsvg-dom-interfaces.vala \
 	gsvg-object.vala \
 	gsvg-svg.vala \
+	gsvg-basic-shapes.vala \
 	$(NULL)
 
 libgsvg_@API_VERSION@_la_SOURCES = \

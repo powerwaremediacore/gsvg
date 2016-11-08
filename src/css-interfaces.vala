@@ -89,12 +89,12 @@ public interface CSSRuleList : Object {
 
 
 public interface DocumentCSS : Object {
-  public abstract CSSStyleDeclaration getOverrideStyle(DomElement elt,
+  public abstract CSSStyleDeclaration get_override_style (DomElement elt,
                                                       string pseudoElt);
 }
 
 public interface ViewCSS : Object {
-  public abstract CSSStyleDeclaration getComputedStyle(DomElement elt,
+  public abstract CSSStyleDeclaration get_computed_style (DomElement elt,
                                                       string pseudoElt);
 }
 
