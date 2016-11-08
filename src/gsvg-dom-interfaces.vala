@@ -24,10 +24,14 @@ namespace GSvg {
  * Top level SVG Element node according with https://www.w3.org/TR/SVG/ version 1.1
  */
 public interface Element : Object, DomElement {
+  [Description (nick="::id")]
   public abstract string id { get; set; }
+  [Description (nick="::xml:base")]
   public abstract string xmlbase { get; set; }
-  public abstract SVGElement ownerSVGElement { get; }
-  public abstract Element viewportElement { get; }
+  // ownerSVGElement
+  public abstract SVGElement owner_svg_element { get; construct set; }
+  // viewportElement
+  public abstract Element viewport_element { get; }
 }
 
 public interface AnimatedBoolean : Object {
@@ -212,11 +216,12 @@ public enum UnitTypes {
 }
 
 public interface Stylable : Object {
-
-  public abstract  AnimatedString className { get; }
+  [Description (nick="::class")]
+  public abstract  AnimatedString class_name { get; }
+  [Description (nick="::style")]
   public abstract  CSSStyleDeclaration style { get; }
 
-  public abstract CSSValue getPresentationAttribute (string name);
+  public abstract CSSValue get_presentation_attribute (string name);
 }
 
 public interface Locatable : Object {
@@ -225,9 +230,9 @@ public interface Locatable : Object {
   public abstract Element farthestViewportElement { get; }
 
   public abstract Rect getBBox();
-  public abstract Matrix getCTM();
-  public abstract Matrix getScreenCTM();
-  public abstract Matrix getTransformToElement(Element element) throws GLib.Error;
+  public abstract Matrix get_ctm ();
+  public abstract Matrix get_screen_ctm ();
+  public abstract Matrix get_transform_to_element (Element element) throws GLib.Error;
 }
 
 public interface Transformable : Object, Locatable {

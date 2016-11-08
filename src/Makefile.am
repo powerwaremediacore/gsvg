@@ -1,7 +1,10 @@
-lib_LTLIBRARIES = libgsvg-@API_VERSION@.la
+include $(top_srcdir)/valalib.mk
 
-libgsvg_@API_VERSION@_la_SOURCES = \
-	gsvg-object.vala \
+VALA_TARGET = libgsvg-@API_VERSION@.la
+
+lib_LTLIBRARIES = $(VALA_TARGET)
+
+VALASOURCES = \
 	css-interfaces.vala \
 	gsvg-dom-interfaces-basic-shapes.vala \
 	gsvg-dom-interfaces-coord.vala \
@@ -14,11 +17,16 @@ libgsvg_@API_VERSION@_la_SOURCES = \
 	gsvg-dom-interfaces-struct.vala \
 	gsvg-dom-interfaces-text.vala \
 	gsvg-dom-interfaces.vala \
+	gsvg-object.vala \
+	gsvg-svg.vala \
+	$(NULL)
+
+libgsvg_@API_VERSION@_la_SOURCES = \
+	$(VALA_CSOURCES) \
 	$(NULL)
 
 libgsvg_@API_VERSION@_la_CFLAGS = \
 	$(GSVG_CFLAGS) \
-	$(WARN_CFLAGS) \
 	$(NULL)
 
 libgsvg_@API_VERSION@_la_LIBADD = \
@@ -26,21 +34,37 @@ libgsvg_@API_VERSION@_la_LIBADD = \
 	$(NULL)
 
 libgsvg_@API_VERSION@_la_LDFLAGS = \
-	$(WARN_LDFLAGS) \
 	$(NULL)
 
-libgsvg_@API_VERSION@_la_VALAFLAGS = \
+VALAFLAGS += \
 	--thread \
 	--target-glib=2.44 \
 	--pkg glib-2.0 \
-	--pkg gxml-0.12 \
-	--pkg gee-0.8 \
-	--library=gsvg-@API_VERSION@ \
-	-H gsvg.h \
-	-X $(GSVG_CFLAGS) \
+	--pkg gxml-0.14 \
 	$(NULL)
+
+VALA_CHEADER = gsvg.h
+VALA_INCLUDEDIR = GSvg-@API_VERSION@
+VALA_VAPI = gsvg-@API_VERSION@.vapi
+VALA_DEPS = gsvg-@API_VERSION@.deps
+
+DISTCLEANFILES = $(VALA_DEPS)
 
 -include $(top_srcdir)/git.mk
 
-EXTRA_DIST= \
-	libgsvg_@API_VERSION@_la_vala.stamp
+
+if DEBUG
+VALAFLAGS+=\
+	-D DEBUG \
+	$(NULL)
+endif
+
+if HAVE_INTROSPECTION
+
+include $(top_srcdir)/valalib_introspection.mk
+
+INTROSPECTION_GIRS = GSvg-@API_VERSION@.gir
+INTROSPECTION_TYPELIBS = GSvg-@API_VERSION@.typelib
+
+endif
+

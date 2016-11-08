@@ -43,41 +43,41 @@ public interface SVGElement : Element,
   public abstract AnimatedLength y { get; }
   public abstract AnimatedLength width { get; }
   public abstract AnimatedLength height { get; }
-  public abstract string contentScriptType { get; set; }
-  public abstract string contentStyleType { get; set; }
+  public abstract string content_script_type { get; set; }
+  public abstract string content_style_type { get; set; }
   public abstract Rect viewport { get; }
-  public abstract float pixelUnitToMillimeterX { get; }
-  public abstract float pixelUnitToMillimeterY { get; }
-  public abstract float screenPixelToMillimeterX { get; }
-  public abstract float screenPixelToMillimeterY { get; }
-  public abstract bool useCurrentView { get; }
-  public abstract ViewSpec currentView { get; }
-  public abstract float currentScale { get; set; }
-  public abstract Point currentTranslate { get; }
+  public abstract float pixel_unit_to_millimeter_x { get; }
+  public abstract float pixel_unit_to_millimeter_y { get; }
+  public abstract float screen_pixel_to_millimeter_x { get; }
+  public abstract float screen_pixel_to_millimeter_y { get; }
+  public abstract bool use_current_view { get; }
+  public abstract ViewSpec current_view { get; }
+  public abstract float current_scale { get; set; }
+  public abstract Point current_translate { get; }
 
-  public abstract uint suspendRedraw(uint maxWaitMilliseconds);
-  public abstract void unsuspendRedraw(uint suspendHandleID);
-  public abstract void unsuspendRedrawAll();
-  public abstract void forceRedraw();
-  public abstract void pauseAnimations();
-  public abstract void unpauseAnimations();
-  public abstract bool animationsPaused();
-  public abstract float getCurrentTime();
-  public abstract void setCurrentTime(float seconds);
-  public abstract NodeList getIntersectionList(Rect rect, Element referenceElement);
-  public abstract NodeList getEnclosureList(Rect rect, Element referenceElement);
-  public abstract bool checkIntersection(Element element, Rect rect);
-  public abstract bool checkEnclosure(Element element, Rect rect);
-  public abstract void deselectAll();
-  public abstract Number createSVGNumber();
-  public abstract Length createSVGLength();
-  public abstract Angle createSVGAngle();
-  public abstract Point createSVGPoint();
-  public abstract Matrix createSVGMatrix();
-  public abstract Rect createSVGRect();
-  public abstract Transform createSVGTransform();
-  public abstract Transform createSVGTransformFromMatrix(Matrix matrix);
-  public abstract DomElement getElementById(string elementId);
+  public abstract uint suspend_redraw (uint maxWaitMilliseconds);
+  public abstract void unsuspend_redraw (uint suspendHandleID);
+  public abstract void unsuspend_redrawAll ();
+  public abstract void force_redraw ();
+  public abstract void pause_animations ();
+  public abstract void unpause_animations ();
+  public abstract bool animations_paused ();
+  public abstract float get_current_time ();
+  public abstract void set_current_time (float seconds);
+  public abstract NodeList get_intersection_list (Rect rect, Element referenceElement);
+  public abstract NodeList get_enclosure_list (Rect rect, Element referenceElement);
+  public abstract bool check_intersection (Element element, Rect rect);
+  public abstract bool check_enclosure (Element element, Rect rect);
+  public abstract void deselect_all ();
+  public abstract Number create_svg_number ();
+  public abstract Length create_svg_length ();
+  public abstract Angle create_svg_angle ();
+  public abstract Point create_svg_point ();
+  public abstract Matrix create_svg_matrix ();
+  public abstract Rect create_svg_rect ();
+  public abstract Transform create_svg_transform ();
+  public abstract Transform create_svg_transform_from_matrix (Matrix matrix);
+  public abstract DomElement? get_element_by_id (string elementId);
 }
 
 public interface GElement : Object,

@@ -93,7 +93,7 @@ AX_CHECK_COMPILE_FLAG([-std=gnu11],
 dnl ***********************************************************************
 dnl Check for required packages
 dnl ***********************************************************************
-PKG_CHECK_MODULES(gsvg, [glib-2.0 >= 2.42 gio-2.0 >= 2.42 gxml-0.12])
+PKG_CHECK_MODULES(GSVG, [glib-2.0 >= 2.42 gio-2.0 >= 2.42 gxml-0.14])
 
 
 dnl ***********************************************************************
@@ -103,6 +103,14 @@ LT_PREREQ([2.2])
 LT_INIT
 
 
+debug=no
+AC_ARG_ENABLE(debug,
+	AS_HELP_STRING([--enable-debug], [Enable Debug [default=no]]),
+        [debug=$enableval], [debug="no"])
+AM_CONDITIONAL(DEBUG, [test $debug = yes])
+
+
+
 dnl ***********************************************************************
 dnl Process .in Files
 dnl ***********************************************************************
@@ -110,8 +118,7 @@ AC_CONFIG_FILES([
 	Makefile
 
 	src/Makefile
-
-
+	src/gsvg-$API_VERSION.deps:src/gsvg.deps.in
 
 	data/Makefile
 	data/gsvg-$API_VERSION.pc:data/gsvg.pc.in

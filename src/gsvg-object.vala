@@ -19,18 +19,10 @@
 using GLib;
 using GXml;
 
-public class GSvg.Base : GXml.SerializableObjectModel {
-  public override string node_name () {
-    string nname = get_type ().name ();
-    if ("Pwmc" in nname)
-    nname = nname.replace ("Gsvg","");
-    return nname;
-  }
-  public override bool property_use_nick () { return true; }
-  public override string to_string () {
-    var d = new TDocument ();
-    try { serialize (d); } catch { return get_type ().name (); }
-    return d.to_string ();
+public class GSvg.GsObject : GXml.GomElement {
+  public string to_string () {
+    var p = new XParser (this);
+    return p.write_string ();
   }
 }
 
