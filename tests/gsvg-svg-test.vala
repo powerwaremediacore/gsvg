@@ -20,7 +20,7 @@ public class GSvgTest.SvgTest {
       GLib.message ("SVG: "+s);
       assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"/>" in s);
     });
-    Test.add_func ("/gsvg/svg/construct/initialize",
+    Test.add_func ("/gsvg/rect-element/construct/initialize",
     ()=>{
       var svg = new GSvg.GsSvg ();
       var parser = new XParser (svg);
@@ -28,6 +28,12 @@ public class GSvgTest.SvgTest {
       assert (s != null);
       GLib.message ("SVG: "+s);
       assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"/>" in s);
+      var r = new GSvg.GsRectElement.initialize (svg, null, null, null, null, null, null);
+      svg.append_child (r);
+      s = parser.write_string ();
+      assert (s != null);
+      GLib.message ("SVG: "+s);
+      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><rect/></svg>" in s);
     });
   }
 }
