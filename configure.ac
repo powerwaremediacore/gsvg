@@ -123,6 +123,9 @@ AC_CONFIG_FILES([
 	data/Makefile
 	data/gsvg-$API_VERSION.pc:data/gsvg.pc.in
 
+	tests/Makefile
+	tests/tests-config.vala
+
 	po/Makefile.in
 ],[],
 [API_VERSION='$API_VERSION'])

@@ -1,4 +1,4 @@
-SUBDIRS = data src po
+SUBDIRS = data src tests po
 
 EXTRA_DIST = AUTHORS
 

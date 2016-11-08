@@ -103,8 +103,8 @@ public class GSvg.GsSvg : GSvg.GsElement {
 
   construct {
     _local_name = "svg";
-    _prefix = "svg";
-    _namespace_uri = "http://www.w3.org/2000/svg";
+    set_attribute_ns ("http://www.w3.org/2000/xmlns/",
+                      "xmlns:svg", "http://www.w3.org/2000/svg");
   }
 
   //currentTranslate

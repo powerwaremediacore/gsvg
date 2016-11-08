@@ -1,0 +1,10 @@
+/* -*- Mode: Vala; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
+/*
+ * Copyright (C) Daniel Espinosa Ortiz 2011 <daniel.espinosa@pwmc.mx>
+ * 
+ */
+[CCode (cprefix = "", lower_case_cprefix = "", cheader_filename = "config.h")]
+namespace PcfdiTest {
+  public const string TEST_DIR = "@top_srcdir@/tests";
+  public const string TEST_BUILD_DIR = "@top_builddir@/tests";
+}
