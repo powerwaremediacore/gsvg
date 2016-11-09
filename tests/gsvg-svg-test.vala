@@ -64,5 +64,26 @@ public class GSvgTest.SvgTest {
       assert (r.ry.base_val.value == (float) 0.1);
       assert (r.ry.base_val.unit_type == Length.Type.CM);
     });
+    Test.add_func ("/gsvg/circle-element/construct/initialize",
+    ()=>{
+      var svg = new GSvg.GsSvg ();
+      var parser = new XParser (svg);
+      string s = parser.write_string ();
+      assert (s != null);
+      GLib.message ("SVG: "+s);
+      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"/>" in s);
+      var c = new GSvg.GsCircleElement.initialize (svg, "1mm", "1mm", "3.5mm");
+      svg.append_child (c);
+      s = parser.write_string ();
+      assert (s != null);
+      GLib.message ("SVG: "+s);
+      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><circle cx=\"1mm\" cy=\"1mm\" r=\"3.5mm\"/></svg>" in s);
+      assert (c.cx.base_val.value == (float) 1.0);
+      assert (c.cx.base_val.unit_type == Length.Type.MM);
+      assert (c.cy.base_val.value == (float) 1.0);
+      assert (c.cy.base_val.unit_type == Length.Type.MM);
+      assert (c.r.base_val.value == (float) 3.5);
+      assert (c.r.base_val.unit_type == Length.Type.MM);
+    });
   }
 }

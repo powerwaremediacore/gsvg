@@ -160,3 +160,21 @@ public class GSvg.GsAnimatedLengthRY : GSvg.GsAnimatedLength, AnimatedLengthRY {
     _attribute_name = "ry";
   }
 }
+
+public class GSvg.GsAnimatedLengthCX : GSvg.GsAnimatedLength, AnimatedLengthCX {
+  construct {
+    _attribute_name = "cx";
+  }
+}
+
+public class GSvg.GsAnimatedLengthCY : GSvg.GsAnimatedLength, AnimatedLengthCY {
+  construct {
+    _attribute_name = "cy";
+  }
+}
+
+public class GSvg.GsAnimatedLengthR : GSvg.GsAnimatedLength, AnimatedLengthR {
+  construct {
+    _attribute_name = "r";
+  }
+}

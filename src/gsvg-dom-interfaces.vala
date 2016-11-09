@@ -136,6 +136,9 @@ public interface AnimatedLengthWidth : Object, AnimatedLength {}
 public interface AnimatedLengthHeight : Object, AnimatedLength {}
 public interface AnimatedLengthRX : Object, AnimatedLength {}
 public interface AnimatedLengthRY : Object, AnimatedLength {}
+public interface AnimatedLengthCX : Object, AnimatedLength {}
+public interface AnimatedLengthCY : Object, AnimatedLength {}
+public interface AnimatedLengthR : Object, AnimatedLength {}
 
 public interface LengthList : Object {
 
