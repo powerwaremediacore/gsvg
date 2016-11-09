@@ -55,10 +55,10 @@ public interface EllipseElement : Object,
                               ExternalResourcesRequired,
                               Stylable,
                               Transformable {
-  public abstract AnimatedLength cx { get; }
-  public abstract AnimatedLength cy { get; }
-  public abstract AnimatedLength rx { get; }
-  public abstract AnimatedLength ry { get; }
+  public abstract AnimatedLengthCX cx { get; construct set; }
+  public abstract AnimatedLengthCY cy { get; construct set; }
+  public abstract AnimatedLengthRX rx { get; construct set; }
+  public abstract AnimatedLengthRY ry { get; construct set; }
 }
 
 public interface LineElement : Object,

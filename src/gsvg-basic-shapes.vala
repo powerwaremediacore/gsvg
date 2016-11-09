@@ -133,3 +133,51 @@ public class GSvg.GsCircleElement : GSvg.GsTransformable,
     }
   }
 }
+
+public class GSvg.GsEllipseElement : GSvg.GsTransformable,
+                          GSvg.EllipseElement
+{
+  protected AnimatedLengthCX _cx;
+  protected AnimatedLengthCY _cy;
+  protected AnimatedLengthRX _rx;
+  protected AnimatedLengthRY _ry;
+  // RectElement
+  public AnimatedLengthCX cx {
+    get { return _cx; } construct set { _cx = value; }
+  }
+  public AnimatedLengthCY cy {
+    get { return _cy; } construct set { _cy = value; }
+  }
+  public AnimatedLengthRX rx {
+    get { return _rx; } construct set { _rx = value; }
+  }
+  public AnimatedLengthRY ry {
+    get { return _ry; } construct set { _ry = value; }
+  }
+  construct {
+    _local_name = "ellipse";
+  }
+  public GsEllipseElement.initialize (GSvg.GsSvg parent,
+                          string? cx,
+                          string? cy,
+                          string? rx,
+                          string? ry) {
+    _document = parent.owner_document;
+    if (cx != null) {
+        _cx = new GsAnimatedLengthCX () as AnimatedLengthCX;
+        (_cx.base_val as GsLength).parse (cx);
+    }
+    if (cy != null) {
+      _cy = new GsAnimatedLengthCY () as AnimatedLengthCY;
+      (_cy.base_val as GsLength).parse (cy);
+    }
+    if (rx != null) {
+      _rx = new GsAnimatedLengthRX () as AnimatedLengthRX;
+      (_rx.base_val as GsLength).parse (rx);
+     }
+    if (ry != null) {
+      _ry = new GsAnimatedLengthRY () as AnimatedLengthRY;
+      (_ry.base_val as GsLength).parse (ry);
+    }
+  }
+}
