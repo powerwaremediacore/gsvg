@@ -70,6 +70,7 @@ public class GSvg.GsRectElement : GSvg.GsTransformable,
         _x = new GsAnimatedLengthX () as AnimatedLengthX;
         (_x.base_val as GsLength).parse (x);
         GLib.message ("X: "+_x.base_val.value_as_string);
+        GLib.message ("X is Property: "+(_x is GomProperty).to_string ());
     }
     if (y != null) {
       _y = new GsAnimatedLengthY () as AnimatedLengthY;

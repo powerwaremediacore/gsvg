@@ -50,7 +50,7 @@ public class GSvgTest.SvgTest {
       s = parser.write_string ();
       assert (s != null);
       GLib.message ("SVG: "+s);
-      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><rect/></svg>" in s);
+      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><rect x=\"0cm\" y=\"1cm\" width=\"1.5cm\" height=\"1.5cm\" rx=\"0.1cm\" ry=\"0.1cm\"/></svg>" in s);
     });
   }
 }

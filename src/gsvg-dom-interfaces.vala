@@ -123,7 +123,7 @@ public interface Length : Object {
   }
 }
 
-public interface AnimatedLength : Object {
+public interface AnimatedLength : Object, GomProperty {
   // baseVal
   public abstract Length base_val { get; construct set; }
   // animVal
