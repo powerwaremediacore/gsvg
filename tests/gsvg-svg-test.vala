@@ -51,6 +51,18 @@ public class GSvgTest.SvgTest {
       assert (s != null);
       GLib.message ("SVG: "+s);
       assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><rect x=\"0cm\" y=\"1cm\" width=\"1.5cm\" height=\"1.5cm\" rx=\"0.1cm\" ry=\"0.1cm\"/></svg>" in s);
+      assert (r.x.base_val.value == (float) 0.0);
+      assert (r.x.base_val.unit_type == Length.Type.CM);
+      assert (r.y.base_val.value == (float) 1.0);
+      assert (r.y.base_val.unit_type == Length.Type.CM);
+      assert (r.width.base_val.value == (float) 1.5);
+      assert (r.width.base_val.unit_type == Length.Type.CM);
+      assert (r.height.base_val.value == (float) 1.5);
+      assert (r.height.base_val.unit_type == Length.Type.CM);
+      assert (r.rx.base_val.value == (float) 0.1);
+      assert (r.rx.base_val.unit_type == Length.Type.CM);
+      assert (r.ry.base_val.value == (float) 0.1);
+      assert (r.ry.base_val.unit_type == Length.Type.CM);
     });
   }
 }
