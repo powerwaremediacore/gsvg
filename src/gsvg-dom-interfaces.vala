@@ -130,6 +130,13 @@ public interface AnimatedLength : Object {
   public abstract Length anim_val { get; }
 }
 
+public interface AnimatedLengthX : Object, AnimatedLength {}
+public interface AnimatedLengthY : Object, AnimatedLength {}
+public interface AnimatedLengthWidth : Object, AnimatedLength {}
+public interface AnimatedLengthHeight : Object, AnimatedLength {}
+public interface AnimatedLengthRX : Object, AnimatedLength {}
+public interface AnimatedLengthRY : Object, AnimatedLength {}
+
 public interface LengthList : Object {
 
   public abstract uint numberOfItems { get; }

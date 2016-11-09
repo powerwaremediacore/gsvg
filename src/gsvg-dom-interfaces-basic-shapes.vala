@@ -28,12 +28,12 @@ public interface RectElement : Object,
                            ExternalResourcesRequired,
                            Stylable,
                            Transformable {
-  public abstract AnimatedLength x { get; construct set; }
-  public abstract AnimatedLength y { get; construct set; }
-  public abstract AnimatedLength width { get; construct set; }
-  public abstract AnimatedLength height { get; construct set; }
-  public abstract AnimatedLength rx { get; construct set; }
-  public abstract AnimatedLength ry { get; construct set; }
+  public abstract AnimatedLengthX x { get; construct set; }
+  public abstract AnimatedLengthY y { get; construct set; }
+  public abstract AnimatedLengthWidth width { get; construct set; }
+  public abstract AnimatedLengthHeight height { get; construct set; }
+  public abstract AnimatedLengthRX rx { get; construct set; }
+  public abstract AnimatedLengthRY ry { get; construct set; }
 }
 
 public interface CircleElement : Object,

@@ -30,53 +30,66 @@ public class GSvg.GsTransformable : GSvg.GsCommonElement,
 public class GSvg.GsRectElement : GSvg.GsTransformable,
                           GSvg.RectElement
 {
-  protected AnimatedLength _x;
-  protected AnimatedLength _y;
-  protected AnimatedLength _width;
-  protected AnimatedLength _height;
-  protected AnimatedLength _rx;
-  protected AnimatedLength _ry;
+  protected AnimatedLengthX _x;
+  protected AnimatedLengthY _y;
+  protected AnimatedLengthWidth _width;
+  protected AnimatedLengthHeight _height;
+  protected AnimatedLengthRX _rx;
+  protected AnimatedLengthRY _ry;
   // RectElement
-  [Description (nick="::x")]
-  public AnimatedLength x {
+  public AnimatedLengthX x {
     get { return _x; } construct set { _x = value; }
   }
-  [Description (nick="::x")]
-  public AnimatedLength y {
+  public AnimatedLengthY y {
     get { return _y; } construct set { _y = value; }
   }
-  [Description (nick="::width")]
-  public AnimatedLength width {
+  public AnimatedLengthWidth width {
     get { return _width; } construct set { _width = value; }
   }
-  [Description (nick="::height")]
-  public AnimatedLength height{
+  public AnimatedLengthHeight height{
     get { return _height; } construct set { _height = value; }
   }
-  [Description (nick="::rx")]
-  public AnimatedLength rx {
+  public AnimatedLengthRX rx {
     get { return _rx; } construct set { _rx = value; }
   }
-  [Description (nick="::ry")]
-  public AnimatedLength ry {
+  public AnimatedLengthRY ry {
     get { return _ry; } construct set { _ry = value; }
   }
   construct {
     _local_name = "rect";
   }
   public GsRectElement.initialize (GSvg.GsSvg parent,
-                          AnimatedLength? x,
-                          AnimatedLength? y,
-                          AnimatedLength? width,
-                          AnimatedLength? height,
-                          AnimatedLength? rx,
-                          AnimatedLength? ry) {
+                          string? x,
+                          string? y,
+                          string? width,
+                          string? height,
+                          string? rx,
+                          string? ry) {
     _document = parent.owner_document;
-    _x = x;
-    _y = y;
-    _width = width;
-    _height = height;
-    _rx = rx;
-    _ry = ry;
+    if (x != null) {
+        _x = new GsAnimatedLengthX () as AnimatedLengthX;
+        (_x.base_val as GsLength).parse (x);
+        GLib.message ("X: "+_x.base_val.value_as_string);
+    }
+    if (y != null) {
+      _y = new GsAnimatedLengthY () as AnimatedLengthY;
+      (_y.base_val as GsLength).parse (y);
+    }
+    if (width != null) {
+      _width = new GsAnimatedLengthWidth () as AnimatedLengthWidth;
+      (_width.base_val as GsLength).parse (width);
+    }
+    if (height != null) {
+      _height = new GsAnimatedLengthHeight () as AnimatedLengthHeight;
+      (_height.base_val as GsLength).parse (height);
+     }
+    if (rx != null) {
+      _rx = new GsAnimatedLengthRX () as AnimatedLengthRX;
+      (_rx.base_val as GsLength).parse (rx);
+     }
+    if (ry != null) {
+      _ry = new GsAnimatedLengthRY () as AnimatedLengthRY;
+      (_ry.base_val as GsLength).parse (ry);
+    }
   }
 }

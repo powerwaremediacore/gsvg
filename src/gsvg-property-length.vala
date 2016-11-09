@@ -53,7 +53,7 @@ public class GSvg.GsAnimatedLength : Object,
 }
 
 public class GSvg.GsLength : Object, GSvg.Length {
-  Length.Type _unit_type;
+  Length.Type _unit_type = Length.Type.UNKNOWN;
   float _value_in_specified_units = (float) 0.0;
   string _value_as_string = "0";
   float _value = (float) 0.0;
@@ -102,14 +102,15 @@ public class GSvg.GsLength : Object, GSvg.Length {
     GLib.message ("No implemented");
   }
   public string to_string () {
-    string units = Enumeration.get_string (typeof (Length.Type), _unit_type);
+    string units = Enumeration.get_string (typeof (Length.Type), _unit_type, true, true);
     if (_unit_type == Length.Type.UNKNOWN
         || _unit_type == Length.Type.NUMBER) units = "";
     if (_unit_type == Length.Type.PERCENTAGE) units = "%";
     string val = value_in_specified_units.to_string ();
     return val+units;
   }
-  public void parse (string v) {
+  public void parse (string? v) {
+    if (v == null) return;
     char* rs = null;
     this.value_in_specified_units = (float) double.ascii_strtod (v, out rs);
     if (rs != null) {
@@ -125,36 +126,36 @@ public class GSvg.GsLength : Object, GSvg.Length {
   }
 }
 
-public class GSvg.GsAnimatedLengthX : GSvg.GsAnimatedLength {
+public class GSvg.GsAnimatedLengthX : GSvg.GsAnimatedLength, AnimatedLengthX {
   construct {
     _attribute_name = "x";
   }
 }
 
-public class GSvg.GsAnimatedLengthY : GSvg.GsAnimatedLength {
+public class GSvg.GsAnimatedLengthY : GSvg.GsAnimatedLength, AnimatedLengthY {
   construct {
     _attribute_name = "y";
   }
 }
 
-public class GSvg.GsAnimatedLengthWidth : GSvg.GsAnimatedLength {
+public class GSvg.GsAnimatedLengthWidth : GSvg.GsAnimatedLength, AnimatedLengthWidth {
   construct {
     _attribute_name = "width";
   }
 }
-public class GSvg.GsAnimatedLengthHeight : GSvg.GsAnimatedLength {
+public class GSvg.GsAnimatedLengthHeight : GSvg.GsAnimatedLength, AnimatedLengthHeight {
   construct {
     _attribute_name = "height";
   }
 }
 
-public class GSvg.GsAnimatedLengthRX : GSvg.GsAnimatedLength {
+public class GSvg.GsAnimatedLengthRX : GSvg.GsAnimatedLength, AnimatedLengthRX {
   construct {
     _attribute_name = "rx";
   }
 }
 
-public class GSvg.GsAnimatedLengthRY : GSvg.GsAnimatedLength {
+public class GSvg.GsAnimatedLengthRY : GSvg.GsAnimatedLength, AnimatedLengthRY {
   construct {
     _attribute_name = "ry";
   }
