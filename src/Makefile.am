@@ -20,6 +20,7 @@ VALASOURCES = \
 	gsvg-object.vala \
 	gsvg-svg.vala \
 	gsvg-basic-shapes.vala \
+	gsvg-property-length.vala \
 	$(NULL)
 
 libgsvg_@API_VERSION@_la_SOURCES = \

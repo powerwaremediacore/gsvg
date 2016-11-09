@@ -95,13 +95,15 @@ public interface AnimatedNumberList : Object {
 }
 
 public interface Length : Object {
-  public abstract uint unitType { get; }
+  public abstract Length.Type unit_type { get; construct set; }
   public abstract float value { get; set; }
-  public abstract float valueInSpecifiedUnits { get; set; }
-  public abstract string valueAsString { get; set; }
+  public abstract float value_in_specified_units { get; set; }
+  public abstract string value_as_string { get; set; }
 
-  public abstract void newValueSpecifiedUnits(uint unitType,float valueInSpecifiedUnits) throws GLib.Error;
-  public abstract void convertToSpecifiedUnits(uint unitType) throws GLib.Error;
+  public abstract void new_value_specified_units (Length.Type unit_type,
+                                                float value_in_specified_units)
+                                                throws GLib.Error;
+  public abstract void convert_to_specified_units (Length.Type unit_type) throws GLib.Error;
 
   /**
    * Length Unit Types
@@ -122,8 +124,10 @@ public interface Length : Object {
 }
 
 public interface AnimatedLength : Object {
-  public abstract Length baseVal { get; }
-  public abstract Length animVal { get; }
+  // baseVal
+  public abstract Length base_val { get; construct set; }
+  // animVal
+  public abstract Length anim_val { get; }
 }
 
 public interface LengthList : Object {
