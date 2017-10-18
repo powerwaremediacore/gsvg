@@ -21,8 +21,10 @@ using GXml;
 
 public class GSvg.GsObject : GXml.GomElement {
   public string to_string () {
-    var p = new XParser (this);
-    return p.write_string ();
+    try {
+      var p = new XParser (this);
+      return p.write_string ();
+    } catch { return ""; }
   }
 }
 

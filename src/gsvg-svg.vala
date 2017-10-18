@@ -115,7 +115,6 @@ public class GSvg.GsSvg : GSvg.GsCommonElement,
   protected AnimatedPreserveAspectRatio _preserve_aspect_ratio;
   protected Point _current_translate;
 
-  public CSSValue get_presentation_attribute (string name) { return null; }
   // FitToViewBox
   // * viewBox
   public AnimatedRect view_box { get { return _view_box; } }
@@ -172,8 +171,12 @@ public class GSvg.GsSvg : GSvg.GsCommonElement,
 
   construct {
     _local_name = "svg";
-    set_attribute_ns ("http://www.w3.org/2000/xmlns/",
+    try {
+      set_attribute_ns ("http://www.w3.org/2000/xmlns/",
                       "xmlns:svg", "http://www.w3.org/2000/svg");
+    } catch (GLib.Error e) {
+      warning (("Error setting default namespace: %s").printf (e.message));
+    }
   }
 
   public GsSvg.initialize (GSvg.GsSvg? parent,

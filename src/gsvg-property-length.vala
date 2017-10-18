@@ -34,9 +34,12 @@ public class GSvg.GsAnimatedLength : Object,
   /**
    * Attribute's value in the parent {@link DomElement}.
    */
-  public string value {
+  public string? value {
     owned get { return (_base_val as GsLength).to_string (); }
     set { _base_val.value_as_string = value; }
+  }
+  public bool validate_value (string val) {
+    return true; // FIXME:
   }
   // baseVal
   public Length base_val {
@@ -102,12 +105,14 @@ public class GSvg.GsLength : Object, GSvg.Length {
     GLib.message ("No implemented");
   }
   public string to_string () {
-    string units = Enumeration.get_string (typeof (Length.Type), _unit_type, true, true);
-    if (_unit_type == Length.Type.UNKNOWN
-        || _unit_type == Length.Type.NUMBER) units = "";
-    if (_unit_type == Length.Type.PERCENTAGE) units = "%";
-    string val = value_in_specified_units.to_string ();
-    return val+units;
+    try {
+      string units = Enumeration.get_string (typeof (Length.Type), _unit_type, true, true);
+      if (_unit_type == Length.Type.UNKNOWN
+          || _unit_type == Length.Type.NUMBER) units = "";
+      if (_unit_type == Length.Type.PERCENTAGE) units = "%";
+      string val = value_in_specified_units.to_string ();
+      return val+units;
+    } catch { return ""; }
   }
   public void parse (string? v) {
     if (v == null) return;
@@ -115,8 +120,10 @@ public class GSvg.GsLength : Object, GSvg.Length {
     this.value_in_specified_units = (float) double.ascii_strtod (v, out rs);
     if (rs != null) {
       string rest = (string) rs;
-      var ev = Enumeration.parse (typeof (Length.Type), rest);
-      _unit_type = (Length.Type) ev.value;
+      try {
+        var ev = Enumeration.parse (typeof (Length.Type), rest);
+        _unit_type = (Length.Type) ev.value;
+      } catch { _unit_type = Length.Type.UNKNOWN; }
     } else {
       _unit_type = Length.Type.UNKNOWN;
     }
