@@ -78,3 +78,18 @@ public class GSvg.GsEllipseElement : GSvg.GsTransformable,
     initialize ("ellipse");
   }
 }
+public class GSvg.GsLineElement : GSvg.GsTransformable,
+                           GSvg.LineElement
+{
+  [Description (nick="::x1")]
+  public AnimatedLengthX x1 { get; set; }
+  [Description (nick="::y1")]
+  public AnimatedLengthY y1 { get; set; }
+  [Description (nick="::x2")]
+  public AnimatedLengthX x2 { get; set; }
+  [Description (nick="::y2")]
+  public AnimatedLengthY y2 { get; set; }
+  construct {
+    initialize ("line");
+  }
+}

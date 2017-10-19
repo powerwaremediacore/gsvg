@@ -111,35 +111,33 @@ public class GSvgTest.SvgTest {
       } catch (GLib.Error e) {
         GLib.message ("ERROR: "+e.message);
       }
-      //assert_not_reached ();
     });
-    Test.add_func ("/gsvg/polyline-element/construct/initialize",
+    Test.add_func ("/gsvg/line-element/construct/initialize",
     ()=>{
-      /*try {
+      try {
       var svg = new GSvg.GsSvg ();
       var parser = new XParser (svg);
       string s = parser.write_string ();
       assert (s != null);
       GLib.message ("SVG: "+s);
       assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"/>" in s);
-      var c = new GSvg.GsEllipseElement.initialize (svg, "1mm", "1mm", "3.5mm", "3.5mm");
-      svg.append_child (c);
+      var l = svg.create_line  ("0mm", "0mm", "50mm", "50mm");
+      svg.append_child (l);
       s = parser.write_string ();
       assert (s != null);
       GLib.message ("SVG: "+s);
-      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><ellipse cx=\"1mm\" cy=\"1mm\" rx=\"3.5mm\" ry=\"3.5mm\"/></svg>" in s);
-      assert (c.cx.base_val.value == (float) 1.0);
-      assert (c.cx.base_val.unit_type == Length.Type.MM);
-      assert (c.cy.base_val.value == (float) 1.0);
-      assert (c.cy.base_val.unit_type == Length.Type.MM);
-      assert (c.rx.base_val.value == (float) 3.5);
-      assert (c.rx.base_val.unit_type == Length.Type.MM);
-      assert (c.ry.base_val.value == (float) 3.5);
-      assert (c.ry.base_val.unit_type == Length.Type.MM);
+      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><line x1=\"0mm\" y1=\"0mm\" x2=\"50mm\" y2=\"50mm\"/></svg>" in s);
+      assert ("%.2f".printf (l.x1.base_val.value) == "%.2f".printf (0.0));
+      assert (l.x1.base_val.unit_type == Length.Type.MM);
+      assert ("%.2f".printf (l.y1.base_val.value) == "%.2f".printf (0.0));
+      assert (l.y1.base_val.unit_type == Length.Type.MM);
+      assert ("%.2f".printf (l.x2.base_val.value) == "%.2f".printf (50.0));
+      assert (l.x2.base_val.unit_type == Length.Type.MM);
+      assert ("%.2f".printf (l.y2.base_val.value) == "%.2f".printf (50.0));
+      assert (l.y2.base_val.unit_type == Length.Type.MM);
       } catch (GLib.Error e) {
         GLib.message ("ERROR: "+e.message);
       }
-      //assert_not_reached ();*/
     });
   }
 }

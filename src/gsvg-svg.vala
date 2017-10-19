@@ -370,4 +370,45 @@ public class GSvg.GsSvg : GSvg.GsCommonElement,
     e.ry = nry;
     return e;
   }
+  /**
+   * @lx1 a string representation of an {@link AnimatedLengthCX}
+   * @lx2 a string representation of an {@link AnimatedLengthCY}
+   * @lx1 a string representation of an {@link AnimatedLengthRX}
+   * @ly2 a string representation of an {@link AnimatedLengthRY}
+   *
+   * Creates a 'line' node for line shapes.
+   */
+  public LineElement create_line (string? lx1,
+                                  string? ly1,
+                                  string? lx2,
+                                  string? ly2) {
+    GsAnimatedLengthX nx1 = null;
+    if (lx1 != null) {
+      nx1 = new GsAnimatedLengthX ();
+      nx1.value = lx1;
+    }
+    GsAnimatedLengthY ny1 = null;
+    if (ly1 != null) {
+      ny1 = new GsAnimatedLengthY ();
+      ny1.value = ly1;
+    }
+    GsAnimatedLengthX nx2 = null;
+    if (lx2 != null) {
+      nx2 = new GsAnimatedLengthX ();
+      nx2.value = lx2;
+    }
+    GsAnimatedLengthY ny2 = null;
+    if (ly2 != null) {
+      ny2 = new GsAnimatedLengthY ();
+      ny2.value = ly2;
+    }
+    var l = Object.new (typeof (GsLineElement),
+                        "owner_document", this.owner_document)
+                        as GsLineElement;
+    l.x1 = nx1;
+    l.y1 = ny1;
+    l.x2 = nx2;
+    l.y2 = ny2;
+    return l;
+  }
 }

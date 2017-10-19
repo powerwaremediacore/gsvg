@@ -68,10 +68,10 @@ public interface LineElement : Object,
                            ExternalResourcesRequired,
                            Stylable,
                            Transformable {
-  public abstract AnimatedLength x1 { get; }
-  public abstract AnimatedLength y1 { get; }
-  public abstract AnimatedLength x2 { get; }
-  public abstract AnimatedLength y2 { get; }
+  public abstract AnimatedLengthX x1 { get; set; }
+  public abstract AnimatedLengthY y1 { get; set; }
+  public abstract AnimatedLengthX x2 { get; set; }
+  public abstract AnimatedLengthY y2 { get; set; }
 }
 
 public interface AnimatedPoints : Object {
