@@ -28,7 +28,7 @@ public class GSvgTest.SvgTest {
       assert (s != null);
       GLib.message ("SVG: "+s);
       assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"/>" in s);
-      var r = new GSvg.GsRectElement.initialize (svg, null, null, null, null, null, null);
+      var r = svg.create_rect (null, null, null, null, null, null);
       svg.append_child (r);
       s = parser.write_string ();
       assert (s != null);
@@ -43,9 +43,9 @@ public class GSvgTest.SvgTest {
       assert (s != null);
       GLib.message ("SVG: "+s);
       assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"/>" in s);
-      var r = new GSvg.GsRectElement.initialize (svg, "0cm", "1cm",
-                                                "1.5cm", "1.5cm",
-                                                ".1cm", ".1cm");
+      var r = svg.create_rect ("0cm", "1cm",
+                    "1.5cm", "1.5cm",
+                    "0.1cm", "0.1cm");
       svg.append_child (r);
       s = parser.write_string ();
       assert (s != null);
@@ -59,9 +59,9 @@ public class GSvgTest.SvgTest {
       assert (r.width.base_val.unit_type == Length.Type.CM);
       assert (r.height.base_val.value == (float) 1.5);
       assert (r.height.base_val.unit_type == Length.Type.CM);
-      assert (r.rx.base_val.value == (float) 0.1);
+      assert ("%.2f".printf (r.rx.base_val.value) == "%.2f".printf (0.1));
       assert (r.rx.base_val.unit_type == Length.Type.CM);
-      assert (r.ry.base_val.value == (float) 0.1);
+      assert ("%.2f".printf (r.ry.base_val.value) == "%.2f".printf (0.1));
       assert (r.ry.base_val.unit_type == Length.Type.CM);
     });
     Test.add_func ("/gsvg/circle-element/construct/initialize",

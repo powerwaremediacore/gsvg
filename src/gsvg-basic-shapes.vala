@@ -1,3 +1,4 @@
+/* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
 /* gsvg-dom-element.vala
  *
  * Copyright (C) 2016 Daniel Espinosa
@@ -30,68 +31,22 @@ public class GSvg.GsTransformable : GSvg.GsCommonElement,
 public class GSvg.GsRectElement : GSvg.GsTransformable,
                           GSvg.RectElement
 {
-  protected AnimatedLengthX _x;
-  protected AnimatedLengthY _y;
-  protected AnimatedLengthWidth _width;
-  protected AnimatedLengthHeight _height;
-  protected AnimatedLengthRX _rx;
-  protected AnimatedLengthRY _ry;
   // RectElement
-  public AnimatedLengthX x {
-    get { return _x; } construct set { _x = value; }
-  }
-  public AnimatedLengthY y {
-    get { return _y; } construct set { _y = value; }
-  }
-  public AnimatedLengthWidth width {
-    get { return _width; } construct set { _width = value; }
-  }
-  public AnimatedLengthHeight height{
-    get { return _height; } construct set { _height = value; }
-  }
-  public AnimatedLengthRX rx {
-    get { return _rx; } construct set { _rx = value; }
-  }
-  public AnimatedLengthRY ry {
-    get { return _ry; } construct set { _ry = value; }
-  }
+  [Description (nick="::x")]
+  public AnimatedLengthX x { get; set; }
+  [Description (nick="::y")]
+  public AnimatedLengthY y { get; set; }
+  [Description (nick="::width")]
+  public AnimatedLengthWidth width { get; set; }
+  [Description (nick="::height")]
+  public AnimatedLengthHeight height{ get; set; }
+  [Description (nick="::rx")]
+  public AnimatedLengthRX rx { get; set; }
+  [Description (nick="::ry")]
+  public AnimatedLengthRY ry { get; set; }
   construct {
-    _local_name = "rect";
-  }
-  public GsRectElement.initialize (GSvg.GsSvg parent,
-                          string? x,
-                          string? y,
-                          string? width,
-                          string? height,
-                          string? rx,
-                          string? ry) {
-    _document = parent.owner_document;
-    if (x != null) {
-        _x = new GsAnimatedLengthX () as AnimatedLengthX;
-        (_x.base_val as GsLength).parse (x);
-        GLib.message ("X: "+_x.base_val.value_as_string);
-        GLib.message ("X is Property: "+(_x is GomProperty).to_string ());
-    }
-    if (y != null) {
-      _y = new GsAnimatedLengthY () as AnimatedLengthY;
-      (_y.base_val as GsLength).parse (y);
-    }
-    if (width != null) {
-      _width = new GsAnimatedLengthWidth () as AnimatedLengthWidth;
-      (_width.base_val as GsLength).parse (width);
-    }
-    if (height != null) {
-      _height = new GsAnimatedLengthHeight () as AnimatedLengthHeight;
-      (_height.base_val as GsLength).parse (height);
-     }
-    if (rx != null) {
-      _rx = new GsAnimatedLengthRX () as AnimatedLengthRX;
-      (_rx.base_val as GsLength).parse (rx);
-     }
-    if (ry != null) {
-      _ry = new GsAnimatedLengthRY () as AnimatedLengthRY;
-      (_ry.base_val as GsLength).parse (ry);
-    }
+    initialize ("rect");
+    message ("construct rect");
   }
 }
 

@@ -1,3 +1,4 @@
+/* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
 /* gsvg-dom-element.vala
  *
  * Copyright (C) 2016 Daniel Espinosa
@@ -27,8 +28,6 @@ public class GSvg.GsElement : GSvg.GsObject,
   protected AnimatedString _class;
   protected CSSStyleDeclaration _style;
   // Element
-  [Description (nick="::id")]
-  public string id { get; set; }
   [Description (nick="::xml:base")]
   public string xmlbase { get; set; }
   public SVGElement? owner_svg_element {
@@ -46,6 +45,7 @@ public class GSvg.GsElement : GSvg.GsObject,
   }
 
   public CSSValue? get_presentation_attribute (string name) { return null; }
+
 }
 
 /**
@@ -93,6 +93,9 @@ public class GSvg.GsCommonElement : GsElement,
   public Matrix get_screen_ctm () { return null; }
   public Matrix get_transform_to_element (Element element) throws GLib.Error { return null; }
 }
+/**
+ * 'svg' node.
+ */
 public class GSvg.GsSvg : GSvg.GsCommonElement,
                         FitToViewBox,
                         ZoomAndPan,
@@ -179,7 +182,7 @@ public class GSvg.GsSvg : GSvg.GsCommonElement,
     }
   }
 
-  public GsSvg.initialize (GSvg.GsSvg? parent,
+  public void initialize (GSvg.GsSvg? parent,
                           AnimatedLength? x,
                           AnimatedLength? y,
                           AnimatedLength? width,
@@ -217,13 +220,86 @@ public class GSvg.GsSvg : GSvg.GsCommonElement,
   public  bool check_intersection (Element element, Rect rect) { return false; }
   public  bool check_enclosure (Element element, Rect rect) { return false; }
   public  void deselect_all () {}
+  // Creators
   public  Number create_svg_number () { return null; }
   public  Length create_svg_length () { return null; }
   public  Angle create_svg_angle () { return null; }
   public  Point create_svg_point () { return null; }
   public  Matrix create_svg_matrix() { return null; }
-  public  Rect create_svg_rect () { return null; }
+  public  Rect create_svg_rect () {
+    var r = new GsRectElement ();
+    r.x = new GsAnimatedLengthX ();
+    r.y = new GsAnimatedLengthY ();
+    r.width = new GsAnimatedLengthWidth ();
+    r.height = new GsAnimatedLengthHeight ();
+    r.rx = new GsAnimatedLengthRX ();
+    r.ry = new GsAnimatedLengthRY ();
+    return r as Rect;
+  }
   public  Transform create_svg_transform () { return null; }
   public  Transform create_svg_transform_from_matrix (Matrix matrix) { return null; }
+  /**
+   * Query elements by 'id' property
+   */
   public  DomElement? get_element_by_id (string elementId) { return null; }
+  // Shape constructors
+  /**
+   * @x a string representation of an {@link AnimatedLengthX}
+   * @y a string representation of an {@link AnimatedLengthY}
+   * @width a string representation of an {@link AnimatedLengthWidth}
+   * @height a string representation of an {@link AnimatedLengthHeight}
+   * @rx a string representation of an {@link AnimatedLengthRX}
+   * @ry a string representation of an {@link AnimatedLengthRY}
+   *
+   * Creates a 'rect' node for rectangular shapes.
+   */
+  public RectElement create_rect (string? x,
+                                  string? y,
+                                  string? width,
+                                  string? height,
+                                  string? rx,
+                                  string? ry) {
+    GsAnimatedLengthX nx = null;
+    if (x != null) {
+    message ("Setting X:"+x);
+      nx = new GsAnimatedLengthX ();
+      nx.value = x;
+      message ("X = "+nx.value);
+    }
+    GsAnimatedLengthY ny = null;
+    if (y != null) {
+      ny = new GsAnimatedLengthY ();
+      ny.value = y;
+    }
+    GsAnimatedLengthWidth nw = null;
+    if (width != null) {
+      nw = new GsAnimatedLengthWidth();
+      nw.value = width;
+    }
+    GsAnimatedLengthHeight nh = null;
+    if (height != null) {
+      nh = new GsAnimatedLengthHeight ();
+      nh.value = height;
+    }
+    GsAnimatedLengthRX nrx = null;
+    if (rx != null) {
+      nrx = new GsAnimatedLengthRX ();
+      nrx.value = rx;
+    }
+    GsAnimatedLengthRY nry = null;
+    if (ry != null) {
+      nry = new GsAnimatedLengthRY ();
+      nry.value = ry;
+    }
+    var r = Object.new (typeof (GsRectElement),
+                        "owner_document", this.owner_document)
+                        as RectElement;
+    r.x = nx;
+    r.y = ny;
+    r.width = nw;
+    r.height = nh;
+    r.rx = nrx;
+    r.ry = nry;
+    return r;
+  }
 }

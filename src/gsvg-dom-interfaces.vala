@@ -24,8 +24,6 @@ namespace GSvg {
  * Top level SVG Element node according with https://www.w3.org/TR/SVG/ version 1.1
  */
 public interface Element : Object, DomElement {
-  [Description (nick="::id")]
-  public abstract string id { get; set; }
   [Description (nick="::xml:base")]
   public abstract string xmlbase { get; set; }
   // ownerSVGElement
@@ -96,12 +94,12 @@ public interface AnimatedNumberList : Object {
 
 public interface Length : Object {
   public abstract Length.Type unit_type { get; construct set; }
-  public abstract float value { get; set; }
-  public abstract float value_in_specified_units { get; set; }
+  public abstract double value { get; set; }
+  public abstract double value_in_specified_units { get; set; }
   public abstract string value_as_string { get; set; }
 
   public abstract void new_value_specified_units (Length.Type unit_type,
-                                                float value_in_specified_units)
+                                                double value_in_specified_units)
                                                 throws GLib.Error;
   public abstract void convert_to_specified_units (Length.Type unit_type) throws GLib.Error;
 

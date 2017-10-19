@@ -1,3 +1,4 @@
+/* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
 /* gsvg-dom-element.vala
  *
  * Copyright (C) 2016 Daniel Espinosa
@@ -35,11 +36,14 @@ public class GSvg.GsAnimatedLength : Object,
    * Attribute's value in the parent {@link DomElement}.
    */
   public string? value {
-    owned get { return (_base_val as GsLength).to_string (); }
-    set { _base_val.value_as_string = value; }
+    owned get { return _base_val.value_as_string; }
+    set {
+      if (value != null)
+        _base_val.value_as_string = value;
+    }
   }
   public bool validate_value (string val) {
-    return true; // FIXME:
+    return double.try_parse (val); // FIXME:
   }
   // baseVal
   public Length base_val {
@@ -57,29 +61,26 @@ public class GSvg.GsAnimatedLength : Object,
 
 public class GSvg.GsLength : Object, GSvg.Length {
   Length.Type _unit_type = Length.Type.UNKNOWN;
-  float _value_in_specified_units = (float) 0.0;
+  double _value_in_specified_units = (float) 0.0;
   string _value_as_string = "0";
-  float _value = (float) 0.0;
   public Length.Type unit_type {
     get { return _unit_type; } construct set { _unit_type = value; }
   }
-  public float value {
-    get {
-      return _value;
-    }
-    set {
-      _value = value;
-      _value_in_specified_units = _value;
-      _value_as_string = this.to_string ();
-    }
-  }
-  public float value_in_specified_units {
+  public double value {
     get {
       return _value_in_specified_units;
     }
     set {
       _value_in_specified_units = value;
-      _value = _value_in_specified_units;
+      _value_as_string = this.to_string ();
+    }
+  }
+  public double value_in_specified_units {
+    get {
+      return _value_in_specified_units;
+    }
+    set {
+      _value_in_specified_units = value;
       _value_as_string = this.to_string ();
     }
   }
@@ -88,13 +89,14 @@ public class GSvg.GsLength : Object, GSvg.Length {
       return _value_as_string;
     }
     set {
+    message ("setting: "+value);
       _value_as_string = value;
       parse (_value_as_string);
     }
   }
 
   public void new_value_specified_units (Length.Type unit_type,
-                                        float value_in_specified_units)
+                                        double value_in_specified_units)
                                         throws GLib.Error {
     _unit_type = unit_type;
     this.value_in_specified_units = value_in_specified_units;
@@ -102,7 +104,7 @@ public class GSvg.GsLength : Object, GSvg.Length {
     value_as_string = this.to_string ();
   }
   public void convert_to_specified_units (Length.Type unit_type) throws GLib.Error {
-    GLib.message ("No implemented");
+    GLib.warning ("No implemented");
   }
   public string to_string () {
     try {
@@ -110,26 +112,30 @@ public class GSvg.GsLength : Object, GSvg.Length {
       if (_unit_type == Length.Type.UNKNOWN
           || _unit_type == Length.Type.NUMBER) units = "";
       if (_unit_type == Length.Type.PERCENTAGE) units = "%";
-      string val = value_in_specified_units.to_string ();
+      string val = "%1.6g".printf (value_in_specified_units);
       return val+units;
     } catch { return ""; }
   }
   public void parse (string? v) {
     if (v == null) return;
     char* rs = null;
-    this.value_in_specified_units = (float) double.ascii_strtod (v, out rs);
+    double vd = 0.0;
+    double.try_parse (v, out vd);
+    _value_in_specified_units = vd;
+    _unit_type = Length.Type.UNKNOWN;
+    v.to_double (out rs);
     if (rs != null) {
       string rest = (string) rs;
       try {
         var ev = Enumeration.parse (typeof (Length.Type), rest);
         _unit_type = (Length.Type) ev.value;
       } catch { _unit_type = Length.Type.UNKNOWN; }
-    } else {
-      _unit_type = Length.Type.UNKNOWN;
     }
     if (_value_as_string != v) {
+      message ("Updating string: ");
       _value_as_string = this.to_string ();
     }
+    message ("%s : %s :v = %f; u = %s".printf (this.to_string (), _value_as_string, _value_in_specified_units, (string) rs));
   }
 }
 
