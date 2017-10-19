@@ -1,0 +1,13 @@
+prefix=@prefix@
+exec_prefix=${prefix}
+libdir=@libdir@
+datadir=@prefix@/share
+includedir=@prefix@/include
+
+Name: @PROJECT_NAME@
+Description: GObject API for SVG files
+URL: www.pwmc.mx/gsvg
+Version: @PROJECT_VERSION@
+Requires: gxml-0.16 >= 0.15.2
+Libs: -L${libdir} -lgxml-@API_VERSION@
+Cflags: -I${includedir}/gxml-@API_VERSION@

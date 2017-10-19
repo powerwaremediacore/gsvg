@@ -46,7 +46,6 @@ public class GSvg.GsRectElement : GSvg.GsTransformable,
   public AnimatedLengthRY ry { get; set; }
   construct {
     initialize ("rect");
-    message ("construct rect");
   }
 }
 

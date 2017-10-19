@@ -89,7 +89,6 @@ public class GSvg.GsLength : Object, GSvg.Length {
       return _value_as_string;
     }
     set {
-    message ("setting: "+value);
       _value_as_string = value;
       parse (_value_as_string);
     }

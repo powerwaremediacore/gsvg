@@ -39,10 +39,10 @@ public interface SVGElement : Element,
                           ViewCSS,
                           DocumentCSS {
 
-  public abstract AnimatedLength x { get; construct set; }
-  public abstract AnimatedLength y { get;  construct set; }
-  public abstract AnimatedLength width { get;  construct set; }
-  public abstract AnimatedLength height { get;  construct set; }
+  public abstract AnimatedLength x { get; set; }
+  public abstract AnimatedLength y { get;  set; }
+  public abstract AnimatedLength width { get;  set; }
+  public abstract AnimatedLength height { get;  set; }
   public abstract string content_script_type { get; set; }
   public abstract string content_style_type { get; set; }
   public abstract Rect viewport { get; }

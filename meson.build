@@ -1,7 +1,7 @@
 project('gsvg', [ 'vala', 'c'], version : '0.3.0')
 
 PROJECT_NAME = meson.project_name()
-API_VERSION = '0'
+API_VERSION = '0.4'
 PROJECT_VERSION = meson.project_version()
 VERSIONED_PROJECT_NAME = PROJECT_NAME+'-'+API_VERSION
 CAMEL_CASE_NAME = 'GSvg'

@@ -103,10 +103,6 @@ public class GSvg.GsSvg : GSvg.GsCommonElement,
                         DocumentCSS,
                         GSvg.SVGElement
 {
-  protected AnimatedLength _x;
-  protected AnimatedLength _y;
-  protected AnimatedLength _width;
-  protected AnimatedLength _height;
   protected Rect _viewport;
   protected float _pixel_unit_to_millimeter_x;
   protected float _pixel_unit_to_millimeter_y;
@@ -142,13 +138,13 @@ public class GSvg.GsSvg : GSvg.GsCommonElement,
   }
   // SVGElement
   [Description (nick="::x")]
-  public AnimatedLength x { get { return _x; } construct set { _x = value; } }
+  public AnimatedLength x { get; set; }
   [Description (nick="::y")]
-  public AnimatedLength y { get { return _y; } construct set { _y = value; } }
+  public AnimatedLength y { get; set; }
   [Description (nick="::width")]
-  public AnimatedLength width { get { return _width; } construct set { _width = value; } }
+  public AnimatedLength width { get; set; }
   [Description (nick="::height")]
-  public AnimatedLength height { get { return _height; } construct set { _height = value; } }
+  public AnimatedLength height { get; set; }
   [Description (nick="::contentScriptType")]
   public string content_script_type { get; set; }
   [Description (nick="::contentStyleType")]
