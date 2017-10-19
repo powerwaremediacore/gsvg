@@ -26,19 +26,19 @@ namespace GSvg {
 /**
  * CSS interfaces according with https://www.w3.org/TR/SVG/ version 1.1
  */
-public interface CSSStyleDeclaration : Object {
-  public abstract string        cssText { get; set; }
-  public abstract uint    length { get; set; }
-  public abstract CSSRule          parentRule { get; set; }
+public interface CSSStyleDeclaration : Object, GomProperty {
+  public abstract string        css_text { get; set; }
+  public abstract uint          length { get; set; }
+  public abstract CSSRule       parent_rule { get; set; }
 
-  public abstract string          getPropertyValue(string propertyName);
-  public abstract CSSValue           getPropertyCSSValue(string propertyName);
-  public abstract string          removeProperty(string propertyName) throws GLib.Error;
-  public abstract string          getPropertyPriority(string propertyName);
-  public abstract void               setProperty(string propertyName,
-                                     string value,
-                                     string priority) throws GLib.Error;
-  public abstract string          item(uint index);
+  public abstract string        get_property_value (string property_name);
+  public abstract CSSValue      get_property_css_value (string property_name);
+  public abstract string        remove_property (string property_name) throws GLib.Error;
+  public abstract string        get_property_priority (string property_name);
+  public abstract void          set_property(string property_name,
+		                             string value,
+		                             string priority) throws GLib.Error;
+  public abstract string        item (uint index);
 }
 
 public interface CSSValue : Object {

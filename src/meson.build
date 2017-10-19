@@ -32,6 +32,7 @@ configure_file(output : 'config.h',
 	configuration : confh)
 
 valasources = files ([
+	'css-classes.vala',
 	'css-interfaces.vala',
 	'gsvg-basic-shapes.vala',
 	'gsvg-dom-interfaces-basic-shapes.vala',

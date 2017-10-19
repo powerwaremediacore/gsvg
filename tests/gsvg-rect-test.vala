@@ -17,6 +17,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+using GSvg;
 
 class GSvgTest.Suite : Object
 {
@@ -24,7 +25,14 @@ class GSvgTest.Suite : Object
   {
     GLib.Intl.setlocale (GLib.LocaleCategory.ALL, "");
     Test.init (ref args);
-    SvgTest.add_funcs ();
+    Test.add_func ("/gsvg/rect/style",
+    ()=>{
+      var svg = new GSvg.GsSvg ();
+      var r = svg.create_rect ("0mm","0mm","50mm","50mm", null, null);
+      assert (r.style != null);
+      r.style.value = "stroke-width:1mm";
+      message (r.style.value);
+    });
     return Test.run ();
   }
 }

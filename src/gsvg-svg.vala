@@ -41,7 +41,12 @@ public class GSvg.GsElement : GSvg.GsObject,
   }
   [Description (nick="::style")]
   public CSSStyleDeclaration? style {
-    get { return _style; } construct set { _style = value; }
+    get {
+      if (_style == null)
+        _style = new GsCSSStyleDeclaration () as CSSStyleDeclaration;
+      return _style;
+    }
+    construct set { _style = value; }
   }
 
   public CSSValue? get_presentation_attribute (string name) { return null; }

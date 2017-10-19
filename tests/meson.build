@@ -13,6 +13,15 @@ t = executable('gsvg_basic_tests', files_tests,
 	dependencies : [ gxml, inc_libh_dep, testdirs_dep, inc_rooth_dep],
 	link_with: lib
 )
-
 test ('gsvg_basic_tests', t)
+
+test_rect_files = ([
+		'gsvg-rect-test.vala'
+	])
+trect = executable('gsvg_rect_tests', test_rect_files,
+	vala_args : [],
+	dependencies : [ gxml, inc_libh_dep, testdirs_dep, inc_rooth_dep],
+	link_with: lib
+)
+test ('gsvg_rect_tests', trect)
 
