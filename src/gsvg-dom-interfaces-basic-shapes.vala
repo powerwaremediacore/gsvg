@@ -43,9 +43,9 @@ public interface CircleElement : Object,
                              ExternalResourcesRequired,
                              Stylable,
                              Transformable {
-  public abstract AnimatedLengthCX cx { get; construct set; }
-  public abstract AnimatedLengthCY cy { get; construct set; }
-  public abstract AnimatedLengthR  r { get; construct set; }
+  public abstract AnimatedLengthCX cx { get; set; }
+  public abstract AnimatedLengthCY cy { get; set; }
+  public abstract AnimatedLengthR  r { get; set; }
 }
 
 public interface EllipseElement : Object,

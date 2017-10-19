@@ -261,10 +261,8 @@ public class GSvg.GsSvg : GSvg.GsCommonElement,
                                   string? ry) {
     GsAnimatedLengthX nx = null;
     if (x != null) {
-    message ("Setting X:"+x);
       nx = new GsAnimatedLengthX ();
       nx.value = x;
-      message ("X = "+nx.value);
     }
     GsAnimatedLengthY ny = null;
     if (y != null) {
@@ -301,5 +299,38 @@ public class GSvg.GsSvg : GSvg.GsCommonElement,
     r.rx = nrx;
     r.ry = nry;
     return r;
+  }
+  /**
+   * @cx a string representation of an {@link AnimatedLengthCX}
+   * @cy a string representation of an {@link AnimatedLengthCY}
+   * @r a string representation of an {@link AnimatedLengthR}
+   *
+   * Creates a 'circle' node for circle shapes.
+   */
+  public CircleElement create_circle (string? cx,
+                                  string? cy,
+                                  string? cr) {
+    GsAnimatedLengthCX nx = null;
+    if (cx != null) {
+      nx = new GsAnimatedLengthCX ();
+      nx.value = cx;
+    }
+    GsAnimatedLengthCY ny = null;
+    if (cy != null) {
+      ny = new GsAnimatedLengthCY ();
+      ny.value = cy;
+    }
+    GsAnimatedLengthR nr = null;
+    if (cr != null) {
+      nr = new GsAnimatedLengthR ();
+      nr.value = cr;
+    }
+    var c = Object.new (typeof (GsCircleElement),
+                        "owner_document", this.owner_document)
+                        as CircleElement;
+    c.cx = nx;
+    c.cy = ny;
+    c.r = nr;
+    return c;
   }
 }

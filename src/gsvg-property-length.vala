@@ -132,10 +132,8 @@ public class GSvg.GsLength : Object, GSvg.Length {
       } catch { _unit_type = Length.Type.UNKNOWN; }
     }
     if (_value_as_string != v) {
-      message ("Updating string: ");
       _value_as_string = this.to_string ();
     }
-    message ("%s : %s :v = %f; u = %s".printf (this.to_string (), _value_as_string, _value_in_specified_units, (string) rs));
   }
 }
 

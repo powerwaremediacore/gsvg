@@ -72,17 +72,17 @@ public class GSvgTest.SvgTest {
       assert (s != null);
       GLib.message ("SVG: "+s);
       assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"/>" in s);
-      var c = new GSvg.GsCircleElement.initialize (svg, "1mm", "1mm", "3.5mm");
+      var c = svg.create_circle ("1mm", "1mm", "3.5mm");
       svg.append_child (c);
       s = parser.write_string ();
       assert (s != null);
       GLib.message ("SVG: "+s);
       assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><circle cx=\"1mm\" cy=\"1mm\" r=\"3.5mm\"/></svg>" in s);
-      assert (c.cx.base_val.value == (float) 1.0);
+      assert ("%.2f".printf (c.cx.base_val.value) == "%.2f".printf (1.0));
       assert (c.cx.base_val.unit_type == Length.Type.MM);
-      assert (c.cy.base_val.value == (float) 1.0);
+      assert ("%.2f".printf (c.cy.base_val.value) == "%.2f".printf (1.0));
       assert (c.cy.base_val.unit_type == Length.Type.MM);
-      assert (c.r.base_val.value == (float) 3.5);
+      assert ("%.2f".printf (c.r.base_val.value) == "%.2f".printf (3.5));
       assert (c.r.base_val.unit_type == Length.Type.MM);
     });
     Test.add_func ("/gsvg/ellipse-element/construct/initialize",

@@ -53,39 +53,14 @@ public class GSvg.GsRectElement : GSvg.GsTransformable,
 public class GSvg.GsCircleElement : GSvg.GsTransformable,
                           GSvg.CircleElement
 {
-  protected AnimatedLengthCX _cx;
-  protected AnimatedLengthCY _cy;
-  protected AnimatedLengthR _r;
-  // RectElement
-  public AnimatedLengthCX cx {
-    get { return _cx; } construct set { _cx = value; }
-  }
-  public AnimatedLengthCY cy {
-    get { return _cy; } construct set { _cy = value; }
-  }
-  public AnimatedLengthR r {
-    get { return _r; } construct set { _r = value; }
-  }
+  [Description (nick="::cx")]
+  public AnimatedLengthCX cx { get; set; }
+  [Description (nick="::cy")]
+  public AnimatedLengthCY cy { get; set; }
+  [Description (nick="::r")]
+  public AnimatedLengthR r { get; set; }
   construct {
-    _local_name = "circle";
-  }
-  public GsCircleElement.initialize (GSvg.GsSvg parent,
-                          string? cx,
-                          string? cy,
-                          string? r) {
-    _document = parent.owner_document;
-    if (cx != null) {
-        _cx = new GsAnimatedLengthCX () as AnimatedLengthCX;
-        (_cx.base_val as GsLength).parse (cx);
-    }
-    if (cy != null) {
-      _cy = new GsAnimatedLengthCY () as AnimatedLengthCY;
-      (_cy.base_val as GsLength).parse (cy);
-    }
-    if (r != null) {
-      _r = new GsAnimatedLengthR () as AnimatedLengthR;
-      (_r.base_val as GsLength).parse (r);
-    }
+    initialize ("circle");
   }
 }
 
