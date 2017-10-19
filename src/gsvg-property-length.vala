@@ -1,7 +1,7 @@
 /* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
 /* gsvg-dom-element.vala
  *
- * Copyright (C) 2016 Daniel Espinosa
+ * Copyright (C) 2016, 2017 Daniel Espinosa <esodan@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by

@@ -1,7 +1,7 @@
 /* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
 /* gsvg-dom-element.vala
  *
- * Copyright (C) 2016 Daniel Espinosa
+ * Copyright (C) 2016,2017 Daniel Espinosa <esodan@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -332,5 +332,46 @@ public class GSvg.GsSvg : GSvg.GsCommonElement,
     c.cy = ny;
     c.r = nr;
     return c;
+  }
+  /**
+   * @cx a string representation of an {@link AnimatedLengthCX}
+   * @cy a string representation of an {@link AnimatedLengthCY}
+   * @rx a string representation of an {@link AnimatedLengthRX}
+   * @ry a string representation of an {@link AnimatedLengthRY}
+   *
+   * Creates a 'ellipse' node for ellipse shapes.
+   */
+  public EllipseElement create_ellipse (string? cx,
+                                  string? cy,
+                                  string? crx,
+                                  string? cry) {
+    GsAnimatedLengthCX nx = null;
+    if (cx != null) {
+      nx = new GsAnimatedLengthCX ();
+      nx.value = cx;
+    }
+    GsAnimatedLengthCY ny = null;
+    if (cy != null) {
+      ny = new GsAnimatedLengthCY ();
+      ny.value = cy;
+    }
+    GsAnimatedLengthRX nrx = null;
+    if (crx != null) {
+      nrx = new GsAnimatedLengthRX ();
+      nrx.value = crx;
+    }
+    GsAnimatedLengthRY nry = null;
+    if (cry != null) {
+      nry = new GsAnimatedLengthRY ();
+      nry.value = cry;
+    }
+    var e = Object.new (typeof (GsEllipseElement),
+                        "owner_document", this.owner_document)
+                        as EllipseElement;
+    e.cx = nx;
+    e.cy = ny;
+    e.rx = nrx;
+    e.ry = nry;
+    return e;
   }
 }

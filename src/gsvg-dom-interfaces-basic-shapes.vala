@@ -1,6 +1,6 @@
 /* gsvg-dom-interfaces-basic-shapes.vala
  *
- * Copyright (C) 2016 Daniel Espinosa <daniel.espinosa@pwmc.mx>
+ * Copyright (C) 2016, 2017 Daniel Espinosa <esodan@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -55,10 +55,10 @@ public interface EllipseElement : Object,
                               ExternalResourcesRequired,
                               Stylable,
                               Transformable {
-  public abstract AnimatedLengthCX cx { get; construct set; }
-  public abstract AnimatedLengthCY cy { get; construct set; }
-  public abstract AnimatedLengthRX rx { get; construct set; }
-  public abstract AnimatedLengthRY ry { get; construct set; }
+  public abstract AnimatedLengthCX cx { get; set; }
+  public abstract AnimatedLengthCY cy { get; set; }
+  public abstract AnimatedLengthRX rx { get; set; }
+  public abstract AnimatedLengthRY ry { get; set; }
 }
 
 public interface LineElement : Object,
