@@ -78,6 +78,80 @@ public interface SVGElement : Element,
   public abstract Transform create_svg_transform ();
   public abstract Transform create_svg_transform_from_matrix (Matrix matrix);
   public abstract DomElement? get_element_by_id (string elementId);
+  // API additions
+  /**
+   * @x a string representation of an {@link AnimatedLengthX}
+   * @y a string representation of an {@link AnimatedLengthY}
+   * @width a string representation of an {@link AnimatedLengthWidth}
+   * @height a string representation of an {@link AnimatedLengthHeight}
+   * @rx a string representation of an {@link AnimatedLengthRX}
+   * @ry a string representation of an {@link AnimatedLengthRY}
+   *
+   * Creates a 'rect' node for rectangular shapes.
+   */
+  public abstract RectElement create_rect (string? x,
+                                  string? y,
+                                  string? width,
+                                  string? height,
+                                  string? rx,
+                                  string? ry,
+                                  string? style = null);
+  /**
+   * @cx a string representation of an {@link AnimatedLengthCX}
+   * @cy a string representation of an {@link AnimatedLengthCY}
+   * @r a string representation of an {@link AnimatedLengthR}
+   *
+   * Creates a 'circle' node for circle shapes.
+   */
+  public abstract CircleElement create_circle (string? cx,
+                                  string? cy,
+                                  string? cr,
+                                  string? style = null);
+  /**
+   * @cx a string representation of an {@link AnimatedLengthCX}
+   * @cy a string representation of an {@link AnimatedLengthCY}
+   * @rx a string representation of an {@link AnimatedLengthRX}
+   * @ry a string representation of an {@link AnimatedLengthRY}
+   *
+   * Creates a 'ellipse' node for ellipse shapes.
+   */
+  public abstract EllipseElement create_ellipse (string? cx,
+                                  string? cy,
+                                  string? crx,
+                                  string? cry,
+                                  string? style = null);
+  /**
+   * @lx1 a string representation of an {@link AnimatedLengthCX}
+   * @lx2 a string representation of an {@link AnimatedLengthCY}
+   * @lx1 a string representation of an {@link AnimatedLengthRX}
+   * @ly2 a string representation of an {@link AnimatedLengthRY}
+   *
+   * Creates a 'line' node for line shapes.
+   */
+  public abstract LineElement create_line (string? lx1,
+                                  string? ly1,
+                                  string? lx2,
+                                  string? ly2,
+                                  string? style = null);
+  /**
+   * @points a string representation of an {@link ArrayList<Point>}
+   *
+   * Creates a 'line' node for line shapes.
+   */
+  public abstract PolylineElement create_polyline (GLib.Queue<Point> points,
+                                   string? style = null);
+  /**
+   * @
+   *
+   * Creates a 'line' node for line shapes.
+   */
+  public abstract TextElement create_text (string? text,
+                                   string? xs,
+                                   string? ys,
+                                   string? dxs,
+                                   string? dys,
+                                   string? rotates,
+                                   string? style = null);
 }
 
 public interface GElement : Object,

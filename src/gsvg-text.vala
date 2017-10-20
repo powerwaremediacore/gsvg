@@ -23,8 +23,8 @@ using Gee;
 public class GSvg.GsTextContentElement : GSvg.GsCommonShapeElement,
                                   TextContentElement
 {
-  public AnimatedLength text_length { get; set; }
-  public AnimatedEnumeration length_adjust { get; set; }
+  public AnimatedLength text_length { get { return null; }  }
+  public AnimatedEnumeration length_adjust { get { return null; }  }
 
   public int get_number_of_chars () { return 0; }
   public double get_computed_text_length () { return 0.0; }
@@ -35,14 +35,27 @@ public class GSvg.GsTextContentElement : GSvg.GsCommonShapeElement,
   public double get_rotation_of_char(int charnum) throws GLib.Error  { return 0.0; }
   public int get_char_num_at_position(Point point) { return 0; }
   public void select_sub_string(int charnum, int nchars) throws GLib.Error {}
+
+  public DomText create_text (string txt) {
+    return owner_document.create_text_node (txt);
+  }
+  public TSpanElement create_span (string txt) { return null; }
+  public TRefElement create_ref (string id_ref) { return null; }
+  public TextPathElement create_path (string path_ref, string txt) { return null; }
 }
 
 public class GSvg.GsTextPositioningElement : GSvg.GsTextContentElement,
-                                   TextPositioningElement {
+                                   TextPositioningElement
+{
+  [Description (nick="::x")]
   public AnimatedLengthList x { get; set; }
+  [Description (nick="::y")]
   public AnimatedLengthList y { get; set; }
+  [Description (nick="::dx")]
   public AnimatedLengthList dx { get; set; }
+  [Description (nick="::dy")]
   public AnimatedLengthList dy { get; set; }
+  [Description (nick="::rotate")]
   public AnimatedNumberList rotate { get; set; }
 }
 
@@ -51,6 +64,9 @@ public class GSvg.GsTextElement : GSvg.GsTextPositioningElement,
                                    TextElement
 {
   AnimatedTransformList _transform;
+  construct {
+    initialize ("text");
+  }
   // Transformable
   public AnimatedTransformList transform {
     get { return _transform; }

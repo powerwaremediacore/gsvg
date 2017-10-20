@@ -83,10 +83,143 @@ public class GSvg.GsCommonElement : GsElement,
   [Description (nick="::xml:space")]
   public string xmlspace { get; set; }
   // ExternalResourcesRequired
-  // * externalResourcesRequired
+  // externalResourcesRequired
   public AnimatedBoolean external_resources_required {
     get { return _external_resources_required; }
   }
+  // Styling properties
+  // Fonts properties
+  [Description (nick="::font")]
+  public string font { get; set; }
+  [Description (nick="::font-family")]
+  public string font_family { get; set; }
+  [Description (nick="::font-size")]
+  public string font_size { get; set; }
+  [Description (nick="::font-size-adjust")]
+  public string font_size_adjust { get; set; }
+  [Description (nick="::font-stretch")]
+  public string font_stretch { get; set; }
+  [Description (nick="::font-style")]
+  public string font_style { get; set; }
+  [Description (nick="::font-variant")]
+  public string font_variant { get; set; }
+  [Description (nick="::font-weight")]
+  public string font_weight { get; set; }
+  // Text properties
+  [Description (nick="::direction")]
+  public string direction { get; set; }
+  [Description (nick="::letter-spacing")]
+  public string letter_spacing { get; set; }
+  [Description (nick="::text-decoration")]
+  public string text_decoration { get; set; }
+  [Description (nick="::unicode-bidi")]
+  public string unicode_bidi { get; set; }
+  [Description (nick="::word-spacing")]
+  public string word_spacing { get; set; }
+  // Other visual properties
+  [Description (nick="::clip")]
+  public string clip { get; set; }
+  [Description (nick="::color")]
+  public string color { get; set; }
+  [Description (nick="::cursor")]
+  public string cursor { get; set; }
+  [Description (nick="::display")]
+  public string display { get; set; }
+  [Description (nick="::overflow")]
+  public string overflow { get; set; }
+  [Description (nick="::visibility")]
+  public string visibility { get; set; }
+  // Clipping, Masking and Compositing properties
+  [Description (nick="::clip-path")]
+  public string clip_path { get; set; }
+  [Description (nick="::clip-rule")]
+  public string clip_rule { get; set; }
+  [Description (nick="::mask")]
+  public string mask { get; set; }
+  [Description (nick="::opacity")]
+  public string opacity { get; set; }
+  // Filter Effects properties
+  [Description (nick="::enable-background")]
+  public string enable_background { get; set; }
+  [Description (nick="::filter")]
+  public string filter { get; set; }
+  [Description (nick="::flood-color")]
+  public string flood_color { get; set; }
+  [Description (nick="::flood-opacity")]
+  public string flood_opacity { get; set; }
+  [Description (nick="::lighting-color")]
+  public string lighting_color { get; set; }
+  // Gradient properties
+  [Description (nick="::stop-color")]
+  public string stop_color { get; set; }
+  [Description (nick="::stop-opacity")]
+  public string stop_opacity { get; set; }
+  // Interactivity properties
+  [Description (nick="::pointer-events")]
+  public string pointer_events { get; set; }
+  // Color and painting properties
+  [Description (nick="::color-interpolation")]
+  public string color_interpolation { get; set; }
+  [Description (nick="::color-interpolation-filter")]
+  public string color_interpolation_filter { get; set; }
+  [Description (nick="::color-profile")]
+  public string color_profile { get; set; }
+  [Description (nick="::color-rendering")]
+  public string color_rendering { get; set; }
+  [Description (nick="::fill")]
+  public string fill { get; set; }
+  [Description (nick="::fill-opacity")]
+  public string fill_opacity { get; set; }
+  [Description (nick="::fill-rule")]
+  public string fill_rule { get; set; }
+  [Description (nick="::image-rendering")]
+  public string image_rendering { get; set; }
+  [Description (nick="::marker")]
+  public string marker { get; set; }
+  [Description (nick="::maker-end")]
+  public string maker_end { get; set; }
+  [Description (nick="::marker_mid")]
+  public string maker_mid { get; set; }
+  [Description (nick="::maker-start")]
+  public string maker_start { get; set; }
+  [Description (nick="::shape-rendering")]
+  public string shape_rendering { get; set; }
+  [Description (nick="::stroke")]
+  public string stroke { get; set; }
+  [Description (nick="::stroke-dasharray")]
+  public string stroke_dasharray { get; set; }
+  [Description (nick="::stroke-dashoffset")]
+  public string stroke_dashoffset { get; set; }
+  [Description (nick="::stroke-linecap")]
+  public string stroke_linecap { get; set; }
+  [Description (nick="::stroke-linejoin")]
+  public string stroke_linejoin { get; set; }
+  [Description (nick="::stroke-miterlimit")]
+  public string stroke_miterlimit { get; set; }
+  [Description (nick="::stroke-opacity")]
+  public string stroke_opacity { get; set; }
+  [Description (nick="::stroke-width")]
+  public string stroke_width { get; set; }
+  [Description (nick="::text-rendering")]
+  public string text_rendering { get; set; }
+  // Other text properties
+  [Description (nick="::alignment-baseline")]
+  public string alignment_baseline { get; set; }
+  [Description (nick="::baseline-shift")]
+  public string baseline_shift { get; set; }
+  [Description (nick="::dominant-baseline")]
+  public string dominant_baseline { get; set; }
+  [Description (nick="::glyph-orientation-horizontal")]
+  public string glyph_orientation_horizontal { get; set; }
+  [Description (nick="::glyph-orientation-vertical")]
+  public string glyph_orientation_vertical { get; set; }
+  [Description (nick="::kerning")]
+  public string kerning { get; set; }
+  [Description (nick="::text-anchor")]
+  public string text_anchor { get; set; }
+  [Description (nick="::writing-mode")]
+  public string writing_mode { get; set; }
+
 }
 /**
  * Base class for SVG and basic types elements
@@ -140,13 +273,13 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
   public CSSStyleDeclaration get_computed_style (DomElement elt,
                                                       string pseudoElt)
   {
-    return null;
+    return style; // FIXME
   }
   // DocumentCSS
   public CSSStyleDeclaration get_override_style (DomElement elt,
                                                 string pseudoElt)
   {
-    return null;
+    return style; // FIXME
   }
   // SVGElement
   [Description (nick="::x")]
@@ -188,25 +321,6 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
     } catch (GLib.Error e) {
       warning (("Error setting default namespace: %s").printf (e.message));
     }
-  }
-
-  public void initialize (GSvg.GsSvg? parent,
-                          AnimatedLength? x,
-                          AnimatedLength? y,
-                          AnimatedLength? width,
-                          AnimatedLength? height,
-                          AnimatedString? class_name,
-                          CSSStyleDeclaration? style) {
-    if (parent != null) {
-      _document = parent.owner_document;
-      _owner_svg_element = parent;
-    }
-    _x = x;
-    _y = y;
-    _width = width;
-    _height = height;
-    _class = class_name;
-    _style = style;
   }
 
   //currentTranslate
@@ -266,7 +380,8 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
                                   string? width,
                                   string? height,
                                   string? rx,
-                                  string? ry) {
+                                  string? ry,
+                                  string? style = null) {
     GsAnimatedLengthX nx = null;
     if (x != null) {
       nx = new GsAnimatedLengthX ();
@@ -317,7 +432,8 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
    */
   public CircleElement create_circle (string? cx,
                                   string? cy,
-                                  string? cr) {
+                                  string? cr,
+                                  string? style = null) {
     GsAnimatedLengthCX nx = null;
     if (cx != null) {
       nx = new GsAnimatedLengthCX ();
@@ -352,7 +468,8 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
   public EllipseElement create_ellipse (string? cx,
                                   string? cy,
                                   string? crx,
-                                  string? cry) {
+                                  string? cry,
+                                  string? style = null) {
     GsAnimatedLengthCX nx = null;
     if (cx != null) {
       nx = new GsAnimatedLengthCX ();
@@ -393,7 +510,8 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
   public LineElement create_line (string? lx1,
                                   string? ly1,
                                   string? lx2,
-                                  string? ly2) {
+                                  string? ly2,
+                                  string? style = null) {
     GsAnimatedLengthX nx1 = null;
     if (lx1 != null) {
       nx1 = new GsAnimatedLengthX ();
@@ -428,7 +546,8 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
    *
    * Creates a 'line' node for line shapes.
    */
-  public PolylineElement create_polyline (GLib.Queue<Point> points) {
+  public PolylineElement create_polyline (GLib.Queue<Point> points,
+                                   string? style = null) {
     var l = Object.new (typeof (GsPolylineElement),
                         "owner_document", this.owner_document)
                         as PolylineElement;
@@ -438,5 +557,46 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
       l.points.append_item (p);
     }
     return l;
+  }
+  /**
+   * @
+   *
+   * Creates a 'line' node for line shapes.
+   */
+  public TextElement create_text (string? text,
+                                   string? xs,
+                                   string? ys,
+                                   string? dxs,
+                                   string? dys,
+                                   string? rotates,
+                                   string? style = null) {
+    var t = Object.new (typeof (GsTextElement),
+                        "owner_document", this.owner_document)
+                        as GsTextElement;
+    if (text != null) {
+      var nt = t.create_text (text);
+      t.append_child (nt);
+    }
+    if (xs != null) {
+      t.x = new GsAnimatedLengthList ();
+      t.x.value = xs;
+    }
+    if (ys != null) {
+      t.y = new GsAnimatedLengthList ();
+      t.y.value = ys;
+    }
+    if (dxs != null) {
+      t.dx = new GsAnimatedLengthList ();
+      t.dx.value = dxs;
+    }
+    if (dys != null) {
+      t.dy = new GsAnimatedLengthList ();
+      t.dy.value = dys;
+    }
+    if (rotates != null) {
+      t.rotate = new GsAnimatedNumberList ();
+      t.rotate.value = rotates;
+    }
+    return t;
   }
 }

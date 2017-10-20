@@ -19,6 +19,7 @@
 
 using GLib;
 using GXml;
+using Gee;
 
 public class GSvg.GsAnimatedLength : Object,
                                     GomProperty,
@@ -186,5 +187,94 @@ public class GSvg.GsAnimatedLengthCY : GSvg.GsAnimatedLength, AnimatedLengthCY {
 public class GSvg.GsAnimatedLengthR : GSvg.GsAnimatedLength, AnimatedLengthR {
   construct {
     _attribute_name = "r";
+  }
+}
+
+public class GSvg.GsLengthList : ArrayList<Length>,
+                          LengthList
+{
+  private string separator = " ";
+  public int number_of_items { get { return size; } }
+
+  public void  clear () throws GLib.Error { clear (); }
+  public Length initialize (Length new_item) throws GLib.Error {
+    add (new_item);
+    return new_item;
+  }
+  public Length get_item (int index) throws GLib.Error {
+    return get (index);
+  }
+  public Length insert_item_before (Length new_item, int index) throws GLib.Error {
+    insert (index, new_item);
+    return new_item;
+  }
+  public Length replace_item (Length new_item, int index) throws GLib.Error {
+    remove_at (index);
+    insert (index, new_item);
+    return new_item;
+  }
+  public Length remove_item (int index) throws GLib.Error {
+    return remove_at (index);
+  }
+  public Length append_item (Length new_item) throws GLib.Error {
+    add (new_item);
+    return new_item;
+  }
+  public string? value {
+    set {
+      if (" " in value) separator = " ";
+      if ("," in value) separator = ",";
+      string[] tks = value.split (separator);
+      for (int i = 0; i < tks.length; i++) {
+        var p = new GsLength ();
+        p.parse (tks[i]);
+        add (p as Length);
+      }
+    }
+    owned get {
+      if (size == 0) return null;
+      string str = "";
+      for (int i = 0; i < size; i++) {
+        var p = get (i);
+        str += p.value_as_string;
+        if (i+1 < size) str += separator;
+      }
+      return str;
+    }
+  }
+}
+public class GSvg.GsAnimatedLengthList : Object,
+                                      GomProperty,
+                                      AnimatedLengthList
+{
+  private LengthList _base_val;
+  private LengthList _anim_val;
+  // AnimatedLengthList
+  public LengthList base_val {
+    get {
+      if (_base_val == null) _base_val = new GsLengthList ();
+      return _base_val;
+    }
+  }
+  public LengthList anim_val {
+    get {
+      if (_anim_val == null) _anim_val = new GsLengthList ();
+      return _base_val;
+    }
+  }
+
+  // GomProperty
+  public string? value {
+    owned get {
+      if (_base_val == null) return null;
+      return base_val.value;
+    }
+    set {
+      if (_base_val == null) _base_val = new GsLengthList ();
+      base_val.value = value;
+    }
+  }
+  public bool validate_value (string val) {
+    return "," in val || " " in val; // FIXME
   }
 }

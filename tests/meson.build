@@ -13,7 +13,7 @@ t = executable('gsvg_basic_tests', files_tests,
 	dependencies : [ gxml, inc_libh_dep, testdirs_dep, inc_rooth_dep],
 	link_with: lib
 )
-test ('gsvg_basic_tests', t)
+test ('basic', t)
 
 test_rect_files = ([
 		'gsvg-rect-test.vala'
@@ -23,7 +23,7 @@ trect = executable('gsvg_rect_tests', test_rect_files,
 	dependencies : [ gxml, inc_libh_dep, testdirs_dep, inc_rooth_dep],
 	link_with: lib
 )
-test ('gsvg_rect_tests', trect)
+test ('rect', trect)
 
 
 test_polylines_files = ([
@@ -34,5 +34,15 @@ tpolyl = executable('gsvg_polyline_tests', test_polylines_files,
 	dependencies : [ gxml, inc_libh_dep, testdirs_dep, inc_rooth_dep],
 	link_with: lib
 )
-test ('gsvg_polyline_tests', tpolyl)
+test ('polyline', tpolyl)
+
+test_text_files = ([
+		'gsvg-text-test.vala'
+	])
+ttext = executable('gsvg_text_tests', test_text_files,
+	vala_args : [],
+	dependencies : [ gxml, inc_libh_dep, testdirs_dep, inc_rooth_dep],
+	link_with: lib
+)
+test ('text', ttext)
 

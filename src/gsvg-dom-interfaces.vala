@@ -44,20 +44,20 @@ public interface AnimatedString : Object {
 
 public interface StringList : Object {
 
-  public abstract uint numberOfItems { get; }
+  public abstract int numberOfItems { get; }
   public abstract void clear () throws GLib.Error;
   public abstract string initialize (string newItem) throws GLib.Error;
   public abstract string getItem (int index) throws GLib.Error;
-  public abstract string insertItemBefore (string newItem, uint index) throws GLib.Error;
-  public abstract string replaceItem (string newItem, uint index) throws GLib.Error;
+  public abstract string insertItemBefore (string newItem, int index) throws GLib.Error;
+  public abstract string replaceItem (string newItem, int index) throws GLib.Error;
   public abstract string removeItem (int index) throws GLib.Error;
   public abstract string appendItem (string newItem) throws GLib.Error;
 }
 
 
 public interface AnimatedEnumeration : Object {
-  public abstract uint baseVal { get; set; }
-  public abstract uint animVal { get; }
+  public abstract int baseVal { get; set; }
+  public abstract int animVal { get; }
 }
 
 public interface AnimatedInteger : Object {
@@ -66,30 +66,34 @@ public interface AnimatedInteger : Object {
 }
 
 public interface Number : Object {
-  public abstract float value { get; set; }
+  public abstract double value { get; set; }
 }
 
 public interface AnimatedNumber : Object {
-  public abstract float baseVal { get; set; }
-  public abstract float animVal  { get; }
+  public abstract double base_val { get; set; }
+  public abstract double anim_val  { get; set; }
 }
 
 public interface NumberList : Object {
 
-  public abstract uint numberOfItems { get; }
+  public abstract int number_of_items { get; }
 
   public abstract void clear() throws GLib.Error;
-  public abstract Number initialize(Number newItem) throws GLib.Error;
-  public abstract Number getItem(uint index) throws GLib.Error;
-  public abstract Number insertItemBefore(Number newItem, uint index) throws GLib.Error;
-  public abstract Number replaceItem(Number newItem, uint index) throws GLib.Error;
-  public abstract Number removeItem(uint index) throws GLib.Error;
-  public abstract Number appendItem(Number newItem) throws GLib.Error;
+  public abstract Number initialize (Number newItem) throws GLib.Error;
+  public abstract Number get_item (int index) throws GLib.Error;
+  public abstract Number insert_item_before (Number newItem, int index) throws GLib.Error;
+  public abstract Number replace_item (Number newItem, int index) throws GLib.Error;
+  public abstract Number remove_item (int index) throws GLib.Error;
+  public abstract Number append_item (Number newItem) throws GLib.Error;
+  /**
+   * Translate a string to and from a list of {@link Number} items
+   */
+  public abstract string? value { owned get; set; }
 }
 
-public interface AnimatedNumberList : Object {
-  public abstract NumberList baseVal { get; }
-  public abstract NumberList animVal { get; }
+public interface AnimatedNumberList : Object, GomProperty {
+  public abstract NumberList base_val { get; }
+  public abstract NumberList anim_val { get; }
 }
 
 public interface Length : Object {
@@ -140,30 +144,35 @@ public interface AnimatedLengthR : Object, AnimatedLength {}
 
 public interface LengthList : Object {
 
-  public abstract uint numberOfItems { get; }
+  public abstract int number_of_items { get; }
 
   public abstract void clear() throws GLib.Error;
-  public abstract Length initialize(Length newItem) throws GLib.Error;
-  public abstract Length getItem(uint index) throws GLib.Error;
-  public abstract Length insertItemBefore(Length newItem,uint index) throws GLib.Error;
-  public abstract Length replaceItem(Length newItem, uint index) throws GLib.Error;
-  public abstract Length removeItem(uint index) throws GLib.Error;
-  public abstract Length appendItem(Length newItem) throws GLib.Error;
+  public abstract Length initialize (Length newItem) throws GLib.Error;
+  public abstract Length get_item (int index) throws GLib.Error;
+  public abstract Length insert_item_before (Length newItem,int index) throws GLib.Error;
+  public abstract Length replace_item (Length newItem, int index) throws GLib.Error;
+  public abstract Length remove_item (int index) throws GLib.Error;
+  public abstract Length append_item (Length newItem) throws GLib.Error;
+  // Added API
+  /**
+   * From/to string property, parsing tokens
+   */
+  public abstract string? value { owned get; set; }
 }
 
-public interface AnimatedLengthList : Object {
-  public abstract LengthList baseVal { get; }
-  public abstract LengthList animVal { get; }
+public interface AnimatedLengthList : Object, GomProperty {
+  public abstract LengthList base_val { get; }
+  public abstract LengthList anim_val { get; }
 }
 
 public interface Angle : Object {
-  public abstract uint unitType { get; }
-  public abstract  float value { get; set; }
-  public abstract  float valueInSpecifiedUnits { get; set; }
+  public abstract int unitType { get; }
+  public abstract  double value { get; set; }
+  public abstract  double valueInSpecifiedUnits { get; set; }
   public abstract  string valueAsString { get; set; }
 
-  public abstract void newValueSpecifiedUnits (uint unitType, float valueInSpecifiedUnits) throws GLib.Error;
-  public abstract void convertToSpecifiedUnits (uint unitType) throws GLib.Error;
+  public abstract void newValueSpecifiedUnits (int unitType, double valueInSpecifiedUnits) throws GLib.Error;
+  public abstract void convertToSpecifiedUnits (int unitType) throws GLib.Error;
   /**
    * Angle Unit Types
    */
@@ -182,13 +191,13 @@ public interface AnimatedAngle : Object {
 }
 
 public interface Color : Object, CSSValue {
-  public abstract uint colorType { get; }
+  public abstract int colorType { get; }
   public abstract CSSRGBColor rgbColor { get; }
   public abstract ICCColor iccColor { get; }
 
   public abstract void setRGBColor(string rgbColor) throws GLib.Error;
   public abstract void setRGBColorICCColor(string rgbColor, string iccColor) throws GLib.Error;
-  public abstract void setColor(uint colorType, string rgbColor, string iccColor) throws GLib.Error;
+  public abstract void setColor(int colorType, string rgbColor, string iccColor) throws GLib.Error;
 
   /**
    * Color Types
@@ -207,10 +216,10 @@ public interface ICCColor : Object {
 }
 
 public interface Rect : Object {
-  public abstract float x { get; set; }
-  public abstract float y { get; set; }
-  public abstract float width { get; set; }
-  public abstract float height { get; set; }
+  public abstract double x { get; set; }
+  public abstract double y { get; set; }
+  public abstract double width { get; set; }
+  public abstract double height { get; set; }
 }
 
 public interface AnimatedRect : Object {
