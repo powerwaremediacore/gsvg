@@ -49,7 +49,8 @@ valasources = files ([
 	'gsvg-dom-interfaces.vala',
 	'gsvg-object.vala',
 	'gsvg-property-length.vala',
-	'gsvg-svg.vala'
+	'gsvg-svg.vala',
+	'gsvg-text.vala'
 ])
 
 sources = files ([

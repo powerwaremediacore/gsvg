@@ -60,8 +60,7 @@ public class GSvg.GsElement : GSvg.GsObject,
 public class GSvg.GsCommonElement : GsElement,
                         Tests,
                         LangSpace,
-                        ExternalResourcesRequired,
-                        Locatable
+                        ExternalResourcesRequired
 {
   // Tests
   protected StringList _required_features;
@@ -88,6 +87,13 @@ public class GSvg.GsCommonElement : GsElement,
   public AnimatedBoolean external_resources_required {
     get { return _external_resources_required; }
   }
+}
+/**
+ * Base class for SVG and basic types elements
+ */
+public class GSvg.GsCommonShapeElement : GsCommonElement,
+                        Locatable
+{
   // Locatable
   // nearestViewportElement
   public Element nearest_viewport_element { get { return _nearest_viewport_element; } }
@@ -102,7 +108,7 @@ public class GSvg.GsCommonElement : GsElement,
 /**
  * 'svg' node.
  */
-public class GSvg.GsSvg : GSvg.GsCommonElement,
+public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
                         FitToViewBox,
                         ZoomAndPan,
                         ViewCSS,

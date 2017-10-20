@@ -26,20 +26,20 @@ public interface TextContentElement : Object,
                                   Tests,
                                   LangSpace,
                                   ExternalResourcesRequired,
-                                  Stylable {
+                                  Stylable
+{
+  public abstract AnimatedLength text_length { get; set; }
+  public abstract AnimatedEnumeration length_adjust { get; set; }
 
-  public abstract AnimatedLength textLength { get; }
-  public abstract AnimatedEnumeration lengthAdjust { get; }
-
-  public abstract int getNumberOfChars();
-  public abstract float getComputedTextLength();
-  public abstract float getSubStringLength(uint charnum, uint nchars) throws GLib.Error;
-  public abstract Point getStartPositionOfChar(uint charnum) throws GLib.Error;
-  public abstract Point getEndPositionOfChar(uint charnum) throws GLib.Error;
-  public abstract Rect getExtentOfChar(uint charnum) throws GLib.Error;
-  public abstract float getRotationOfChar(uint charnum) throws GLib.Error;
-  public abstract int getCharNumAtPosition(Point point);
-  public abstract void selectSubString(uint charnum, uint nchars) throws GLib.Error;
+  public abstract int get_number_of_chars ();
+  public abstract double get_computed_text_length();
+  public abstract double get_sub_string_length(int charnum, int nchars) throws GLib.Error;
+  public abstract Point get_start_position_of_char(int charnum) throws GLib.Error;
+  public abstract Point get_end_position_of_char(int charnum) throws GLib.Error;
+  public abstract Rect get_extent_of_char(int charnum) throws GLib.Error;
+  public abstract double get_rotation_of_char(int charnum) throws GLib.Error;
+  public abstract int get_char_num_at_position(Point point);
+  public abstract void select_sub_string(int charnum, int nchars) throws GLib.Error;
 }
 
   // lengthAdjust Types
@@ -51,11 +51,11 @@ public enum LengthAdjust {
 
 public interface TextPositioningElement : Object,
                                    TextContentElement {
-  public abstract AnimatedLengthList x { get; }
-  public abstract AnimatedLengthList y { get; }
-  public abstract AnimatedLengthList dx { get; }
-  public abstract AnimatedLengthList dy { get; }
-  public abstract AnimatedNumberList rotate { get; }
+  public abstract AnimatedLengthList x { get; set; }
+  public abstract AnimatedLengthList y { get; set; }
+  public abstract AnimatedLengthList dx { get; set; }
+  public abstract AnimatedLengthList dy { get; set; }
+  public abstract AnimatedNumberList rotate { get; set; }
 }
 
 public interface TextElement : Object,
@@ -75,9 +75,9 @@ public interface TRefElement : Object,
 public interface TextPathElement : Object,
                                    TextContentElement,
                                    URIReference {
-  public abstract AnimatedLength startOffset { get; }
-  public abstract AnimatedEnumeration method { get; }
-  public abstract AnimatedEnumeration spacing { get; }
+  public abstract AnimatedLength startOffset { get; set; }
+  public abstract AnimatedEnumeration method { get; set; }
+  public abstract AnimatedEnumeration spacing { get; set; }
 }
 
 
@@ -114,10 +114,10 @@ public interface GlyphRefElement : Object,
                                Stylable {
   public abstract string glyphRef { get; set; }
   public abstract string format { get; set; }
-  public abstract float x { get; set; }
-  public abstract float y { get; set; }
-  public abstract float dx { get; set; }
-  public abstract float dy { get; set; }
+  public abstract double x { get; set; }
+  public abstract double y { get; set; }
+  public abstract double dx { get; set; }
+  public abstract double dy { get; set; }
 }
 
 } // GSvg

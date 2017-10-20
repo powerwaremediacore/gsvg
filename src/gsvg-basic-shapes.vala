@@ -20,7 +20,7 @@
 using GLib;
 using GXml;
 
-public class GSvg.GsTransformable : GSvg.GsCommonElement,
+public class GSvg.GsTransformable : GSvg.GsCommonShapeElement,
                                   Transformable
 {
   protected AnimatedTransformList _transform;
