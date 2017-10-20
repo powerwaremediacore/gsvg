@@ -93,3 +93,26 @@ public class GSvg.GsLineElement : GSvg.GsTransformable,
     initialize ("line");
   }
 }
+
+public class GSvg.GsAnimatedPoints : GSvg.GsTransformable,
+                                    AnimatedPoints
+{
+  private PointList _points = new GsPointList () as PointList;
+  private PointList _animated_points = new GsPointList () as PointList;
+  [Description (nick="::points")]
+  public PointList points { get { return _points; } }
+  public PointList animated_points { get { return _animated_points; } }
+}
+
+public class GSvg.GsPolylineElement : GSvg.GsAnimatedPoints, PolylineElement {
+  construct {
+    initialize ("polyline");
+  }
+}
+
+public class GSvg.GsPolygonElement : GSvg.GsAnimatedPoints, PolygonElement {
+  construct {
+    initialize ("polygon");
+  }
+}
+

@@ -23,23 +23,25 @@ namespace GSvg {
 
 public interface Point : Object {
 
-  public abstract float x { get; set; }
-  public abstract float y { get; set; }
+  public abstract double x { get; set; }
+  public abstract double y { get; set; }
 
-  public abstract Point matrixTransform (Matrix matrix);
+  public abstract Point matrix_transform (Matrix matrix);
+  public abstract void parse (string str);
+  public abstract string to_string ();
 }
 
-public interface PointList : Object {
+public interface PointList : Object, GomProperty {
 
-  public abstract uint numberOfItems { get; }
+  public abstract int   number_of_items { get; }
 
-  public abstract void clear() throws GLib.Error;
-  public abstract Point initialize(Point newItem) throws GLib.Error;
-  public abstract Point getItem(uint index) throws GLib.Error;
-  public abstract Point insertItemBefore(Point newItem, uint index) throws GLib.Error;
-  public abstract Point replaceItem(Point newItem, uint index) throws GLib.Error;
-  public abstract Point removeItem(uint index) throws GLib.Error;
-  public abstract Point appendItem(Point newItem) throws GLib.Error;
+  public abstract void  clear() throws GLib.Error;
+  public abstract Point initialize (Point newItem) throws GLib.Error;
+  public abstract Point get_item (int index) throws GLib.Error;
+  public abstract Point insert_item_before (Point newItem, int index) throws GLib.Error;
+  public abstract Point replace_item (Point newItem, int index) throws GLib.Error;
+  public abstract Point remove_item (int index) throws GLib.Error;
+  public abstract Point append_item (Point newItem) throws GLib.Error;
 }
 
 public interface Matrix : Object {

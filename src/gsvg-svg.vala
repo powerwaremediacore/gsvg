@@ -19,6 +19,7 @@
 
 using GLib;
 using GXml;
+using Gee;
 
 public class GSvg.GsElement : GSvg.GsObject,
                         GSvg.Element,
@@ -414,6 +415,22 @@ public class GSvg.GsSvg : GSvg.GsCommonElement,
     l.y1 = ny1;
     l.x2 = nx2;
     l.y2 = ny2;
+    return l;
+  }
+  /**
+   * @points a string representation of an {@link ArrayList<Point>}
+   *
+   * Creates a 'line' node for line shapes.
+   */
+  public PolylineElement create_polyline (GLib.Queue<Point> points) {
+    var l = Object.new (typeof (GsPolylineElement),
+                        "owner_document", this.owner_document)
+                        as PolylineElement;
+    for (int i = 0; i < points.length; i++) {
+      var p = points.peek_nth (i);
+      if (p == null) continue;
+      l.points.append_item (p);
+    }
     return l;
   }
 }

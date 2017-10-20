@@ -25,3 +25,14 @@ trect = executable('gsvg_rect_tests', test_rect_files,
 )
 test ('gsvg_rect_tests', trect)
 
+
+test_polylines_files = ([
+		'gsvg-polyline-test.vala'
+	])
+tpolyl = executable('gsvg_polyline_tests', test_polylines_files,
+	vala_args : [],
+	dependencies : [ gxml, inc_libh_dep, testdirs_dep, inc_rooth_dep],
+	link_with: lib
+)
+test ('gsvg_polyline_tests', tpolyl)
+

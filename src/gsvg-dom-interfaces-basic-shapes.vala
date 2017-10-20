@@ -76,7 +76,7 @@ public interface LineElement : Object,
 
 public interface AnimatedPoints : Object {
   public abstract PointList points { get; }
-  public abstract PointList animatedPoints { get; }
+  public abstract PointList animated_points { get; }
 }
 
 public interface PolylineElement : Object,
