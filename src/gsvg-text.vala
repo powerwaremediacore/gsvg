@@ -35,13 +35,6 @@ public class GSvg.GsTextContentElement : GSvg.GsCommonShapeElement,
   public double get_rotation_of_char(int charnum) throws GLib.Error  { return 0.0; }
   public int get_char_num_at_position(Point point) { return 0; }
   public void select_sub_string(int charnum, int nchars) throws GLib.Error {}
-
-  public DomText create_text (string txt) {
-    return owner_document.create_text_node (txt);
-  }
-  public TSpanElement create_span (string txt) { return null; }
-  public TRefElement create_ref (string id_ref) { return null; }
-  public TextPathElement create_path (string path_ref, string txt) { return null; }
 }
 
 public class GSvg.GsTextPositioningElement : GSvg.GsTextContentElement,
@@ -59,16 +52,44 @@ public class GSvg.GsTextPositioningElement : GSvg.GsTextContentElement,
   public AnimatedNumberList rotate { get; set; }
 }
 
-public class GSvg.GsTextElement : GSvg.GsTextPositioningElement,
-                                   Transformable,
-                                   TextElement
+public class GSvg.GsBaseTextElement : GSvg.GsTextPositioningElement,
+                                   Transformable
 {
   AnimatedTransformList _transform;
-  construct {
-    initialize ("text");
-  }
   // Transformable
   public AnimatedTransformList transform {
     get { return _transform; }
+  }
+}
+public class GSvg.GsTextElement : GSvg.GsBaseTextElement,
+                                 TextElement
+{
+  construct {
+    initialize ("text");
+  }
+  // API additions
+  public DomText add_text (string txt) {
+    var t = owner_document.create_text_node (txt);
+    append_child (t);
+    return t;
+  }
+  public TSpanElement add_span (string txt) {
+    var ts = Object.new (typeof (GsTSpanElement),
+                        "owner_document", owner_document)
+                        as GsTSpanElement;
+    var t = owner_document.create_text_node (txt);
+    ts.append_child (t);
+    append_child (ts);
+    return ts;
+  }
+  public TRefElement add_ref (string id_ref) { return null; }
+  public TextPathElement add_path (string path_ref, string txt) { return null; }
+}
+
+public class GSvg.GsTSpanElement : GSvg.GsBaseTextElement,
+                                  TSpanElement
+{
+  construct {
+    initialize ("tspan");
   }
 }

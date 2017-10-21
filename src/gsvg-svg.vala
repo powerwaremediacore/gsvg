@@ -559,7 +559,12 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
     return l;
   }
   /**
-   * @
+   * @text a text to be displayed
+   * @xs a list of coordinates
+   * @ys a list of coordinates
+   * @dxs a list of coordinates
+   * @dys a list of coordinates
+   * @rotae a list of numbers
    *
    * Creates a 'line' node for line shapes.
    */
@@ -573,10 +578,8 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
     var t = Object.new (typeof (GsTextElement),
                         "owner_document", this.owner_document)
                         as GsTextElement;
-    if (text != null) {
-      var nt = t.create_text (text);
-      t.append_child (nt);
-    }
+    if (text != null)
+      t.add_text (text);
     if (xs != null) {
       t.x = new GsAnimatedLengthList ();
       t.x.value = xs;

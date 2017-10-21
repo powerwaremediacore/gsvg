@@ -40,12 +40,6 @@ public interface TextContentElement : Object,
   public abstract double get_rotation_of_char(int charnum) throws GLib.Error;
   public abstract int get_char_num_at_position(Point point);
   public abstract void select_sub_string(int charnum, int nchars) throws GLib.Error;
-
-  // API Additions
-  public abstract DomText         create_text (string txt);
-  public abstract TSpanElement    create_span (string txt);
-  public abstract TRefElement     create_ref (string id_ref);
-  public abstract TextPathElement create_path (string path_ref, string txt);
 }
 
   // lengthAdjust Types
@@ -66,7 +60,26 @@ public interface TextPositioningElement : Object,
 
 public interface TextElement : Object,
                                    TextPositioningElement,
-                                   Transformable {
+                                   Transformable
+{
+  // API Additions
+  /**
+   * Adds a new {@link DomText} node with the given text
+   */
+  public abstract DomText         add_text (string txt);
+  /**
+   * Adds a new {@link TSpanElement} node with the given text
+   */
+  public abstract TSpanElement    add_span (string txt);
+  /**
+   * Adds a new {@link TRefElement} node with the given reference
+   */
+  public abstract TRefElement     add_ref (string id_ref);
+  /**
+   * Adds a new {@link TextPathElement} node with the given text
+   * using given reference path
+   */
+  public abstract TextPathElement add_path (string path_ref, string txt);
 }
 
 public interface TSpanElement : Object,

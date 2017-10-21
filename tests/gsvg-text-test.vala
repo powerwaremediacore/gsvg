@@ -34,6 +34,21 @@ class GSvgTest.Suite : Object
       message (svg.write_string ());
       assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><text x=\"0\" y=\"0\" dx=\"10\" dy=\"10\" rotate=\"0\">HELLO WORLD</text></svg>" in svg.write_string ());
     });
+    Test.add_func ("/gsvg/text/span",
+    ()=>{
+      var svg = new GSvg.GsSvg ();
+      var t = svg.create_text (null, "0", "0", "10", "10", "0");
+      assert (t.child_nodes.length == 0);
+      t.add_text ("HE");
+      assert (t.child_nodes.length == 1);
+      t.add_span ("LLO");
+      assert (t.child_nodes.length == 2);
+      t.add_text ("WORLD");
+      assert (t.child_nodes.length == 3);
+      svg.append_child (t);
+      message (svg.write_string ());
+      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><text x=\"0\" y=\"0\" dx=\"10\" dy=\"10\" rotate=\"0\">HE<tspan>LLO</tspan>WORLD</text></svg>" in svg.write_string ());
+    });
     return Test.run ();
   }
 }
