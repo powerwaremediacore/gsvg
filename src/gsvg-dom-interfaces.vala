@@ -24,12 +24,83 @@ namespace GSvg {
  * Top level SVG Element node according with https://www.w3.org/TR/SVG/ version 1.1
  */
 public interface Element : Object, DomElement {
-  [Description (nick="::xml:base")]
   public abstract string xmlbase { get; set; }
   // ownerSVGElement
   public abstract SVGElement? owner_svg_element { get; }
   // viewportElement
   public abstract Element? viewport_element { get; }
+
+  // Styling properties
+  // Fonts properties
+  public abstract string font { get; set; }
+  public abstract string font_family { get; set; }
+  public abstract string font_size { get; set; }
+  public abstract string font_size_adjust { get; set; }
+  public abstract string font_stretch { get; set; }
+  public abstract string font_style { get; set; }
+  public abstract string font_variant { get; set; }
+  public abstract string font_weight { get; set; }
+  // Text properties
+  public abstract string direction { get; set; }
+  public abstract string letter_spacing { get; set; }
+  public abstract string text_decoration { get; set; }
+  public abstract string unicode_bidi { get; set; }
+  public abstract string word_spacing { get; set; }
+  // Other visual properties
+  public abstract string clip { get; set; }
+  public abstract string color { get; set; }
+  public abstract string cursor { get; set; }
+  public abstract string display { get; set; }
+  public abstract string overflow { get; set; }
+  public abstract string visibility { get; set; }
+  // Clipping, Masking and Compositing properties
+  public abstract string clip_path { get; set; }
+  public abstract string clip_rule { get; set; }
+  public abstract string mask { get; set; }
+  public abstract string opacity { get; set; }
+  // Filter Effects properties
+  public abstract string enable_background { get; set; }
+  public abstract string filter { get; set; }
+  public abstract string flood_color { get; set; }
+  public abstract string flood_opacity { get; set; }
+  public abstract string lighting_color { get; set; }
+  // Gradient properties
+  public abstract string stop_color { get; set; }
+  public abstract string stop_opacity { get; set; }
+  // Interactivity properties
+  public abstract string pointer_events { get; set; }
+  // Color and painting properties
+  public abstract string color_interpolation { get; set; }
+  public abstract string color_interpolation_filter { get; set; }
+  public abstract string color_profile { get; set; }
+  public abstract string color_rendering { get; set; }
+  public abstract string fill { get; set; }
+  public abstract string fill_opacity { get; set; }
+  public abstract string fill_rule { get; set; }
+  public abstract string image_rendering { get; set; }
+  public abstract string marker { get; set; }
+  public abstract string maker_end { get; set; }
+  public abstract string maker_mid { get; set; }
+  public abstract string maker_start { get; set; }
+  public abstract string shape_rendering { get; set; }
+  public abstract string stroke { get; set; }
+  public abstract string stroke_dasharray { get; set; }
+  public abstract string stroke_dashoffset { get; set; }
+  public abstract string stroke_linecap { get; set; }
+  public abstract string stroke_linejoin { get; set; }
+  public abstract string stroke_miterlimit { get; set; }
+  public abstract string stroke_opacity { get; set; }
+  public abstract string stroke_width { get; set; }
+  public abstract string text_rendering { get; set; }
+  // Other text properties
+  public abstract string alignment_baseline { get; set; }
+  public abstract string baseline_shift { get; set; }
+  public abstract string dominant_baseline { get; set; }
+  public abstract string glyph_orientation_horizontal { get; set; }
+  public abstract string glyph_orientation_vertical { get; set; }
+  public abstract string kerning { get; set; }
+  public abstract string text_anchor { get; set; }
+  public abstract string writing_mode { get; set; }
 }
 
 public interface AnimatedBoolean : Object {
@@ -37,9 +108,9 @@ public interface AnimatedBoolean : Object {
   public abstract bool animVal { get; }
 }
 
-public interface AnimatedString : Object {
-  public abstract string baseVal { get; set; }
-  public abstract string animVal { get; }
+public interface AnimatedString : Object, GomProperty {
+  public abstract string base_val { get; set; }
+  public abstract string anim_val { get; set; }
 }
 
 public interface StringList : Object {
@@ -258,7 +329,7 @@ public interface Locatable : Object {
 }
 
 public interface Transformable : Object, Locatable {
-  public abstract AnimatedTransformList transform { get; }
+  public abstract AnimatedTransformList transform { get; set; }
 }
 
 public interface Tests : Object {
@@ -314,7 +385,7 @@ public interface ViewSpec : Object,
 }
 
 public interface URIReference : Object {
-  public abstract AnimatedString href { get; }
+  public abstract AnimatedString href { get; set; }
 }
 
 public interface SVGCSSRule : Object, CSSRule {

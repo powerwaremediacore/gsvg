@@ -91,3 +91,103 @@ public class GSvg.GsPointList : ArrayList<Point>,
     return "," in val; // FIXME
   }
 }
+
+public class GSvg.GsTransform : Object, Transform {
+  public int ttype { get; set; }
+  public Matrix matrix { get; set; }
+  public double angle { get; set; }
+
+  public void set_translate (double tx, double ty) throws GLib.Error {}
+  public void set_scale (double sx, double sy) throws GLib.Error {}
+  public void set_rotate (double angle, double cx, double cy) throws GLib.Error {}
+  public void set_skew_x (double angle) throws GLib.Error {}
+  public void set_skew_y (double angle) throws GLib.Error {}
+  public void parse (string str) {
+    // FIXME
+  }
+  public string to_string () {
+    return "";
+  }
+}
+
+public class GSvg.GsTransformList : ArrayList<Transform>,
+                                  GomProperty,
+                                  TransformList
+{
+  private string separator = " ";
+  public int number_of_items { get { return size; } }
+
+  public void  clear () throws GLib.Error { clear (); }
+  public Transform initialize (Transform new_item) throws GLib.Error {
+    add (new_item);
+    return new_item;
+  }
+  public Transform get_item (int index) throws GLib.Error {
+    return get (index);
+  }
+  public Transform insert_item_before (Transform new_item, int index) throws GLib.Error {
+    insert (index, new_item);
+    return new_item;
+  }
+  public Transform replace_item (Transform new_item, int index) throws GLib.Error {
+    remove_at (index);
+    insert (index, new_item);
+    return new_item;
+  }
+  public Transform remove_item (int index) throws GLib.Error {
+    return remove_at (index);
+  }
+  public Transform append_item (Transform new_item) throws GLib.Error {
+    add (new_item);
+    return new_item;
+  }
+  public string? value {
+    set {
+      if (" " in value) separator = " ";
+      if ("," in value) separator = ",";
+      string[] tks = value.split (separator);
+      for (int i = 0; i < tks.length; i++) {
+        var p = new GsTransform ();
+        p.parse (tks[i]);
+        add (p as Transform);
+      }
+    }
+    owned get {
+      if (size == 0) return null;
+      string str = "";
+      for (int i = 0; i < size; i++) {
+        var p = get (i);
+        str += p.to_string ();
+        if (i+1 < size) str += separator;
+      }
+      return str;
+    }
+  }
+  public bool validate_value (string val) {
+    return "," in val || " " in val; // FIXME
+  }
+  public Transform create_svg_transform_from_matrix (Matrix matrix) { return new GsTransform (); }
+  public Transform consolidate () throws GLib.Error { return new GsTransform (); }
+}
+
+public class GSvg.GsAnimatedTransformList : Object,
+                                          GomProperty
+{
+  public TransformList base_val { get; set; }
+  public TransformList anim_val { get; set; }
+  public string? value {
+    owned get {
+      if (base_val == null) return null;
+      return base_val.value;
+    }
+    set {
+      if (base_val == null)
+        base_val = new GsTransformList ();
+      base_val.value = value;
+    }
+  }
+  public bool validate_value (string val) {
+    if (base_val == null) base_val = new GsTransformList ();
+    return base_val.validate_value (val);
+  }
+}

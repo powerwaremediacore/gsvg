@@ -23,7 +23,8 @@ using Gee;
 
 public class GSvg.GsElement : GSvg.GsObject,
                         GSvg.Element,
-                        GSvg.Stylable {
+                        GSvg.Stylable
+{
   protected SVGElement _owner_svg_element;
   protected Element _viewport_element;
   protected AnimatedString _class;
@@ -52,41 +53,6 @@ public class GSvg.GsElement : GSvg.GsObject,
 
   public CSSValue? get_presentation_attribute (string name) { return null; }
 
-}
-
-/**
- * Base class for SVG and basic types elements
- */
-public class GSvg.GsCommonElement : GsElement,
-                        Tests,
-                        LangSpace,
-                        ExternalResourcesRequired
-{
-  // Tests
-  protected StringList _required_features;
-  protected StringList _required_extensions;
-  protected StringList _system_language;
-  protected AnimatedBoolean _external_resources_required;
-  protected Element _nearest_viewport_element;
-  protected Element _farthest_viewport_element;
-    // requiredFeatures
-  public StringList required_features { get { return _required_features;} }
-  // requiredExtensions
-  public StringList required_extensions { get { return _required_extensions; } }
-  // systemLanguage
-  public StringList system_language { get { return _system_language; } }
-
-  public bool has_extension (string extension) { return false; }
-  // LangSpace
-  [Description (nick="::xml:lang")]
-  public string xmllang { get; set; }
-  [Description (nick="::xml:space")]
-  public string xmlspace { get; set; }
-  // ExternalResourcesRequired
-  // externalResourcesRequired
-  public AnimatedBoolean external_resources_required {
-    get { return _external_resources_required; }
-  }
   // Styling properties
   // Fonts properties
   [Description (nick="::font")]
@@ -219,7 +185,41 @@ public class GSvg.GsCommonElement : GsElement,
   public string text_anchor { get; set; }
   [Description (nick="::writing-mode")]
   public string writing_mode { get; set; }
+}
 
+/**
+ * Base class for SVG and basic types elements
+ */
+public class GSvg.GsCommonElement : GsElement,
+                        Tests,
+                        LangSpace,
+                        ExternalResourcesRequired
+{
+  // Tests
+  protected StringList _required_features;
+  protected StringList _required_extensions;
+  protected StringList _system_language;
+  protected AnimatedBoolean _external_resources_required;
+  protected Element _nearest_viewport_element;
+  protected Element _farthest_viewport_element;
+    // requiredFeatures
+  public StringList required_features { get { return _required_features;} }
+  // requiredExtensions
+  public StringList required_extensions { get { return _required_extensions; } }
+  // systemLanguage
+  public StringList system_language { get { return _system_language; } }
+
+  public bool has_extension (string extension) { return false; }
+  // LangSpace
+  [Description (nick="::xml:lang")]
+  public string xmllang { get; set; }
+  [Description (nick="::xml:space")]
+  public string xmlspace { get; set; }
+  // ExternalResourcesRequired
+  // externalResourcesRequired
+  public AnimatedBoolean external_resources_required {
+    get { return _external_resources_required; }
+  }
 }
 /**
  * Base class for SVG and basic types elements
@@ -601,5 +601,19 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
       t.rotate.value = rotates;
     }
     return t;
+  }
+  public DefsElement add_defs () {
+    var d = Object.new (typeof (GsDefsElement),
+                        "owner_document", owner_document)
+                        as GsDefsElement;
+    append_child (d);
+    return d;
+  }
+}
+public class GSvg.GsDefsElement : GSvg.GsTransformable,
+                                  DefsElement
+{
+  construct {
+    initialize ("defs");
   }
 }

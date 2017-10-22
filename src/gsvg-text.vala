@@ -55,11 +55,8 @@ public class GSvg.GsTextPositioningElement : GSvg.GsTextContentElement,
 public class GSvg.GsBaseTextElement : GSvg.GsTextPositioningElement,
                                    Transformable
 {
-  AnimatedTransformList _transform;
   // Transformable
-  public AnimatedTransformList transform {
-    get { return _transform; }
-  }
+  public AnimatedTransformList transform { get; set; }
 }
 public class GSvg.GsTextElement : GSvg.GsBaseTextElement,
                                  TextElement
@@ -82,7 +79,16 @@ public class GSvg.GsTextElement : GSvg.GsBaseTextElement,
     append_child (ts);
     return ts;
   }
-  public TRefElement add_ref (string id_ref) { return null; }
+  public TRefElement add_ref (string id_ref) {
+    var ts = Object.new (typeof (GsTRefElement),
+                        "owner_document", owner_document)
+                        as GsTRefElement;
+    var r = new GsAnimatedString ();
+    append_child (ts);
+    r.base_val = id_ref;
+    ts.href = r;
+    return ts;
+  }
   public TextPathElement add_path (string path_ref, string txt) { return null; }
 }
 
@@ -91,5 +97,37 @@ public class GSvg.GsTSpanElement : GSvg.GsBaseTextElement,
 {
   construct {
     initialize ("tspan");
+  }
+}
+
+public class GSvg.GsTRefElement : GSvg.GsBaseTextElement,
+                                   URIReference,
+                                   TRefElement
+{
+  private AnimatedString _href;
+  construct {
+    initialize ("tref");
+  }
+  [Description (nick="href")]
+  public AnimatedString href {
+    get {
+      if (_href == null)
+        _href = new GsAnimatedString ();
+      _href.base_val = get_attribute_ns ("http://www.w3.org/1999/xlink", "href");
+      return _href;
+    }
+    set {
+      if (value.base_val == null) return;
+      if (_href == null)
+        _href = new GsAnimatedString ();
+      _href.base_val = value.base_val;
+      try {
+        owner_document.document_element.set_attribute_ns ("http://www.w3.org/2000/xmlns",
+                        "xmlns:xlink",
+                        "http://www.w3.org/1999/xlink");
+        message ((owner_document.document_element as GSvg.GsObject).to_string ());
+        set_attribute_ns ("http://www.w3.org/1999/xlink", "xlink:href", _href.base_val);
+      } catch (GLib.Error e) { warning ("Error on set href property: %s".printf (e.message)); }
+    }
   }
 }

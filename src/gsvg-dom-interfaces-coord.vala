@@ -46,37 +46,38 @@ public interface PointList : Object, GomProperty {
 
 public interface Matrix : Object {
 
-  public abstract float a { get; set; }
-  public abstract float b { get; set; }
-  public abstract float c { get; set; }
-  public abstract float d { get; set; }
-  public abstract float e { get; set; }
-  public abstract float f { get; set; }
+  public abstract double a { get; set; }
+  public abstract double b { get; set; }
+  public abstract double c { get; set; }
+  public abstract double d { get; set; }
+  public abstract double e { get; set; }
+  public abstract double f { get; set; }
 
   public abstract Matrix multiply(Matrix secondMatrix);
   public abstract Matrix inverse() throws GLib.Error;
-  public abstract Matrix translate(float x, float y);
-  public abstract Matrix scale(float scaleFactor);
-  public abstract Matrix scaleNonUniform(float scaleFactorX, float scaleFactorY);
-  public abstract Matrix rotate(float angle);
-  public abstract Matrix rotateFromVector(float x, float y) throws GLib.Error;
+  public abstract Matrix translate(double x, double y);
+  public abstract Matrix scale(double scaleFactor);
+  public abstract Matrix scaleNonUniform(double scaleFactorX, double scaleFactorY);
+  public abstract Matrix rotate(double angle);
+  public abstract Matrix rotateFromVector(double x, double y) throws GLib.Error;
   public abstract Matrix flipX();
   public abstract Matrix flipY();
-  public abstract Matrix skewX(float angle);
-  public abstract Matrix skewY(float angle);
+  public abstract Matrix skewX(double angle);
+  public abstract Matrix skewY(double angle);
 }
 
 public interface Transform : Object {
-  public abstract uint ttype { get; set; }
+  public abstract int ttype { get; set; }
   public abstract Matrix matrix { get; set; }
-  public abstract float angle { get; set; }
+  public abstract double angle { get; set; }
 
-  public abstract void setMatrix(Matrix matrix) throws GLib.Error;
-  public abstract void setTranslate(float tx, float ty) throws GLib.Error;
-  public abstract void setScale(float sx, float sy) throws GLib.Error;
-  public abstract void setRotate(float angle, float cx, float cy) throws GLib.Error;
-  public abstract void setSkewX(float angle) throws GLib.Error;
-  public abstract void setSkewY(float angle) throws GLib.Error;
+  public abstract void set_translate (double tx, double ty) throws GLib.Error;
+  public abstract void set_scale (double sx, double sy) throws GLib.Error;
+  public abstract void set_rotate (double angle, double cx, double cy) throws GLib.Error;
+  public abstract void set_skew_x (double angle) throws GLib.Error;
+  public abstract void set_skew_y (double angle) throws GLib.Error;
+
+  public abstract string to_string ();
 
 
   // Transform Types
@@ -91,24 +92,24 @@ public interface Transform : Object {
   }
 }
 
-public interface TransformList : Object {
+public interface TransformList : Object, GomProperty {
 
-  public abstract uint numberOfItems { get; }
+  public abstract int number_of_items { get; }
 
   public abstract void clear()throws GLib.Error;
-  public abstract Transform initialize(Transform newItem)throws GLib.Error;
-  public abstract Transform getItem(uint index)throws GLib.Error;
-  public abstract Transform insertItemBefore(Transform newItem, uint index) throws GLib.Error;
-  public abstract Transform replaceItem(Transform newItem, uint index) throws GLib.Error;
-  public abstract Transform removeItem(uint index)throws GLib.Error;
-  public abstract Transform appendItem(Transform newItem)throws GLib.Error;
-  public abstract Transform createSVGTransformFromMatrix(Matrix matrix);
-  public abstract Transform consolidate() throws GLib.Error;
+  public abstract Transform initialize (Transform newItem)throws GLib.Error;
+  public abstract Transform get_item (int index)throws GLib.Error;
+  public abstract Transform insert_item_before (Transform newItem, int index) throws GLib.Error;
+  public abstract Transform replace_item (Transform newItem, int index) throws GLib.Error;
+  public abstract Transform remove_item (int index)throws GLib.Error;
+  public abstract Transform append_item (Transform newItem)throws GLib.Error;
+  public abstract Transform create_svg_transform_from_matrix (Matrix matrix);
+  public abstract Transform consolidate () throws GLib.Error;
 }
 
 public interface AnimatedTransformList : Object {
-  public abstract TransformList baseVal { get; set; }
-  public abstract TransformList animVal { get; set; }
+  public abstract TransformList base_val { get; set; }
+  public abstract TransformList anim_val { get; set; }
 }
 
 public interface PreserveAspectRatio : Object {

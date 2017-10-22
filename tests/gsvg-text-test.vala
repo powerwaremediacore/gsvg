@@ -37,17 +37,21 @@ class GSvgTest.Suite : Object
     Test.add_func ("/gsvg/text/span",
     ()=>{
       var svg = new GSvg.GsSvg ();
-      var t = svg.create_text (null, "0", "0", "10", "10", "0");
-      assert (t.child_nodes.length == 0);
-      t.add_text ("HE");
-      assert (t.child_nodes.length == 1);
-      t.add_span ("LLO");
-      assert (t.child_nodes.length == 2);
-      t.add_text ("WORLD");
-      assert (t.child_nodes.length == 3);
-      svg.append_child (t);
+      var tr = svg.create_text ("Inline character data","100", "100", null, null, null);
+      tr.font_size = "45";
+      tr.fill = "blue";
+      tr.id = "ReferencedText";
+      assert (tr.get_attribute ("id") == "ReferencedText");
+      var defs = svg.add_defs ();
+      defs.append_child (tr);
+      var t1 = svg.create_text (null, "0", "0", "100", "100", "0");
+      svg.append_child (t1);
+      t1.add_ref ("ReferencedText");
+      var t2 = svg.create_text (null, "0", "0", "100", "100", "0");
+      svg.append_child (t2);
+      t2.add_ref ("ReferencedText");
       message (svg.write_string ());
-      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><text x=\"0\" y=\"0\" dx=\"10\" dy=\"10\" rotate=\"0\">HE<tspan>LLO</tspan>WORLD</text></svg>" in svg.write_string ());
+      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><defs><text id=\"ReferencedText\" font-size=\"45\" fill=\"blue\" x=\"100\" y=\"100\">Inline character data</text></defs><text x=\"0\" y=\"0\" dx=\"100\" dy=\"100\" rotate=\"0\"><tref xlink:href=\"ReferencedText\"/></text><text x=\"0\" y=\"0\" dx=\"100\" dy=\"100\" rotate=\"0\"><tref xlink:href=\"ReferencedText\"/></text></svg>" in svg.write_string ());
     });
     return Test.run ();
   }

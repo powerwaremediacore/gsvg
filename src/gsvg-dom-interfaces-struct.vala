@@ -28,7 +28,8 @@ public interface Document : Object,  DomDocument {
   public abstract SVGElement rootElement { get; }
 }
 
-public interface SVGElement : Element,
+public interface SVGElement : Object,
+                          Element,
                           Tests,
                           LangSpace,
                           ExternalResourcesRequired,

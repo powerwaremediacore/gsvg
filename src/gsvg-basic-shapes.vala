@@ -23,9 +23,8 @@ using GXml;
 public class GSvg.GsTransformable : GSvg.GsCommonShapeElement,
                                   Transformable
 {
-  protected AnimatedTransformList _transform;
   // Transformable
-  public AnimatedTransformList transform { get { return _transform; } }
+  public AnimatedTransformList transform { get; set; }
 }
 
 public class GSvg.GsRectElement : GSvg.GsTransformable,
