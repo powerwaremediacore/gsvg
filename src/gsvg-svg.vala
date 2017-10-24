@@ -248,20 +248,19 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
                         DocumentCSS,
                         GSvg.SVGElement
 {
-  protected Rect _viewport;
   protected float _pixel_unit_to_millimeter_x;
   protected float _pixel_unit_to_millimeter_y;
   protected float _screen_pixel_to_millimeter_x;
   protected float _screen_pixel_to_millimeter_y;
   protected bool _use_current_view;
   protected ViewSpec _current_view;
-  protected AnimatedRect _view_box;
   protected AnimatedPreserveAspectRatio _preserve_aspect_ratio;
   protected Point _current_translate;
 
   // FitToViewBox
   // * viewBox
-  public AnimatedRect view_box { get { return _view_box; } }
+  [Description (nick="::viewBox")]
+  public AnimatedRect view_box { get; set; }
   // preserveAspectRatio
   public AnimatedPreserveAspectRatio preserve_aspect_ratio {
     get { return _preserve_aspect_ratio; }
@@ -295,7 +294,7 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
   [Description (nick="::contentStyleType")]
   public string content_style_type { get; set; }
   [Description (nick="::viewport")]
-  public Rect viewport { get { return _viewport; } }
+  public Rect viewport { get; set; }
   //pixelUnitToMillimeterX
   public float pixel_unit_to_millimeter_x { get { return _pixel_unit_to_millimeter_x; } }
   //pixelUnitToMillimeterY
@@ -317,7 +316,7 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
     _local_name = "svg";
     try {
       set_attribute_ns ("http://www.w3.org/2000/xmlns/",
-                      "xmlns:svg", "http://www.w3.org/2000/svg");
+                      "xmlns", "http://www.w3.org/2000/svg");
     } catch (GLib.Error e) {
       warning (("Error setting default namespace: %s").printf (e.message));
     }
@@ -365,16 +364,6 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
    */
   public  DomElement? get_element_by_id (string elementId) { return null; }
   // Shape constructors
-  /**
-   * @x a string representation of an {@link AnimatedLengthX}
-   * @y a string representation of an {@link AnimatedLengthY}
-   * @width a string representation of an {@link AnimatedLengthWidth}
-   * @height a string representation of an {@link AnimatedLengthHeight}
-   * @rx a string representation of an {@link AnimatedLengthRX}
-   * @ry a string representation of an {@link AnimatedLengthRY}
-   *
-   * Creates a 'rect' node for rectangular shapes.
-   */
   public RectElement create_rect (string? x,
                                   string? y,
                                   string? width,
@@ -423,13 +412,6 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
     r.ry = nry;
     return r;
   }
-  /**
-   * @cx a string representation of an {@link AnimatedLengthCX}
-   * @cy a string representation of an {@link AnimatedLengthCY}
-   * @r a string representation of an {@link AnimatedLengthR}
-   *
-   * Creates a 'circle' node for circle shapes.
-   */
   public CircleElement create_circle (string? cx,
                                   string? cy,
                                   string? cr,
@@ -457,14 +439,6 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
     c.r = nr;
     return c;
   }
-  /**
-   * @cx a string representation of an {@link AnimatedLengthCX}
-   * @cy a string representation of an {@link AnimatedLengthCY}
-   * @rx a string representation of an {@link AnimatedLengthRX}
-   * @ry a string representation of an {@link AnimatedLengthRY}
-   *
-   * Creates a 'ellipse' node for ellipse shapes.
-   */
   public EllipseElement create_ellipse (string? cx,
                                   string? cy,
                                   string? crx,
@@ -499,14 +473,6 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
     e.ry = nry;
     return e;
   }
-  /**
-   * @lx1 a string representation of an {@link AnimatedLengthCX}
-   * @lx2 a string representation of an {@link AnimatedLengthCY}
-   * @lx1 a string representation of an {@link AnimatedLengthRX}
-   * @ly2 a string representation of an {@link AnimatedLengthRY}
-   *
-   * Creates a 'line' node for line shapes.
-   */
   public LineElement create_line (string? lx1,
                                   string? ly1,
                                   string? lx2,
@@ -541,11 +507,6 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
     l.y2 = ny2;
     return l;
   }
-  /**
-   * @points a string representation of an {@link ArrayList<Point>}
-   *
-   * Creates a 'line' node for line shapes.
-   */
   public PolylineElement create_polyline (GLib.Queue<Point> points,
                                    string? style = null) {
     var l = Object.new (typeof (GsPolylineElement),
@@ -558,16 +519,6 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
     }
     return l;
   }
-  /**
-   * @text a text to be displayed
-   * @xs a list of coordinates
-   * @ys a list of coordinates
-   * @dxs a list of coordinates
-   * @dys a list of coordinates
-   * @rotae a list of numbers
-   *
-   * Creates a 'line' node for line shapes.
-   */
   public TextElement create_text (string? text,
                                    string? xs,
                                    string? ys,
@@ -609,11 +560,218 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
     append_child (d);
     return d;
   }
+  public GElement add_g () {
+    var g = Object.new (typeof (GsGElement),
+                        "owner_document", owner_document)
+                        as GsGElement;
+    append_child (g);
+    return g;
+  }
+  public TitleElement add_title (string text) {
+    var t = Object.new (typeof (GsTitleElement),
+                        "owner_document", owner_document)
+                        as GsTitleElement;
+    var tx = owner_document.create_text_node (text);
+    t.append_child (tx);
+    append_child (t);
+    return t;
+  }
+  public DescElement add_desc (string? text) {
+    var t = Object.new (typeof (GsDescElement),
+                        "owner_document", owner_document)
+                        as GsDescElement;
+    if (text != null) {
+      var tx = owner_document.create_text_node (text);
+      t.append_child (tx);
+    }
+    append_child (t);
+    return t;
+  }
+  public MetadataElement add_metadata () {
+    var mt = Object.new (typeof (GsMetadataElement),
+                        "owner_document", owner_document)
+                        as GsMetadataElement;
+    append_child (mt);
+    return mt;
+  }
 }
 public class GSvg.GsDefsElement : GSvg.GsTransformable,
                                   DefsElement
 {
   construct {
     initialize ("defs");
+  }
+}
+
+public class GSvg.GsGElement : GsTransformable, GElement {
+  construct {
+    initialize ("g");
+  }
+}
+
+
+public class GSvg.GsRect : Object, GomProperty, Rect {
+  public double x { get; set; }
+  public double y { get; set; }
+  public double width { get; set; }
+  public double height { get; set; }
+
+  public string? value {
+    owned get { return to_string (); }
+    set { parse (value); }
+  }
+
+  public bool validate_value (string str) {
+    return double.try_parse (str);
+  }
+
+  public void parse (string str) {
+    if (!(" " in str)) {
+      x = double.parse (str);
+      return;
+    }
+    string[] st = str.split (" ");
+    for (int i = 0; i < st.length; i++) {
+      if (i == 0) x = double.parse (st[0]);
+      if (i == 1) y = double.parse (st[1]);
+      if (i == 2) width = double.parse (st[2]);
+      if (i == 3) height = double.parse (st[3]);
+    }
+  }
+  public string to_string () {
+    return "%0.0g".printf (x)+" "+"%0.0g".printf (y)
+        +" "+"%0.0g".printf (width)+" "+"%0.0g".printf (height);
+  }
+}
+
+public class GSvg.GsAnimatedRect : Object,
+                                GomProperty,
+                                AnimatedRect
+{
+  private Rect _base_val;
+  private Rect _anim_val;
+  public Rect base_val {
+    get {
+      if (_base_val == null) _base_val = new GsRect ();
+      return _base_val;
+    }
+  }
+  public Rect anim_val {
+    get {
+      if (_anim_val == null) _anim_val = new GsRect ();
+      return _anim_val;
+    }
+  }
+  public string? value {
+    owned get { return base_val.to_string (); }
+    set { base_val.parse (value); }
+  }
+  public bool validate_value (string str) {
+    return _base_val.validate_value (str); // FIXME:
+  }
+}
+
+public class GSvg.GsDescriptiveElement : GSvg.GsElement,
+                                        LangSpace
+{
+  // LangSpace
+  [Description (nick="::xml:lang")]
+  public string xmllang { get; set; }
+  [Description (nick="::xml:space")]
+  public string xmlspace { get; set; }
+}
+
+public class GSvg.GsTitleElement : GSvg.GsDescriptiveElement, TitleElement {
+  construct { initialize ("title"); }
+}
+
+public class GSvg.GsDescElement : GSvg.GsDescriptiveElement, DescElement {
+  construct { initialize ("desc"); }
+}
+
+public class GSvg.GsMetadataElement : GsElement, MetadataElement {
+  construct { initialize ("metadata"); }
+}
+
+/**
+ * Creates an stand alone SVG document to contain a top level 'svg'.
+ *
+ * You should use {@link add_svg} to add a new 'svg' node.
+ */
+public class GSvg.GsDocument : GXml.GomDocument,  GSvg.Document {
+  protected string _referrer = "";
+  protected string _url = "";
+  protected string _domain = "";
+  public string title {
+    owned get {
+      if (document_element == null) return "";
+      if (document_element.local_name.down () != "svg") return "";
+      var els = document_element.get_elements_by_tag_name ("title");
+      if (els.length == 0) return "";
+      return els.item (0).text_content;
+    }
+  }
+  public string referrer {
+    get { return _referrer; }
+  }
+  public string domain { get { return _domain; } }
+  public string url { get { return _url; } }
+  public SVGElement root_element { owned get { return document_element as SVGElement; } }
+  construct {
+    var dt = new GomDocumentType (this, "svg", "-//W3C//DTD SVG 1.1//EN",
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd");
+    append_child (dt);
+  }
+  /**
+   * Adds an 'svg' to the document. It should be top most element in the tree.
+   *
+   * If you plan to set more complex descriptions, set @param desc to null.
+   *
+   * @param x a string representation of {@link AnimatedLength}, for x position, or null
+   * @param y a string representation of {@link AnimatedLength}, for y position, or null
+   * @param width a string representation of {@link AnimatedLength}, for width, or null
+   * @param height a string representation of {@link AnimatedLength}, for height, or null
+   * @param viewport a string representation of {@link Rect}, or null
+   * @param title a string for SVG title, or null
+   * @param desc a string for a text description, or null
+   */
+  public SVGElement add_svg (string? x,
+                            string? y,
+                            string? width,
+                            string? height,
+                            string? viewbox = null,
+                            string? title = null,
+                            string? desc = null)
+  {
+    var nsvg = Object.new (typeof (GSvg.GsSvg),
+                          "owner-document", this) as SVGElement;
+    if (x != null) {
+      nsvg.x = new GsAnimatedLength ();
+      nsvg.x.value = x;
+    }
+    if (y != null) {
+      nsvg.y = new GsAnimatedLength ();
+      nsvg.y.value = y;
+    }
+    if (width != null) {
+      nsvg.width = new GsAnimatedLength ();
+      nsvg.width.value = width;
+    }
+    if (height != null) {
+      nsvg.height = new GsAnimatedLength ();
+      nsvg.height.value = height;
+    }
+    if (viewbox != null) {
+      nsvg.view_box = new GsAnimatedRect ();
+      nsvg.view_box.value = viewbox;
+    }
+    if (title != null) {
+      nsvg.add_title (title);
+    }
+    if (desc != null) {
+      nsvg.add_desc (desc);
+    }
+    append_child (nsvg);
+    return nsvg;
   }
 }

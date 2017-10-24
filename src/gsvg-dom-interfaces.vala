@@ -286,16 +286,19 @@ public interface ICCColor : Object {
   public abstract NumberList colors { get; }
 }
 
-public interface Rect : Object {
+public interface Rect : Object, GomProperty {
   public abstract double x { get; set; }
   public abstract double y { get; set; }
   public abstract double width { get; set; }
   public abstract double height { get; set; }
+
+  public abstract string to_string ();
+  public abstract void parse (string str);
 }
 
-public interface AnimatedRect : Object {
-  public abstract Rect baseVal { get; }
-  public abstract Rect animVal { get; }
+public interface AnimatedRect : Object, GomProperty {
+  public abstract Rect base_val { get; }
+  public abstract Rect anim_val { get; }
 }
 
 /**
@@ -355,7 +358,7 @@ public interface ExternalResourcesRequired : Object {
 
 public interface FitToViewBox : Object {
   // viewBox
-  public abstract AnimatedRect view_box { get; }
+  public abstract AnimatedRect view_box { get; set; }
   // preserveAspectRatio
   public abstract AnimatedPreserveAspectRatio preserve_aspect_ratio { get; }
 }

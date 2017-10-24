@@ -46,3 +46,13 @@ ttext = executable('gsvg_text_tests', test_text_files,
 )
 test ('text', ttext)
 
+test_g_files = ([
+		'gsvg-g-test.vala'
+	])
+tg = executable('gsvg_g_tests', test_g_files,
+	vala_args : [],
+	dependencies : [ gxml, inc_libh_dep, testdirs_dep, inc_rooth_dep],
+	link_with: lib
+)
+test ('group-g', tg)
+

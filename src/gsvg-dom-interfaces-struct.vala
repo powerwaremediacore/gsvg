@@ -1,3 +1,4 @@
+/* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
 /* gsvg-dom-interfaces-struct.vala
  *
  * Copyright (C) 2016 Daniel Espinosa <daniel.espinosa@pwmc.mx>
@@ -21,11 +22,11 @@ using GXml;
 
 namespace GSvg {
 public interface Document : Object,  DomDocument {
-  public abstract string title { get; }
+  public abstract string title { owned get; }
   public abstract string referrer { get; }
-  public abstract string doma{ get; }
-  public abstract string URL { get; }
-  public abstract SVGElement rootElement { get; }
+  public abstract string domain { get; }
+  public abstract string url { get; }
+  public abstract SVGElement root_element { owned get; }
 }
 
 public interface SVGElement : Object,
@@ -46,7 +47,7 @@ public interface SVGElement : Object,
   public abstract AnimatedLength height { get;  set; }
   public abstract string content_script_type { get; set; }
   public abstract string content_style_type { get; set; }
-  public abstract Rect viewport { get; }
+  public abstract Rect viewport { get; set; }
   public abstract float pixel_unit_to_millimeter_x { get; }
   public abstract float pixel_unit_to_millimeter_y { get; }
   public abstract float screen_pixel_to_millimeter_x { get; }
@@ -142,7 +143,12 @@ public interface SVGElement : Object,
   public abstract PolylineElement create_polyline (GLib.Queue<Point> points,
                                    string? style = null);
   /**
-   * @
+   * @text a text to be displayed
+   * @xs a list of coordinates
+   * @ys a list of coordinates
+   * @dxs a list of coordinates
+   * @dys a list of coordinates
+   * @rotae a list of numbers
    *
    * Creates a 'line' node for line shapes.
    */
@@ -153,6 +159,30 @@ public interface SVGElement : Object,
                                    string? dys,
                                    string? rotates,
                                    string? style = null);
+  /**
+   * Adds a definitions element node.
+   */
+  public abstract DefsElement add_defs ();
+  /**
+   * Adds a grouping element node.
+   */
+  public abstract GElement add_g ();
+  /**
+   * Adds a 'title' node to current SVG one.
+   *
+   * @param
+   */
+  public abstract TitleElement add_title (string text);
+  /**
+   * Adds a description 'desc' node to current SVG one.
+   *
+   * @param text a text to be added to description or null, if custome values will be added
+   */
+  public abstract DescElement add_desc (string? text);
+  /**
+   * Adds a 'metadata' node to current SVG one.
+   */
+  public abstract MetadataElement add_metadata ();
 }
 
 public interface GElement : Object,

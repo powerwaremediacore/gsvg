@@ -66,7 +66,7 @@ class GSvgTest.Suite : Object
       assert (pl.points.value != null);
       svg.append_child (pl);
       message (svg.write_string ());
-      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><polyline points=\"1,2 4,6 7,9\"/></svg>" in svg.write_string ());
+      assert ("<svg xmlns=\"http://www.w3.org/2000/svg\"><polyline points=\"1,2 4,6 7,9\"/></svg>" in svg.write_string ());
     });
     return Test.run ();
   }

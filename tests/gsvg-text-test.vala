@@ -32,7 +32,7 @@ class GSvgTest.Suite : Object
       var t = svg.create_text ("HELLO WORLD", "0", "0", "10", "10", "0");
       svg.append_child (t);
       message (svg.write_string ());
-      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\"><text x=\"0\" y=\"0\" dx=\"10\" dy=\"10\" rotate=\"0\">HELLO WORLD</text></svg>" in svg.write_string ());
+      assert ("<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"0\" y=\"0\" dx=\"10\" dy=\"10\" rotate=\"0\">HELLO WORLD</text></svg>" in svg.write_string ());
     });
     Test.add_func ("/gsvg/text/span",
     ()=>{
@@ -51,7 +51,7 @@ class GSvgTest.Suite : Object
       svg.append_child (t2);
       t2.add_ref ("ReferencedText");
       message (svg.write_string ());
-      assert ("<svg xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><defs><text id=\"ReferencedText\" font-size=\"45\" fill=\"blue\" x=\"100\" y=\"100\">Inline character data</text></defs><text x=\"0\" y=\"0\" dx=\"100\" dy=\"100\" rotate=\"0\"><tref xlink:href=\"ReferencedText\"/></text><text x=\"0\" y=\"0\" dx=\"100\" dy=\"100\" rotate=\"0\"><tref xlink:href=\"ReferencedText\"/></text></svg>" in svg.write_string ());
+      assert ("<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><defs><text id=\"ReferencedText\" font-size=\"45\" fill=\"blue\" x=\"100\" y=\"100\">Inline character data</text></defs><text x=\"0\" y=\"0\" dx=\"100\" dy=\"100\" rotate=\"0\"><tref xlink:href=\"ReferencedText\"/></text><text x=\"0\" y=\"0\" dx=\"100\" dy=\"100\" rotate=\"0\"><tref xlink:href=\"ReferencedText\"/></text></svg>" in svg.write_string ());
     });
     return Test.run ();
   }
