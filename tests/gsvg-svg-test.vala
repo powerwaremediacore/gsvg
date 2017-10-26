@@ -37,7 +37,7 @@ public class GSvgTest.SvgTest {
     ()=>{
       var d = new GSvg.GsDocument ();
       d.add_svg ("0","0","20cm","15cm","0 0 20 15","SVG Title", "Description");
-      warning ("SVG: \n"+d.write_string ());
+      message ("SVG: \n"+d.write_string ());
       assert ("<svg xmlns=\"http://www.w3.org/2000/svg\"" in d.write_string ());
     });
     Test.add_func ("/gsvg/rect-element/construct/default",

@@ -138,56 +138,29 @@ public class GSvg.GsLength : Object, GSvg.Length {
 }
 
 public class GSvg.GsAnimatedLengthX : GSvg.GsAnimatedLength, AnimatedLengthX {
-  construct {
-    _attribute_name = "x";
-  }
 }
 
 public class GSvg.GsAnimatedLengthY : GSvg.GsAnimatedLength, AnimatedLengthY {
-  construct {
-    _attribute_name = "y";
-  }
 }
 
 public class GSvg.GsAnimatedLengthWidth : GSvg.GsAnimatedLength, AnimatedLengthWidth {
-  construct {
-    _attribute_name = "width";
-  }
 }
 public class GSvg.GsAnimatedLengthHeight : GSvg.GsAnimatedLength, AnimatedLengthHeight {
-  construct {
-    _attribute_name = "height";
-  }
 }
 
 public class GSvg.GsAnimatedLengthRX : GSvg.GsAnimatedLength, AnimatedLengthRX {
-  construct {
-    _attribute_name = "rx";
-  }
 }
 
 public class GSvg.GsAnimatedLengthRY : GSvg.GsAnimatedLength, AnimatedLengthRY {
-  construct {
-    _attribute_name = "ry";
-  }
 }
 
 public class GSvg.GsAnimatedLengthCX : GSvg.GsAnimatedLength, AnimatedLengthCX {
-  construct {
-    _attribute_name = "cx";
-  }
 }
 
 public class GSvg.GsAnimatedLengthCY : GSvg.GsAnimatedLength, AnimatedLengthCY {
-  construct {
-    _attribute_name = "cy";
-  }
 }
 
 public class GSvg.GsAnimatedLengthR : GSvg.GsAnimatedLength, AnimatedLengthR {
-  construct {
-    _attribute_name = "r";
-  }
 }
 
 public class GSvg.GsLengthList : ArrayList<Length>,

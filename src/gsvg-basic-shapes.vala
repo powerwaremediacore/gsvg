@@ -31,20 +31,52 @@ public class GSvg.GsRectElement : GSvg.GsTransformable,
                           GSvg.RectElement
 {
   // RectElement
-  [Description (nick="::x")]
   public AnimatedLengthX x { get; set; }
-  [Description (nick="::y")]
+  [Description (nick="::x")]
+  public GsAnimatedLengthX mx {
+    get { return x as GsAnimatedLengthX; }
+    set { x = value as AnimatedLengthX; }
+  }
   public AnimatedLengthY y { get; set; }
-  [Description (nick="::width")]
+  [Description (nick="::y")]
+  public GsAnimatedLengthY my {
+    get { return y as GsAnimatedLengthY; }
+    set { y = value as AnimatedLengthY; }
+  }
   public AnimatedLengthWidth width { get; set; }
-  [Description (nick="::height")]
+  [Description (nick="::width")]
+  public GsAnimatedLengthWidth mwidth {
+    get { return width as GsAnimatedLengthWidth; }
+    set { width = value as AnimatedLengthWidth; }
+  }
   public AnimatedLengthHeight height{ get; set; }
-  [Description (nick="::rx")]
+  [Description (nick="::height")]
+  public GsAnimatedLengthHeight mheight {
+    get { return height as GsAnimatedLengthHeight; }
+    set { height = value as AnimatedLengthHeight; }
+  }
   public AnimatedLengthRX rx { get; set; }
-  [Description (nick="::ry")]
+  [Description (nick="::rx")]
+  public GsAnimatedLengthRX mrx {
+    get { return rx as GsAnimatedLengthRX; }
+    set { rx = value as AnimatedLengthRX; }
+  }
   public AnimatedLengthRY ry { get; set; }
+  [Description (nick="::ry")]
+  public GsAnimatedLengthRY mry {
+    get { return ry as GsAnimatedLengthRY; }
+    set { ry = value as AnimatedLengthRY; }
+  }
   construct {
     initialize ("rect");
+  }
+}
+
+public class GSvg.GsRectElementMap : GomHashMap, RectElementMap {
+  public int length { get { return (this as GomHashMap).length; } }
+  construct { initialize (typeof (GsRectElement)); }
+  public RectElement RectElementMap.get (string id) {
+    return (this as GomHashMap).get (id) as RectElement;
   }
 }
 

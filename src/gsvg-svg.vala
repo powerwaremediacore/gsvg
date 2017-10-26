@@ -238,10 +238,30 @@ public class GSvg.GsCommonShapeElement : GsCommonElement,
   public Matrix get_screen_ctm () { return null; }
   public Matrix get_transform_to_element (Element element) throws GLib.Error { return null; }
 }
+
+public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
+  // ContainerElement
+  private GsRectElementMap _rects_map;
+  public GsRectElementMap rects_map {
+    get {
+      if (_rects_map == null)
+        set_instance_property ("rects-maps");
+      return _rects_map;
+    }
+    set {
+      if (_rects_map != null)
+        clean_property_elements ("rects-maps");
+      _rects_map = value;
+    }
+  }
+  public RectElementMap rects {
+    get { return null; }
+  }
+}
 /**
  * 'svg' node.
  */
-public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
+public class GSvg.GsSvg : GSvg.GsContainerElement,
                         FitToViewBox,
                         ZoomAndPan,
                         ViewCSS,
@@ -362,7 +382,17 @@ public class GSvg.GsSvg : GSvg.GsCommonShapeElement,
   /**
    * Query elements by 'id' property
    */
-  public  DomElement? get_element_by_id (string elementId) { return null; }
+  public  DomElement? get_element_by_id (string element_id) {
+    message ("Searching : "+element_id);
+    message (write_string ());
+    var l2 = owner_document.get_element_by_id (element_id);
+    if (l2 != null) return l2;
+    var l = get_elements_by_property_value ("id", element_id);
+    if (l.length == 0) return null;
+    message (l.get_element (0).node_name);
+
+    return  l.get_element (0);
+  }
   // Shape constructors
   public RectElement create_rect (string? x,
                                   string? y,

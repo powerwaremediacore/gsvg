@@ -29,6 +29,9 @@ public interface Document : Object,  DomDocument {
   public abstract SVGElement root_element { owned get; }
 }
 
+/**
+ * Top level SVG Element node according with https://www.w3.org/TR/SVG/ version 1.1
+ */
 public interface SVGElement : Object,
                           Element,
                           Tests,
@@ -81,6 +84,7 @@ public interface SVGElement : Object,
   public abstract Transform create_svg_transform_from_matrix (Matrix matrix);
   public abstract DomElement? get_element_by_id (string elementId);
   // API additions
+  // Shapes creation
   /**
    * @x a string representation of an {@link AnimatedLengthX}
    * @y a string representation of an {@link AnimatedLengthY}

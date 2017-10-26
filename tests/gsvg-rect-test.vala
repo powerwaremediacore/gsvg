@@ -32,6 +32,30 @@ class GSvgTest.Suite : Object
       assert (r.style != null);
       r.style.value = "stroke-width:1mm";
       message (r.style.value);
+      svg.append_child (r);
+    });
+    Test.add_func ("/gsvg/rect/read",
+    ()=>{
+      var svg = new GSvg.GsSvg ();
+      string str = """<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1e+03 3e+02" width="10cm" height="3cm"><desc>Example tspan01 - using tspan to change visual attributes</desc><g font-family="Verdana" font-size="45"><text fill="blue" x="200" y="150">You are <tspan font-weight="bold" fill="red">not</tspan> a banana</text></g><g font-family="Verdana" font-size="45"><text fill="blue" x="200" y="150">You are <tspan font-weight="bold" fill="red">not</tspan> a banana</text></g><rect id="rect" fill="none" stroke="blue" stroke-width="2" x="1" y="1" width="998" height="298" rx="20" ry="30"/></svg>""";
+      svg.read_from_string (str);
+      var r = svg.get_element_by_id ("rect") as RectElement;
+      assert (r != null);
+      assert (r is RectElement);
+      assert (r.x != null);
+      assert (r.x.value == "1");
+      assert (r.y != null);
+      assert (r.y.value == "1");
+      assert (r.width != null);
+      assert (r.width.value == "998");
+      assert (r.height != null);
+      assert (r.height.value == "298");
+      assert (r.rx != null);
+      assert (r.rx.value == "20");
+      assert (r.ry != null);
+      assert (r.ry.value == "30");
     });
     return Test.run ();
   }

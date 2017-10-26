@@ -1,3 +1,4 @@
+/* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
 /* gsvg-dom-interfaces-basic-shapes.vala
  *
  * Copyright (C) 2016, 2017 Daniel Espinosa <esodan@gmail.com>
@@ -34,6 +35,11 @@ public interface RectElement : Object,
   public abstract AnimatedLengthHeight height { get; set; }
   public abstract AnimatedLengthRX rx { get; set; }
   public abstract AnimatedLengthRY ry { get; set; }
+}
+
+public interface RectElementMap : Object {
+  public abstract int length { get; }
+  public abstract RectElement get (string id);
 }
 
 public interface CircleElement : Object,

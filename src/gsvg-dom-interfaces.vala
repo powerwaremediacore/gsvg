@@ -1,6 +1,7 @@
-/* gsvg-dom-element.vala
+/* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
+/* gsvg-dom-interfaces.vala
  *
- * Copyright (C) 2016 Daniel Espinosa
+ * Copyright (C) 2016-2017 Daniel Espinosa <daniel.espinosa@pwmc.mx>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -20,9 +21,12 @@ using GLib;
 using GXml;
 
 namespace GSvg {
-/**
- * Top level SVG Element node according with https://www.w3.org/TR/SVG/ version 1.1
- */
+
+public interface ContainerElement : Object {
+  // Shapes access
+  public abstract RectElementMap rects { get; }
+}
+
 public interface Element : Object, DomElement {
   public abstract string xmlbase { get; set; }
   // ownerSVGElement
