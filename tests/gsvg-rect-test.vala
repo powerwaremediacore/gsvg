@@ -56,6 +56,8 @@ class GSvgTest.Suite : Object
       assert (r.rx.value == "20");
       assert (r.ry != null);
       assert (r.ry.value == "30");
+      assert (svg.rects != null);
+      assert (svg.rects.get ("rect") is RectElement);
     });
     return Test.run ();
   }

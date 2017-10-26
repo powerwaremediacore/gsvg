@@ -240,8 +240,9 @@ public class GSvg.GsCommonShapeElement : GsCommonElement,
 }
 
 public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
-  // ContainerElement
   private GsRectElementMap _rects_map;
+  // ContainerElement
+  public RectElementMap rects { get { return _rects_map as RectElementMap; } }
   public GsRectElementMap rects_map {
     get {
       if (_rects_map == null)
@@ -253,9 +254,6 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
         clean_property_elements ("rects-maps");
       _rects_map = value;
     }
-  }
-  public RectElementMap rects {
-    get { return null; }
   }
 }
 /**

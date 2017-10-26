@@ -28,7 +28,7 @@ public class GSvg.GsTransformable : GSvg.GsCommonShapeElement,
 }
 
 public class GSvg.GsRectElement : GSvg.GsTransformable,
-                          GSvg.RectElement
+                          GSvg.RectElement, MappeableElement
 {
   // RectElement
   public AnimatedLengthX x { get; set; }
@@ -70,6 +70,8 @@ public class GSvg.GsRectElement : GSvg.GsTransformable,
   construct {
     initialize ("rect");
   }
+  // MappeableElement
+  public string get_map_key () { return id; }
 }
 
 public class GSvg.GsRectElementMap : GomHashMap, RectElementMap {
