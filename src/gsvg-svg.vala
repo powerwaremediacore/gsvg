@@ -255,6 +255,20 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       _rects_map = value;
     }
   }
+  private GsCircleElementMap _circles_map;
+  public CircleElementMap circles { get { return _circles_map as CircleElementMap; } }
+  public GsCircleElementMap circles_map {
+    get {
+      if (_circles_map == null)
+        set_instance_property ("circles-map");
+      return _circles_map;
+    }
+    set {
+      if (_circles_map != null)
+        clean_property_elements ("circles-map");
+      _circles_map = value;
+    }
+  }
 }
 /**
  * 'svg' node.
@@ -381,8 +395,6 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
    * Query elements by 'id' property
    */
   public  DomElement? get_element_by_id (string element_id) {
-    message ("Searching : "+element_id);
-    message (write_string ());
     var l2 = owner_document.get_element_by_id (element_id);
     if (l2 != null) return l2;
     var l = get_elements_by_property_value ("id", element_id);

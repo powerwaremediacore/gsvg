@@ -56,3 +56,15 @@ tg = executable('gsvg_g_tests', test_g_files,
 )
 test ('group-g', tg)
 
+
+
+test_circle_files = ([
+		'gsvg-circle-test.vala'
+	])
+tcircle = executable('gsvg_circle_tests', test_circle_files,
+	vala_args : [],
+	dependencies : [ gxml, inc_libh_dep, testdirs_dep, inc_rooth_dep],
+	link_with: lib
+)
+
+test ('circle', tcircle)

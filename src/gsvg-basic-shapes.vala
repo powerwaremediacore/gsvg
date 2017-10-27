@@ -83,16 +83,38 @@ public class GSvg.GsRectElementMap : GomHashMap, RectElementMap {
 }
 
 public class GSvg.GsCircleElement : GSvg.GsTransformable,
-                          GSvg.CircleElement
+                          GSvg.CircleElement, MappeableElement
 {
-  [Description (nick="::cx")]
   public AnimatedLengthCX cx { get; set; }
-  [Description (nick="::cy")]
+  [Description (nick="::cx")]
+  public GsAnimatedLengthCX mcx {
+    get { return cx as GsAnimatedLengthCX; }
+    set { cx = value as AnimatedLengthCX; }
+  }
   public AnimatedLengthCY cy { get; set; }
-  [Description (nick="::r")]
+  [Description (nick="::cy")]
+  public GsAnimatedLengthCY mcy {
+    get { return cy as GsAnimatedLengthCY; }
+    set { cy = value as AnimatedLengthCY; }
+  }
   public AnimatedLengthR r { get; set; }
+  [Description (nick="::r")]
+  public GsAnimatedLengthR mr {
+    get { return r as GsAnimatedLengthR; }
+    set { r = value as AnimatedLengthR; }
+  }
   construct {
     initialize ("circle");
+  }
+  // MappeableElement
+  public string get_map_key () { return id; }
+}
+
+public class GSvg.GsCircleElementMap : GomHashMap, CircleElementMap {
+  public int length { get { return (this as GomHashMap).length; } }
+  construct { initialize (typeof (GsCircleElement)); }
+  public CircleElement CircleElementMap.get (string id) {
+    return (this as GomHashMap).get (id) as CircleElement;
   }
 }
 

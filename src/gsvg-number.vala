@@ -94,12 +94,14 @@ public class GSvg.GsAnimatedNumberList : Object,
       if (_base_val == null) _base_val = new GsNumberList ();
       return _base_val;
     }
+    set { _base_val = value; }
   }
   public NumberList anim_val {
     get {
       if (_anim_val == null) _anim_val = new GsNumberList ();
       return _anim_val;
     }
+    set { _anim_val = value; }
   }
   // GomProperty
   public string? value {

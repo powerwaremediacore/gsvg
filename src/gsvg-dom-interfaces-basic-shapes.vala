@@ -54,6 +54,11 @@ public interface CircleElement : Object,
   public abstract AnimatedLengthR  r { get; set; }
 }
 
+public interface CircleElementMap : Object {
+  public abstract int length { get; }
+  public abstract CircleElement get (string id);
+}
+
 public interface EllipseElement : Object,
                               Element,
                               Tests,

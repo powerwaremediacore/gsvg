@@ -24,7 +24,8 @@ namespace GSvg {
 
 public interface ContainerElement : Object {
   // Shapes access
-  public abstract RectElementMap rects { get; }
+  public abstract RectElementMap rects { get; set; }
+  public abstract CircleElementMap circles { get; set; }
 }
 
 public interface Element : Object, DomElement {
@@ -167,8 +168,8 @@ public interface NumberList : Object {
 }
 
 public interface AnimatedNumberList : Object, GomProperty {
-  public abstract NumberList base_val { get; }
-  public abstract NumberList anim_val { get; }
+  public abstract NumberList base_val { get; set; }
+  public abstract NumberList anim_val { get; set; }
 }
 
 public interface Length : Object {
