@@ -144,7 +144,14 @@ public interface SVGElement : Object,
    *
    * Creates a 'line' node for line shapes.
    */
-  public abstract PolylineElement create_polyline (GLib.Queue<Point> points,
+  public abstract PolylineElement create_polyline (string points,
+                                   string? style = null);
+  /**
+   * @points a string representation of an {@link ArrayList<Point>}
+   *
+   * Creates a 'line' node for line shapes.
+   */
+  public abstract PolygonElement create_polygon (string points,
                                    string? style = null);
   /**
    * @text a text to be displayed

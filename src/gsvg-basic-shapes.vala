@@ -250,3 +250,12 @@ public class GSvg.GsPolygonElement : GSvg.GsAnimatedPoints, PolygonElement {
   }
 }
 
+
+public class GSvg.GsPolygonElementMap : GomHashMap, PolygonElementMap {
+  public int length { get { return (this as GomHashMap).length; } }
+  construct { initialize (typeof (GsPolygonElement)); }
+  public PolygonElement PolygonElementMap.get (string id) {
+    return (this as GomHashMap).get (id) as PolygonElement;
+  }
+}
+

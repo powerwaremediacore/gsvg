@@ -90,3 +90,15 @@ tline = executable('gsvg_line_tests', test_line_files,
 )
 
 test ('line', tline)
+
+
+test_polygon_files = ([
+		'gsvg-polygons-test.vala'
+	])
+tpolygon = executable('gsvg_polygon_tests', test_polygon_files,
+	vala_args : [],
+	dependencies : [ gxml, inc_libh_dep, testdirs_dep, inc_rooth_dep],
+	link_with: lib
+)
+
+test ('line', tpolygon)

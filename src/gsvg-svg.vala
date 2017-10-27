@@ -311,6 +311,20 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       _polylines_map = value;
     }
   }
+  private GsPolygonElementMap _polygons_map;
+  public PolygonElementMap polygons { get { return _polygons_map as PolygonElementMap; } }
+  public GsPolygonElementMap polygons_map {
+    get {
+      if (_polygons_map == null)
+        set_instance_property ("polygons-map");
+      return _polygons_map;
+    }
+    set {
+      if (_polygons_map != null)
+        clean_property_elements ("polygons-map");
+      _polygons_map = value;
+    }
+  }
 }
 /**
  * 'svg' node.
@@ -589,16 +603,20 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
     l.y2 = ny2;
     return l;
   }
-  public PolylineElement create_polyline (GLib.Queue<Point> points,
+  public PolylineElement create_polyline (string points,
                                    string? style = null) {
     var l = Object.new (typeof (GsPolylineElement),
                         "owner_document", this.owner_document)
                         as PolylineElement;
-    for (int i = 0; i < points.length; i++) {
-      var p = points.peek_nth (i);
-      if (p == null) continue;
-      l.points.append_item (p);
-    }
+    l.points.value = points;
+    return l;
+  }
+  public PolygonElement create_polygon (string points,
+                                   string? style = null) {
+    var l = Object.new (typeof (GsPolygonElement),
+                        "owner_document", this.owner_document)
+                        as PolygonElement;
+    l.points.value = points;
     return l;
   }
   public TextElement create_text (string? text,

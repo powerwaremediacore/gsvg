@@ -125,4 +125,9 @@ public interface PolygonElement : Object,
                               AnimatedPoints {
 }
 
+public interface PolygonElementMap : Object {
+  public abstract int length { get; }
+  public abstract PolygonElement get (string id);
+}
+
 } // GSvg
