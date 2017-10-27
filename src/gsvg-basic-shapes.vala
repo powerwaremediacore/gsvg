@@ -203,18 +203,44 @@ public class GSvg.GsLineElementMap : GomHashMap, LineElementMap {
 }
 
 public class GSvg.GsAnimatedPoints : GSvg.GsTransformable,
-                                    AnimatedPoints
+                                    AnimatedPoints, MappeableElement
 {
-  private PointList _points = new GsPointList () as PointList;
-  private PointList _animated_points = new GsPointList () as PointList;
+  private GsPointList _points_list = new GsPointList ();
+  private PointList _animated_points;
+  public PointList points {
+    get { return mpoints; }
+    set { mpoints = value as GsPointList; }
+  }
   [Description (nick="::points")]
-  public PointList points { get { return _points; } }
-  public PointList animated_points { get { return _animated_points; } }
+  public GsPointList mpoints {
+    get {
+      if (_points_list == null) _points_list = new GsPointList ();
+      return _points_list;
+    }
+    set { _points_list = value; }
+  }
+  public PointList animated_points {
+    get {
+      if (_animated_points == null) _animated_points = new GsPointList () as PointList;
+      return _animated_points;
+    }
+    set { _animated_points = value; }
+  }
+  // MappeableElement
+  public string get_map_key () { return id; }
 }
 
 public class GSvg.GsPolylineElement : GSvg.GsAnimatedPoints, PolylineElement {
   construct {
     initialize ("polyline");
+  }
+}
+
+public class GSvg.GsPolylineElementMap : GomHashMap, PolylineElementMap {
+  public int length { get { return (this as GomHashMap).length; } }
+  construct { initialize (typeof (GsPolylineElement)); }
+  public PolylineElement PolylineElementMap.get (string id) {
+    return (this as GomHashMap).get (id) as PolylineElement;
   }
 }
 

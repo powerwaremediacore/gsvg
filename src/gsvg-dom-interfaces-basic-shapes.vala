@@ -96,8 +96,8 @@ public interface LineElementMap : Object {
 }
 
 public interface AnimatedPoints : Object {
-  public abstract PointList points { get; }
-  public abstract PointList animated_points { get; }
+  public abstract PointList points { get; set; }
+  public abstract PointList animated_points { get; set; }
 }
 
 public interface PolylineElement : Object,
@@ -108,6 +108,11 @@ public interface PolylineElement : Object,
                                Stylable,
                                Transformable,
                                AnimatedPoints {
+}
+
+public interface PolylineElementMap : Object {
+  public abstract int length { get; }
+  public abstract PolylineElement get (string id);
 }
 
 public interface PolygonElement : Object,

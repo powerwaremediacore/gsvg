@@ -33,7 +33,7 @@ public class GSvg.GsPoint : Object, Point {
     y = double.parse (p[1]);
   }
   public string to_string () {
-    return "%0.0g".printf (x)+","+"%0.0g".printf (y);
+    return "%0g".printf (x)+","+"%0g".printf (y);
   }
 }
 

@@ -297,6 +297,20 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       _lines_map = value;
     }
   }
+  private GsPolylineElementMap _polylines_map;
+  public PolylineElementMap polylines { get { return _polylines_map as PolylineElementMap; } }
+  public GsPolylineElementMap polylines_map {
+    get {
+      if (_polylines_map == null)
+        set_instance_property ("polylines-map");
+      return _polylines_map;
+    }
+    set {
+      if (_polylines_map != null)
+        clean_property_elements ("polylines-map");
+      _polylines_map = value;
+    }
+  }
 }
 /**
  * 'svg' node.
