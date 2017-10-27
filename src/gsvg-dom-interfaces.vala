@@ -26,6 +26,7 @@ public interface ContainerElement : Object {
   // Shapes access
   public abstract RectElementMap rects { get; set; }
   public abstract CircleElementMap circles { get; set; }
+  public abstract EllipseElementMap ellipses { get; set; }
 }
 
 public interface Element : Object, DomElement {

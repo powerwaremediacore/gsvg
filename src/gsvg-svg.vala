@@ -269,6 +269,20 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       _circles_map = value;
     }
   }
+  private GsEllipseElementMap _ellipses_map;
+  public EllipseElementMap ellipses { get { return _ellipses_map as EllipseElementMap; } }
+  public GsEllipseElementMap ellipses_map {
+    get {
+      if (_ellipses_map == null)
+        set_instance_property ("ellipses-map");
+      return _ellipses_map;
+    }
+    set {
+      if (_ellipses_map != null)
+        clean_property_elements ("ellipses-map");
+      _ellipses_map = value;
+    }
+  }
 }
 /**
  * 'svg' node.

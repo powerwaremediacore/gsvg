@@ -72,6 +72,11 @@ public interface EllipseElement : Object,
   public abstract AnimatedLengthRY ry { get; set; }
 }
 
+public interface EllipseElementMap : Object {
+  public abstract int length { get; }
+  public abstract EllipseElement get (string id);
+}
+
 public interface LineElement : Object,
                            Element,
                            Tests,
