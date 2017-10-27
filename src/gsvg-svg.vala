@@ -283,6 +283,20 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       _ellipses_map = value;
     }
   }
+  private GsLineElementMap _lines_map;
+  public LineElementMap lines { get { return _lines_map as LineElementMap; } }
+  public GsLineElementMap lines_map {
+    get {
+      if (_lines_map == null)
+        set_instance_property ("lines-map");
+      return _lines_map;
+    }
+    set {
+      if (_lines_map != null)
+        clean_property_elements ("lines-map");
+      _lines_map = value;
+    }
+  }
 }
 /**
  * 'svg' node.

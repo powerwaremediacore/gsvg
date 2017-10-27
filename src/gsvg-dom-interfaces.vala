@@ -27,6 +27,7 @@ public interface ContainerElement : Object {
   public abstract RectElementMap rects { get; set; }
   public abstract CircleElementMap circles { get; set; }
   public abstract EllipseElementMap ellipses { get; set; }
+  public abstract LineElementMap lines { get; set; }
 }
 
 public interface Element : Object, DomElement {

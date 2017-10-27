@@ -152,7 +152,6 @@ public class GSvg.GsEllipseElement : GSvg.GsTransformable,
   public string get_map_key () { return id; }
 }
 
-
 public class GSvg.GsEllipseElementMap : GomHashMap, EllipseElementMap {
   public int length { get { return (this as GomHashMap).length; } }
   construct { initialize (typeof (GsEllipseElement)); }
@@ -162,18 +161,44 @@ public class GSvg.GsEllipseElementMap : GomHashMap, EllipseElementMap {
 }
 
 public class GSvg.GsLineElement : GSvg.GsTransformable,
-                           GSvg.LineElement
+                           GSvg.LineElement, MappeableElement
 {
-  [Description (nick="::x1")]
   public AnimatedLengthX x1 { get; set; }
-  [Description (nick="::y1")]
+  [Description (nick="::x1")]
+  public GsAnimatedLengthX mx1 {
+    get { return x1 as GsAnimatedLengthX; }
+    set { x1 = value as AnimatedLengthX; }
+  }
   public AnimatedLengthY y1 { get; set; }
-  [Description (nick="::x2")]
+  [Description (nick="::y1")]
+  public GsAnimatedLengthY my1 {
+    get { return y1 as GsAnimatedLengthY; }
+    set { y1 = value as AnimatedLengthY; }
+  }
   public AnimatedLengthX x2 { get; set; }
-  [Description (nick="::y2")]
+  [Description (nick="::x2")]
+  public GsAnimatedLengthX mx2 {
+    get { return x2 as GsAnimatedLengthX; }
+    set { x2 = value as AnimatedLengthX; }
+  }
   public AnimatedLengthY y2 { get; set; }
+  [Description (nick="::y2")]
+  public GsAnimatedLengthY my2 {
+    get { return y2 as GsAnimatedLengthY; }
+    set { y2 = value as AnimatedLengthY; }
+  }
   construct {
     initialize ("line");
+  }
+  // MappeableElement
+  public string get_map_key () { return id; }
+}
+
+public class GSvg.GsLineElementMap : GomHashMap, LineElementMap {
+  public int length { get { return (this as GomHashMap).length; } }
+  construct { initialize (typeof (GsLineElement)); }
+  public LineElement LineElementMap.get (string id) {
+    return (this as GomHashMap).get (id) as LineElement;
   }
 }
 

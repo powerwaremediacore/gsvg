@@ -70,7 +70,7 @@ tcircle = executable('gsvg_circle_tests', test_circle_files,
 test ('circle', tcircle)
 
 test_ellipse_files = ([
-		'gsvg-circle-test.vala'
+		'gsvg-ellipse-test.vala'
 	])
 tellipse = executable('gsvg_ellipse_tests', test_ellipse_files,
 	vala_args : [],
@@ -79,3 +79,14 @@ tellipse = executable('gsvg_ellipse_tests', test_ellipse_files,
 )
 
 test ('ellipse', tellipse)
+
+test_line_files = ([
+		'gsvg-line-test.vala'
+	])
+tline = executable('gsvg_line_tests', test_line_files,
+	vala_args : [],
+	dependencies : [ gxml, inc_libh_dep, testdirs_dep, inc_rooth_dep],
+	link_with: lib
+)
+
+test ('line', tline)

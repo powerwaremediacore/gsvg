@@ -90,6 +90,11 @@ public interface LineElement : Object,
   public abstract AnimatedLengthY y2 { get; set; }
 }
 
+public interface LineElementMap : Object {
+  public abstract int length { get; }
+  public abstract LineElement get (string id);
+}
+
 public interface AnimatedPoints : Object {
   public abstract PointList points { get; }
   public abstract PointList animated_points { get; }
