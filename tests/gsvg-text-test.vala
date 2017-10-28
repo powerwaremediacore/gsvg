@@ -45,7 +45,31 @@ class GSvgTest.Suite : Object
       assert (svg.texts != null);
       assert (svg.texts.get ("text") is TextElement);
     });
-    Test.add_func ("/gsvg/text/span",
+    Test.add_func ("/gsvg/text/span/write",
+    ()=>{
+      var svg = new GSvg.GsSvg ();
+      var t = svg.create_text ("IS", "0", "0", "10", "10", "0");
+      svg.append_child (t);
+      var ts = t.add_span ("TIME");
+      t.add_text ("FOR ME");
+      message (svg.write_string ());
+      assert ("<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"0\" y=\"0\" dx=\"10\" dy=\"10\" rotate=\"0\">IS<tspan>TIME</tspan>FOR ME</text></svg>" in svg.write_string ());
+      });
+    Test.add_func ("/gsvg/text/span/read",
+    ()=>{var svg = new GSvg.GsSvg ();
+      string str = """<svg xmlns="http://www.w3.org/2000/svg"><text id="text" x="0" y="0" dx="10" dy="10" rotate="0">IS<tspan id = "span">TIME</tspan>FOR ME</text></svg>""";
+      svg.read_from_string (str);
+      var t = svg.get_element_by_id ("text") as TextElement;
+      assert (t != null);
+      assert (t is TextElement);
+      var ts = svg.get_element_by_id ("span") as TSpanElement;
+      assert (ts != null);
+      assert (ts is TSpanElement);
+      assert (ts.text_content == "TIME");
+      assert (t.spans != null);
+      assert (t.spans.get ("span") is TSpanElement);
+    });
+    Test.add_func ("/gsvg/text/tref/write",
     ()=>{
       var svg = new GSvg.GsSvg ();
       var tr = svg.create_text ("Inline character data","100", "100", null, null, null);

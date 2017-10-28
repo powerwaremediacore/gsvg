@@ -63,6 +63,8 @@ public interface TextElement : Object,
                                    Transformable
 {
   // API Additions
+
+  public abstract TSpanElementMap spans { get; }
   /**
    * Adds a new {@link DomText} node with the given text
    */
@@ -88,6 +90,10 @@ public interface TextElementMap : Object {
 }
 public interface TSpanElement : Object,
                                    TextPositioningElement {
+}
+public interface TSpanElementMap : Object {
+  public abstract int length { get; }
+  public abstract TSpanElement get (string id);
 }
 
 public interface TRefElement : Object,

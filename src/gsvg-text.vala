@@ -85,6 +85,21 @@ public class GSvg.GsTextElement : GSvg.GsBaseTextElement,
     initialize ("text");
   }
   // API additions
+  private GsTSpanElementMap _spans_map;
+  // ContainerElement
+  public TSpanElementMap spans { get { return _spans_map as TSpanElementMap; } }
+  public GsTSpanElementMap spans_map {
+    get {
+      if (_spans_map == null)
+        set_instance_property ("spans-maps");
+      return _spans_map;
+    }
+    set {
+      if (_spans_map != null)
+        clean_property_elements ("spans-maps");
+      _spans_map = value;
+    }
+  }
   public DomText add_text (string txt) {
     var t = owner_document.create_text_node (txt);
     append_child (t);
@@ -123,16 +138,26 @@ public class GSvg.GsTextElementMap : GomHashMap, TextElementMap {
 }
 
 public class GSvg.GsTSpanElement : GSvg.GsBaseTextElement,
-                                  TSpanElement
+                                  TSpanElement, MappeableElement
 {
   construct {
     initialize ("tspan");
+  }
+  // MappeableElement
+  public string get_map_key () { return id; }
+}
+
+public class GSvg.GsTSpanElementMap : GomHashMap, TSpanElementMap {
+  public int length { get { return (this as GomHashMap).length; } }
+  construct { initialize (typeof (GsTSpanElement)); }
+  public TSpanElement TSpanElementMap.get (string id) {
+    return (this as GomHashMap).get (id) as TSpanElement;
   }
 }
 
 public class GSvg.GsTRefElement : GSvg.GsBaseTextElement,
                                    URIReference,
-                                   TRefElement
+                                   TRefElement, MappeableElement
 {
   private AnimatedString _href;
   construct {
@@ -160,4 +185,6 @@ public class GSvg.GsTRefElement : GSvg.GsBaseTextElement,
       } catch (GLib.Error e) { warning ("Error on set href property: %s".printf (e.message)); }
     }
   }
+  // MappeableElement
+  public string get_map_key () { return id; }
 }
