@@ -100,6 +100,10 @@ public interface TRefElement : Object,
                                    TextPositioningElement,
                                    URIReference {
 }
+public interface TRefElementMap : Object {
+  public abstract int length { get; }
+  public abstract TRefElement get (string id);
+}
 
 public interface TextPathElement : Object,
                                    TextContentElement,

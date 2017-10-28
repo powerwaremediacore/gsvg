@@ -118,8 +118,8 @@ public class GSvg.GsTextElement : GSvg.GsBaseTextElement,
     var ts = Object.new (typeof (GsTRefElement),
                         "owner_document", owner_document)
                         as GsTRefElement;
-    var r = new GsAnimatedString ();
     append_child (ts);
+    var r = new GsAnimatedString ();
     r.base_val = id_ref;
     ts.href = r;
     return ts;
@@ -159,32 +159,27 @@ public class GSvg.GsTRefElement : GSvg.GsBaseTextElement,
                                    URIReference,
                                    TRefElement, MappeableElement
 {
-  private AnimatedString _href;
   construct {
     initialize ("tref");
+    if (owner_document.document_element.lookup_prefix ("http://www.w3.org/1999/xlink") == null)
+          owner_document.document_element.set_attribute_ns ("http://www.w3.org/2000/xmlns",
+                          "xmlns:xlink",
+                          "http://www.w3.org/1999/xlink");
   }
-  [Description (nick="href")]
-  public AnimatedString href {
-    get {
-      if (_href == null)
-        _href = new GsAnimatedString ();
-      _href.base_val = get_attribute_ns ("http://www.w3.org/1999/xlink", "href");
-      return _href;
-    }
-    set {
-      if (value.base_val == null) return;
-      if (_href == null)
-        _href = new GsAnimatedString ();
-      _href.base_val = value.base_val;
-      try {
-        owner_document.document_element.set_attribute_ns ("http://www.w3.org/2000/xmlns",
-                        "xmlns:xlink",
-                        "http://www.w3.org/1999/xlink");
-        message ((owner_document.document_element as GSvg.GsObject).to_string ());
-        set_attribute_ns ("http://www.w3.org/1999/xlink", "xlink:href", _href.base_val);
-      } catch (GLib.Error e) { warning ("Error on set href property: %s".printf (e.message)); }
-    }
+  public AnimatedString href { get; set; }
+  [Description (nick="::xlink:href")]
+  public GsAnimatedString mhref {
+    get { return href as GsAnimatedString; }
+    set { href = value as AnimatedString; }
   }
   // MappeableElement
   public string get_map_key () { return id; }
+}
+
+public class GSvg.GsTRefElementMap : GomHashMap, TRefElementMap {
+  public int length { get { return (this as GomHashMap).length; } }
+  construct { initialize (typeof (GsTRefElement)); }
+  public TRefElement TRefElementMap.get (string id) {
+    return (this as GomHashMap).get (id) as TRefElement;
+  }
 }
