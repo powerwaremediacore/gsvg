@@ -325,6 +325,21 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       _polygons_map = value;
     }
   }
+  private GsTextElementMap _texts_map;
+  // ContainerElement
+  public TextElementMap texts { get { return _texts_map as TextElementMap; } }
+  public GsTextElementMap texts_map {
+    get {
+      if (_texts_map == null)
+        set_instance_property ("texts-maps");
+      return _texts_map;
+    }
+    set {
+      if (_texts_map != null)
+        clean_property_elements ("texts-maps");
+      _texts_map = value;
+    }
+  }
 }
 /**
  * 'svg' node.

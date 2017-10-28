@@ -26,13 +26,24 @@ class GSvgTest.Suite : Object
   {
     GLib.Intl.setlocale (GLib.LocaleCategory.ALL, "");
     Test.init (ref args);
-    Test.add_func ("/gsvg/text/init",
+    Test.add_func ("/gsvg/text/write",
     ()=>{
       var svg = new GSvg.GsSvg ();
       var t = svg.create_text ("HELLO WORLD", "0", "0", "10", "10", "0");
       svg.append_child (t);
       message (svg.write_string ());
       assert ("<svg xmlns=\"http://www.w3.org/2000/svg\"><text x=\"0\" y=\"0\" dx=\"10\" dy=\"10\" rotate=\"0\">HELLO WORLD</text></svg>" in svg.write_string ());
+      });
+    Test.add_func ("/gsvg/text/read",
+    ()=>{var svg = new GSvg.GsSvg ();
+      string str = """<svg xmlns="http://www.w3.org/2000/svg"><text id="text" x="0" y="0" dx="10" dy="10" rotate="0">HELLO WORLD</text></svg>""";
+      svg.read_from_string (str);
+      var t = svg.get_element_by_id ("text") as TextElement;
+      assert (t != null);
+      assert (t is TextElement);
+      assert (t.text_content == "HELLO WORLD");
+      assert (svg.texts != null);
+      assert (svg.texts.get ("text") is TextElement);
     });
     Test.add_func ("/gsvg/text/span",
     ()=>{

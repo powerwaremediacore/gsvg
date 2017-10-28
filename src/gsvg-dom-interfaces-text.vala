@@ -82,6 +82,10 @@ public interface TextElement : Object,
   public abstract TextPathElement add_path (string path_ref, string txt);
 }
 
+public interface TextElementMap : Object {
+  public abstract int length { get; }
+  public abstract TextElement get (string id);
+}
 public interface TSpanElement : Object,
                                    TextPositioningElement {
 }

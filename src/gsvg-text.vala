@@ -40,16 +40,36 @@ public class GSvg.GsTextContentElement : GSvg.GsCommonShapeElement,
 public class GSvg.GsTextPositioningElement : GSvg.GsTextContentElement,
                                    TextPositioningElement
 {
-  [Description (nick="::x")]
   public AnimatedLengthList x { get; set; }
-  [Description (nick="::y")]
+  [Description (nick="::x")]
+  public GsAnimatedLengthList mx {
+    get { return x as GsAnimatedLengthList; }
+    set { x = value as AnimatedLengthList; }
+  }
   public AnimatedLengthList y { get; set; }
-  [Description (nick="::dx")]
+  [Description (nick="::y")]
+  public GsAnimatedLengthList my {
+    get { return y as GsAnimatedLengthList; }
+    set { y = value as AnimatedLengthList; }
+  }
   public AnimatedLengthList dx { get; set; }
-  [Description (nick="::dy")]
+  [Description (nick="::dx")]
+  public GsAnimatedLengthList mdx {
+    get { return dx as GsAnimatedLengthList; }
+    set { dx = value as AnimatedLengthList; }
+  }
   public AnimatedLengthList dy { get; set; }
-  [Description (nick="::rotate")]
+  [Description (nick="::dy")]
+  public GsAnimatedLengthList mdy {
+    get { return dy as GsAnimatedLengthList; }
+    set { dy = value as AnimatedLengthList; }
+  }
   public AnimatedNumberList rotate { get; set; }
+  [Description (nick="::rotate")]
+  public GsAnimatedNumberList mrotate {
+    get { return rotate as GsAnimatedNumberList; }
+    set { rotate = value as AnimatedNumberList; }
+  }
 }
 
 public class GSvg.GsBaseTextElement : GSvg.GsTextPositioningElement,
@@ -59,7 +79,7 @@ public class GSvg.GsBaseTextElement : GSvg.GsTextPositioningElement,
   public AnimatedTransformList transform { get; set; }
 }
 public class GSvg.GsTextElement : GSvg.GsBaseTextElement,
-                                 TextElement
+                                 TextElement, MappeableElement
 {
   construct {
     initialize ("text");
@@ -90,6 +110,16 @@ public class GSvg.GsTextElement : GSvg.GsBaseTextElement,
     return ts;
   }
   public TextPathElement add_path (string path_ref, string txt) { return null; }
+  // MappeableElement
+  public string get_map_key () { return id; }
+}
+
+public class GSvg.GsTextElementMap : GomHashMap, TextElementMap {
+  public int length { get { return (this as GomHashMap).length; } }
+  construct { initialize (typeof (GsTextElement)); }
+  public TextElement TextElementMap.get (string id) {
+    return (this as GomHashMap).get (id) as TextElement;
+  }
 }
 
 public class GSvg.GsTSpanElement : GSvg.GsBaseTextElement,

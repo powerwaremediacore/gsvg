@@ -30,6 +30,7 @@ public interface ContainerElement : Object {
   public abstract LineElementMap lines { get; set; }
   public abstract PolylineElementMap polylines { get; set; }
   public abstract PolygonElementMap polygons { get; set; }
+  public abstract TextElementMap texts { get; set; }
 }
 
 public interface Element : Object, DomElement {
