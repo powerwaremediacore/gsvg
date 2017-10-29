@@ -85,8 +85,8 @@ public class GSvg.GsTextElement : GSvg.GsBaseTextElement,
     initialize ("text");
   }
   // API additions
-  private GsTSpanElementMap _spans_map;
   // ContainerElement
+  private GsTSpanElementMap _spans_map;
   public TSpanElementMap spans { get { return _spans_map as TSpanElementMap; } }
   public GsTSpanElementMap spans_map {
     get {
@@ -98,6 +98,20 @@ public class GSvg.GsTextElement : GSvg.GsBaseTextElement,
       if (_spans_map != null)
         clean_property_elements ("spans-maps");
       _spans_map = value;
+    }
+  }
+  private GsTRefElementMap _trefs_map;
+  public TRefElementMap trefs { get { return _trefs_map as TRefElementMap; } }
+  public GsTRefElementMap trefs_map {
+    get {
+      if (_trefs_map == null)
+        set_instance_property ("trefs-maps");
+      return _trefs_map;
+    }
+    set {
+      if (_trefs_map != null)
+        clean_property_elements ("trefs-maps");
+      _trefs_map = value;
     }
   }
   public DomText add_text (string txt) {

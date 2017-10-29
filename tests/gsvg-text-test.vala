@@ -88,6 +88,23 @@ class GSvgTest.Suite : Object
       message (svg.write_string ());
       assert ("<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\"><defs><text id=\"ReferencedText\" font-size=\"45\" fill=\"blue\" x=\"100\" y=\"100\">Inline character data</text></defs><text x=\"0\" y=\"0\" dx=\"100\" dy=\"100\" rotate=\"0\"><tref xlink:href=\"ReferencedText\"/></text><text x=\"0\" y=\"0\" dx=\"100\" dy=\"100\" rotate=\"0\"><tref xlink:href=\"ReferencedText\"/></text></svg>" in svg.write_string ());
     });
+    Test.add_func ("/gsvg/text/tref/read",
+    ()=>{var svg = new GSvg.GsSvg ();
+      try {
+        string str = """<svg xmlns="http://www.w3.org/2000/svg"><defs><text id="ReferencedText" font-size="45" fill="blue" x="100" y="100">Inline character data</text></defs><text id="text">IS<tref id="tref" xlink:href="ReferencedText"/></text></svg>""";
+        svg.read_from_string (str);
+        var t = svg.get_element_by_id ("text") as TextElement;
+        assert (t != null);
+        assert (t is TextElement);
+        var tr = svg.get_element_by_id ("tref") as TRefElement;
+        assert (tr != null);
+        assert (tr is TRefElement);
+        assert (tr.href != null);
+        assert (tr.href.value == "ReferencedText");
+        assert (t.trefs != null);
+        assert (t.trefs.get ("tref") is TRefElement);
+      } catch (GLib.Error e) { warning ("Error: "+e.message); }
+    });
     return Test.run ();
   }
 }

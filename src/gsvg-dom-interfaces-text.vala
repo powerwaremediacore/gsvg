@@ -63,8 +63,8 @@ public interface TextElement : Object,
                                    Transformable
 {
   // API Additions
-
   public abstract TSpanElementMap spans { get; }
+  public abstract TRefElementMap trefs { get; }
   /**
    * Adds a new {@link DomText} node with the given text
    */
