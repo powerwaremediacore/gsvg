@@ -837,19 +837,6 @@ public class GSvg.GsDocument : GXml.GomDocument,  GSvg.Document {
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd");
     append_child (dt);
   }
-  /**
-   * Adds an 'svg' to the document. It should be top most element in the tree.
-   *
-   * If you plan to set more complex descriptions, set @param desc to null.
-   *
-   * @param x a string representation of {@link AnimatedLength}, for x position, or null
-   * @param y a string representation of {@link AnimatedLength}, for y position, or null
-   * @param width a string representation of {@link AnimatedLength}, for width, or null
-   * @param height a string representation of {@link AnimatedLength}, for height, or null
-   * @param viewport a string representation of {@link Rect}, or null
-   * @param title a string for SVG title, or null
-   * @param desc a string for a text description, or null
-   */
   public SVGElement add_svg (string? x,
                             string? y,
                             string? width,
