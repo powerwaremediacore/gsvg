@@ -37,7 +37,7 @@ public interface Document : Object,  DomDocument {
    * @param y a string representation of {@link AnimatedLength}, for y position, or null
    * @param width a string representation of {@link AnimatedLength}, for width, or null
    * @param height a string representation of {@link AnimatedLength}, for height, or null
-   * @param viewport a string representation of {@link Rect}, or null
+   * @param viewbox a string representation of {@link AnimatedRect}, or null
    * @param title a string for SVG title, or null
    * @param desc a string for a text description, or null
    */
