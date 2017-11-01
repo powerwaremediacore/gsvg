@@ -159,5 +159,20 @@ public class GSvgTest.SvgTest {
         GLib.message ("ERROR: "+e.message);
       }
     });
+    Test.add_func ("/gsvg/document",
+    ()=>{
+      try {
+      string str = """<svg xmlns="http://www.w3.org/2000/svg"><line x1="0mm" y1="0mm" x2="50mm" y2="50mm"/></svg>""";
+      var svg = new GSvg.GsDocument ();
+      svg.read_from_string (str);
+      message (svg.write_string ());
+      message (svg.children.item (0).get_type().name());
+      message (svg.children.item (0).node_name);
+      message ((svg.children.item (0) is SVGElement).to_string ());
+      assert (svg.root_element != null);
+      } catch (GLib.Error e) {
+        GLib.message ("ERROR: "+e.message);
+      }
+    });
   }
 }

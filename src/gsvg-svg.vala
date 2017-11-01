@@ -831,11 +831,16 @@ public class GSvg.GsDocument : GXml.GomDocument,  GSvg.Document {
   }
   public string domain { get { return _domain; } }
   public string url { get { return _url; } }
-  public SVGElement root_element { owned get { return document_element as SVGElement; } }
+  public SVGElement root_element { owned get { return mroot_element; } }
+  public GsSvg mroot_element { get; set; }
   construct {
     var dt = new GomDocumentType (this, "svg", "-//W3C//DTD SVG 1.1//EN",
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd");
     append_child (dt);
+  }
+  public void read_from_string (string str) {
+    add_svg (null, null, null, null);
+    mroot_element.read_from_string (str);
   }
   public SVGElement add_svg (string? x,
                             string? y,
@@ -874,6 +879,7 @@ public class GSvg.GsDocument : GXml.GomDocument,  GSvg.Document {
       nsvg.add_desc (desc);
     }
     append_child (nsvg);
+    mroot_element = nsvg as GSvg.GsSvg;
     return nsvg;
   }
 }

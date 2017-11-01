@@ -28,6 +28,9 @@ public interface Document : Object,  DomDocument {
   public abstract string url { get; }
   public abstract SVGElement root_element { owned get; }
 
+  public abstract void read_from_string (string str);
+  public abstract string write_string ();
+
   /**
    * Adds an 'svg' to the document. It should be top most element in the tree.
    *
@@ -105,6 +108,8 @@ public interface SVGElement : Object,
   public abstract Transform create_svg_transform_from_matrix (Matrix matrix);
   public abstract DomElement? get_element_by_id (string elementId);
   // API additions
+  public abstract void read_from_string (string str);
+  public abstract string write_string ();
   // Shapes creation
   /**
    * @x a string representation of an {@link AnimatedLengthX}
