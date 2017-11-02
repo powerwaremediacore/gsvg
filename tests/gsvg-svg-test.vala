@@ -180,5 +180,26 @@ public class GSvgTest.SvgTest {
         GLib.message ("ERROR: "+e.message);
       }
     });
+    Test.add_func ("/gsvg/aspect-radio",
+    ()=>{
+      var aar = new GsAnimatedPreserveAspectRatio ();
+      aar.value = "xMaxYMax";
+      assert (aar.base_val.align == PreserveAspectRatio.Type.XMAXYMAX);
+      assert (aar.base_val.meet_or_slice == PreserveAspectRatio.MeetorSlice.UNKNOWN);
+      aar.value = "defer xMaxYMax";
+      assert (aar.base_val.align == PreserveAspectRatio.Type.XMAXYMAX);
+      assert (aar.base_val.meet_or_slice == PreserveAspectRatio.MeetorSlice.UNKNOWN);
+      aar.value = "xMaxYMax meet";
+      assert (aar.base_val.align == PreserveAspectRatio.Type.XMAXYMAX);
+      assert (aar.base_val.meet_or_slice == PreserveAspectRatio.MeetorSlice.MEET);
+      var str = """<svg preserveAspectRatio="xMaxYMax meet" />""";
+      var svg = new GSvg.GsSvg ();
+      svg.read_from_string (str);
+      assert (svg.preserve_aspect_ratio != null);
+      assert (svg.preserve_aspect_ratio.base_val.align == PreserveAspectRatio.Type.XMAXYMAX);
+      assert (svg.preserve_aspect_ratio.base_val.meet_or_slice == PreserveAspectRatio.MeetorSlice.MEET);
+      message (svg.preserve_aspect_ratio.value);
+      assert (svg.preserve_aspect_ratio.value == "xMaxYMax meet");
+    });
   }
 }

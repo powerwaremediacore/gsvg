@@ -370,7 +370,7 @@ public interface FitToViewBox : Object {
   // viewBox
   public abstract AnimatedRect view_box { get; set; }
   // preserveAspectRatio
-  public abstract AnimatedPreserveAspectRatio preserve_aspect_ratio { get; }
+  public abstract AnimatedPreserveAspectRatio preserve_aspect_ratio { get; set; }
 }
 
 public interface ZoomAndPan : Object {

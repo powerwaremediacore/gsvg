@@ -1,3 +1,4 @@
+/* -*- Mode: vala; indent-tabs-mode: nil; c-basic-offset: 2; tab-width: 2 -*- */
 /* gsvg-dom-interfaces-coord.vala
  *
  * Copyright (C) 2016 Daniel Espinosa <daniel.espinosa@pwmc.mx>
@@ -113,8 +114,8 @@ public interface AnimatedTransformList : Object {
 }
 
 public interface PreserveAspectRatio : Object {
-  public abstract short align { get; set; }
-  public abstract short meetOrSlice { get; set; }
+  public abstract Type align { get; set; }
+  public abstract MeetorSlice meet_or_slice { get; set; }
 
   // Alignment Types
   public enum Type {
@@ -128,20 +129,93 @@ public interface PreserveAspectRatio : Object {
     XMAXYMID = 7,
     XMINYMAX = 8,
     XMIDYMAX = 9,
-    XMAXYMAX = 10
+    XMAXYMAX = 10;
+    public static string? to_string (Type t) {
+      string s = null;
+      switch (t) {
+        case UNKNOWN:
+          break;
+        case NONE:
+          s = "none";
+          break;
+        case XMINYMIN:
+          s = "xMinYMin";
+          break;
+        case XMIDYMIN:
+          s = "xMidYMin";
+          break;
+        case XMAXYMIN:
+          s = "xMaxYMin";
+          break;
+        case XMINYMID:
+          s = "xMinYMid";
+          break;
+        case XMIDYMID:
+          s = "xMidYMid";
+          break;
+        case XMAXYMID:
+          s = "xMaxYMid";
+          break;
+        case XMINYMAX:
+          s = "xMinYMax";
+          break;
+        case XMIDYMAX:
+          s = "xMidYMax";
+          break;
+        case XMAXYMAX:
+          s = "xMaxYMax";
+          break;
+      }
+      return s;
+    }
+    public static Type parse (string? s) {
+      if (s == null || s == "") return UNKNOWN;
+      if (s.down () == "none".down ()) return NONE;
+      if (s.down () == "xMinYMin".down ()) return XMINYMIN;
+      if (s.down () == "xMidYMin".down ()) return XMIDYMIN;
+      if (s.down () == "xMaxYMin".down ()) return XMAXYMIN;
+      if (s.down () == "xMinYMid".down ()) return XMINYMID;
+      if (s.down () == "xMidYMid".down ()) return XMIDYMID;
+      if (s.down () == "xMaxYMid".down ()) return XMAXYMID;
+      if (s.down () == "xMinYMax".down ()) return XMINYMAX;
+      if (s.down () == "xMidYMax".down ()) return XMIDYMAX;
+      if (s.down () == "xMaxYMax".down ()) return XMAXYMAX;
+      return UNKNOWN;
+    }
   }
 
     // Meet-or-slice Types
   public enum MeetorSlice {
     UNKNOWN = 0,
     MEET = 1,
-    SLICE = 2
+    SLICE = 2;
+    public static string? to_string (MeetorSlice m) {
+      if (m == UNKNOWN) return null;
+      string s = null;
+      switch (m) {
+        case UNKNOWN:
+          break;
+        case MEET:
+          s = "meet";
+          break;
+        case SLICE:
+          s = "slice";
+          break;
+      }
+      return s;
+    }
+    public static MeetorSlice parse (string? str) {
+      if (str == "" || str == null) return UNKNOWN;
+      if (str.down () == "meet") return MEET;
+      if (str.down () == "slice") return SLICE;
+      return UNKNOWN;
+    }
   }
 }
 
-public interface AnimatedPreserveAspectRatio : Object {
-  public abstract PreserveAspectRatio baseVal { get; }
-  public abstract PreserveAspectRatio animVal { get; }
+public interface AnimatedPreserveAspectRatio : Object, GomProperty {
+  public abstract PreserveAspectRatio base_val { get; set; }
+  public abstract PreserveAspectRatio anim_val { get; set; }
 }
 
 } // GSvg

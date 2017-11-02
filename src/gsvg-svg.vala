@@ -357,7 +357,6 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
   protected float _screen_pixel_to_millimeter_y;
   protected bool _use_current_view;
   protected ViewSpec _current_view;
-  protected AnimatedPreserveAspectRatio _preserve_aspect_ratio;
   protected Point _current_translate;
 
   // FitToViewBox
@@ -369,9 +368,13 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
     set { view_box = value as AnimatedRect; }
   }
   // preserveAspectRatio
-  public AnimatedPreserveAspectRatio preserve_aspect_ratio {
-    get { return _preserve_aspect_ratio; }
+  public AnimatedPreserveAspectRatio preserve_aspect_ratio { get; set; }
+  [Description (nick="::preserveAspectRatio")]
+  public GsAnimatedPreserveAspectRatio mpreserve_aspect_ratio {
+    get { return preserve_aspect_ratio as GsAnimatedPreserveAspectRatio; }
+    set { preserve_aspect_ratio = value as AnimatedPreserveAspectRatio; }
   }
+
   // ZoomAndPan
   // * zoomAndPan
   public int zoom_and_pan { get; set; }
@@ -807,6 +810,64 @@ public class GSvg.GsAnimatedRect : Object,
   }
   public bool validate_value (string str) {
     return _base_val.validate_value (str); // FIXME:
+  }
+}
+
+
+public class GSvg.GsPreserveAspectRatio : Object, PreserveAspectRatio {
+  private string defer = null;
+  public PreserveAspectRatio.Type align { get; set; }
+  public PreserveAspectRatio.MeetorSlice meet_or_slice { get; set; }
+  public string? to_string () {
+    if (PreserveAspectRatio.Type.to_string (align) == null) return null;
+    string str = "";
+    if (defer != null)
+      str += defer+" ";
+    str += PreserveAspectRatio.Type.to_string (align);
+    message (str);
+    if (meet_or_slice != PreserveAspectRatio.MeetorSlice.UNKNOWN)
+      str += " "+PreserveAspectRatio.MeetorSlice.to_string (meet_or_slice);
+    return str;
+  }
+  public void parse (string str) {
+    if (str == "") return;
+    string a = str;
+    string m = "";
+    if (" " in str) {
+      string[] st = str.split (" ");
+      if (st.length == 0) return;
+      int p = 0;
+      if ("defer" == st[0].down ()) {
+        defer = st[0];
+        p++;
+      }
+      a = st[p];
+      if (p+1 < st.length)
+        p++;
+      m = st[p];
+    }
+    align = PreserveAspectRatio.Type.parse (a);
+    meet_or_slice = PreserveAspectRatio.MeetorSlice.parse (m);
+  }
+}
+
+public class GSvg.GsAnimatedPreserveAspectRatio : Object, GomProperty, AnimatedPreserveAspectRatio {
+  public PreserveAspectRatio base_val { get; set; }
+  public PreserveAspectRatio anim_val { get; set; }
+  public string? value {
+    owned get {
+      if (base_val == null)
+        return null;
+      return (base_val as GsPreserveAspectRatio).to_string ();
+    }
+    set {
+      if (base_val == null)
+        base_val = new GsPreserveAspectRatio () as PreserveAspectRatio;
+      (base_val as GsPreserveAspectRatio).parse (value);
+    }
+  }
+  public bool validate_value (string val) {
+    return true; // FIXME
   }
 }
 
