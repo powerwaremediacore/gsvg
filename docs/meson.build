@@ -1,12 +1,10 @@
 valadoc = find_program ('valadoc')
 outdir = CAMEL_CASE_NAME+'-'+API_VERSION
-gtkdoc_outdir = PROJECT_NAME+'-'+API_VERSION
+gtkdoc_outdir = CAMEL_CASE_NAME+'-'+API_VERSION
 valacapi = run_command ('valac', '--api-version')
 driver = '--driver='+valacapi.stdout().strip()
-pkgname = '--package-name='+'GXml-'+API_VERSION
+pkgname = '--package-name='+CAMEL_CASE_NAME+'-'+API_VERSION
 pkgversion = '--package-version='+PROJECT_VERSION
-vapidirgxml = '--vapidir='+join_paths (meson.current_source_dir (),'gxml')
-vapidirvapi = '--vapidir='+join_paths (meson.current_source_dir (),'vapi')
 docsdir = join_paths (get_option ('datadir'), 'devhelp','books')
 
 custom_target ('valadocs',
