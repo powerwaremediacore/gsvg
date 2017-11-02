@@ -29,6 +29,7 @@ public interface Document : Object,  DomDocument {
   public abstract SVGElement root_element { owned get; }
 
   public abstract void read_from_string (string str);
+  public abstract void read_from_file (GLib.File file);
   public abstract string write_string ();
 
   /**

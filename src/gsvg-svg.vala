@@ -384,14 +384,30 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
     return style; // FIXME
   }
   // SVGElement
-  [Description (nick="::x")]
   public AnimatedLength x { get; set; }
-  [Description (nick="::y")]
+  [Description (nick="::x")]
+  public GsAnimatedLength mx {
+    get { return x as GsAnimatedLength; }
+    set { x = value as AnimatedLength; }
+  }
   public AnimatedLength y { get; set; }
-  [Description (nick="::width")]
+  [Description (nick="::y")]
+  public GsAnimatedLength my {
+    get { return y as GsAnimatedLength; }
+    set { y = value as AnimatedLength; }
+  }
   public AnimatedLength width { get; set; }
-  [Description (nick="::height")]
+  [Description (nick="::width")]
+  public GsAnimatedLength mwidth {
+    get { return width as GsAnimatedLength; }
+    set { width = value as AnimatedLength; }
+  }
   public AnimatedLength height { get; set; }
+  [Description (nick="::height")]
+  public GsAnimatedLength mheight {
+    get { return height as GsAnimatedLength; }
+    set { height = value as AnimatedLength; }
+  }
   [Description (nick="::contentScriptType")]
   public string content_script_type { get; set; }
   [Description (nick="::contentStyleType")]
@@ -841,6 +857,10 @@ public class GSvg.GsDocument : GXml.GomDocument,  GSvg.Document {
   public void read_from_string (string str) {
     add_svg (null, null, null, null);
     mroot_element.read_from_string (str);
+  }
+  public void read_from_file (GLib.File file) {
+    add_svg (null, null, null, null);
+    mroot_element.read_from_file (file);
   }
   public SVGElement add_svg (string? x,
                             string? y,

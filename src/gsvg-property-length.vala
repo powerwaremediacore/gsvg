@@ -26,13 +26,8 @@ public class GSvg.GsAnimatedLength : Object,
                                     AnimatedLength
 {
   protected Length _base_val = new GsLength () as Length;
-  protected Length _anim_val = new GsLength () as Length;
-  protected string _attribute_name = "";
+  protected Length _anim_val;
   // GomProperty
-  public string attribute_name {
-    get { return _attribute_name; }
-    construct set { _attribute_name = value; }
-  }
   /**
    * Attribute's value in the parent {@link DomElement}.
    */
@@ -56,7 +51,11 @@ public class GSvg.GsAnimatedLength : Object,
   }
   // animVal
   public Length anim_val {
-    get { return _anim_val; }
+    get {
+      if (_anim_val == null)
+         _anim_val = new GsLength () as Length;
+      return _anim_val;
+    }
   }
 }
 
