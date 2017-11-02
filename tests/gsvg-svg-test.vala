@@ -162,7 +162,7 @@ public class GSvgTest.SvgTest {
     Test.add_func ("/gsvg/document",
     ()=>{
       try {
-      string str = """<svg xmlns="http://www.w3.org/2000/svg" width="8.5in"><line x1="0mm" y1="0mm" x2="50mm" y2="50mm"/></svg>""";
+      string str = """<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" viewBox="0 0 8.5 11"><line x1="0mm" y1="0mm" x2="50mm" y2="50mm"/></svg>""";
       var svg = new GSvg.GsDocument ();
       svg.read_from_string (str);
       message (svg.write_string ());
@@ -175,6 +175,7 @@ public class GSvgTest.SvgTest {
       assert (svg.root_element.width.base_val != null);
       assert (svg.root_element.width.base_val.value == 8.5);
       assert (svg.root_element.width.base_val.unit_type == Length.Type.IN);
+      assert (svg.root_element.view_box != null);
       } catch (GLib.Error e) {
         GLib.message ("ERROR: "+e.message);
       }

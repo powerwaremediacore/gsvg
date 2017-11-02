@@ -362,8 +362,12 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
 
   // FitToViewBox
   // * viewBox
-  [Description (nick="::viewBox")]
   public AnimatedRect view_box { get; set; }
+  [Description (nick="::viewBox")]
+  public GsAnimatedRect mview_box {
+    get { return view_box as GsAnimatedRect; }
+    set { view_box = value as AnimatedRect; }
+  }
   // preserveAspectRatio
   public AnimatedPreserveAspectRatio preserve_aspect_ratio {
     get { return _preserve_aspect_ratio; }
@@ -412,8 +416,12 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
   public string content_script_type { get; set; }
   [Description (nick="::contentStyleType")]
   public string content_style_type { get; set; }
-  [Description (nick="::viewport")]
   public Rect viewport { get; set; }
+  [Description (nick="::viewport")]
+  public GsRect mviewport {
+    get { return viewport as GsRect; }
+    set { viewport = value as Rect; }
+  }
   //pixelUnitToMillimeterX
   public float pixel_unit_to_millimeter_x { get { return _pixel_unit_to_millimeter_x; } }
   //pixelUnitToMillimeterY
