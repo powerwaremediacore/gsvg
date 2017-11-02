@@ -487,8 +487,8 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
     r.ry = new GsAnimatedLengthRY ();
     return r as Rect;
   }
-  public  Transform create_svg_transform () { return new GsTransform (); }
-  public  Transform create_svg_transform_from_matrix (Matrix matrix) { return null; }
+  public  Transform create_svg_transform () { return new GsTransform (); } // FIXME
+  public  Transform create_svg_transform_from_matrix (Matrix matrix) { return new GsTransform (); } //FIXME
   /**
    * Query elements by 'id' property
    */

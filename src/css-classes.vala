@@ -35,7 +35,7 @@ public class GsCSSStyleDeclaration : Object,
   public CSSRule       parent_rule { get; set; }
 
   public string        get_property_value (string property_name) { return ""; }
-  public CSSValue      get_property_css_value (string property_name) { return null; }
+  public CSSValue      get_property_css_value (string property_name) { return new GsCSSValue (); }
   public string        remove_property (string property_name) throws GLib.Error { return ""; }
   public string        get_property_priority (string property_name) { return ""; }
   public void          set_property (string property_name,
@@ -51,6 +51,11 @@ public class GsCSSStyleDeclaration : Object,
   public bool validate_value (string val) {
     return true; // FIXME:
   }
+}
+
+public class GsCSSValue : Object, CSSValue {
+  public string css_text { get; set; }
+  public CSSValue.Type css_value_type { get; set; }
 }
 
 } // GSvg

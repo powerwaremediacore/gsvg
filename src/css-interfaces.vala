@@ -42,8 +42,8 @@ public interface CSSStyleDeclaration : Object, GomProperty {
 }
 
 public interface CSSValue : Object {
-  public abstract string cssText { get; set; }
-  public abstract uint cssValueType { get; }
+  public abstract string css_text { get; set; }
+  public abstract Type css_value_type { get; set; }
   /**
    * UnitTypes
    */
