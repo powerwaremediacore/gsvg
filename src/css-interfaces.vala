@@ -24,7 +24,7 @@ namespace GSvg {
 // FIXME: This should be moved to its own library
 
 /**
- * CSS interfaces according with https://www.w3.org/TR/SVG/ version 1.1
+ * CSS interfaces according with [[https://www.w3.org/TR/SVG/]] version 1.1
  */
 public interface CSSStyleDeclaration : Object, GomProperty {
   public abstract string        css_text { get; set; }

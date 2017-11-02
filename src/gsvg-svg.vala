@@ -824,7 +824,6 @@ public class GSvg.GsPreserveAspectRatio : Object, PreserveAspectRatio {
     if (defer != null)
       str += defer+" ";
     str += PreserveAspectRatio.Type.to_string (align);
-    message (str);
     if (meet_or_slice != PreserveAspectRatio.MeetorSlice.UNKNOWN)
       str += " "+PreserveAspectRatio.MeetorSlice.to_string (meet_or_slice);
     return str;

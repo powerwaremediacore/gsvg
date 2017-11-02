@@ -55,7 +55,7 @@ public interface Document : Object,  DomDocument {
 }
 
 /**
- * Top level SVG Element node according with https://www.w3.org/TR/SVG/ version 1.1
+ * Top level SVG Element node according with [[https://www.w3.org/TR/SVG/]] version 1.1
  */
 public interface SVGElement : Object,
                           Element,
@@ -113,14 +113,14 @@ public interface SVGElement : Object,
   public abstract string write_string ();
   // Shapes creation
   /**
-   * @x a string representation of an {@link AnimatedLengthX}
-   * @y a string representation of an {@link AnimatedLengthY}
-   * @width a string representation of an {@link AnimatedLengthWidth}
-   * @height a string representation of an {@link AnimatedLengthHeight}
-   * @rx a string representation of an {@link AnimatedLengthRX}
-   * @ry a string representation of an {@link AnimatedLengthRY}
-   *
    * Creates a 'rect' node for rectangular shapes.
+   *
+   * @param x a string representation of an {@link AnimatedLengthX}
+   * @param y a string representation of an {@link AnimatedLengthY}
+   * @param width a string representation of an {@link AnimatedLengthWidth}
+   * @param height a string representation of an {@link AnimatedLengthHeight}
+   * @param rx a string representation of an {@link AnimatedLengthRX}
+   * @param ry a string representation of an {@link AnimatedLengthRY}
    */
   public abstract RectElement create_rect (string? x,
                                   string? y,
@@ -130,23 +130,23 @@ public interface SVGElement : Object,
                                   string? ry,
                                   string? style = null);
   /**
-   * @cx a string representation of an {@link AnimatedLengthCX}
-   * @cy a string representation of an {@link AnimatedLengthCY}
-   * @r a string representation of an {@link AnimatedLengthR}
-   *
    * Creates a 'circle' node for circle shapes.
+   *
+   * @param cx a string representation of an {@link AnimatedLengthCX}
+   * @param cy a string representation of an {@link AnimatedLengthCY}
+   * @param r a string representation of an {@link AnimatedLengthR}
    */
   public abstract CircleElement create_circle (string? cx,
                                   string? cy,
                                   string? cr,
                                   string? style = null);
   /**
-   * @cx a string representation of an {@link AnimatedLengthCX}
-   * @cy a string representation of an {@link AnimatedLengthCY}
-   * @rx a string representation of an {@link AnimatedLengthRX}
-   * @ry a string representation of an {@link AnimatedLengthRY}
-   *
    * Creates a 'ellipse' node for ellipse shapes.
+   *
+   * @param cx a string representation of an {@link AnimatedLengthCX}
+   * @param cy a string representation of an {@link AnimatedLengthCY}
+   * @param rx a string representation of an {@link AnimatedLengthRX}
+   * @param ry a string representation of an {@link AnimatedLengthRY}
    */
   public abstract EllipseElement create_ellipse (string? cx,
                                   string? cy,
@@ -154,12 +154,12 @@ public interface SVGElement : Object,
                                   string? cry,
                                   string? style = null);
   /**
-   * @lx1 a string representation of an {@link AnimatedLengthCX}
-   * @lx2 a string representation of an {@link AnimatedLengthCY}
-   * @lx1 a string representation of an {@link AnimatedLengthRX}
-   * @ly2 a string representation of an {@link AnimatedLengthRY}
-   *
    * Creates a 'line' node for line shapes.
+   *
+   * @param lx1 a string representation of an {@link AnimatedLengthCX}
+   * @param lx2 a string representation of an {@link AnimatedLengthCY}
+   * @param lx1 a string representation of an {@link AnimatedLengthRX}
+   * @param ly2 a string representation of an {@link AnimatedLengthRY}
    */
   public abstract LineElement create_line (string? lx1,
                                   string? ly1,
@@ -167,28 +167,28 @@ public interface SVGElement : Object,
                                   string? ly2,
                                   string? style = null);
   /**
-   * @points a string representation of an {@link ArrayList<Point>}
-   *
    * Creates a 'line' node for line shapes.
+   *
+   * @param points a string representation of a list of {@link Point}
    */
   public abstract PolylineElement create_polyline (string points,
                                    string? style = null);
   /**
-   * @points a string representation of an {@link ArrayList<Point>}
-   *
    * Creates a 'line' node for line shapes.
+   *
+   * @param points a string representation of a list of {@link Point}
    */
   public abstract PolygonElement create_polygon (string points,
                                    string? style = null);
   /**
-   * @text a text to be displayed
-   * @xs a list of coordinates
-   * @ys a list of coordinates
-   * @dxs a list of coordinates
-   * @dys a list of coordinates
-   * @rotae a list of numbers
-   *
    * Creates a 'line' node for line shapes.
+   *
+   * @param text a text to be displayed
+   * @param xs a list of coordinates
+   * @param ys a list of coordinates
+   * @param dxs a list of coordinates
+   * @param dys a list of coordinates
+   * @param rotae a list of numbers
    */
   public abstract TextElement create_text (string? text,
                                    string? xs,
@@ -208,7 +208,7 @@ public interface SVGElement : Object,
   /**
    * Adds a 'title' node to current SVG one.
    *
-   * @param
+   * @param text a title to be added
    */
   public abstract TitleElement add_title (string text);
   /**
