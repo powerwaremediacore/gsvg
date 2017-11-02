@@ -247,13 +247,13 @@ public interface AnimatedLengthList : Object, GomProperty {
 }
 
 public interface Angle : Object {
-  public abstract int unitType { get; }
+  public abstract Angle.Type unit_type { get; set; }
   public abstract  double value { get; set; }
-  public abstract  double valueInSpecifiedUnits { get; set; }
-  public abstract  string valueAsString { get; set; }
+  public abstract  double value_in_specified_units { get; set; }
+  public abstract  string value_as_string { get; set; }
 
-  public abstract void newValueSpecifiedUnits (int unitType, double valueInSpecifiedUnits) throws GLib.Error;
-  public abstract void convertToSpecifiedUnits (int unitType) throws GLib.Error;
+  public abstract void new_value_specified_units (Type unit_type, double value_in_specified_units) throws GLib.Error;
+  public abstract void convert_to_specified_units (Type unit_type) throws GLib.Error;
   /**
    * Angle Unit Types
    */

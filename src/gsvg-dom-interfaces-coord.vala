@@ -46,7 +46,6 @@ public interface PointList : Object, GomProperty {
 }
 
 public interface Matrix : Object {
-
   public abstract double a { get; set; }
   public abstract double b { get; set; }
   public abstract double c { get; set; }
@@ -54,17 +53,17 @@ public interface Matrix : Object {
   public abstract double e { get; set; }
   public abstract double f { get; set; }
 
-  public abstract Matrix multiply(Matrix secondMatrix);
-  public abstract Matrix inverse() throws GLib.Error;
-  public abstract Matrix translate(double x, double y);
-  public abstract Matrix scale(double scaleFactor);
-  public abstract Matrix scaleNonUniform(double scaleFactorX, double scaleFactorY);
-  public abstract Matrix rotate(double angle);
-  public abstract Matrix rotateFromVector(double x, double y) throws GLib.Error;
-  public abstract Matrix flipX();
-  public abstract Matrix flipY();
-  public abstract Matrix skewX(double angle);
-  public abstract Matrix skewY(double angle);
+  public abstract Matrix multiply (Matrix second_matrix);
+  public abstract Matrix inverse () throws GLib.Error;
+  public abstract Matrix translate (double x, double y);
+  public abstract Matrix scale (double scale_factor);
+  public abstract Matrix scale_non_uniform (double scale_factor_x, double scale_factor_y);
+  public abstract Matrix rotate (double angle);
+  public abstract Matrix rotate_from_vector (double x, double y) throws GLib.Error;
+  public abstract Matrix flip_x ();
+  public abstract Matrix flip_y ();
+  public abstract Matrix skew_x (double angle);
+  public abstract Matrix skew_y (double angle);
 }
 
 public interface Transform : Object {

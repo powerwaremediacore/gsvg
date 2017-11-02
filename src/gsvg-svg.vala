@@ -472,11 +472,11 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
   public  bool check_enclosure (Element element, Rect rect) { return false; }
   public  void deselect_all () {}
   // Creators
-  public  Number create_svg_number () { return null; }
-  public  Length create_svg_length () { return null; }
-  public  Angle create_svg_angle () { return null; }
-  public  Point create_svg_point () { return null; }
-  public  Matrix create_svg_matrix() { return null; }
+  public  Number create_svg_number () { return new GsNumber (); }
+  public  Length create_svg_length () { return new GsLength (); }
+  public  Angle create_svg_angle () { return new GsAngle (); }
+  public  Point create_svg_point () { return new GsPoint (); }
+  public  Matrix create_svg_matrix() { return new GsMatrix (); }
   public  Rect create_svg_rect () {
     var r = new GsRectElement ();
     r.x = new GsAnimatedLengthX ();
@@ -487,7 +487,7 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
     r.ry = new GsAnimatedLengthRY ();
     return r as Rect;
   }
-  public  Transform create_svg_transform () { return null; }
+  public  Transform create_svg_transform () { return new GsTransform (); }
   public  Transform create_svg_transform_from_matrix (Matrix matrix) { return null; }
   /**
    * Query elements by 'id' property

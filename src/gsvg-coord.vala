@@ -191,3 +191,33 @@ public class GSvg.GsAnimatedTransformList : Object,
     return base_val.validate_value (val);
   }
 }
+
+public class GSvg.GsAngle : Object, Angle {
+  public Angle.Type unit_type { get; set; }
+  public double value { get; set; }
+  public double value_in_specified_units { get; set; }
+  public string value_as_string { get; set; }
+
+  public void new_value_specified_units (Angle.Type unit_type, double value_in_specified_units) throws GLib.Error {}
+  public void convert_to_specified_units (Angle.Type unit_type) throws GLib.Error {}
+}
+public class GSvg.GsMatrix : Object, Matrix {
+  public double a { get; set; }
+  public double b { get; set; }
+  public double c { get; set; }
+  public double d { get; set; }
+  public double e { get; set; }
+  public double f { get; set; }
+
+  public Matrix multiply (Matrix second_matrix) { return new GsMatrix (); }
+  public Matrix inverse () throws GLib.Error { return new GsMatrix (); }
+  public Matrix translate (double x, double y) { return new GsMatrix (); }
+  public Matrix scale (double scaleFactor) { return new GsMatrix (); }
+  public Matrix scale_non_uniform (double scaleFactorX, double scaleFactorY) { return new GsMatrix (); }
+  public Matrix rotate (double angle) { return new GsMatrix (); }
+  public Matrix rotate_from_vector (double x, double y) throws GLib.Error { return new GsMatrix (); }
+  public Matrix flip_x () { return new GsMatrix (); }
+  public Matrix flip_y () { return new GsMatrix (); }
+  public Matrix skew_x (double angle) { return new GsMatrix (); }
+  public Matrix skew_y (double angle) { return new GsMatrix (); }
+}
