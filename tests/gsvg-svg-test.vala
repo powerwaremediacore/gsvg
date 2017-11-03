@@ -229,5 +229,43 @@ public class GSvgTest.SvgTest {
         assert (svg.root_element.svgs.length == 1);
       } catch (GLib.Error e) { warning ("Error: "+e.message); }
     });
+    Test.add_func ("/gsvg/transform",
+    ()=>{
+      try {
+        var tl = new GsAnimatedTransformList ();
+        string str = "translate(10)";
+        message (str);
+        tl.value = str;
+        assert (tl.base_val != null);
+        assert (tl.base_val.number_of_items == 1);
+        var t = tl.base_val.get_item (0);
+        assert (t != null);
+        assert (t.ttype == Transform.Type.TRANSLATE);
+        assert (t.matrix != null);
+        assert (t.matrix.a == 1.0);
+        assert (t.matrix.b == 0.0);
+        assert (t.matrix.c == 0.0);
+        assert (t.matrix.d == 1.0);
+        assert (t.matrix.e == 10.0);
+        assert (t.matrix.f == 0.0);
+        assert (str == tl.value);
+        str = "translate(11 21)";
+        message (str);
+        tl.value = str;
+        assert (tl.base_val != null);
+        assert (tl.base_val.number_of_items == 1);
+        var t2 = tl.base_val.get_item (0);
+        assert (t2 != null);
+        assert (t2.ttype == Transform.Type.TRANSLATE);
+        assert (t2.matrix != null);
+        assert (t2.matrix.a == 1.0);
+        assert (t2.matrix.b == 0.0);
+        assert (t2.matrix.c == 0.0);
+        assert (t2.matrix.d == 1.0);
+        assert (t2.matrix.e == 11.0);
+        assert (t2.matrix.f == 21.0);
+        assert (str == tl.value);
+      } catch (GLib.Error e) { warning ("Error: "+e.message); }
+    });
   }
 }

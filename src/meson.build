@@ -67,7 +67,7 @@ lib = library(VERSIONED_PROJECT_NAME,
 	vala_header : PROJECT_NAME+'.h',
 	vala_vapi : VAPI_NAME,
 	vala_gir : GIR_NAME,
-	dependencies : [namespaceinfo_dep, gxml],
+	dependencies : [namespaceinfo_dep, m_dep, gxml],
 	install : true,
 	install_dir : [
 		get_option('libdir'),

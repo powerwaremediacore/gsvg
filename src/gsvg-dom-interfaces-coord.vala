@@ -67,7 +67,7 @@ public interface Matrix : Object {
 }
 
 public interface Transform : Object {
-  public abstract int ttype { get; set; }
+  public abstract Type ttype { get; set; }
   public abstract Matrix matrix { get; set; }
   public abstract double angle { get; set; }
 

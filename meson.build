@@ -15,6 +15,9 @@ PCDEPS = 'gxml-0.16'
 inc_rooth = include_directories ('.')
 inc_rooth_dep = declare_dependency (include_directories : inc_rooth)
 
+cc = meson.get_compiler('c')
+m_dep = cc.find_library('m', required: true)
+
 #subdir('po')
 subdir('src')
 subdir('data')

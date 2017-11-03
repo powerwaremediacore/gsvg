@@ -93,20 +93,102 @@ public class GSvg.GsPointList : ArrayList<Point>,
 }
 
 public class GSvg.GsTransform : Object, Transform {
-  public int ttype { get; set; }
+  private bool ey = false;
+  public Transform.Type ttype { get; set; }
   public Matrix matrix { get; set; }
   public double angle { get; set; }
 
-  public void set_translate (double tx, double ty) throws GLib.Error {}
-  public void set_scale (double sx, double sy) throws GLib.Error {}
-  public void set_rotate (double angle, double cx, double cy) throws GLib.Error {}
-  public void set_skew_x (double angle) throws GLib.Error {}
-  public void set_skew_y (double angle) throws GLib.Error {}
+  public void set_translate (double tx, double ty) throws GLib.Error {
+    ttype = Transform.Type.TRANSLATE;
+    matrix = new GsMatrix ();
+    matrix.a = 1;
+    matrix.b = 0;
+    matrix.c = 0;
+    matrix.d = 1;
+    matrix.e = tx;
+    matrix.f = ty;
+  }
+  public void set_scale (double sx, double sy) throws GLib.Error {
+    ttype = Transform.Type.SCALE;
+    matrix = new GsMatrix ();
+    matrix.a = sx;
+    matrix.b = 0;
+    matrix.c = 0;
+    matrix.d = sy;
+    matrix.e = 0;
+    matrix.f = 0;
+  }
+  public void set_rotate (double angle, double cx, double cy) throws GLib.Error {
+    ttype = Transform.Type.ROTATE;
+    matrix = new GsMatrix ();
+    this.angle = angle;
+    matrix.a = Math.cos (angle);
+    matrix.b = Math.sin (angle);
+    matrix.c = -(Math.sin (angle));
+    matrix.d = Math.cos (angle);
+    // FIXME:
+    matrix.e = cx;
+    matrix.f = cy;
+  }
+  public void set_skew_x (double angle) throws GLib.Error {
+    ttype = Transform.Type.SKEWX;
+    matrix = new GsMatrix ();
+    this.angle = angle;
+    matrix.a = 1;
+    matrix.b = 0;
+    matrix.c = Math.tan (angle);
+    matrix.d = 0;
+    matrix.e = 0;
+    matrix.f = 0;
+  }
+  public void set_skew_y (double angle) throws GLib.Error {
+    ttype = Transform.Type.SKEWY;
+    matrix = new GsMatrix ();
+    this.angle = angle;
+    matrix.a = 1;
+    matrix.b = Math.tan (angle);
+    matrix.c = 0;
+    matrix.d = 1;
+    matrix.e = 0;
+    matrix.f = 0;
+  }
   public void parse (string str) {
-    // FIXME
+    if ("translate" in str) {
+      if (!("(" in str)) return;
+      if (!(")" in str)) return;
+      string vals = str.down ().replace("translate","");
+      vals = vals.replace ("(","");
+      vals = vals.replace (")","");
+      string x = vals;
+      string y = "0";
+      ey = false;
+      if (" " in vals) {
+        string[] astr = vals.split (" ");
+        if (astr.length > 0)
+          x = astr[0];
+        if (astr.length > 1) {
+          ey = true;
+          y = astr[1];
+        }
+      }
+      message ("x=%s, y=%s".printf (x, y));
+      set_translate (double.parse (x), double.parse (y));
+    }
+    // FIXME: add all other types: matrix rotate skewx skewy
   }
   public string to_string () {
-    return "";
+    string s = "";
+    if (ttype == Transform.Type.TRANSLATE && matrix != null) {
+      s += "translate(";
+      s += "%0g".printf (matrix.e);
+      if (ey) {
+        s += " ";
+        s += "%0g".printf (matrix.f);
+      }
+      s += ")";
+    }
+    message (s);
+    return s;
   }
 }
 
@@ -114,6 +196,8 @@ public class GSvg.GsTransformList : ArrayList<Transform>,
                                   GomProperty,
                                   TransformList
 {
+
+  static string KEYWORDS = "matrix translate scale rotate skewX skeyY";
   private string separator = " ";
   public int number_of_items { get { return size; } }
 
@@ -143,14 +227,11 @@ public class GSvg.GsTransformList : ArrayList<Transform>,
   }
   public string? value {
     set {
-      if (" " in value) separator = " ";
-      if ("," in value) separator = ",";
-      string[] tks = value.split (separator);
-      for (int i = 0; i < tks.length; i++) {
-        var p = new GsTransform ();
-        p.parse (tks[i]);
-        add (p as Transform);
+      if (value == null) {
+        clear ();
+        return;
       }
+      parse (value);
     }
     owned get {
       if (size == 0) return null;
@@ -168,6 +249,45 @@ public class GSvg.GsTransformList : ArrayList<Transform>,
   }
   public Transform create_svg_transform_from_matrix (Matrix matrix) { return new GsTransform (); }
   public Transform consolidate () throws GLib.Error { return new GsTransform (); }
+  private void parse (string str) {
+    clear ();
+    message ("Parsing "+str);
+    string kw = "";
+    bool skip = false;
+    int i = 0;
+    unichar c;
+    while (str.get_next_char (ref i, out c)) {
+      message ("Current="+c.to_string ());
+      kw = "";
+      skip = false;
+      while (c.to_string () != "(") {
+        kw += c.to_string ();
+        if (!str.get_next_char (ref i, out c)) return;
+      }
+      message (kw);
+      if (!(kw.replace("(","") in KEYWORDS)) skip = true;
+      kw += c.to_string();
+      if (!str.get_next_char (ref i, out c)) return;
+      while (c.to_string () != ")") {
+        kw += c.to_string ();
+        if (!str.get_next_char (ref i, out c)) return;
+      }
+      kw += c.to_string();
+      message (kw);
+      if (!skip) {
+        var tr = new GsTransform ();
+        tr.parse (kw);
+        add (tr);
+        message ("Added: "+kw+", Items: "+size.to_string ());
+      }
+      if (!str.get_next_char (ref i, out c)) return;
+      while (c.to_string () == " ") {
+        if (!str.get_next_char (ref i, out c)) return;
+      }
+      message ("Pos: "+i.to_string ()+" C: "+c.to_string ());
+    }
+    message ("Items: "+size.to_string ());
+  }
 }
 
 public class GSvg.GsAnimatedTransformList : Object,

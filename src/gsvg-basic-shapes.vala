@@ -25,6 +25,11 @@ public class GSvg.GsTransformable : GSvg.GsCommonShapeElement,
 {
   // Transformable
   public AnimatedTransformList transform { get; set; }
+  [Description (nick="::transform")]
+  public GsAnimatedTransformList mtransform {
+    get { return transform as GsAnimatedTransformList; }
+    set { transform = value as AnimatedTransformList; }
+  }
 }
 
 public class GSvg.GsRectElement : GSvg.GsTransformable,
