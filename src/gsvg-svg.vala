@@ -952,11 +952,11 @@ public class GSvg.GsDocument : GXml.GomDocument,  GSvg.Document {
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd");
     try { append_child (dt); } catch (GLib.Error e) { warning ("Error: "+e.message); }
   }
-  public new void read_from_string (string str) {
+  public new void read_from_string (string str) throws GLib.Error {
     add_svg (null, null, null, null);
     mroot_element.read_from_string (str);
   }
-  public new void read_from_file (GLib.File file) {
+  public new void read_from_file (GLib.File file) throws GLib.Error {
     add_svg (null, null, null, null);
     mroot_element.read_from_file (file);
   }
