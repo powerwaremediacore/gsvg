@@ -28,7 +28,7 @@ class GSvgTest.Suite : Object
     Test.add_func ("/gsvg/ellipse/style",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var c = svg.create_ellipse ("0","0","10", "10", "10");
         svg.append_child (c);
         message (svg.write_string ());
@@ -37,7 +37,7 @@ class GSvgTest.Suite : Object
     });
     Test.add_func ("/gsvg/ellipse/read",
     ()=>{
-      var svg = new GSvg.GsSvg ();
+      var svg = new GSvg.GsSVGElement ();
       string str = """<?xml version="1.0"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1e+03 3e+02" width="10cm" height="3cm"><desc>Example tspan01 - using tspan to change visual attributes</desc><g font-family="Verdana" font-size="45"><text fill="blue" x="200" y="150">You are <tspan font-weight="bold" fill="red">not</tspan> a banana</text></g><ellipse id="ellipse" fill="none" stroke="blue" stroke-width="2" cx="1" cy="1" rx="250" ry="150"/></svg>""";

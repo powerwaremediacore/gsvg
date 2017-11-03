@@ -29,7 +29,7 @@ class GSvgTest.Suite : Object
     Test.add_func ("/gsvg/g/init",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var g = svg.add_g ();
         var t = svg.create_text ("HELLO WORLD", "0", "0", "10", "10", "0");
         g.append_child (t);

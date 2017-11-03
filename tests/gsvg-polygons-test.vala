@@ -48,7 +48,7 @@ class GSvgTest.Suite : Object
     Test.add_func ("/gsvg/polygon/init",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var pl = svg.create_polygon ("1,2 4,6 7,9");
         assert (pl is DomElement);
         assert (pl.points != null);
@@ -60,7 +60,7 @@ class GSvgTest.Suite : Object
     });
     Test.add_func ("/gsvg/polygon/read",
     ()=>{
-      var svg = new GSvg.GsSvg ();
+      var svg = new GSvg.GsSVGElement ();
       string str = """<?xml version="1.0"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1e+03 3e+02" width="10cm" height="3cm"><desc>Example tspan01 - using tspan to change visual attributes</desc><g font-family="Verdana" font-size="45"><text fill="blue" x="200" y="150">You are <tspan font-weight="bold" fill="red">not</tspan> a banana</text></g><polygon id="polygon" fill="none" stroke="blue" stroke-width="2" points="0,0 10,0 20,1 15,10 10,10"/></svg>""";

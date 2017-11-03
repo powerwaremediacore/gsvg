@@ -29,7 +29,7 @@ class GSvgTest.Suite : Object
     Test.add_func ("/gsvg/text/write",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var t = svg.create_text ("HELLO WORLD", "0", "0", "10", "10", "0");
         svg.append_child (t);
         message (svg.write_string ());
@@ -37,7 +37,7 @@ class GSvgTest.Suite : Object
       } catch (GLib.Error e) { warning ("Error: "+e.message); }
     });
     Test.add_func ("/gsvg/text/read",
-    ()=>{var svg = new GSvg.GsSvg ();
+    ()=>{var svg = new GSvg.GsSVGElement ();
       string str = """<svg xmlns="http://www.w3.org/2000/svg"><text id="text" x="0" y="0" dx="10" dy="10" rotate="0">HELLO WORLD</text></svg>""";
       svg.read_from_string (str);
       var t = svg.get_element_by_id ("text") as TextElement;
@@ -50,7 +50,7 @@ class GSvgTest.Suite : Object
     Test.add_func ("/gsvg/text/span/write",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var t = svg.create_text ("IS", "0", "0", "10", "10", "0");
         svg.append_child (t);
         t.add_span ("TIME");
@@ -61,7 +61,7 @@ class GSvgTest.Suite : Object
     });
     Test.add_func ("/gsvg/text/span/read",
     ()=>{
-      var svg = new GSvg.GsSvg ();
+      var svg = new GSvg.GsSVGElement ();
       string str = """<svg xmlns="http://www.w3.org/2000/svg"><text id="text" x="0" y="0" dx="10" dy="10" rotate="0">IS<tspan id = "span">TIME</tspan>FOR ME</text></svg>""";
       svg.read_from_string (str);
       var t = svg.get_element_by_id ("text") as TextElement;
@@ -77,7 +77,7 @@ class GSvgTest.Suite : Object
     Test.add_func ("/gsvg/text/tref/write",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var tr = svg.create_text ("Inline character data","100", "100", null, null, null);
         tr.font_size = "45";
         tr.fill = "blue";
@@ -97,7 +97,7 @@ class GSvgTest.Suite : Object
     });
     Test.add_func ("/gsvg/text/tref/read",
     ()=>{
-      var svg = new GSvg.GsSvg ();
+      var svg = new GSvg.GsSVGElement ();
       string str = """<svg xmlns="http://www.w3.org/2000/svg"><defs><text id="ReferencedText" font-size="45" fill="blue" x="100" y="100">Inline character data</text></defs><text id="text">IS<tref id="tref" xlink:href="ReferencedText"/></text></svg>""";
       svg.read_from_string (str);
       var t = svg.get_element_by_id ("text") as TextElement;

@@ -365,7 +365,7 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
 /**
  * 'svg' node.
  */
-public class GSvg.GsSvg : GSvg.GsContainerElement,
+public class GSvg.GsSVGElement : GSvg.GsContainerElement,
                         FitToViewBox,
                         ZoomAndPan,
                         ViewCSS,
@@ -946,7 +946,7 @@ public class GSvg.GsDocument : GXml.GomDocument,  GSvg.Document {
   public string domain { get { return _domain; } }
   public string url { get { return _url; } }
   public SVGElement root_element { owned get { return mroot_element; } }
-  public GsSvg mroot_element { get; set; }
+  public GsSVGElement mroot_element { get; set; }
   construct {
     var dt = new GomDocumentType (this, "svg", "-//W3C//DTD SVG 1.1//EN",
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd");
@@ -968,7 +968,7 @@ public class GSvg.GsDocument : GXml.GomDocument,  GSvg.Document {
                             string? title = null,
                             string? desc = null)
   {
-    var nsvg = Object.new (typeof (GSvg.GsSvg),
+    var nsvg = Object.new (typeof (GSvg.GsSVGElement),
                           "owner-document", this) as SVGElement;
     if (x != null) {
       nsvg.x = new GsAnimatedLength ();
@@ -997,7 +997,7 @@ public class GSvg.GsDocument : GXml.GomDocument,  GSvg.Document {
       nsvg.add_desc (desc);
     }
     try { append_child (nsvg); } catch (GLib.Error e) { warning ("Error: "+e.message); }
-    mroot_element = nsvg as GSvg.GsSvg;
+    mroot_element = nsvg as GSvg.GsSVGElement;
     return nsvg;
   }
 }

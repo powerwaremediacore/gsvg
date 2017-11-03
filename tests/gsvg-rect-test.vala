@@ -28,7 +28,7 @@ class GSvgTest.Suite : Object
     Test.add_func ("/gsvg/rect/style",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var r = svg.create_rect ("0mm","0mm","50mm","50mm", null, null);
         assert (r.style != null);
         r.style.value = "stroke-width:1mm";
@@ -38,7 +38,7 @@ class GSvgTest.Suite : Object
     });
     Test.add_func ("/gsvg/rect/read",
     ()=>{
-      var svg = new GSvg.GsSvg ();
+      var svg = new GSvg.GsSVGElement ();
       string str = """<?xml version="1.0"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1e+03 3e+02" width="10cm" height="3cm"><desc>Example tspan01 - using tspan to change visual attributes</desc><g font-family="Verdana" font-size="45"><text fill="blue" x="200" y="150">You are <tspan font-weight="bold" fill="red">not</tspan> a banana</text></g><g font-family="Verdana" font-size="45"><text fill="blue" x="200" y="150">You are <tspan font-weight="bold" fill="red">not</tspan> a banana</text></g><rect id="rect" fill="none" stroke="blue" stroke-width="2" x="1" y="1" width="998" height="298" rx="20" ry="30"/></svg>""";

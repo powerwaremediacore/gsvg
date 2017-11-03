@@ -27,7 +27,7 @@ public class GSvgTest.SvgTest {
     Test.add_func ("/gsvg/svg/construct/default",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var parser = new XParser (svg);
         string s = parser.write_string ();
         assert (s != null);
@@ -47,7 +47,7 @@ public class GSvgTest.SvgTest {
     Test.add_func ("/gsvg/rect-element/construct/default",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var parser = new XParser (svg);
         string s = parser.write_string ();
         assert (s != null);
@@ -64,7 +64,7 @@ public class GSvgTest.SvgTest {
     Test.add_func ("/gsvg/rect-element/construct/initialize",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var parser = new XParser (svg);
         string s = parser.write_string ();
         assert (s != null);
@@ -95,7 +95,7 @@ public class GSvgTest.SvgTest {
     Test.add_func ("/gsvg/circle-element/construct/initialize",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var parser = new XParser (svg);
         string s = parser.write_string ();
         assert (s != null);
@@ -118,7 +118,7 @@ public class GSvgTest.SvgTest {
     Test.add_func ("/gsvg/ellipse-element/construct/initialize",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var parser = new XParser (svg);
         string s = parser.write_string ();
         assert (s != null);
@@ -145,7 +145,7 @@ public class GSvgTest.SvgTest {
     Test.add_func ("/gsvg/line-element/construct/initialize",
     ()=>{
       try {
-        var svg = new GSvg.GsSvg ();
+        var svg = new GSvg.GsSVGElement ();
         var parser = new XParser (svg);
         string s = parser.write_string ();
         assert (s != null);
@@ -203,7 +203,7 @@ public class GSvgTest.SvgTest {
       assert (aar.base_val.align == PreserveAspectRatio.Type.XMAXYMAX);
       assert (aar.base_val.meet_or_slice == PreserveAspectRatio.MeetorSlice.MEET);
       var str = """<svg preserveAspectRatio="xMaxYMax meet" />""";
-      var svg = new GSvg.GsSvg ();
+      var svg = new GSvg.GsSVGElement ();
       svg.read_from_string (str);
       assert (svg.preserve_aspect_ratio != null);
       assert (svg.preserve_aspect_ratio.base_val.align == PreserveAspectRatio.Type.XMAXYMAX);
