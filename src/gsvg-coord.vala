@@ -24,7 +24,7 @@ public class GSvg.GsPoint : Object, Point {
   public double x { get; set; }
   public double y { get; set; }
 
-  public Point matrix_transform (Matrix matrix) { return null; }
+  public Point matrix_transform (Matrix matrix) { return new GsPoint (); }
   public void parse (string str) {
     string[] p = str.split (",");
     if (p.length == 0) return;
@@ -43,7 +43,7 @@ public class GSvg.GsPointList : ArrayList<Point>,
 {
   public int number_of_items { get { return size; } }
 
-  public void  clear () throws GLib.Error { clear (); }
+  public new void clear () throws GLib.Error { (this as ArrayList).clear (); }
   public Point initialize (Point new_item) throws GLib.Error {
     add (new_item);
     return new_item;
@@ -117,7 +117,7 @@ public class GSvg.GsTransformList : ArrayList<Transform>,
   private string separator = " ";
   public int number_of_items { get { return size; } }
 
-  public void  clear () throws GLib.Error { clear (); }
+  public new void  clear () throws GLib.Error { (this as ArrayList).clear (); }
   public Transform initialize (Transform new_item) throws GLib.Error {
     add (new_item);
     return new_item;

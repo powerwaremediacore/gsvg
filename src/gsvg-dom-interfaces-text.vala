@@ -66,7 +66,7 @@ public interface TextElement : Object,
   public abstract TSpanElementMap spans { get; }
   public abstract TRefElementMap trefs { get; }
   /**
-   * Adds a new {@link DomText} node with the given text
+   * Adds a new {@link GXml.DomText} node with the given text
    */
   public abstract DomText         add_text (string txt);
   /**
@@ -108,7 +108,7 @@ public interface TRefElementMap : Object {
 public interface TextPathElement : Object,
                                    TextContentElement,
                                    URIReference {
-  public abstract AnimatedLength startOffset { get; set; }
+  public abstract AnimatedLength start_off_set { get; set; }
   public abstract AnimatedEnumeration method { get; set; }
   public abstract AnimatedEnumeration spacing { get; set; }
 }

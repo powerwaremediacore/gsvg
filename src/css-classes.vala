@@ -38,7 +38,7 @@ public class GsCSSStyleDeclaration : Object,
   public CSSValue      get_property_css_value (string property_name) { return new GsCSSValue (); }
   public string        remove_property (string property_name) throws GLib.Error { return ""; }
   public string        get_property_priority (string property_name) { return ""; }
-  public void          set_property (string property_name,
+  public new void          CSSStyleDeclaration.set_property (string property_name,
                                      string value,
                                      string priority) throws GLib.Error { return; }
   public string        item (uint index) { return ""; }

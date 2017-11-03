@@ -137,8 +137,8 @@ public interface StringList : Object {
 
 
 public interface AnimatedEnumeration : Object {
-  public abstract int baseVal { get; set; }
-  public abstract int animVal { get; }
+  public abstract int base_val { get; set; }
+  public abstract int anim_val { get; set; }
 }
 
 public interface AnimatedInteger : Object {

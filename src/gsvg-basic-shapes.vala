@@ -76,8 +76,12 @@ public class GSvg.GsRectElement : GSvg.GsTransformable,
 
 public class GSvg.GsRectElementMap : GomHashMap, RectElementMap {
   public int length { get { return (this as GomHashMap).length; } }
-  construct { initialize (typeof (GsRectElement)); }
-  public RectElement RectElementMap.get (string id) {
+  construct {
+    try {
+      initialize (typeof (GsRectElement));
+    } catch (GLib.Error e) { warning ("Error: "+e.message); }
+  }
+  public new RectElement RectElementMap.get (string id) {
     return (this as GomHashMap).get (id) as RectElement;
   }
 }
@@ -112,8 +116,12 @@ public class GSvg.GsCircleElement : GSvg.GsTransformable,
 
 public class GSvg.GsCircleElementMap : GomHashMap, CircleElementMap {
   public int length { get { return (this as GomHashMap).length; } }
-  construct { initialize (typeof (GsCircleElement)); }
-  public CircleElement CircleElementMap.get (string id) {
+  construct {
+    try {
+      initialize (typeof (GsCircleElement));
+    } catch (GLib.Error e) { warning ("Error: "+e.message); }
+  }
+  public new CircleElement CircleElementMap.get (string id) {
     return (this as GomHashMap).get (id) as CircleElement;
   }
 }
@@ -146,7 +154,8 @@ public class GSvg.GsEllipseElement : GSvg.GsTransformable,
     set { ry = value as AnimatedLengthRY; }
   }
   construct {
-    initialize ("ellipse");
+    try { initialize ("ellipse"); }
+    catch (GLib.Error e) { warning ("Error: "+e.message); }
   }
   // MappeableElement
   public string get_map_key () { return id; }
@@ -154,8 +163,8 @@ public class GSvg.GsEllipseElement : GSvg.GsTransformable,
 
 public class GSvg.GsEllipseElementMap : GomHashMap, EllipseElementMap {
   public int length { get { return (this as GomHashMap).length; } }
-  construct { initialize (typeof (GsEllipseElement)); }
-  public EllipseElement EllipseElementMap.get (string id) {
+  construct { try { initialize (typeof (GsEllipseElement)); } catch (GLib.Error e) { warning ("Error: "+e.message); } }
+  public new EllipseElement EllipseElementMap.get (string id) {
     return (this as GomHashMap).get (id) as EllipseElement;
   }
 }
@@ -196,8 +205,8 @@ public class GSvg.GsLineElement : GSvg.GsTransformable,
 
 public class GSvg.GsLineElementMap : GomHashMap, LineElementMap {
   public int length { get { return (this as GomHashMap).length; } }
-  construct { initialize (typeof (GsLineElement)); }
-  public LineElement LineElementMap.get (string id) {
+  construct { try { initialize (typeof (GsLineElement)); } catch (GLib.Error e) { warning ("Error: "+e.message); } }
+  public new LineElement LineElementMap.get (string id) {
     return (this as GomHashMap).get (id) as LineElement;
   }
 }
@@ -238,8 +247,8 @@ public class GSvg.GsPolylineElement : GSvg.GsAnimatedPoints, PolylineElement {
 
 public class GSvg.GsPolylineElementMap : GomHashMap, PolylineElementMap {
   public int length { get { return (this as GomHashMap).length; } }
-  construct { initialize (typeof (GsPolylineElement)); }
-  public PolylineElement PolylineElementMap.get (string id) {
+  construct { try { initialize (typeof (GsPolylineElement)); } catch (GLib.Error e) { warning ("Error: "+e.message); } }
+  public new PolylineElement PolylineElementMap.get (string id) {
     return (this as GomHashMap).get (id) as PolylineElement;
   }
 }
@@ -253,8 +262,8 @@ public class GSvg.GsPolygonElement : GSvg.GsAnimatedPoints, PolygonElement {
 
 public class GSvg.GsPolygonElementMap : GomHashMap, PolygonElementMap {
   public int length { get { return (this as GomHashMap).length; } }
-  construct { initialize (typeof (GsPolygonElement)); }
-  public PolygonElement PolygonElementMap.get (string id) {
+  construct { try { initialize (typeof (GsPolygonElement)); } catch (GLib.Error e) { warning ("Error: "+e.message); } }
+  public new PolygonElement PolygonElementMap.get (string id) {
     return (this as GomHashMap).get (id) as PolygonElement;
   }
 }

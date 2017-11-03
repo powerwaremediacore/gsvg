@@ -28,12 +28,14 @@ class GSvgTest.Suite : Object
     Test.init (ref args);
     Test.add_func ("/gsvg/g/init",
     ()=>{
-      var svg = new GSvg.GsSvg ();
-      var g = svg.add_g ();
-      var t = svg.create_text ("HELLO WORLD", "0", "0", "10", "10", "0");
-      g.append_child (t);
-      message (svg.write_string ());
-      assert ("<svg xmlns=\"http://www.w3.org/2000/svg\"><g><text x=\"0\" y=\"0\" dx=\"10\" dy=\"10\" rotate=\"0\">HELLO WORLD</text></g></svg>" in svg.write_string ());
+      try {
+        var svg = new GSvg.GsSvg ();
+        var g = svg.add_g ();
+        var t = svg.create_text ("HELLO WORLD", "0", "0", "10", "10", "0");
+        g.append_child (t);
+        message (svg.write_string ());
+        assert ("<svg xmlns=\"http://www.w3.org/2000/svg\"><g><text x=\"0\" y=\"0\" dx=\"10\" dy=\"10\" rotate=\"0\">HELLO WORLD</text></g></svg>" in svg.write_string ());
+      } catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
     });
     return Test.run ();
   }

@@ -35,7 +35,7 @@ public interface CSSStyleDeclaration : Object, GomProperty {
   public abstract CSSValue      get_property_css_value (string property_name);
   public abstract string        remove_property (string property_name) throws GLib.Error;
   public abstract string        get_property_priority (string property_name);
-  public abstract void          set_property(string property_name,
+  public new abstract void          set_property(string property_name,
 		                             string value,
 		                             string priority) throws GLib.Error;
   public abstract string        item (uint index);

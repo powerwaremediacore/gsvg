@@ -35,8 +35,8 @@ public class GSvg.GsNumberList : ArrayList<Number>,
   private string separator = " ";
   public int number_of_items { get { return size; } }
 
-  public void  clear () throws GLib.Error { clear (); }
-  public Number initialize (Number new_item) throws GLib.Error {
+  public new void  clear () throws GLib.Error { (this as ArrayList<Number>).clear (); }
+  public new Number initialize (Number new_item) throws GLib.Error {
     add (new_item);
     return new_item;
   }
@@ -66,7 +66,7 @@ public class GSvg.GsNumberList : ArrayList<Number>,
       string[] tks = value.split (separator);
       for (int i = 0; i < tks.length; i++) {
         var p = new GsNumber ();
-        p.value.parse (tks[i]);
+        p.value = double.parse (tks[i]);
         add (p as Number);
       }
     }
@@ -117,4 +117,9 @@ public class GSvg.GsAnimatedNumberList : Object,
   public bool validate_value (string val) {
     return "," in val || " " in val; // FIXME
   }
+}
+
+public class GSvg.GsAnimatedEnumeration : Object, AnimatedEnumeration {
+  public int base_val { get; set; }
+  public int anim_val { get; set; }
 }

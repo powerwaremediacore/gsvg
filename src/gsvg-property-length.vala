@@ -29,7 +29,7 @@ public class GSvg.GsAnimatedLength : Object,
   protected Length _anim_val;
   // GomProperty
   /**
-   * Attribute's value in the parent {@link DomElement}.
+   * Attribute's value in the parent {@link GXml.DomElement}.
    */
   public string? value {
     owned get { return _base_val.value_as_string; }
@@ -168,7 +168,7 @@ public class GSvg.GsLengthList : ArrayList<Length>,
   private string separator = " ";
   public int number_of_items { get { return size; } }
 
-  public void  clear () throws GLib.Error { clear (); }
+  public new void  clear () throws GLib.Error { (this as ArrayList<Length>).clear (); }
   public Length initialize (Length new_item) throws GLib.Error {
     add (new_item);
     return new_item;

@@ -28,9 +28,9 @@ public interface Document : Object,  DomDocument {
   public abstract string url { get; }
   public abstract SVGElement root_element { owned get; }
 
-  public abstract void read_from_string (string str);
-  public abstract void read_from_file (GLib.File file);
-  public abstract string write_string ();
+  public abstract void read_from_string (string str) throws GLib.Error;
+  public abstract void read_from_file (GLib.File file) throws GLib.Error;
+  public abstract string write_string () throws GLib.Error;
 
   /**
    * Adds an 'svg' to the document. It should be top most element in the tree.
@@ -94,8 +94,8 @@ public interface SVGElement : Object,
   public abstract bool animations_paused ();
   public abstract float get_current_time ();
   public abstract void set_current_time (float seconds);
-  public abstract NodeList get_intersection_list (Rect rect, Element referenceElement);
-  public abstract NodeList get_enclosure_list (Rect rect, Element referenceElement);
+  public abstract DomNodeList get_intersection_list (Rect rect, Element referenceElement);
+  public abstract DomNodeList get_enclosure_list (Rect rect, Element referenceElement);
   public abstract bool check_intersection (Element element, Rect rect);
   public abstract bool check_enclosure (Element element, Rect rect);
   public abstract void deselect_all ();
@@ -134,7 +134,8 @@ public interface SVGElement : Object,
    *
    * @param cx a string representation of an {@link AnimatedLengthCX}
    * @param cy a string representation of an {@link AnimatedLengthCY}
-   * @param r a string representation of an {@link AnimatedLengthR}
+   * @param cr a string representation of an {@link AnimatedLengthR}
+   * @param style a string with style information
    */
   public abstract CircleElement create_circle (string? cx,
                                   string? cy,
@@ -145,8 +146,9 @@ public interface SVGElement : Object,
    *
    * @param cx a string representation of an {@link AnimatedLengthCX}
    * @param cy a string representation of an {@link AnimatedLengthCY}
-   * @param rx a string representation of an {@link AnimatedLengthRX}
-   * @param ry a string representation of an {@link AnimatedLengthRY}
+   * @param crx a string representation of an {@link AnimatedLengthRX}
+   * @param cry a string representation of an {@link AnimatedLengthRY}
+   * @param style a string with style information
    */
   public abstract EllipseElement create_ellipse (string? cx,
                                   string? cy,
@@ -160,6 +162,7 @@ public interface SVGElement : Object,
    * @param lx2 a string representation of an {@link AnimatedLengthCY}
    * @param lx1 a string representation of an {@link AnimatedLengthRX}
    * @param ly2 a string representation of an {@link AnimatedLengthRY}
+   * @param style a string with style information
    */
   public abstract LineElement create_line (string? lx1,
                                   string? ly1,
@@ -170,6 +173,7 @@ public interface SVGElement : Object,
    * Creates a 'line' node for line shapes.
    *
    * @param points a string representation of a list of {@link Point}
+   * @param style a string with style information
    */
   public abstract PolylineElement create_polyline (string points,
                                    string? style = null);
@@ -177,6 +181,7 @@ public interface SVGElement : Object,
    * Creates a 'line' node for line shapes.
    *
    * @param points a string representation of a list of {@link Point}
+   * @param style a string with style information
    */
   public abstract PolygonElement create_polygon (string points,
                                    string? style = null);
@@ -188,7 +193,8 @@ public interface SVGElement : Object,
    * @param ys a list of coordinates
    * @param dxs a list of coordinates
    * @param dys a list of coordinates
-   * @param rotae a list of numbers
+   * @param rotates a list of numbers
+   * @param style a string with style information
    */
   public abstract TextElement create_text (string? text,
                                    string? xs,

@@ -233,10 +233,10 @@ public class GSvg.GsCommonShapeElement : GsCommonElement,
   // farthestViewportElement
   public Element farthest_viewport_element { get { return _farthest_viewport_element; } }
 
-  public Rect get_bbox () { return null; }
-  public Matrix get_ctm () { return null; }
-  public Matrix get_screen_ctm () { return null; }
-  public Matrix get_transform_to_element (Element element) throws GLib.Error { return null; }
+  public Rect get_bbox () { return new GsRect (); }
+  public Matrix get_ctm () { return new GsMatrix (); }
+  public Matrix get_screen_ctm () { return new GsMatrix (); }
+  public Matrix get_transform_to_element (Element element) throws GLib.Error { return new GsMatrix (); }
 }
 
 public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
@@ -250,8 +250,11 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       return _rects_map;
     }
     set {
-      if (_rects_map != null)
-        clean_property_elements ("rects-maps");
+      if (_rects_map != null) {
+        try {
+          clean_property_elements ("rects-maps");
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
+      }
       _rects_map = value;
     }
   }
@@ -264,8 +267,11 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       return _circles_map;
     }
     set {
-      if (_circles_map != null)
-        clean_property_elements ("circles-map");
+      if (_circles_map != null) {
+        try {
+          clean_property_elements ("circles-map");
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
+      }
       _circles_map = value;
     }
   }
@@ -278,8 +284,11 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       return _ellipses_map;
     }
     set {
-      if (_ellipses_map != null)
-        clean_property_elements ("ellipses-map");
+      if (_ellipses_map != null) {
+        try {
+          clean_property_elements ("ellipses-map");
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
+      }
       _ellipses_map = value;
     }
   }
@@ -292,8 +301,11 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       return _lines_map;
     }
     set {
-      if (_lines_map != null)
-        clean_property_elements ("lines-map");
+      if (_lines_map != null) {
+        try {
+          clean_property_elements ("lines-map");
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
+      }
       _lines_map = value;
     }
   }
@@ -306,8 +318,11 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       return _polylines_map;
     }
     set {
-      if (_polylines_map != null)
-        clean_property_elements ("polylines-map");
+      if (_polylines_map != null) {
+        try {
+          clean_property_elements ("polylines-map");
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
+      }
       _polylines_map = value;
     }
   }
@@ -320,8 +335,11 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       return _polygons_map;
     }
     set {
-      if (_polygons_map != null)
-        clean_property_elements ("polygons-map");
+      if (_polygons_map != null) {
+        try {
+          clean_property_elements ("polygons-map");
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
+      }
       _polygons_map = value;
     }
   }
@@ -335,8 +353,11 @@ public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
       return _texts_map;
     }
     set {
-      if (_texts_map != null)
-        clean_property_elements ("texts-maps");
+      if (_texts_map != null) {
+        try {
+          clean_property_elements ("texts-maps");
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
+      }
       _texts_map = value;
     }
   }
@@ -462,11 +483,11 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
   public  bool animations_paused () { return false; }
   public  float get_current_time () { return (float) 0.0; }
   public  void set_current_time (float seconds) {}
-  public  NodeList get_intersection_list (Rect rect, Element referenceElement) {
-    return null;
+  public  DomNodeList get_intersection_list (Rect rect, Element referenceElement) {
+    return new GomNodeList () as DomNodeList;
   }
-  public  NodeList get_enclosure_list (Rect rect, Element referenceElement) {
-    return null;
+  public  DomNodeList get_enclosure_list (Rect rect, Element referenceElement) {
+    return new GomNodeList () as DomNodeList;
   }
   public  bool check_intersection (Element element, Rect rect) { return false; }
   public  bool check_enclosure (Element element, Rect rect) { return false; }
@@ -493,13 +514,16 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
    * Query elements by 'id' property
    */
   public  DomElement? get_element_by_id (string element_id) {
-    var l2 = owner_document.get_element_by_id (element_id);
-    if (l2 != null) return l2;
-    var l = get_elements_by_property_value ("id", element_id);
-    if (l.length == 0) return null;
-    message (l.get_element (0).node_name);
+    try {
+      var l2 = owner_document.get_element_by_id (element_id);
+      if (l2 != null) return l2;
+      var l = get_elements_by_property_value ("id", element_id);
+      if (l.length == 0) return null;
+      message (l.get_element (0).node_name);
 
-    return  l.get_element (0);
+      return  l.get_element (0);
+    } catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
+    return null;
   }
   // Shape constructors
   public RectElement create_rect (string? x,
@@ -699,41 +723,48 @@ public class GSvg.GsSvg : GSvg.GsContainerElement,
     var d = Object.new (typeof (GsDefsElement),
                         "owner_document", owner_document)
                         as GsDefsElement;
-    append_child (d);
+    try { append_child (d); }
+    catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
     return d;
   }
   public GElement add_g () {
     var g = Object.new (typeof (GsGElement),
                         "owner_document", owner_document)
                         as GsGElement;
-    append_child (g);
+    try { append_child (g); }
+    catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
     return g;
   }
   public TitleElement add_title (string text) {
     var t = Object.new (typeof (GsTitleElement),
                         "owner_document", owner_document)
                         as GsTitleElement;
-    var tx = owner_document.create_text_node (text);
-    t.append_child (tx);
-    append_child (t);
+    try {
+      var tx = owner_document.create_text_node (text);
+      t.append_child (tx);
+      append_child (t);
+    } catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
     return t;
   }
   public DescElement add_desc (string? text) {
     var t = Object.new (typeof (GsDescElement),
                         "owner_document", owner_document)
                         as GsDescElement;
-    if (text != null) {
-      var tx = owner_document.create_text_node (text);
-      t.append_child (tx);
-    }
-    append_child (t);
+    try {
+      if (text != null) {
+        var tx = owner_document.create_text_node (text);
+        t.append_child (tx);
+      }
+      append_child (t);
+    } catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
     return t;
   }
   public MetadataElement add_metadata () {
     var mt = Object.new (typeof (GsMetadataElement),
                         "owner_document", owner_document)
                         as GsMetadataElement;
-    append_child (mt);
+    try { append_child (mt); }
+    catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
     return mt;
   }
 }
@@ -899,7 +930,6 @@ public class GSvg.GsMetadataElement : GsElement, MetadataElement {
  */
 public class GSvg.GsDocument : GXml.GomDocument,  GSvg.Document {
   protected string _referrer = "";
-  protected string _url = "";
   protected string _domain = "";
   public string title {
     owned get {
@@ -920,13 +950,13 @@ public class GSvg.GsDocument : GXml.GomDocument,  GSvg.Document {
   construct {
     var dt = new GomDocumentType (this, "svg", "-//W3C//DTD SVG 1.1//EN",
   "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd");
-    append_child (dt);
+    try { append_child (dt); } catch (GLib.Error e) { warning ("Error: "+e.message); }
   }
-  public void read_from_string (string str) {
+  public new void read_from_string (string str) {
     add_svg (null, null, null, null);
     mroot_element.read_from_string (str);
   }
-  public void read_from_file (GLib.File file) {
+  public new void read_from_file (GLib.File file) {
     add_svg (null, null, null, null);
     mroot_element.read_from_file (file);
   }
@@ -966,7 +996,7 @@ public class GSvg.GsDocument : GXml.GomDocument,  GSvg.Document {
     if (desc != null) {
       nsvg.add_desc (desc);
     }
-    append_child (nsvg);
+    try { append_child (nsvg); } catch (GLib.Error e) { warning ("Error: "+e.message); }
     mroot_element = nsvg as GSvg.GsSvg;
     return nsvg;
   }
