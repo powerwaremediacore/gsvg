@@ -229,7 +229,7 @@ public class GSvgTest.SvgTest {
         assert (svg.root_element.svgs.length == 1);
       } catch (GLib.Error e) { warning ("Error: "+e.message); }
     });
-    Test.add_func ("/gsvg/transform",
+    Test.add_func ("/gsvg/transform/translate",
     ()=>{
       try {
         var tl = new GsAnimatedTransformList ();
@@ -264,6 +264,68 @@ public class GSvgTest.SvgTest {
         assert (t2.matrix.d == 1.0);
         assert (t2.matrix.e == 11.0);
         assert (t2.matrix.f == 21.0);
+        assert (str == tl.value);
+        str = "translate(11 21) translate(20 45)";
+        message (str);
+        tl.value = str;
+        assert (tl.base_val != null);
+        assert (tl.base_val.number_of_items == 2);
+        var t3 = tl.base_val.get_item (0);
+        assert (t3 != null);
+        assert (t3.ttype == Transform.Type.TRANSLATE);
+        assert (t3.matrix != null);
+        assert (t3.matrix.a == 1.0);
+        assert (t3.matrix.b == 0.0);
+        assert (t3.matrix.c == 0.0);
+        assert (t3.matrix.d == 1.0);
+        assert (t3.matrix.e == 11.0);
+        assert (t3.matrix.f == 21.0);
+        var t4 = tl.base_val.get_item (1);
+        assert (t4 != null);
+        assert (t4.ttype == Transform.Type.TRANSLATE);
+        assert (t4.matrix != null);
+        assert (t4.matrix.a == 1.0);
+        assert (t4.matrix.b == 0.0);
+        assert (t4.matrix.c == 0.0);
+        assert (t4.matrix.d == 1.0);
+        assert (t4.matrix.e == 20.0);
+        assert (t4.matrix.f == 45.0);
+        assert (str == tl.value);
+        str = "translate(11 21) translate(20 45) translate(12 23)";
+        message (str);
+        tl.value = str;
+        assert (tl.base_val != null);
+        assert (tl.base_val.number_of_items == 3);
+        var t5 = tl.base_val.get_item (0);
+        assert (t5 != null);
+        assert (t5.ttype == Transform.Type.TRANSLATE);
+        assert (t5.matrix != null);
+        assert (t5.matrix.a == 1.0);
+        assert (t5.matrix.b == 0.0);
+        assert (t5.matrix.c == 0.0);
+        assert (t5.matrix.d == 1.0);
+        assert (t5.matrix.e == 11.0);
+        assert (t5.matrix.f == 21.0);
+        var t6 = tl.base_val.get_item (1);
+        assert (t6 != null);
+        assert (t6.ttype == Transform.Type.TRANSLATE);
+        assert (t6.matrix != null);
+        assert (t6.matrix.a == 1.0);
+        assert (t6.matrix.b == 0.0);
+        assert (t6.matrix.c == 0.0);
+        assert (t6.matrix.d == 1.0);
+        assert (t6.matrix.e == 20.0);
+        assert (t6.matrix.f == 45.0);
+        var t7 = tl.base_val.get_item (2);
+        assert (t7 != null);
+        assert (t7.ttype == Transform.Type.TRANSLATE);
+        assert (t7.matrix != null);
+        assert (t7.matrix.a == 1.0);
+        assert (t7.matrix.b == 0.0);
+        assert (t7.matrix.c == 0.0);
+        assert (t7.matrix.d == 1.0);
+        assert (t7.matrix.e == 12.0);
+        assert (t7.matrix.f == 23.0);
         assert (str == tl.value);
       } catch (GLib.Error e) { warning ("Error: "+e.message); }
     });

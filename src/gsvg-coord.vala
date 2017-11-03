@@ -264,6 +264,7 @@ public class GSvg.GsTransformList : ArrayList<Transform>,
         kw += c.to_string ();
         if (!str.get_next_char (ref i, out c)) return;
       }
+      kw = kw.strip ();
       message (kw);
       if (!(kw.replace("(","") in KEYWORDS)) skip = true;
       kw += c.to_string();
@@ -280,7 +281,6 @@ public class GSvg.GsTransformList : ArrayList<Transform>,
         add (tr);
         message ("Added: "+kw+", Items: "+size.to_string ());
       }
-      if (!str.get_next_char (ref i, out c)) return;
       while (c.to_string () == " ") {
         if (!str.get_next_char (ref i, out c)) return;
       }
