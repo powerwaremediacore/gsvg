@@ -211,5 +211,23 @@ public class GSvgTest.SvgTest {
       message (svg.preserve_aspect_ratio.value);
       assert (svg.preserve_aspect_ratio.value == "xMaxYMax meet");
     });
+    Test.add_func ("/gsvg/container",
+    ()=>{
+      try {
+        string str = """<svg xmlns="http://www.w3.org/2000/svg" width="8.5in" viewBox="0 0 8.5 11"><svg id="svg"><line id="line" x1="0mm" y1="0mm" x2="50mm" y2="50mm"/></svg></svg>""";
+        var svg = new GSvg.GsDocument ();
+        svg.read_from_string (str);
+        var csvg = svg.get_element_by_id ("svg") as SVGElement;
+        assert (csvg != null);
+        assert (csvg is SVGElement);
+        assert (csvg is GsSVGElement);
+        assert (csvg.id == "svg");
+        assert ((csvg as ContainerElement).lines != null);
+        assert ((csvg as ContainerElement).lines.length == 1);
+        assert ((csvg as ContainerElement).lines.get("line") is LineElement);
+        assert (svg.root_element.svgs != null);
+        assert (svg.root_element.svgs.length == 1);
+      } catch (GLib.Error e) { warning ("Error: "+e.message); }
+    });
   }
 }

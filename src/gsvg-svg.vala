@@ -239,9 +239,43 @@ public class GSvg.GsCommonShapeElement : GsCommonElement,
   public Matrix get_transform_to_element (Element element) throws GLib.Error { return new GsMatrix (); }
 }
 
-public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement {
-  private GsRectElementMap _rects_map;
+public class GSvg.GsContainerElement : GSvg.GsCommonShapeElement, ContainerElement {
   // ContainerElement
+  private GsSVGElementMap _svgs_map;
+  public SVGElementMap svgs { get { return _svgs_map as SVGElementMap; } }
+  public GsSVGElementMap svgs_map {
+    get {
+      if (_svgs_map == null)
+        set_instance_property ("svgs-maps");
+      return _svgs_map;
+    }
+    set {
+      if (_svgs_map != null) {
+        try {
+          clean_property_elements ("svgs-maps");
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
+      }
+      _svgs_map = value;
+    }
+  }
+  private GsGElementMap _groups_map;
+  public GElementMap groups { get { return _groups_map as GElementMap; } }
+  public GsGElementMap groups_map {
+    get {
+      if (_groups_map == null)
+        set_instance_property ("groups-maps");
+      return _groups_map;
+    }
+    set {
+      if (_groups_map != null) {
+        try {
+          clean_property_elements ("groups-maps");
+        } catch (GLib.Error e) { warning ("Error: "+e.message); }
+      }
+      _groups_map = value;
+    }
+  }
+  private GsRectElementMap _rects_map;
   public RectElementMap rects { get { return _rects_map as RectElementMap; } }
   public GsRectElementMap rects_map {
     get {
@@ -370,7 +404,7 @@ public class GSvg.GsSVGElement : GSvg.GsContainerElement,
                         ZoomAndPan,
                         ViewCSS,
                         DocumentCSS,
-                        GSvg.SVGElement
+                        GSvg.SVGElement, MappeableElement
 {
   protected float _pixel_unit_to_millimeter_x;
   protected float _pixel_unit_to_millimeter_y;
@@ -767,7 +801,24 @@ public class GSvg.GsSVGElement : GSvg.GsContainerElement,
     catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
     return mt;
   }
+  // MappeableElement
+  public string get_map_key () { return id; }
 }
+
+
+public class GSvg.GsSVGElementMap : GomHashMap, SVGElementMap {
+  public int length { get { return (this as GomHashMap).length; } }
+  construct {
+    try {
+      initialize (typeof (GsSVGElement));
+    } catch (GLib.Error e) { warning ("Error: "+e.message); }
+  }
+  public new SVGElement SVGElementMap.get (string id) {
+    return (this as GomHashMap).get (id) as SVGElement;
+  }
+}
+
+
 public class GSvg.GsDefsElement : GSvg.GsTransformable,
                                   DefsElement
 {
@@ -776,11 +827,27 @@ public class GSvg.GsDefsElement : GSvg.GsTransformable,
   }
 }
 
-public class GSvg.GsGElement : GsContainerElement, Transformable, GElement{// Transformable
+public class GSvg.GsGElement : GsContainerElement, Transformable, GElement, MappeableElement
+{
   // Transformable
   public AnimatedTransformList transform { get; set; }
   construct {
     initialize ("g");
+  }
+  // MappeableElement
+  public string get_map_key () { return id; }
+}
+
+
+public class GSvg.GsGElementMap : GomHashMap, GElementMap {
+  public int length { get { return (this as GomHashMap).length; } }
+  construct {
+    try {
+      initialize (typeof (GsGElement));
+    } catch (GLib.Error e) { warning ("Error: "+e.message); }
+  }
+  public new GElement GElementMap.get (string id) {
+    return (this as GomHashMap).get (id) as GElement;
   }
 }
 

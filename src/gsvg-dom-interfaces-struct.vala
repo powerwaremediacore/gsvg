@@ -67,7 +67,8 @@ public interface SVGElement : Object,
                           FitToViewBox,
                           ZoomAndPan,
                           ViewCSS,
-                          DocumentCSS {
+                          DocumentCSS,
+                          ContainerElement {
 
   public abstract AnimatedLength x { get; set; }
   public abstract AnimatedLength y { get;  set; }
@@ -229,13 +230,25 @@ public interface SVGElement : Object,
   public abstract MetadataElement add_metadata ();
 }
 
+public interface SVGElementMap : Object {
+  public abstract int length { get; }
+  public abstract SVGElement get (string id);
+}
+
+
 public interface GElement : Object,
                         Element,
                         Tests,
                         LangSpace,
                         ExternalResourcesRequired,
                         Stylable,
-                        Transformable {
+                        Transformable,
+                        ContainerElement {
+}
+
+public interface GElementMap : Object {
+  public abstract int length { get; }
+  public abstract GElement get (string id);
 }
 
 public interface DefsElement : Object,

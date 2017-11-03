@@ -24,13 +24,15 @@ namespace GSvg {
 
 public interface ContainerElement : Object {
   // Shapes access
-  public abstract RectElementMap rects { get; set; }
-  public abstract CircleElementMap circles { get; set; }
-  public abstract EllipseElementMap ellipses { get; set; }
-  public abstract LineElementMap lines { get; set; }
-  public abstract PolylineElementMap polylines { get; set; }
-  public abstract PolygonElementMap polygons { get; set; }
-  public abstract TextElementMap texts { get; set; }
+  public abstract SVGElementMap svgs { get; }
+  public abstract GElementMap groups { get; }
+  public abstract RectElementMap rects { get; }
+  public abstract CircleElementMap circles { get; }
+  public abstract EllipseElementMap ellipses { get; }
+  public abstract LineElementMap lines { get; }
+  public abstract PolylineElementMap polylines { get; }
+  public abstract PolygonElementMap polygons { get; }
+  public abstract TextElementMap texts { get; }
 }
 
 public interface Element : Object, DomElement {

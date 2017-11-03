@@ -37,6 +37,24 @@ class GSvgTest.Suite : Object
         assert ("<svg xmlns=\"http://www.w3.org/2000/svg\"><g><text x=\"0\" y=\"0\" dx=\"10\" dy=\"10\" rotate=\"0\">HELLO WORLD</text></g></svg>" in svg.write_string ());
       } catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
     });
+    Test.add_func ("/gsvg/g/container",
+    ()=>{
+      try {
+        string str = """<svg xmlns="http://www.w3.org/2000/svg"><g id="g1"><text x="0" y="0" dx="10" dy="10" rotate="0">HELLO WORLD</text></g><g id="gsecond"><svg id="second" xmlns="http://www.w3.org/2000/svg"><g id="g2"><text x="0" y="0" dx="10" dy="10" rotate="0">HELLO WORLD</text></g></svg></g></svg>""";
+        var svg = new GSvg.GsDocument () as GSvg.Document;
+        svg.read_from_string (str);
+        message (svg.write_string ());
+        var g = svg.get_element_by_id ("gsecond") as GSvg.GElement;
+        assert (g != null);
+        assert (g is ContainerElement);
+        assert (g.svgs != null);
+        message (g.svgs.length.to_string ());
+        assert (g.svgs.length == 1);
+        var s = g.svgs.get ("second") as SVGElement;
+        assert (s != null);
+        assert (s is SVGElement);
+      } catch (GLib.Error e) { warning ("Error: %s".printf (e.message)); }
+    });
     return Test.run ();
   }
 }
