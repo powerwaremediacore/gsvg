@@ -776,7 +776,9 @@ public class GSvg.GsDefsElement : GSvg.GsTransformable,
   }
 }
 
-public class GSvg.GsGElement : GsTransformable, GElement {
+public class GSvg.GsGElement : GsContainerElement, Transformable, GElement{// Transformable
+  // Transformable
+  public AnimatedTransformList transform { get; set; }
   construct {
     initialize ("g");
   }
