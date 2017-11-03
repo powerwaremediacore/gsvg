@@ -159,20 +159,30 @@ public class GSvg.GsTransform : Object, Transform {
       string vals = str.down ().replace("translate","");
       vals = vals.replace ("(","");
       vals = vals.replace (")","");
+      vals = vals.strip ();
       string x = vals;
+      message (x);
       string y = "0";
       ey = false;
       if (" " in vals) {
         string[] astr = vals.split (" ");
+        message (astr.length.to_string ());
         if (astr.length > 0)
           x = astr[0];
         if (astr.length > 1) {
-          ey = true;
-          y = astr[1];
+          int i = 1;
+          while (astr[i] == "") {
+            i++;
+            if (i == astr.length) break;
+          }
+          if (i < astr.length) {
+            ey = true;
+            y = astr[i];
+          }
         }
       }
       message ("x=%s, y=%s".printf (x, y));
-      set_translate (double.parse (x), double.parse (y));
+      set_translate (double.parse (x.strip ()), double.parse (y.strip()));
     }
     // FIXME: add all other types: matrix rotate skewx skewy
   }
